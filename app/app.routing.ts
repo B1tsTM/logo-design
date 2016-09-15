@@ -11,8 +11,9 @@ const appRoutes: Routes = [
   { path: 'kategorijos', component: CategoriesComponent },
   { path: 'dizaineriai', component: DesignersComponent },
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
+  { path: 'nerasta', component: PageNotFoundComponent },
   { path: '', component: HeaderComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', redirectTo: 'nerasta' }
 ];
 
 export const appRoutingProviders: any[] = [
