@@ -11,15 +11,19 @@ import { ContestsService } from '../../services/contests.service';
 export class ContestsComponent implements OnInit {
   contests: any;
   constructor(private contestsService: ContestsService) {
-    this.contestsService.addContest(new Contest('Contest1', 'Logo', 'John Lohke')); 
-    this.contestsService.addContest(new Contest('Contest2', 'Logo2', 'John2Lohke')); 
-    this.contests = contestsService.getContests();
+    
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.contests = this.contestsService.getContests();
+   }
 
   onSubmit(message: any) {
     this.contestsService.addContest(new Contest(message, 'Dummy', 'Dummy'))
+  }
+
+  editContest(contest: any) {
+    this.contestsService.editContest(contest);
   }
 
   deleteContest(contest: any) {
