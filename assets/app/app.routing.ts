@@ -1,13 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { HeaderComponent } from './components/header/header.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { DesignersComponent } from './components/designers/designers.component';
-import { HowItWorksComponent } from './components/howitworks/howitworks.component';
-import { PageNotFoundComponent } from './components/notfound/notfound.component';
+import { HeaderComponent, CategoriesComponent, DesignersComponent,
+         HowItWorksComponent, PageNotFoundComponent, ContestsComponent } from './components/index';
 
 const appRoutes: Routes = [
+  { path: 'konkursai', component: ContestsComponent },
   { path: 'kategorijos', component: CategoriesComponent },
   { path: 'dizaineriai', component: DesignersComponent },
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
