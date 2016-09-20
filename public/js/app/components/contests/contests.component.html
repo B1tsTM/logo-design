@@ -1,1 +1,32 @@
-<h1>CONTESTS</h1>
+<div class="row spacing">
+<section class="col-md-8 col-md-offset-2">
+    <form (ngSubmit)="onSubmit(input.value)" #f="ngForm">
+        <div class="form-group">
+            <label for="content">Add a contest</label>
+            <input ngControl="content" type="text" class="form-control" id="content" #input>
+        </div>
+        <button type="submit" class="btn btn-primary">Add contest</button>
+    </form>
+</section>
+
+  <div class="col-md-8 col-md-offset-2 pad-10">
+          <div *ngFor="let contest of contests">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            {{ contest.name }}
+        </div>
+        <div class="panel-footer">   
+          <div class="author">         
+            {{ contest.type }}
+            {{ contest.designer }}
+          </div>
+          <div class="config">
+          <a href="#">Edit</a>
+          <a (click)="deleteContest(contest)">Delete</a>
+        </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,8 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent } from './components/index';
 
+import { ContestsService } from './services/contests.service';
+
 
 
 @NgModule({
@@ -22,6 +24,6 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders ]
+  providers: [ appRoutingProviders, ContestsService ]
 })
 export class AppModule { }
