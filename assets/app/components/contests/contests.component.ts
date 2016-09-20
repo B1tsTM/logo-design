@@ -9,7 +9,7 @@ import { ContestsService } from '../../services/contests.service';
   styleUrls: ['contests.component.css']
 })
 export class ContestsComponent implements OnInit {
-  contests: any;
+  contests: any = [];
   constructor(private contestsService: ContestsService) {
     
   }
@@ -18,8 +18,16 @@ export class ContestsComponent implements OnInit {
     this.contests = this.contestsService.getContests();
    }
 
-  onSubmit(message: any) {
-    this.contestsService.addContest(new Contest(message, 'Dummy', 'Dummy'))
+  onSubmit(input: any) {
+    const contest: any = {contests: input, type: 'Logo', designer: 'John Lohke'};
+    console.log(contest);
+    this.contestsService.addContest(contest)
+      .subscribe(data => {
+        console.log(data)
+      },
+      error => {
+        console.error(error);
+      });
   }
 
   editContest(contest: any) {

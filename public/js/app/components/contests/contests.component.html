@@ -1,9 +1,9 @@
 <div class="row spacing">
 <section class="col-md-8 col-md-offset-2">
-    <form (ngSubmit)="onSubmit(input.value)" #f="ngForm">
+    <form (ngSubmit)="onSubmit(input.value)">
         <div class="form-group">
-            <label for="content">Add a contest</label>
-            <input ngControl="content" type="text" class="form-control" id="content" #input>
+            <label>Add a contest</label>
+            <input ngControl="contests" name="contests" id="contests" type="text" class="form-control" #input>
         </div>
         <button type="submit" class="btn btn-primary">Add contest</button>
     </form>

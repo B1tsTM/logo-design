@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
+var contestsRoutes = require('./routes/contests');
+var usersRoutes = require('./routes/users');
 
 var app = express();
 
@@ -30,6 +32,8 @@ res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 next();
 });
 
+app.use('/login', usersRoutes);
+app.use('/konkursai', contestsRoutes);
 app.use('/', appRoutes);
 
 
