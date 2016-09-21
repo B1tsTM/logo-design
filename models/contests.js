@@ -2,9 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
-  contests: {
+  name: {
     type: String,
     required: true
+  },
+  type: {
+    type: String
+  },
+  designer: {
+    type: String
   },
   user: {
     type: Schema.Types.ObjectId,

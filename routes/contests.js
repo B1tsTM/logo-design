@@ -6,7 +6,9 @@ var Contest = require('../models/contests');
 router.post('/', function(req, res, next) {
   console.log(req.body);
   var contest = new Contest({
-    contests: req.body.contests
+    name: req.body.name,
+    type: req.body.type,
+    designer: req.body.designer
   });
   contest.save(function(err, result) {
     if (err) {

@@ -1,9 +1,13 @@
 <div class="row spacing">
 <section class="col-md-8 col-md-offset-2">
-    <form (ngSubmit)="onSubmit(input.value)">
+    <form (ngSubmit)="onSubmit(f)" #f>
         <div class="form-group">
-            <label>Add a contest</label>
-            <input ngControl="contests" name="contests" id="contests" type="text" class="form-control" #input>
+            <label>Konkurso pavadinimas</label>
+            <input ngControl="name" name="name" id="name" type="text" class="form-control" #name>
+        </div>
+        <div class="form-group">
+            <label>Konkurso kategorija</label>
+            <input ngControl="category" name="category" id="category" type="text" class="form-control" #category>
         </div>
         <button type="submit" class="btn btn-primary">Add contest</button>
     </form>
