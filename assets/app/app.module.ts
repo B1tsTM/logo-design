@@ -12,7 +12,7 @@ import { AlertModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { NavbarComponent, HeaderComponent, FooterComponent, 
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
-  ContestsComponent } from './components/index';
+  ContestsComponent, RegisterComponent, LoginComponent } from './components/index';
 
 import { ContestsService } from './services/contests.service';
 
@@ -23,7 +23,7 @@ import { ContestsService } from './services/contests.service';
   declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
-                  BSAlertComponent, ContestsComponent ],
+                  BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService ]
 })
