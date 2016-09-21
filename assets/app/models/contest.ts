@@ -1,5 +1,5 @@
 export class Contest {
-  constructor(public name: string, public type?: string, public designer?: string) {
+  constructor(public name: string, public category?: string, public description?: string, public award?: number, public designer?: string) {
 
   }
 }

@@ -7,7 +7,9 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   var contest = new Contest({
     name: req.body.name,
-    type: req.body.type,
+    category: req.body.category,
+    description: req.body.description,
+    award: req.body.award,
     designer: req.body.designer
   });
   contest.save(function(err, result) {
