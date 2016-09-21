@@ -3,13 +3,17 @@ var map = {
   'rxjs': 'js/vendor/rxjs',
   '@angular': 'js/vendor/@angular',
   'ng2-bootstrap': 'js/vendor/ng2-bootstrap',
-  'moment': 'js/vendor/moment/moment.js'
+  'moment': 'js/vendor/moment/moment.js',
+  'primeng': 'js/vendor/primeng'
+  //'angular2-fontawesome': 'js/vendor/angular2-fontawesome'
 };
 
 var packages = {
   'app': { main: 'main.js', defaultExtension: 'js' },
   'rxjs': { defaultExtension: 'js' },
-  'ng2-bootstrap': { defaultExtension: 'js' }
+  'ng2-bootstrap': { defaultExtension: 'js' },
+  'primeng': { defaultExtension: 'js' }
+  //'angular2-fontawesome': { defaultExtension: 'js' }
 };
 
 var packageNames = [

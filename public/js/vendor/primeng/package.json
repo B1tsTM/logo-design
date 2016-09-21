@@ -1,0 +1,87 @@
+{
+  "_args": [
+    [
+      "primeng",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+    ]
+  ],
+  "_from": "primeng@latest",
+  "_id": "primeng@1.0.0-beta.16",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/primeng",
+  "_nodeVersion": "5.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/primeng-1.0.0-beta.16.tgz_1474273387708_0.6432321663014591"
+  },
+  "_npmUser": {
+    "email": "cagatay.civici@gmail.com",
+    "name": "cagatay.civici"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "primeng",
+    "raw": "primeng",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/primeng/-/primeng-1.0.0-beta.16.tgz",
+  "_shasum": "ca9eb29ebd862de2f3fc17d40a6e8000719dff69",
+  "_shrinkwrap": null,
+  "_spec": "primeng",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "bugs": {
+    "url": "https://github.com/primefaces/primeng/issues"
+  },
+  "dependencies": {},
+  "description": "UI Components for AngularJS 2",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-uglifycss": "^1.0.6",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2",
+    "webpack": "^1.13.1"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "ca9eb29ebd862de2f3fc17d40a6e8000719dff69",
+    "tarball": "https://registry.npmjs.org/primeng/-/primeng-1.0.0-beta.16.tgz"
+  },
+  "gitHead": "d6c3479969246c9f037ec2e537db34ab09dc2ef1",
+  "homepage": "https://github.com/primefaces/primeng#readme",
+  "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "email": "cagatay.civici@gmail.com",
+      "name": "cagatay.civici"
+    }
+  ],
+  "name": "primeng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/primefaces/primeng.git"
+  },
+  "scripts": {
+    "start": "npm run tsc && npm run webpack-dev-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server",
+    "webpack:w": "webpack -w"
+  },
+  "version": "1.0.0-beta.16"
+}

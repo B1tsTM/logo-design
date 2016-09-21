@@ -46,6 +46,12 @@ gulp.task('vendor', function() {
   gulp.src('node_modules/moment/**')
   .pipe(gulp.dest(vendor + "/moment/"));
 
+  gulp.src('node_modules/primeng/**')
+  .pipe(gulp.dest(vendor + "/primeng/"));
+
+  gulp.src('node_modules/angular2-fontawesome/**')
+  .pipe(gulp.dest(vendor + "/angular2-fontawesome/"));
+
   return gulp.src('node_modules/zone.js/**')
   .pipe(gulp.dest(vendor + "/zone.js/"));
 });

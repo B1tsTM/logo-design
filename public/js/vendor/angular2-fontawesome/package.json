@@ -1,0 +1,96 @@
+{
+  "_args": [
+    [
+      "angular2-fontawesome",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+    ]
+  ],
+  "_from": "angular2-fontawesome@latest",
+  "_id": "angular2-fontawesome@0.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/angular2-fontawesome",
+  "_nodeVersion": "5.4.1",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/angular2-fontawesome-0.5.1.tgz_1467863445642_0.35148405912332237"
+  },
+  "_npmUser": {
+    "email": "komei.t.f@gmail.com",
+    "name": "travelist"
+  },
+  "_npmVersion": "3.9.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "angular2-fontawesome",
+    "raw": "angular2-fontawesome",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular2-fontawesome/-/angular2-fontawesome-0.5.1.tgz",
+  "_shasum": "3e77cfbf0eb91d8734f14e94fb2212b53d7ff6d5",
+  "_shrinkwrap": null,
+  "_spec": "angular2-fontawesome",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "author": {
+    "email": "komei.t.f@gmail.com",
+    "name": "Komei Shimamura"
+  },
+  "bugs": {
+    "url": "https://github.com/travelist/angular2-fontawesome/issues"
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.2 || 2.0.0-rc.3 || 2.0.0-rc.4 || 2.0.0-rc.5 || 2.0.0-rc.6 || 2.0.0-rc.7 || 2.0.0-rc.8 || 2.0.0-rc.9",
+    "@angular/core": "2.0.0-rc.2 || 2.0.0-rc.3 || 2.0.0-rc.4 || 2.0.0-rc.5 || 2.0.0-rc.6 || 2.0.0-rc.7 || 2.0.0-rc.8 || 2.0.0-rc.9",
+    "font-awesome": "*",
+    "rxjs": "5.0.0-beta.6"
+  },
+  "description": "Angular 2 Component/Directive for Fontawesome",
+  "devDependencies": {
+    "tslint": "^3.13.0",
+    "typescript": "^1.8.10",
+    "zone.js": "^0.6.6"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "3e77cfbf0eb91d8734f14e94fb2212b53d7ff6d5",
+    "tarball": "https://registry.npmjs.org/angular2-fontawesome/-/angular2-fontawesome-0.5.1.tgz"
+  },
+  "gitHead": "e0c6336b67a262a651f70d5a96dd1059216d959a",
+  "homepage": "https://github.com/travelist/angular2-fontawesome",
+  "keywords": [
+    "angular",
+    "angular2",
+    "fontawesome",
+    "typescript"
+  ],
+  "license": "MIT",
+  "main": "angular2-fontawesome.js",
+  "maintainers": [
+    {
+      "email": "komei.t.f@gmail.com",
+      "name": "travelist"
+    }
+  ],
+  "name": "angular2-fontawesome",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/travelist/angular2-fontawesome.git"
+  },
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "prepublish": "tsc",
+    "test": "tslint ./src/*.ts ./src/**/*.ts",
+    "typings": "typings",
+    "watch": "tsc -w"
+  },
+  "typings": "./lib/components.d.ts",
+  "version": "0.5.1"
+}
