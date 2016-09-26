@@ -16,10 +16,14 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
 
 import { ContestsService } from './services/contests.service';
 
+import { CategoriesModule } from './components/categories/categories.module';
+
 
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule, routing, AlertModule, DatepickerModule, HttpModule, TabViewModule ],
+  imports: [ BrowserModule, FormsModule, routing, 
+             AlertModule, DatepickerModule, HttpModule, 
+             TabViewModule, CategoriesModule ],
   declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
