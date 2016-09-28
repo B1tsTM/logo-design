@@ -3,21 +3,22 @@
     <form (ngSubmit)="onSubmit(f)" #f>
         <div class="form-group">
             <label>Konkurso pavadinimas</label>
-            <input ngControl="name" name="name" id="name" type="text" class="form-control" #name>
+            <input ngControl="name" name="name" id="name" type="text" class="form-control" #name [ngModel]="contest?.name">
         </div>
         <div class="form-group">
             <label>Konkurso kategorija (select list)</label>
-            <input ngControl="category" name="category" id="category" type="text" class="form-control" #category>
+            <input ngControl="category" name="category" id="category" type="text" class="form-control" #category [ngModel]="contest?.category">
         </div>
         <div class="form-group">
             <label>Konkurso Aprašymas</label>
-            <input ngControl="description" name="description" id="description" type="text" class="form-control" #description>
+            <input ngControl="description" name="description" id="description" type="text" class="form-control" #description [ngModel]="contest?.description">
         </div>
         <div class="form-group">
             <label>Konkurso Prizas</label>
-            <input ngControl="award" name="award" id="award" type="text" class="form-control" #award>
+            <input ngControl="award" name="award" id="award" type="text" class="form-control" #award [ngModel]="contest?.award">
         </div>
-        <button type="submit" class="btn btn-primary">Add contest</button>
+        <button type="submit" class="btn btn-primary">{{ !contest ? 'Pridėti konkursą' : 'Saugoti pakeitimus' }}</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="contest">Atšaukti</button>
     </form>
 </section>
 
