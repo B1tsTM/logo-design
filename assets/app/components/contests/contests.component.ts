@@ -15,7 +15,11 @@ export class ContestsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contests = this.contestsService.getContests();
+    this.contestsService.getContests()
+    .subscribe(contests => {
+      this.contests = contests;
+      this.contestsService.contests = contests;
+    })
    }
 
   onSubmit(form: any) {
@@ -25,7 +29,8 @@ export class ContestsComponent implements OnInit {
     console.log(contest);
     this.contestsService.addContest(contest)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
+        this.contestsService.contests.push(data);
       },
       error => {
         console.error(error);

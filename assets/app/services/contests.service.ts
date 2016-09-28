@@ -10,7 +10,17 @@ export class ContestsService {
   constructor(private http: Http) { }
 
   getContests() {
-    return this.contests;
+    return this.http.get('http://localhost:3000/konkursai')
+      .map(res => {
+        const data = res.json().obj;
+        let objs: any[] = [];
+        for(let i=0; i< data.length; i++) {
+          let contest = new Contest(data[i].name, data[i].category, data[i].description, data[i].award, data[i].designer);
+          objs.push(contest);
+        };
+        return objs;
+      })
+      .catch(error => Observable.throw(error.json()));
   }
 
   addContest(contest: Contest) {
@@ -18,7 +28,11 @@ export class ContestsService {
     const headers = new Headers({'Content-Type': 'application/json'});
 
     return this.http.post("http://localhost:3000/konkursai", body, {headers: headers})
-    .map(res => res.json())
+    .map(res => {
+      const data = res.json().obj;
+      let contest = new Contest(data.name, data.category, data.description, data.award, data.designer);
+      return contest;
+    })
     .catch(error => Observable.throw(error.json()));
   }
 

@@ -1,0 +1,4 @@
+.ng-touched .ng-invalid {
+  border: 1px solid tomato;
+  box-shadow: 0 0 5px tomato;
+}

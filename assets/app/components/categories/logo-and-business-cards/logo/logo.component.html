@@ -1,1 +1,14 @@
 <h1>Logotipo dizainas</h1>
+
+<form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm, myForm.valid)">
+
+    <!-- We'll add our form controls here -->
+    <label>First name</label>
+    <input formControlName="firstName" pInputText size="30">
+      <small *ngIf="myForm.controls.firstName.touched && myForm.controls.firstName.invalid">
+      First Name is required
+      </small>
+    <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+</form>
+

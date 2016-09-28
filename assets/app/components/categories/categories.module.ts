@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { InputTextModule } from 'primeng/primeng';
+import { MaterialModule } from '@angular/material';
 
 import { CategoriesDashboardComponent } from './categories-dashboard/categories-dashboard.component';
 import { BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent } from './logo-and-business-cards/index';
@@ -31,8 +35,8 @@ import { categoriesRouting } from './categories.routing';
 
 @NgModule({
   imports: [
-    CommonModule,
-    categoriesRouting
+    CommonModule, InputTextModule, ReactiveFormsModule,
+    categoriesRouting, MaterialModule.forRoot()
   ],
   declarations: [
     CategoriesDashboardComponent, BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent,
