@@ -15,7 +15,7 @@ export class AuthService {
     return this.http.post('http://localhost:3000/registracija', body, {headers:headers})
       .map(res => {
         const data = res.json().obj;
-        let designer = new Designer(data.email, data.password, data.firstName, data.lastName);
+        let designer = new Designer(data.email, data.password, data.userType ,data.firstName, data.lastName);
         return designer;
 
       })
@@ -35,6 +35,8 @@ export class AuthService {
       })
       .catch(error => Observable.throw(error.json()));
   }
-  }
 
+  isLoggedIn() {
+    return localStorage.getItem('token') !== null;
+  }
 }

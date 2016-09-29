@@ -19,12 +19,13 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      userType: ['', Validators.required]
     });
   }
 
   register(model) {
-        const designer = new Designer(this.myForm.value.email, this.myForm.value.password, this.myForm.value.firstName, this.myForm.value.lastName);
+        const designer = new Designer(this.myForm.value.email, this.myForm.value.password, this.myForm.value.userType ,this.myForm.value.firstName, this.myForm.value.lastName);
         this.authService.signup(designer)
           .subscribe(data => {
             console.log(data);

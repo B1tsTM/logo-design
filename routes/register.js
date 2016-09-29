@@ -9,7 +9,8 @@ router.post('/', function(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: passwordHash.generate(req.body.password),
-    email: req.body.email
+    email: req.body.email,
+    userType: req.body.userType
   });
   user.save(function(err, result) {
     if (err) {

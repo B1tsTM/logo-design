@@ -32,6 +32,13 @@
       Įveskite slaptažodį
       </small>
     </div>
+    <div class="form-group">
+      <label>Dizaineris ar užsakovas (select list)</label>
+    <input formControlName="userType" pInputText size="30">
+      <small *ngIf="myForm.controls.userType.touched && myForm.controls.userType.invalid">
+      Pasirinkite ar Esate užsakovas ar dizaineris
+      </small>
+    </div>
     <button type="submit" [disabled]="!myForm.valid">Submit</button>
 
 </form>
