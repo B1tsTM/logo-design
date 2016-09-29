@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var contestsRoutes = require('./routes/contests');
-var usersRoutes = require('./routes/users');
+var loginRoutes = require('./routes/login');
+var regRoutes = require('./routes/register');
 
 var app = express();
 
@@ -32,7 +33,8 @@ res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 next();
 });
 
-app.use('/login', usersRoutes);
+app.use('/prisijungti', loginRoutes);
+app.use('/registracija', regRoutes);
 app.use('/konkursai', contestsRoutes);
 app.use('/', appRoutes);
 

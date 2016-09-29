@@ -1,1 +1,38 @@
-<h1>REGISTER COMPONENT</h1>
+<h1 class="text-center">REGISTER COMPONENT</h1>
+
+<section class="col-md-4 col-md-offset-4">
+<form [formGroup]="myForm" novalidate (ngSubmit)="register(myForm)">
+
+    <!-- We'll add our form controls here -->
+    <div class="form-group">
+    <label>Vardas</label>
+    <input formControlName="firstName" pInputText size="30">
+      <small *ngIf="myForm.controls.firstName.touched && myForm.controls.firstName.invalid">
+      Įveskite savo vardą
+      </small>
+    </div>
+    <div class="form-group">
+      <label>Pavardė</label>
+    <input formControlName="lastName" pInputText size="30">
+      <small *ngIf="myForm.controls.lastName.touched && myForm.controls.lastName.invalid">
+      Įveskite savo pavardę
+      </small>
+    </div>
+    <div class="form-group">
+    <label>El paštas</label>
+    <input formControlName="email" pInputText size="30">
+      <small *ngIf="myForm.controls.email.touched && myForm.controls.email.invalid">
+      Įveskite el. pašto adresą
+      </small>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+    <input formControlName="password" pInputText size="30">
+      <small *ngIf="myForm.controls.password.touched && myForm.controls.password.invalid">
+      Įveskite slaptažodį
+      </small>
+    </div>
+    <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+</form>
+</section>

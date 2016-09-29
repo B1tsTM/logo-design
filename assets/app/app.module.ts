@@ -16,6 +16,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   ContestsComponent, RegisterComponent, LoginComponent } from './components/index';
 
 import { ContestsService } from './services/contests.service';
+import { AuthService } from './services/auth.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 
@@ -31,6 +32,6 @@ import { CategoriesModule } from './components/categories/categories.module';
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders, ContestsService ]
+  providers: [ appRoutingProviders, ContestsService, AuthService ]
 })
 export class AppModule { }

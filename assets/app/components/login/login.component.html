@@ -1,1 +1,18 @@
-<h1>LOGIN COMPONENT</h1>
+<h1 class="text-center">LOGIN COMPONENT</h1>
+
+<form [formGroup]="myForm" novalidate (ngSubmit)="login()" #f>
+
+    <!-- We'll add our form controls here -->
+    <label>Email</label>
+    <input formControlName="email" pInputText size="30">
+      <small *ngIf="myForm.controls.email.touched && myForm.controls.email.invalid">
+      Įveskite el. pašto adresą
+      </small>
+      <label>Password</label>
+    <input formControlName="password" pInputText size="30">
+      <small *ngIf="myForm.controls.password.touched && myForm.controls.password.invalid">
+      Įveskite slaptažodį
+      </small>
+    <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+</form>
