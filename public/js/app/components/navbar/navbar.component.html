@@ -18,34 +18,70 @@
             <li><a routerLink="/dizaineriai" routerLinkActive="active">Dizaineriai</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!--<li *ngIf="!isLoggedIn()"><a routerLink="/prisijungti">Prisijungti</a></li> -->
-            <li *ngIf="!isLoggedIn()"><a href="#" (click)="validationModal.open()">Prisijungti</a></li>
-            <li *ngIf="!isLoggedIn()"><a routerLink="/registracija">Registracija</a></li>
+            <!-- <li *ngIf="!isLoggedIn()"><a routerLink="/prisijungti">Prisijungti</a></li> -->
+            <li *ngIf="!isLoggedIn()"><a href="#" (click)="loginModal.open()">Prisijungti</a></li>
+            <!-- <li *ngIf="!isLoggedIn()"><a routerLink="/registracija">Registracija</a></li> -->
+            <li *ngIf="!isLoggedIn()"><a href="#" (click)="registerModal.open()">Registracija</a></li>
             <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Atsijungti</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-     <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" [cssClass]="cssClass" #validationModal>
-        <form #modalForm="ngForm">
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> <!--#modalForm="ngForm"> -->
             <modal-header [show-close]="true">
-                <h4 class="modal-title">I'm a modal!</h4>
+                <h4 class="modal-title text-center">Prisijungimas</h4>
             </modal-header>
             <modal-body>
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" required [(ngModel)]="model.firstName" name="firstName" id="firstName">
+                    <label for="firstName">El. Paštas</label>
+                    <input type="text" class="form-control" formControlName="email" name="email" id="email" autofocus>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" required [(ngModel)]="model.lastName" name="lastName" id="lastName">
+                    <label for="lastName">Slaptažodis</label>
+                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
                 </div>
             </modal-body>
             <modal-footer>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="validationModal.dismiss()">Cancel</button>
-                <button type="button" class="btn btn-primary" [disabled]="!modalForm.valid" (click)="validationModal.close()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="loginModal.dismiss()">Atšaukti</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="loginModal.close()">Prisijungti</button>
+            </modal-footer>
+        </form>
+</modal>
+
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" [cssClass]="cssClass" #registerModal>
+        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> <!--#modalForm="ngForm"> -->
+            <modal-header [show-close]="true">
+                <h4 class="modal-title text-center">Prisijungimas</h4>
+            </modal-header>
+            <modal-body>
+              <div class="form-group">
+                    <label for="firstName">Vardas</label>
+                    <input type="text" class="form-control" formControlName="firstName" name="firstName" id="firstName" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Pavardė</label>
+                    <input type="text" class="form-control" formControlName="lastName" name="lastName" id="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">El. Paštas</label>
+                    <input type="text" class="form-control" formControlName="email" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Slaptažodis</label>
+                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Dizaineris ar užsakovas?</label>
+                    <input type="text" class="form-control" formControlName="userType" name="userType" id="userType">
+                </div>
+            </modal-body>
+            <modal-footer>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="registerModal.dismiss()">Atšaukti</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="registerModal.close()">Prisijungti</button>
             </modal-footer>
         </form>
 </modal>

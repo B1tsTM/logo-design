@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -9,27 +10,44 @@ import { User } from '../../models/user';
   moduleId: module.id,
   selector: 'navbar',
   templateUrl: 'navbar.component.html',
-  styleUrls: ['navbar.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['navbar.component.css']
+  // , encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild('modal')
-    modal: ModalComponent;
+ // @ViewChild('modal')
+ //   modal: ModalComponent;   to support modal in modal (to implement: forgot password)
     model: User = new User('', '');
 
     index: number = 0;
-    backdropOptions = [true, false, 'static'];
+  //  backdropOptions = [true, false, 'static'];
     cssClass: string = '';
 
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
-    css: boolean = false;
+ //   css: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  public loginForm: FormGroup;
+  public registerForm: FormGroup;
+  public submitted: boolean = false;
 
-  ngOnInit() { }
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
+
+  ngOnInit() { 
+    this.loginForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, this.isValidEmail])],
+      password: ['', Validators.required]
+    });
+
+    this.registerForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, this.isValidEmail])],
+      password: ['', Validators.required],
+      userType: ['', Validators.required]
+    });
+  }
 
   logout() {
     localStorage.clear();
@@ -53,9 +71,31 @@ export class NavbarComponent implements OnInit {
         console.log('Modal opened');
     }
 
-    open() {
-        //this.modal.open();
-        console.log('Modal open');
-}
-  
+    login() {
+       const user = new User(this.loginForm.value.email, this.loginForm.value.password);
+       this.authService.signin(user)
+       .subscribe(data => {
+         console.log(data);
+         console.log('Sekmingai prisijungta');
+         localStorage.setItem('token', data.token);
+         localStorage.setItem('userId', data.userId);
+         this.router.navigateByUrl('/');
+       },
+       error => console.error(error))
+    }
+
+    register() {
+      const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName);
+        this.authService.signup(user)
+          .subscribe(data => {
+            console.log(data);
+          },
+          error => console.error(error))
+    }
+
+    private isValidEmail(control: FormControl): {[s: string]: boolean} {
+      let emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"); 
+      return emailRegex.test(control.value) ? null : {invalidEmail: true}
+      }
+
 }
