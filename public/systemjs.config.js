@@ -5,7 +5,8 @@ var map = {
   'ng2-bootstrap': 'js/vendor/ng2-bootstrap',
   'moment': 'js/vendor/moment/moment.js',
   'primeng': 'js/vendor/primeng',
-  '@angular/material': 'js/vendor/@angular/material'
+  '@angular/material': 'js/vendor/@angular/material',
+  'ng2-bs3-modal': 'js/vendor/ng2-bs3-modal'
   //'angular2-fontawesome': 'js/vendor/angular2-fontawesome'
 };
 
@@ -14,7 +15,8 @@ var packages = {
   'rxjs': { defaultExtension: 'js' },
   'ng2-bootstrap': { defaultExtension: 'js' },
   'primeng': { defaultExtension: 'js' },
-  '@angular/material': { main: 'material.umd.js', defaultExtension: 'js' }
+  '@angular/material': { main: 'material.umd.js', defaultExtension: 'js' },
+  'ng2-bs3-modal': { main: 'ng-bs3-modal.js', defaultExtension: 'js' }
   //'angular2-fontawesome': { defaultExtension: 'js' }
 };
 

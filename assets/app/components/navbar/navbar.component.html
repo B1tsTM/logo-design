@@ -18,6 +18,7 @@
             <li><a routerLink="/dizaineriai" routerLinkActive="active">Dizaineriai</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <!--<li *ngIf="!isLoggedIn()"><a routerLink="/prisijungti">Prisijungti</a></li> -->
             <li *ngIf="!isLoggedIn()"><a routerLink="/prisijungti">Prisijungti</a></li>
             <li *ngIf="!isLoggedIn()"><a routerLink="/registracija">Registracija</a></li>
             <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Atsijungti</a></li>

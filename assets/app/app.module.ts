@@ -9,6 +9,7 @@ import { TabViewModule, InputTextModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';
 
 import { AlertModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { NavbarComponent, HeaderComponent, FooterComponent, 
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
@@ -26,7 +27,7 @@ import { CategoriesModule } from './components/categories/categories.module';
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
-             TabViewModule, CategoriesModule ],
+             TabViewModule, CategoriesModule, Ng2Bs3ModalModule ],
   declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
