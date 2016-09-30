@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var Contest = require('../models/contests');
 
@@ -18,6 +19,19 @@ router.get('/', function(req,res,next) {
       });
     });
 });
+
+router.use('/', function(req, res, next) {
+  jwt.verify(req.query.token, 'secret', function(err, decoded) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida prisijungiant',
+        error: err
+      });
+    }
+    next();
+  });
+});
+
 
 router.post('/', function(req, res, next) {
   console.log(req.body);

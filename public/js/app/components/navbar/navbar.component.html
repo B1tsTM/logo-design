@@ -19,8 +19,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li *ngIf="!isLoggedIn()"><a routerLink="/prisijungti">Prisijungti</a></li>
-            <li><a routerLink="/registracija">Registracija</a></li>
-            <li *ngIf="isLoggedIn()"><a (click)="logout()">Atsijungti</a></li>
+            <li *ngIf="!isLoggedIn()"><a routerLink="/registracija">Registracija</a></li>
+            <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Atsijungti</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

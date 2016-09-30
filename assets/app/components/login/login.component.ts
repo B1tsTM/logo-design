@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Designer } from '../../models/designer';
+import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-       const designer = new Designer(this.myForm.value.email, this.myForm.value.password);
-       this.authService.signin(designer)
+       const user = new User(this.myForm.value.email, this.myForm.value.password);
+       this.authService.signin(user)
        .subscribe(data => {
          console.log(data);
          localStorage.setItem('token', data.token);
-         localStorage.setItem('designerId', data.designerId);
+         localStorage.setItem('userId', data.userId);
          this.router.navigateByUrl('/');
        },
        error => console.error(error))

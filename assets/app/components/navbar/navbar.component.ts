@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+    console.log('localStorage cleared, logging out...');
     this.router.navigate(['/']);
   }
 

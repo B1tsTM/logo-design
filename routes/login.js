@@ -26,11 +26,11 @@ router.post('/', function(req, res, next) {
         error: {message: 'Neteisingas slaptazodis'}
       });
     }
-    var token = jwt.sign({designer: doc}, 'secret', {expiresIn: 3600});
+    var token = jwt.sign({user: doc}, 'secret', {expiresIn: 3600});
     res.status(200).json({
       message: 'Prisijungta sekmingai',
       token: token,
-      designerId: doc._id
+      userId: doc._id
     });
   });
 });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Designer } from '../../models/designer';
+import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 
 
@@ -25,8 +25,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register(model) {
-        const designer = new Designer(this.myForm.value.email, this.myForm.value.password, this.myForm.value.userType ,this.myForm.value.firstName, this.myForm.value.lastName);
-        this.authService.signup(designer)
+        const user = new User(this.myForm.value.email, this.myForm.value.password, this.myForm.value.userType ,this.myForm.value.firstName, this.myForm.value.lastName);
+        this.authService.signup(user)
           .subscribe(data => {
             console.log(data);
           },

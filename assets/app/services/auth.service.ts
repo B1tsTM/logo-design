@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Designer } from '../models/designer';
+import { User } from '../models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
@@ -9,28 +9,28 @@ export class AuthService {
 
   constructor(private http: Http) { }
 
-  signup(designer: Designer) {
-    const body = JSON.stringify(designer);
+  signup(user: User) {
+    const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post('http://localhost:3000/registracija', body, {headers:headers})
       .map(res => {
         const data = res.json().obj;
-        let designer = new Designer(data.email, data.password, data.userType ,data.firstName, data.lastName);
-        return designer;
+        let user = new User(data.email, data.password, data.userType ,data.firstName, data.lastName);
+        return user;
 
       })
       .catch(error => Observable.throw(error.json()));
   }
 
-  signin(designer: Designer) {
-    console.log(designer);
-    const body = JSON.stringify(designer);
+  signin(user: User) {
+    console.log(user);
+    const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post('http://localhost:3000/prisijungti', body, {headers:headers})
       .map(res => {
         var token = res.json().token;
-        var designerId = res.json().designerId;
-        return {token: token, designerId: designerId};
+        var userId = res.json().userId;
+        return {token: token, userId: userId};
         
       })
       .catch(error => Observable.throw(error.json()));
