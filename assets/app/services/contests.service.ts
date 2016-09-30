@@ -16,7 +16,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].designer);
+          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].user);
           objs.push(contest);
         };
         return objs;
@@ -27,11 +27,12 @@ export class ContestsService {
   addContest(contest: Contest) {
     const body = JSON.stringify(contest);
     const headers = new Headers({'Content-Type': 'application/json'});
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
 
-    return this.http.post("http://localhost:3000/konkursai", body, {headers: headers})
+    return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.designer);
+      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.user._id);
       return contest;
     })
     .catch(error => Observable.throw(error.json()));

@@ -48,7 +48,7 @@ export class ContestsComponent implements OnInit {
     } else {
       console.log(form);
       //const contest: any = {contests: input, type: 'Logo', designer: 'John Lohke'};
-      const contest = new Contest(form.name.value, form.category.value, form.description.value, form.award.value, 'John Lohke');
+      const contest = new Contest(form.name.value, null, form.category.value, form.description.value, form.award.value);
       console.log(contest);
       this.contestsService.addContest(contest)
         .subscribe(data => {

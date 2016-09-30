@@ -33,6 +33,10 @@ var schema = new Schema({
   extraInfo: {      //extra info for designers
     type: String  
   },
+  participants: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var Contest = require('../models/contests');
+var User = require('../models/user');
 
 router.get('/', function(req,res,next) {
   Contest.find()
@@ -34,14 +35,23 @@ router.use('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
-  var contest = new Contest({
+  var decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, function(err, doc) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log(req.body);
+    var contest = new Contest({
     contestId: req.body.contestId,
     name: req.body.name,
     category: req.body.category,
     description: req.body.description,
     award: req.body.award,
-    designer: req.body.designer
+    designer: req.body.designer,
+    user: doc
   });
   contest.save(function(err, result) {
     if (err) {
@@ -50,10 +60,13 @@ router.post('/', function(req, res, next) {
         error: err
       });
     }
+    doc.contests.push(result);
+    doc.save();
     res.status(201).json({
       contest: 'Konkursas įkeltas',
       obj: result
     });
+  });
   });
 });
 
