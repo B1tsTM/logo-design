@@ -24,7 +24,7 @@ router.get('/', function(req,res,next) {
 router.use('/', function(req, res, next) {
   jwt.verify(req.query.token, 'secret', function(err, decoded) {
     if (err) {
-      return res.status(404).json({
+      return res.status(401).json({
         title: 'Klaida prisijungiant',
         error: err
       });
@@ -71,6 +71,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.patch('/:id', function(req,res,next) {
+    var decoded = jwt.decode(req.query.token);
   Contest.findById(req.params.id, function(err, doc) {
     if (err) {
       return res.status(404).json({
@@ -84,6 +85,13 @@ router.patch('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
+    if (doc.user !== decoded.user._id) {
+      return res.status(401).json({
+        title: 'Neturite privilegiju !',
+        error: {message: 'Negalima pakeisti konkurso'}
+      });
+    }
+
     doc.name = req.body.name;
     doc.category = req.body.category;
     doc.description = req.body.description;
@@ -104,6 +112,7 @@ router.patch('/:id', function(req,res,next) {
 });
 
 router.delete('/:id', function(req,res,next) {
+  var decoded = jwt.decode(req.query.token);
   Contest.findById(req.params.id, function(err, doc) {
     if (err) {
       return res.status(404).json({
@@ -117,6 +126,13 @@ router.delete('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
+    if (doc.user !== decoded.user._id) {
+      return res.status(401).json({
+        title: 'Neturite privilegiju !',
+        error: {message: 'Negalima pakeisti konkurso'}
+      });
+    }
+    
     doc.remove(function(err, result) {
       if (err) {
       return res.status(404).json({

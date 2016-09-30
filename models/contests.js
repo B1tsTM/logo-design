@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require('../models/user');
 
 var schema = new Schema({
   name: {
@@ -41,6 +42,14 @@ var schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
+});
+
+schema.post('remove', function(doc) { // schema.pre another option
+  var deletedContest = doc;
+  User.findById(doc.user, function(err, doc) {
+    doc.contests.pull(deletedContest);
+    doc.save();
+  });
 });
 
 module.exports = mongoose.model('Contests', schema);
