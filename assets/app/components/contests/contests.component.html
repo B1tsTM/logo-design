@@ -31,9 +31,9 @@
         </div>
         <div class="panel-footer">   
           <div class="author">         
-            {{ contest.category }} - {{ contest.user }}
+            {{ contest.category }} - {{ contest.userName }}
           </div>
-          <div class="config">
+          <div class="config" *ngIf="belongsToUser(contest.user)">
           <a (click)="editContest(contest)">Edit</a>
           <a (click)="deleteContest(contest)">Delete</a>
         </div>

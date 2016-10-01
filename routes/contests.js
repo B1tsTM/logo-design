@@ -7,6 +7,7 @@ var User = require('../models/user');
 
 router.get('/', function(req,res,next) {
   Contest.find()
+    .populate('user', 'firstName')
     .exec(function(err, docs) {
       if (err) {
       return res.status(404).json({
@@ -85,7 +86,7 @@ router.patch('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
-    if (doc.user !== decoded.user._id) {
+    if (doc.user != decoded.user._id) {
       return res.status(401).json({
         title: 'Neturite privilegiju !',
         error: {message: 'Negalima pakeisti konkurso'}
@@ -126,13 +127,13 @@ router.delete('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
-    if (doc.user !== decoded.user._id) {
+    if (doc.user != decoded.user._id) {
       return res.status(401).json({
         title: 'Neturite privilegiju !',
         error: {message: 'Negalima pakeisti konkurso'}
       });
     }
-    
+
     doc.remove(function(err, result) {
       if (err) {
       return res.status(404).json({

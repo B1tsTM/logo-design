@@ -16,7 +16,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].user);
+          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].user.firstName, data[i].user._id);
           objs.push(contest);
         };
         return objs;
@@ -32,7 +32,7 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.user._id);
+      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.user.firstName, data.user._id);
       return contest;
     })
     .catch(error => Observable.throw(error.json()));
@@ -41,8 +41,9 @@ export class ContestsService {
   updateContest(contest: Contest) {
     const body = JSON.stringify(contest);
     const headers = new Headers({'Content-Type': 'application/json'});
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
 
-    return this.http.patch("http://localhost:3000/konkursai/" + contest.id, body, {headers: headers})
+    return this.http.patch("http://localhost:3000/konkursai/" + contest.id + token, body, {headers: headers})
     .map(res => res.json())
   }
 
@@ -51,8 +52,9 @@ export class ContestsService {
   }
 
   deleteContest(contest: any) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     this.contests.splice(this.contests.indexOf(contest), 1);
-    return this.http.delete("http://localhost:3000/konkursai/" + contest.id)
+    return this.http.delete("http://localhost:3000/konkursai/" + contest.id + token)
       .map(res => res.json())
   }
 }

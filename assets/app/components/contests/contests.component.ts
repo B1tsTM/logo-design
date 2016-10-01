@@ -20,6 +20,7 @@ export class ContestsComponent implements OnInit {
     .subscribe(contests => {
       this.contests = contests;
       this.contestsService.contests = contests;
+      console.log(this.contests);
     });
 
     this.contestsService.messageEdited
@@ -54,6 +55,10 @@ export class ContestsComponent implements OnInit {
         .subscribe(data => {
           console.log(data);
           this.contestsService.contests.push(data);
+          form.name.value = '';
+          form.category.value = '';
+          form.description.value = '';
+          form.award.value = '';
         },
         error => {
           console.error(error);
@@ -77,6 +82,10 @@ export class ContestsComponent implements OnInit {
 
   onCancel() {
     this.contest = null;
+  }
+
+  belongsToUser(userId: string) {
+    return localStorage.getItem('userId') == userId;
   }
 
 }
