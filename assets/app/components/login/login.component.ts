@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ErrorService } from '../../errors/index';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public myForm: FormGroup;
   public submitted: boolean = false;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private errorService: ErrorService) { }
 
   ngOnInit() { 
     this.myForm = this.fb.group({
@@ -32,6 +33,6 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('userId', data.userId);
          this.router.navigateByUrl('/');
        },
-       error => console.error(error))
+       error => this.errorService.handleError(error))
     }
 }

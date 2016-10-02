@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contest } from '../../models/contest';
 import { ContestsService } from '../../services/contests.service';
+import { ErrorService } from '../../errors/index';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import { ContestsService } from '../../services/contests.service';
 export class ContestsComponent implements OnInit {
   contest: Contest = null;
   contests: any = [];
-  constructor(private contestsService: ContestsService) {
+  constructor(private contestsService: ContestsService, private errorService: ErrorService) {
     
   }
 
@@ -42,7 +43,7 @@ export class ContestsComponent implements OnInit {
           console.log(data);
         },
         error => {
-          console.log(error);
+          this.errorService.handleError(error);
         })
       this.contest = null;
 
@@ -61,7 +62,7 @@ export class ContestsComponent implements OnInit {
           form.award.value = '';
         },
         error => {
-          console.error(error);
+          this.errorService.handleError(error);
         });
     }
   }
@@ -76,7 +77,7 @@ export class ContestsComponent implements OnInit {
         console.log(data);
       },
       error => {
-        console.error(error);
+        this.errorService.handleError(error);
       })
   }
 

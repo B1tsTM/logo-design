@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { ErrorService } from '../../errors/index';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterComponent implements OnInit {
    public myForm: FormGroup;
   public submitted: boolean = false;
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private errorService: ErrorService) { }
 
   ngOnInit() { 
     this.myForm = this.fb.group({
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
           .subscribe(data => {
             console.log(data);
           },
-          error => console.error(error))
+          error => this.errorService.handleError(error))
     }
 
     private isValidEmail(control: FormControl): {[s: string]: boolean} {

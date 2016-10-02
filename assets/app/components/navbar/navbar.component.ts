@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { User } from '../../models/user';
+import { ErrorService } from '../../errors/index';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit {
   public registerForm: FormGroup;
   public submitted: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private errorService: ErrorService) { }
 
   ngOnInit() { 
     this.loginForm = this.fb.group({
@@ -81,7 +82,7 @@ export class NavbarComponent implements OnInit {
          localStorage.setItem('userId', data.userId);
          this.router.navigateByUrl('/');
        },
-       error => console.error(error))
+       error => this.errorService.handleError(error))
     }
 
     register() {
@@ -90,7 +91,7 @@ export class NavbarComponent implements OnInit {
           .subscribe(data => {
             console.log(data);
           },
-          error => console.error(error))
+          error => this.errorService.handleError(error))
     }
 
     private isValidEmail(control: FormControl): {[s: string]: boolean} {

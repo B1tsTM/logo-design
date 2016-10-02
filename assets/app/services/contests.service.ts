@@ -45,7 +45,9 @@ export class ContestsService {
 
     return this.http.patch("http://localhost:3000/konkursai/" + contest.id + token, body, {headers: headers})
     .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
   }
+  
 
   editContest(contest: any) {
     this.messageEdited.emit(contest);
@@ -56,5 +58,6 @@ export class ContestsService {
     this.contests.splice(this.contests.indexOf(contest), 1);
     return this.http.delete("http://localhost:3000/konkursai/" + contest.id + token)
       .map(res => res.json())
+      .catch(error => Observable.throw(error.json()));
   }
 }

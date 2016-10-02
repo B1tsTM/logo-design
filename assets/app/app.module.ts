@@ -21,6 +21,8 @@ import { AuthService } from './services/auth.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 
+import { ErrorComponent, ErrorService } from './errors/index';
+
 
 
 @NgModule({
@@ -31,8 +33,9 @@ import { CategoriesModule } from './components/categories/categories.module';
   declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
-                  BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent ],
+                  BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
+                  ErrorComponent ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders, ContestsService, AuthService ]
+  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService ]
 })
 export class AppModule { }
