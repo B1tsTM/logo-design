@@ -13,6 +13,8 @@ export class ContestsService {
   getContests() {
     return this.http.get('http://localhost:3000/konkursai')
       .map(res => {
+        console.log(res.json());
+//        const data = res.json().obj;
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {

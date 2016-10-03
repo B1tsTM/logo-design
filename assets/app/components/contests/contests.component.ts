@@ -17,6 +17,7 @@ export class ContestsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.contestsService.getContests()
     .subscribe(contests => {
       this.contests = contests;

@@ -19,6 +19,7 @@ router.get('/', function(req,res,next) {
         message: 'Success',
         obj: docs
       });
+      //return res.render('index', {message: 'Success', obj: docs});
     });
 });
 

@@ -33,10 +33,11 @@ res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 next();
 });
 
-app.use('/prisijungti', loginRoutes);
+app.use('/prisijungti', loginRoutes); // TODO find a way to render html with JSON attached
 app.use('/registracija', regRoutes);
 app.use('/konkursai', contestsRoutes);
 app.use('/', appRoutes);
+app.use('**', function(req,res,next) {res.render('index')});
 
 
 // catch 404 and forward to error handler
