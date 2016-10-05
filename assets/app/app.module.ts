@@ -14,12 +14,14 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { NavbarComponent, HeaderComponent, FooterComponent, 
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
-  ContestsComponent, RegisterComponent, LoginComponent } from './components/index';
+  ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
+  PublishContestComponent } from './components/index';
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
+import { PublishContestModule } from './components/publish-contest/publish-contest.module';
 
 import { ErrorComponent, ErrorService } from './errors/index';
 
@@ -29,12 +31,12 @@ import { ErrorComponent, ErrorService } from './errors/index';
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
-             TabViewModule, CategoriesModule, Ng2Bs3ModalModule ],
+             TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule ],
   declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
-                  ErrorComponent ],
+                  ErrorComponent, WinnersGalleryComponent, PublishContestComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService ]
 })

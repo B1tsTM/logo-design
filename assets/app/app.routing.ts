@@ -3,11 +3,13 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
-        LoginComponent, RegisterComponent } from './components/index';
+        LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent } from './components/index';
 
 const appRoutes: Routes = [
   { path: 'konkursai', component: ContestsComponent },
+  { path: 'paskelbti-konkursa', component: PublishContestComponent },
   { path: 'kategorijos', component: CategoriesComponent },
+  { path: 'nugaletoju-galerija', component: WinnersGalleryComponent },
   { path: 'dizaineriai', component: DesignersComponent },
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
   { path: 'prisijungti', component: LoginComponent },

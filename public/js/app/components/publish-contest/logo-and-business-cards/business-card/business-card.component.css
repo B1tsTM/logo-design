@@ -1,0 +1,45 @@
+.ng-touched .ng-invalid {
+  
+}
+
+.error {
+  color: tomato;
+  display: inline-block;
+}
+
+.asterisk {
+  color: tomato;
+  display: inline-block;
+  font-size: 25px;
+}
+
+.block {
+  display: block;
+}
+
+.content-body {
+  max-width: 1000px !important;
+  margin: 0 auto;
+}
+
+.span8 {
+    width: 66%;
+    float: left;
+}
+
+.span4 {
+    width: 33%;
+    float: left;
+}
+
+[md-raised-button] {
+  background-color: cyan;
+  margin-top: 10px;
+}
+
+[disabled][md-raised-button] {
+  background-color: #333;
+  color: #fff;
+  cursor: not-allowed;
+  margin-top: 10px;
+}

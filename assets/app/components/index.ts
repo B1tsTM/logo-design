@@ -10,3 +10,5 @@ export * from './bs-components/bs-datetime/datetime.component';
 export * from './contests/contests.component';
 export * from './login/login.component';
 export * from './register/register.component';
+export * from './winners-gallery/winners-gallery.component';
+export * from './publish-contest/publish-contest.component';

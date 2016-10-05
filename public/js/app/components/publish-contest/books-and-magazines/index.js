@@ -1,0 +1,9 @@
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(require('./book-cover-design/book-cover-design.component'));
+__export(require('./e-book-cover-design/e-book-cover-design.component'));
+__export(require('./magazine-cover-design/magazine-cover-design.component'));
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvcHVibGlzaC1jb250ZXN0L2Jvb2tzLWFuZC1tYWdhemluZXMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlCQUFjLGlEQUFpRCxDQUFDLEVBQUE7QUFDaEUsaUJBQWMscURBQXFELENBQUMsRUFBQTtBQUNwRSxpQkFBYyx5REFBeUQsQ0FBQyxFQUFBIiwiZmlsZSI6ImNvbXBvbmVudHMvcHVibGlzaC1jb250ZXN0L2Jvb2tzLWFuZC1tYWdhemluZXMvaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL2Jvb2stY292ZXItZGVzaWduL2Jvb2stY292ZXItZGVzaWduLmNvbXBvbmVudCc7XHJcbmV4cG9ydCAqIGZyb20gJy4vZS1ib29rLWNvdmVyLWRlc2lnbi9lLWJvb2stY292ZXItZGVzaWduLmNvbXBvbmVudCc7XHJcbmV4cG9ydCAqIGZyb20gJy4vbWFnYXppbmUtY292ZXItZGVzaWduL21hZ2F6aW5lLWNvdmVyLWRlc2lnbi5jb21wb25lbnQnO1xyXG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=

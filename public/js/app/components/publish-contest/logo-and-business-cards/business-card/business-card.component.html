@@ -1,0 +1,38 @@
+<h1 class="text-center">Verslo korteles dizainas</h1>
+
+<div class="content-body">
+  <form class="form-horizontal well" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm, myForm.valid)">
+    <!-- We'll add our form controls here -->
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <p class="lead">Užpildykite anketą</p>
+          <div class="control-group">
+            <md-input formControlName="logoName" placeholder="Logotipo pavadinimas" dividerColor="primary" style="width: 66%"></md-input>
+            <span *ngIf="!myForm.controls.logoName.touched && myForm.controls.logoName.pristine" class="asterisk"> *</span>
+            <small class="error" *ngIf="myForm.controls.logoName.touched && myForm.controls.logoName.invalid">
+            Šis laukas privalomas
+            </small>
+          </div>
+          <div class="control-group">
+            <md-input formControlName="description" placeholder="Trumpas aprašymas" dividerColor="primary" style="width: 66%"></md-input>
+            <small class="error" *ngIf="myForm.controls.description.touched && myForm.controls.description.invalid">
+            Šis laukas privalomas
+            </small>
+          </div>
+           <div class="control-group">
+            <textarea formControlName="additionalInfo" rows="6" placeholder="Papildoma informacija" style="width: 66%; margin-top: 15px;"></textarea>
+            <small class="error" *ngIf="myForm.controls.additionalInfo.touched && myForm.controls.additionalInfo.invalid">
+            Šis laukas privalomas
+            </small>
+          </div>
+        </div>
+        <div class="span4">
+          <p>Pinigų gražinimo garantija</p>
+        </div>
+      </div>
+    </div>
+    <button md-raised-button color="primary" [disabled]="!myForm.valid">Paskelbti konkursą</button>
+  </form>
+</div>
+
