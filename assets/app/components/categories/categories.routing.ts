@@ -3,12 +3,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { CategoriesComponent } from './categories.component';
 import { CategoriesDashboardComponent } from './categories-dashboard/categories-dashboard.component';
 import { BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent } from './logo-and-business-cards/index';
-import { AdBannerComponent, AndroidAppComponent, BlogDesignComponent,
+import { AbBannerComponent, AndroidAppComponent, BlogDesignComponent,
          FacebookDesignComponent, FlashBannerComponent, FrontPageComponent,
          IconDesignComponent, IosAppComponent, MobileAppComponent,
          TwitterDesignComponent, WebsiteHeaderComponent, WebsiteRedesignComponent,
          WordpressThemeComponent, YoutubeChannelComponent, OtherWebAndAppDesignComponent } from './web-and-app-design/index';
-import { AdDesignComponent, BillboardComponent, BookletComponent,
+import { AbDesignComponent, BillboardComponent, BookletComponent,
          CarAdComponent, EmailDesignComponent, FoodMenuComponent,
          LeafletComponent, OtherBusinessOrAdvertisingComponent, PostcardComponent,
          PowerPointDesignComponent, MicrosoftWordDesignComponent, ResumeDesignComponent } from './business-and-advertising/index';
@@ -37,7 +37,7 @@ const categoriesRoutes: Routes = [
       { path: 'logotipo-dizainas', component: LogoComponent },
       { path: 'logotipo-ir-verslo-korteles-dizainas', component: LogoAndBusinessCardComponent },
       // Web dizainas
-      { path: 'reklamines-juostos-dizainas', component: AdBannerComponent },
+      { path: 'reklamines-juostos-dizainas', component: AbBannerComponent },
       { path: 'puslapio-antrastes-dizainas', component: WebsiteHeaderComponent },
       { path: 'tinklarascio-dizainas', component: BlogDesignComponent },
       { path: 'esamo-dizaino-keitimas', component: WebsiteRedesignComponent },
@@ -53,7 +53,7 @@ const categoriesRoutes: Routes = [
       { path: 'flash-reklamos-dizainas', component: FlashBannerComponent },
       { path: 'kitas-puslapio-ar-aplikacijos-dizainas', component: OtherWebAndAppDesignComponent },
       // Verslas, Reklama
-      { path: 'reklamos-dizainas', component: AdDesignComponent }, // Billboard, booth banner
+      { path: 'reklamos-dizainas', component: AbDesignComponent }, // Billboard, booth banner
       { path: 'brosiuros-dizainas', component: BookletComponent }, // 3 tabs / both sides
       { path: 'skelbimu-lentos-skelbimo-dizainas', component: BillboardComponent },
       { path: 'reklamines-masinos-dizainas', component: CarAdComponent },

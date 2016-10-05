@@ -1,4 +1,4 @@
-export * from './ad-design/ad-design.component';
+export * from './ab-design/ab-design.component';
 export * from './billboard/billboard.component';
 export * from './booklet/booklet.component';
 export * from './car-ad/car-ad.component';

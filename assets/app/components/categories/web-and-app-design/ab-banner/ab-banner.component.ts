@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'ad-banner.component.html'
+  templateUrl: 'ab-banner.component.html'
 })
-export class AdBannerComponent implements OnInit {
+export class AbBannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }

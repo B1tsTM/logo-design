@@ -1,4 +1,4 @@
-export * from './ad-banner/ad-banner.component';
+export * from './ab-banner/ab-banner.component';
 export * from './android-app/android-app.component';
 export * from './blog-design/blog-design.component';
 export * from './facebook-design/facebook-design.component';

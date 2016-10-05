@@ -7,12 +7,12 @@ import { MaterialModule } from '@angular/material';
 
 import { PublishContestDashboardComponent } from './publish-contest-dashboard/publish-contest-dashboard.component';
 import { BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent } from './logo-and-business-cards/index';
-import { AdBannerComponent, AndroidAppComponent, BlogDesignComponent,
+import { AbBannerComponent, AndroidAppComponent, BlogDesignComponent,
          FacebookDesignComponent, FlashBannerComponent, FrontPageComponent,
          IconDesignComponent, IosAppComponent, MobileAppComponent,
          TwitterDesignComponent, WebsiteHeaderComponent, WebsiteRedesignComponent,
          WordpressThemeComponent, YoutubeChannelComponent, OtherWebAndAppDesignComponent } from './web-and-app-design/index';
-import { AdDesignComponent, BillboardComponent, BookletComponent,
+import { AbDesignComponent, BillboardComponent, BookletComponent,
          CarAdComponent, EmailDesignComponent, FoodMenuComponent,
          LeafletComponent, OtherBusinessOrAdvertisingComponent, PostcardComponent,
          PowerPointDesignComponent, MicrosoftWordDesignComponent, ResumeDesignComponent } from './business-and-advertising/index';
@@ -40,12 +40,12 @@ import { publishContestRouting } from './publish-contest.routing';
   ],
   declarations: [
     PublishContestDashboardComponent, BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent,
-    AdBannerComponent, AndroidAppComponent, BlogDesignComponent,
+    AbBannerComponent, AndroidAppComponent, BlogDesignComponent,
     FacebookDesignComponent, FlashBannerComponent, FrontPageComponent,
     IconDesignComponent, IosAppComponent, MobileAppComponent,
     TwitterDesignComponent, WebsiteHeaderComponent, WebsiteRedesignComponent,
     WordpressThemeComponent, YoutubeChannelComponent, OtherWebAndAppDesignComponent,
-    AdDesignComponent, BillboardComponent, BookletComponent,
+    AbDesignComponent, BillboardComponent, BookletComponent,
     CarAdComponent, EmailDesignComponent, FoodMenuComponent,
     LeafletComponent, OtherBusinessOrAdvertisingComponent, PostcardComponent,
     PowerPointDesignComponent, MicrosoftWordDesignComponent, ResumeDesignComponent,
