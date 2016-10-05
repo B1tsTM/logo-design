@@ -20,3 +20,8 @@
 .red-text {
     color: #d9534f !important; 
 }
+
+.radios {
+    display: inline-block;
+    padding-left: 15px;
+}

@@ -32,6 +32,10 @@ export class NavbarComponent implements OnInit {
   public loginForm: FormGroup;
   public registerForm: FormGroup;
   public submitted: boolean = false;
+  public userTypes = [
+    { value: 'client', display: 'Client' },
+    { value: 'designer', display: 'Designer' }
+];
 
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private errorService: ErrorService) { }
 
@@ -46,7 +50,7 @@ export class NavbarComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       password: ['', Validators.required],
-      userType: ['', Validators.required]
+      userType: [this.userTypes[0].value, Validators.required]
     });
   }
 

@@ -13,6 +13,10 @@ import { ErrorService } from '../../errors/index';
 export class RegisterComponent implements OnInit {
    public myForm: FormGroup;
   public submitted: boolean = false;
+  public userTypes = [
+    { value: 'client', display: 'Client' },
+    { value: 'designer', display: 'Designer' }
+];
   constructor(private fb: FormBuilder, private authService: AuthService, private errorService: ErrorService) { }
 
   ngOnInit() { 
@@ -21,7 +25,7 @@ export class RegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       password: ['', Validators.required],
-      userType: ['', Validators.required]
+      userType: [this.userTypes[0].value, Validators.required]
     });
   }
 

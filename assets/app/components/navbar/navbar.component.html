@@ -75,8 +75,13 @@
                     <input type="text" class="form-control" formControlName="password" name="password" id="password">
                 </div>
                 <div class="form-group">
-                    <label for="firstName">Dizaineris ar užsakovas?</label>
-                    <input type="text" class="form-control" formControlName="userType" name="userType" id="userType">
+                    <label style="display: block">Dizaineris ar užsakovas?</label>
+                    <div *ngFor="let type of userTypes" class="radios">
+                    <label>
+                    <input type="radio" class="form-control" formControlName="userType" name="userType" id="userType" [value]="type.value">
+                    {{ type.display }}
+                    </label>
+                    </div>
                 </div>
             </modal-body>
             <modal-footer>
