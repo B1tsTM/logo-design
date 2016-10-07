@@ -11,7 +11,17 @@ var schema = new Schema({
   contestsWon: {type: Number},
   designsCreated: {type: Number},
   publicDesigns: {type: Number},
-  contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}]
+  contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
+  designs: [{
+    designUrl: {type: String},
+    designIsPublic: {type: Boolean}
+  }],
+  avatar: {
+    avatarUrl: {type: String}
+  },
+  profile: {
+    profileUrl: {type: String}
+  }
 });
 
 schema.plugin(mongooseUniqueValidator);
