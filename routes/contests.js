@@ -5,22 +5,8 @@ var jwt = require('jsonwebtoken');
 var Contest = require('../models/contests');
 var User = require('../models/user');
 
-router.get('/', function(req,res,next) {
-  Contest.find()
-    .populate('user', 'firstName')
-    .exec(function(err, docs) {
-      if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      res.status(200).json({
-        message: 'Success',
-        obj: docs
-      });
-      //return res.render('index', {message: 'Success', obj: docs});
-    });
+router.get('/', function (req,res,next) {
+  res.render('index');
 });
 
 router.use('/', function(req, res, next) {
@@ -52,6 +38,9 @@ router.post('/', function(req, res, next) {
     category: req.body.category,
     description: req.body.description,
     award: req.body.award,
+    status: req.body.status,
+    submitions: req.body.submitions,
+    daysRemaining: req.body.daysRemaining,
     designer: req.body.designer,
     user: doc
   });

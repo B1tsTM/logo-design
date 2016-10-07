@@ -22,6 +22,12 @@ var schema = new Schema({
   award: {
     type: Number
   },
+  daysRemaining: {
+    type: Number
+  },
+  submitions: {
+    type: Number
+  },
   startDate: {
     type: Date, default: Date.now()
   },

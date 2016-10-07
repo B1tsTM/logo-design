@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
+var apiRoutes = require('./routes/api');
 var contestsRoutes = require('./routes/contests');
 var loginRoutes = require('./routes/login');
 var regRoutes = require('./routes/register');
@@ -36,6 +37,7 @@ next();
 app.use('/prisijungti', loginRoutes); // TODO find a way to render html with JSON attached
 app.use('/registracija', regRoutes);
 app.use('/konkursai', contestsRoutes);
+app.use('/api/v1', apiRoutes);
 app.use('/', appRoutes);
 app.use('**', function(req,res,next) {res.render('index')});
 
