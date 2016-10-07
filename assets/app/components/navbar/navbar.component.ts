@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
     }
 
     register() {
-      const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName);
+      const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName, 0, 0, 0);
         this.authService.signup(user)
           .subscribe(data => {
             console.log(data);

@@ -15,7 +15,8 @@ export class AuthService {
     return this.http.post('http://localhost:3000/registracija', body, {headers:headers})
       .map(res => {
         const data = res.json().obj;
-        let user = new User(data.email, data.password, data.userType ,data.firstName, data.lastName);
+        let user = new User(data.email, data.password, data.userType ,data.firstName, data.lastName, 0, 0, 0);
+        console.log(user);
         return user;
 
       })

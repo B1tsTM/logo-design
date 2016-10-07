@@ -3,5 +3,8 @@
 </div>
 
 <div *ngFor="let designer of designers">
-  {{designer.firstName}} - {{designer.lastName}} - {{designer.email}}
+  {{designer.firstName}} - {{designer.lastName}} - {{designer.email}} - {{designer.contestsWon == 0 ? 'No' : designer.contestsWon}} {{designer.contestsWon == 1 ? 'contest won' : 'contests won'}}
+  <div>
+    {{designer | json}}
+  </div>
 </div>

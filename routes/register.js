@@ -10,7 +10,10 @@ router.post('/', function(req, res, next) {
     lastName: req.body.lastName,
     password: passwordHash.generate(req.body.password),
     email: req.body.email,
-    userType: req.body.userType
+    userType: req.body.userType,
+    contestsWon: req.body.contestsWon,
+    designsCreated: req.body.designsCreated,
+    publicDesigns: req.body.publicDesigns
   });
   user.save(function(err, result) {
     if (err) {
