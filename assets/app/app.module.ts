@@ -19,6 +19,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
+import { DesignersService } from './services/designers.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
@@ -38,6 +39,6 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService ]
+  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, DesignersService ]
 })
 export class AppModule { }

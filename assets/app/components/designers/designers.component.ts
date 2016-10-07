@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContestsService } from '../../services/contests.service';
+import { DesignersService } from '../../services/designers.service';
 
 @Component({
   moduleId: module.id,
@@ -9,13 +9,13 @@ import { ContestsService } from '../../services/contests.service';
 })
 export class DesignersComponent implements OnInit {
   designers: any;
-  constructor(private contestsService: ContestsService) { }
+  constructor(private designersService: DesignersService) { }
 
   ngOnInit() { 
-    this.contestsService.getDesigners()
+    this.designersService.getDesigners()
     .subscribe(designers => {
       this.designers = designers;
-      this.contestsService.designers = designers;
+      this.designersService.designers = designers;
       console.log(this.designers);
     });
 
