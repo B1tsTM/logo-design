@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 import { CategoriesDashboardComponent } from './categories-dashboard/categories-dashboard.component';
 import { BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent } from './logo-and-business-cards/index';
@@ -59,7 +60,7 @@ import { categoriesRouting } from './categories.routing';
     CosmeticsProductsLabelOrPackagingDesignComponent, DrinkLabelDesignComponent,
     FoodProductsLabelOrPackagingDesignComponent, OtherProductsLabelOrPackagingDesignComponent,
     BookCoverDesignComponent, EBookCoverDesignComponent, MagazineCoverDesignComponent,
-    OtherDesignsComponent
+    OtherDesignsComponent, FileSelectDirective, FileDropDirective
   ]
 })
 

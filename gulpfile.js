@@ -52,6 +52,9 @@ gulp.task('vendor', function() {
    gulp.src('node_modules/ng2-bs3-modal/**')
   .pipe(gulp.dest(vendor + "/ng2-bs3-modal/"));
 
+  gulp.src('node_modules/ng2-file-upload/**')
+  .pipe(gulp.dest(vendor + "/ng2-file-upload/"));
+
   gulp.src('node_modules/angular2-fontawesome/**')
   .pipe(gulp.dest(vendor + "/angular2-fontawesome/"));
 
