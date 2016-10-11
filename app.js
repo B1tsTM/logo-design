@@ -5,12 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 var appRoutes = require('./routes/app');
 var apiRoutes = require('./routes/api');
 var contestsRoutes = require('./routes/contests');
 var loginRoutes = require('./routes/login');
 var regRoutes = require('./routes/register');
+
+var multer = require('multer');
+var DIR = './uploads/';
+var upload = multer({dest: DIR});
 
 var app = express();
 
@@ -22,17 +27,36 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(express.bodyParser({keepExtensions: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next) {
-res.setHeader('Access-Control-Allow-Origin', '*');
+//res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 next();
 });
+
+
+
+// app.use(multer({
+//   dest: DIR,
+//   rename: function (fieldname, filename) {
+//     return filename + Date.now();
+//   },
+//   onFileUploadStart: function (file) {
+//     console.log(file.originalname + ' is starting ...');
+//   },
+//   onFileUploadComplete: function (file) {
+//     console.log(file.fieldname + ' uploaded to  ' + file.path);
+//   }
+// }).any());
 
 app.use('/prisijungti', loginRoutes); // TODO find a way to render html with JSON attached
 app.use('/registracija', regRoutes);

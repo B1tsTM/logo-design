@@ -4,7 +4,7 @@
   <input type="file" name="file1">
   <input type="submit" value="Submit">
 </form>-->
-
+<form [formGroup]="myForm" action="http://localhost:3000/api/v1/avatar" method="post" (ngSubmit)="submit()" enctype="multipart/form-data">
 <div class="container">
 
     <div class="navbar navbar-default">
@@ -108,6 +108,9 @@
                         (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
+                <button type="submit" class="btn btn-danger btn-s">                       
+                    <span class="glyphicon glyphicon-trash"></span> Submit
+                </button>
             </div>
 
         </div>
@@ -115,3 +118,5 @@
     </div>
 
 </div>
+
+</form>
