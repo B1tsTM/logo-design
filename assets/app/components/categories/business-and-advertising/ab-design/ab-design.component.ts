@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'ab-design.component.html'
 })
 export class AbDesignComponent implements OnInit {
-  filesToUpload: Array<File>;
+  filesToUpload: any;
   constructor() {
     this.filesToUpload = [];
    }
@@ -21,7 +21,12 @@ export class AbDesignComponent implements OnInit {
     }
  
     fileChangeEvent(fileInput: any){
-        this.filesToUpload = <Array<File>> fileInput.target.files;
+        //this.filesToUpload = <Array<File>> fileInput.target.files;
+        //this.filesToUpload.forEach((file, i) => this.filesToUpload.push(fileInput.target.files[i]));
+        console.log(fileInput.target.files);
+        let arr = Array.from(fileInput.target.files); //convert File Object to Array to push it
+        this.filesToUpload.push(arr[0]);
+        console.log(this.filesToUpload);
     }
  
     makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
