@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
     });
   };
   user.profile.profileUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName;
-  user.avatar.avatarUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName + '/avatar';
+  //user.avatar.avatarUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName + '/avatar';
   user.save(function(err, result) {
     if (err) {
       return res.status(404).json({

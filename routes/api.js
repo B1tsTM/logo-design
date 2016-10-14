@@ -64,8 +64,28 @@ var storage = multer.diskStorage({
   }
 });
 
+var storageForAvatar = multer.diskStorage({
+  fileFilter: function (req, file, cb) { //not working
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true);
+  },
+  destination: function (req, file, cb) {
+    cb(null, './uploads/avatar');
+  },
+  filename: function (req, file, cb) {
+    //cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, 'avatar.jpg');
+      //cb(null, raw.toString('hex') + Date.now());
+    });
+  }
+});
+
 //router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
-router.post('/avatar', multer({storage: storage}).array("avatar", 12), function(req,res){
+router.post('/avatar', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
 //  res.end(JSON.stringify(req.files) + "/n");
 // console.log(req.files);
 //   var body = JSON.stringify(req.files);
@@ -78,12 +98,38 @@ router.post('/avatar', multer({storage: storage}).array("avatar", 12), function(
 //     //res.end('File is uploaded');
 //   });
 //res.send(req.files);
-var fileNames = [];
-for (let i=0; i<req.files.length; i++) {
-  fileNames.push(req.files[i].filename);
-}
 
-res.json({files: req.files, filenames: fileNames});
+User.findById("57eeda3ff9667e112cc51bf2", function(err, doc) {
+  if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log(doc);
+
+    doc.avatar.avatarUrl = req.files[0].filename;
+
+    doc.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      var fileNames = [];
+    for (let i=0; i<req.files.length; i++) {
+      fileNames.push(req.files[i].filename);
+    }
+      res.status(200).json({
+        message: 'Avataras išsaugotas',
+        obj: result,
+        files: req.files,
+        filenames: fileNames
+      });
+    });
+  });
+
 });
 
 module.exports = router;
