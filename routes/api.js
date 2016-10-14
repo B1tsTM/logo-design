@@ -72,7 +72,7 @@ var storageForAvatar = multer.diskStorage({
     cb(null, true);
   },
   destination: function (req, file, cb) {
-    cb(null, './uploads/avatar');
+    cb(null, './public/uploads/avatar');
   },
   filename: function (req, file, cb) {
     //cb(null, file.fieldname + '-' + Date.now() + '.jpg');

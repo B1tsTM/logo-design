@@ -3,7 +3,8 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
-        LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent } from './components/index';
+         LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
+         ProfilePageComponent } from './components/index';
 
 const appRoutes: Routes = [
   { path: 'konkursai', component: ContestsComponent },
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
   { path: 'prisijungti', component: LoginComponent },
   { path: 'registracija', component: RegisterComponent },
+  { path: 'profilis', component: ProfilePageComponent },
   { path: 'nerasta', component: PageNotFoundComponent },
   { path: '', component: HeaderComponent },
   { path: '**', redirectTo: 'nerasta' }

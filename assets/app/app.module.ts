@@ -15,7 +15,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
-  PublishContestComponent } from './components/index';
+  PublishContestComponent, ProfilePageComponent } from './components/index';
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
@@ -37,7 +37,8 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
-                  ErrorComponent, WinnersGalleryComponent, PublishContestComponent ],
+                  ErrorComponent, WinnersGalleryComponent, PublishContestComponent,
+                  ProfilePageComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, DesignersService ]
 })
