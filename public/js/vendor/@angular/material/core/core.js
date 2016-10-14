@@ -13,7 +13,8 @@ import { RtlModule } from './rtl/dir';
 import { MdRippleModule } from './ripple/ripple';
 import { PortalModule } from './portal/portal-directives';
 import { OverlayModule } from './overlay/overlay-directives';
-import { A11yModule } from './a11y/index';
+import { A11yModule, A11Y_PROVIDERS } from './a11y/index';
+import { OVERLAY_PROVIDERS } from './overlay/overlay';
 // RTL
 export { Dir, RtlModule } from './rtl/dir';
 // Portals
@@ -36,6 +37,7 @@ export { MdRipple, MdRippleModule } from './ripple/ripple';
 export { MdLiveAnnouncer, LIVE_ANNOUNCER_ELEMENT_TOKEN } from './a11y/live-announcer';
 export { FocusTrap } from './a11y/focus-trap';
 export { InteractivityChecker } from './a11y/interactivity-checker';
+export { A11yModule } from './a11y/index';
 export { MdUniqueSelectionDispatcher } from './coordination/unique-selection-dispatcher';
 export { MdLineModule, MdLine, MdLineSetter } from './line/line';
 // Style
@@ -53,7 +55,7 @@ export var MdCoreModule = (function () {
     MdCoreModule.forRoot = function () {
         return {
             ngModule: MdCoreModule,
-            providers: [A11yModule.forRoot().providers],
+            providers: [A11Y_PROVIDERS, OVERLAY_PROVIDERS],
         };
     };
     MdCoreModule = __decorate([

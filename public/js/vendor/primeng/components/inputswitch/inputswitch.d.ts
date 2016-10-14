@@ -1,8 +1,8 @@
-import { ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
+import { ElementRef, AfterViewInit, AfterViewChecked, EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { DomHandler } from '../dom/domhandler';
 export declare const INPUTSWITCH_VALUE_ACCESSOR: any;
-export declare class InputSwitch implements ControlValueAccessor, AfterViewInit {
+export declare class InputSwitch implements ControlValueAccessor, AfterViewInit, AfterViewChecked {
     protected el: ElementRef;
     protected domHandler: DomHandler;
     onLabel: string;
@@ -25,6 +25,8 @@ export declare class InputSwitch implements ControlValueAccessor, AfterViewInit 
     initialized: boolean;
     constructor(el: ElementRef, domHandler: DomHandler);
     ngAfterViewInit(): void;
+    ngAfterViewChecked(): void;
+    render(): void;
     toggle(event: any, checkbox: any): void;
     checkUI(): void;
     uncheckUI(): void;

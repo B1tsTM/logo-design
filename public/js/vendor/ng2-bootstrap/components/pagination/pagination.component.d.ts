@@ -39,13 +39,13 @@ export declare class PaginationComponent implements ControlValueAccessor, OnInit
     cd: NgModel;
     renderer: Renderer;
     elementRef: ElementRef;
-    private classMap;
+    classMap: string;
+    pages: Array<any>;
     private _itemsPerPage;
     private _totalItems;
     private _totalPages;
     private inited;
     private _page;
-    private pages;
     constructor(cd: NgModel, renderer: Renderer, elementRef: ElementRef);
     ngOnInit(): void;
     writeValue(value: number): void;
@@ -54,7 +54,7 @@ export declare class PaginationComponent implements ControlValueAccessor, OnInit
     noNext(): boolean;
     registerOnChange(fn: (_: any) => {}): void;
     registerOnTouched(fn: () => {}): void;
-    private selectPage(page, event?);
+    selectPage(page: number, event?: MouseEvent): void;
     private makePage(num, text, isActive);
     private getPages(currentPage, totalPages);
     private calculateTotalPages();

@@ -5,5 +5,6 @@ export declare class MonthPickerComponent implements OnInit {
     rows: Array<any>;
     datePicker: DatePickerInnerComponent;
     constructor(datePicker: DatePickerInnerComponent);
+    readonly isBS4: boolean;
     ngOnInit(): void;
 }

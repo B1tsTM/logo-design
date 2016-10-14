@@ -4,7 +4,6 @@ export declare class DataGrid implements AfterViewInit, DoCheck {
     value: any[];
     paginator: boolean;
     rows: number;
-    columns: number;
     totalRecords: number;
     pageLinks: number;
     rowsPerPageOptions: number[];

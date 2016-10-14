@@ -12,7 +12,7 @@ import { Overlay, OverlayModule, PortalModule, OverlayState, ComponentPortal, OV
 import { MdDialogRef } from './dialog-ref';
 import { DialogInjector } from './dialog-injector';
 import { MdDialogContainer } from './dialog-container';
-import { A11yModule } from '../core/a11y/index';
+import { A11yModule, InteractivityChecker } from '../core';
 export { MdDialogConfig } from './dialog-config';
 export { MdDialogRef } from './dialog-ref';
 // TODO(jelbourn): add support for opening with a TemplateRef
@@ -110,7 +110,7 @@ export var MdDialogModule = (function () {
     MdDialogModule.forRoot = function () {
         return {
             ngModule: MdDialogModule,
-            providers: [MdDialog, OVERLAY_PROVIDERS, A11yModule.forRoot().providers],
+            providers: [MdDialog, OVERLAY_PROVIDERS, InteractivityChecker],
         };
     };
     MdDialogModule = __decorate([

@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var dropdown_service_1 = require('./dropdown.service');
 var DropdownDirective = (function () {
@@ -128,42 +119,26 @@ var DropdownDirective = (function () {
             this.toggleEl.nativeElement.focus();
         }
     };
-    __decorate([
-        core_1.HostBinding('class.open'),
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DropdownDirective.prototype, "isOpen", null);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DropdownDirective.prototype, "autoClose", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DropdownDirective.prototype, "keyboardNav", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DropdownDirective.prototype, "appendToBody", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], DropdownDirective.prototype, "onToggle", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], DropdownDirective.prototype, "isOpenChange", void 0);
-    __decorate([
-        core_1.HostBinding('class.dropdown'), 
-        __metadata('design:type', Boolean)
-    ], DropdownDirective.prototype, "addClass", void 0);
-    DropdownDirective = __decorate([
-        core_1.Directive({
-            selector: '[dropdown]',
-            exportAs: 'bs-dropdown'
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef])
-    ], DropdownDirective);
+    DropdownDirective.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[dropdown]',
+                    exportAs: 'bs-dropdown'
+                },] },
+    ];
+    /** @nocollapse */
+    DropdownDirective.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.ChangeDetectorRef, },
+    ];
+    DropdownDirective.propDecorators = {
+        'isOpen': [{ type: core_1.HostBinding, args: ['class.open',] }, { type: core_1.Input },],
+        'autoClose': [{ type: core_1.Input },],
+        'keyboardNav': [{ type: core_1.Input },],
+        'appendToBody': [{ type: core_1.Input },],
+        'onToggle': [{ type: core_1.Output },],
+        'isOpenChange': [{ type: core_1.Output },],
+        'addClass': [{ type: core_1.HostBinding, args: ['class.dropdown',] },],
+    };
     return DropdownDirective;
 }());
 exports.DropdownDirective = DropdownDirective;

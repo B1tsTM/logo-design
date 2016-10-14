@@ -30,6 +30,12 @@ var Checkbox = (function () {
             return;
         }
         this.checked = !this.checked;
+        this.updateModel();
+        if (focus) {
+            checkbox.focus();
+        }
+    };
+    Checkbox.prototype.updateModel = function () {
         if (!this.binary) {
             if (this.checked)
                 this.addValue(this.value);
@@ -41,9 +47,10 @@ var Checkbox = (function () {
             this.onModelChange(this.checked);
         }
         this.onChange.emit(this.checked);
-        if (focus) {
-            checkbox.focus();
-        }
+    };
+    Checkbox.prototype.handleChange = function (event) {
+        this.checked = event.target.checked;
+        this.updateModel();
     };
     Checkbox.prototype.isChecked = function () {
         if (!this.binary)
@@ -119,7 +126,7 @@ var Checkbox = (function () {
     Checkbox = __decorate([
         core_1.Component({
             selector: 'p-checkbox',
-            template: "\n        <div class=\"ui-chkbox ui-widget\">\n            <div class=\"ui-helper-hidden-accessible\">\n                <input #cb type=\"checkbox\" name=\"{{name}}\" value=\"{{value}}\" [checked]=\"checked\" (focus)=\"onFocus($event)\" (blur)=\"onBlur($event)\"\n                [ngClass]=\"{'ui-state-focus':focused}\" (keydown.space)=\"onClick($event,cb,false)\">\n            </div>\n            <div class=\"ui-chkbox-box ui-widget ui-corner-all ui-state-default\" (click)=\"onClick($event,cb,true)\"\n                        (mouseover)=\"hover=true\" (mouseout)=\"hover=false\" \n                        [ngClass]=\"{'ui-state-hover':hover&&!disabled,'ui-state-active':checked,'ui-state-disabled':disabled,'ui-state-focus':focused}\">\n                <span class=\"ui-chkbox-icon ui-c\" [ngClass]=\"{'fa fa-fw fa-check':checked}\"></span>\n            </div>\n        </div>\n        <label class=\"ui-chkbox-label\" (click)=\"onClick($event,cb,true)\" *ngIf=\"label\">{{label}}</label>\n    ",
+            template: "\n        <div class=\"ui-chkbox ui-widget\">\n            <div class=\"ui-helper-hidden-accessible\">\n                <input #cb type=\"checkbox\" [name]=\"name\" [value]=\"value\" [checked]=\"checked\" (focus)=\"onFocus($event)\" (blur)=\"onBlur($event)\"\n                [ngClass]=\"{'ui-state-focus':focused}\" (change)=\"handleChange($event)\">\n            </div>\n            <div class=\"ui-chkbox-box ui-widget ui-corner-all ui-state-default\" (click)=\"onClick($event,cb,true)\"\n                        (mouseover)=\"hover=true\" (mouseout)=\"hover=false\" \n                        [ngClass]=\"{'ui-state-hover':hover&&!disabled,'ui-state-active':checked,'ui-state-disabled':disabled,'ui-state-focus':focused}\">\n                <span class=\"ui-chkbox-icon ui-c\" [ngClass]=\"{'fa fa-fw fa-check':checked}\"></span>\n            </div>\n        </div>\n        <label class=\"ui-chkbox-label\" (click)=\"onClick($event,cb,true)\" *ngIf=\"label\">{{label}}</label>\n    ",
             providers: [exports.CHECKBOX_VALUE_ACCESSOR]
         }), 
         __metadata('design:paramtypes', [])

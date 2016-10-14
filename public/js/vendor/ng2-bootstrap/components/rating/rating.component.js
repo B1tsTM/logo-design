@@ -1,18 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+/* tslint:disable-next-line */
+var KeyboardEvent = global.KeyboardEvent;
 var RatingComponent = (function () {
     function RatingComponent(cd) {
         this.onHover = new core_1.EventEmitter(false);
@@ -91,55 +81,30 @@ var RatingComponent = (function () {
             this.cd.viewToModelUpdate(value);
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], RatingComponent.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], RatingComponent.prototype, "stateOn", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], RatingComponent.prototype, "stateOff", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], RatingComponent.prototype, "readonly", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], RatingComponent.prototype, "titles", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], RatingComponent.prototype, "ratingStates", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], RatingComponent.prototype, "onHover", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], RatingComponent.prototype, "onLeave", void 0);
-    __decorate([
-        core_1.HostListener('keydown', ['$event']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [KeyboardEvent]), 
-        __metadata('design:returntype', void 0)
-    ], RatingComponent.prototype, "onKeydown", null);
-    RatingComponent = __decorate([
-        core_1.Component({
-            /* tslint:disable */
-            selector: 'rating[ngModel]',
-            /* tslint:enable */
-            template: "\n    <span (mouseleave)=\"reset()\" (keydown)=\"onKeydown($event)\" tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" [attr.aria-valuemax]=\"range.length\" [attr.aria-valuenow]=\"value\">\n      <template ngFor let-r [ngForOf]=\"range\" let-index=\"index\">\n        <span class=\"sr-only\">({{ index < value ? '*' : ' ' }})</span>\n        <i (mouseenter)=\"enter(index + 1)\" (click)=\"rate(index + 1)\" class=\"glyphicon\" [ngClass]=\"index < value ? r.stateOn : r.stateOff\" [title]=\"r.title\" ></i>\n      </template>\n    </span>\n  ",
-            providers: [forms_1.NgModel]
-        }),
-        __param(0, core_1.Self()), 
-        __metadata('design:paramtypes', [forms_1.NgModel])
-    ], RatingComponent);
+    RatingComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    /* tslint:disable */
+                    selector: 'rating[ngModel]',
+                    /* tslint:enable */
+                    template: "\n    <span (mouseleave)=\"reset()\" (keydown)=\"onKeydown($event)\" tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" [attr.aria-valuemax]=\"range.length\" [attr.aria-valuenow]=\"value\">\n      <template ngFor let-r [ngForOf]=\"range\" let-index=\"index\">\n        <span class=\"sr-only\">({{ index < value ? '*' : ' ' }})</span>\n        <i (mouseenter)=\"enter(index + 1)\" (click)=\"rate(index + 1)\" class=\"glyphicon\" [ngClass]=\"index < value ? r.stateOn : r.stateOff\" [title]=\"r.title\" ></i>\n      </template>\n    </span>\n  ",
+                    providers: [forms_1.NgModel]
+                },] },
+    ];
+    /** @nocollapse */
+    RatingComponent.ctorParameters = [
+        { type: forms_1.NgModel, decorators: [{ type: core_1.Self },] },
+    ];
+    RatingComponent.propDecorators = {
+        'max': [{ type: core_1.Input },],
+        'stateOn': [{ type: core_1.Input },],
+        'stateOff': [{ type: core_1.Input },],
+        'readonly': [{ type: core_1.Input },],
+        'titles': [{ type: core_1.Input },],
+        'ratingStates': [{ type: core_1.Input },],
+        'onHover': [{ type: core_1.Output },],
+        'onLeave': [{ type: core_1.Output },],
+        'onKeydown': [{ type: core_1.HostListener, args: ['keydown', ['$event'],] },],
+    };
     return RatingComponent;
 }());
 exports.RatingComponent = RatingComponent;

@@ -1,12 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ElementRef, TemplateRef } from '@angular/core';
 import { TooltipOptions } from './tooltip-options.class';
 export declare class TooltipContainerComponent implements AfterViewInit {
-    private classMap;
-    private top;
-    private left;
-    private display;
-    private content;
-    private htmlContent;
+    classMap: any;
+    top: string;
+    left: string;
+    display: string;
+    content: string;
+    htmlContent: string | TemplateRef<any>;
     private placement;
     private popupClass;
     private animation;

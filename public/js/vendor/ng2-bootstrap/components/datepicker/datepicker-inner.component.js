@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var date_formatter_1 = require('./date-formatter');
 var FORMAT_DAY = 'DD';
@@ -44,12 +35,12 @@ var SHORTCUT_PROPAGATION = false;
 var DatePickerInnerComponent = (function () {
     function DatePickerInnerComponent() {
         this.selectionDone = new core_1.EventEmitter(undefined);
+        this.update = new core_1.EventEmitter(false);
         this.stepDay = {};
         this.stepMonth = {};
         this.stepYear = {};
         this.modes = ['day', 'month', 'year'];
         this.dateFormatter = new date_formatter_1.DateFormatter();
-        this.update = new core_1.EventEmitter(false);
     }
     Object.defineProperty(DatePickerInnerComponent.prototype, "activeDate", {
         get: function () {
@@ -93,7 +84,8 @@ var DatePickerInnerComponent = (function () {
         }
     };
     // this.refreshView should be called here to reflect the changes on the fly
-    DatePickerInnerComponent.prototype.ngOnChanges = function () {
+    // tslint:disable-next-line:no-unused-variable
+    DatePickerInnerComponent.prototype.ngOnChanges = function (changes) {
         this.refreshView();
     };
     DatePickerInnerComponent.prototype.setCompareHandler = function (handler, type) {
@@ -181,16 +173,19 @@ var DatePickerInnerComponent = (function () {
         var hours = date.getHours();
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours === 23 ? hours + 2 : 0);
     };
-    DatePickerInnerComponent.prototype.select = function (date) {
+    DatePickerInnerComponent.prototype.select = function (date, isManual) {
+        if (isManual === void 0) { isManual = true; }
         if (this.datepickerMode === this.minMode) {
             if (!this.activeDate) {
                 this.activeDate = new Date(0, 0, 0, 0, 0, 0, 0);
             }
             this.activeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-            this.selectionDone.emit(this.activeDate);
+            if (isManual) {
+                this.selectionDone.emit(this.activeDate);
+            }
         }
         else {
-            this.activeDate = date;
+            this.activeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             this.datepickerMode = this.modes[this.modes.indexOf(this.datepickerMode) - 1];
         }
         this.selectedDate = new Date(this.activeDate.valueOf());
@@ -242,101 +237,38 @@ var DatePickerInnerComponent = (function () {
         return ((this.minDate && this.compare(date, this.minDate) < 0) ||
             (this.maxDate && this.compare(date, this.maxDate) > 0));
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "datepickerMode", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], DatePickerInnerComponent.prototype, "startingDay", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], DatePickerInnerComponent.prototype, "yearRange", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], DatePickerInnerComponent.prototype, "minDate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], DatePickerInnerComponent.prototype, "maxDate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "minMode", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "maxMode", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DatePickerInnerComponent.prototype, "showWeeks", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatDay", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatMonth", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatYear", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatDayHeader", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatDayTitle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], DatePickerInnerComponent.prototype, "formatMonthTitle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DatePickerInnerComponent.prototype, "onlyCurrentMonth", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DatePickerInnerComponent.prototype, "shortcutPropagation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], DatePickerInnerComponent.prototype, "customClass", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DatePickerInnerComponent.prototype, "dateDisabled", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], DatePickerInnerComponent.prototype, "initDate", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], DatePickerInnerComponent.prototype, "selectionDone", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], DatePickerInnerComponent.prototype, "update", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], DatePickerInnerComponent.prototype, "activeDate", null);
-    DatePickerInnerComponent = __decorate([
-        core_1.Component({
-            selector: 'datepicker-inner',
-            template: "\n    <div *ngIf=\"datepickerMode\" class=\"well well-sm bg-faded p-a card\" role=\"application\" ><!--&lt;!&ndash;ng-keydown=\"keydown($event)\"&ndash;&gt;-->\n      <ng-content></ng-content>\n    </div>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], DatePickerInnerComponent);
+    DatePickerInnerComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'datepicker-inner',
+                    template: "\n    <div *ngIf=\"datepickerMode\" class=\"well well-sm bg-faded p-a card\" role=\"application\" ><!--&lt;!&ndash;ng-keydown=\"keydown($event)\"&ndash;&gt;-->\n      <ng-content></ng-content>\n    </div>\n  "
+                },] },
+    ];
+    /** @nocollapse */
+    DatePickerInnerComponent.ctorParameters = [];
+    DatePickerInnerComponent.propDecorators = {
+        'datepickerMode': [{ type: core_1.Input },],
+        'startingDay': [{ type: core_1.Input },],
+        'yearRange': [{ type: core_1.Input },],
+        'minDate': [{ type: core_1.Input },],
+        'maxDate': [{ type: core_1.Input },],
+        'minMode': [{ type: core_1.Input },],
+        'maxMode': [{ type: core_1.Input },],
+        'showWeeks': [{ type: core_1.Input },],
+        'formatDay': [{ type: core_1.Input },],
+        'formatMonth': [{ type: core_1.Input },],
+        'formatYear': [{ type: core_1.Input },],
+        'formatDayHeader': [{ type: core_1.Input },],
+        'formatDayTitle': [{ type: core_1.Input },],
+        'formatMonthTitle': [{ type: core_1.Input },],
+        'onlyCurrentMonth': [{ type: core_1.Input },],
+        'shortcutPropagation': [{ type: core_1.Input },],
+        'customClass': [{ type: core_1.Input },],
+        'dateDisabled': [{ type: core_1.Input },],
+        'initDate': [{ type: core_1.Input },],
+        'selectionDone': [{ type: core_1.Output },],
+        'update': [{ type: core_1.Output },],
+        'activeDate': [{ type: core_1.Input },],
+    };
     return DatePickerInnerComponent;
 }());
 exports.DatePickerInnerComponent = DatePickerInnerComponent;

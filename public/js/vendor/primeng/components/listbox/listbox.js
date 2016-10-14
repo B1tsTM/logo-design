@@ -23,6 +23,7 @@ var Listbox = (function () {
         this.el = el;
         this.domHandler = domHandler;
         this.onChange = new core_1.EventEmitter();
+        this.onDblClick = new core_1.EventEmitter();
         this.onModelChange = function () { };
         this.onModelTouched = function () { };
     }
@@ -118,6 +119,12 @@ var Listbox = (function () {
         }
         return index;
     };
+    Listbox.prototype.onDoubleClick = function (event, option) {
+        this.onDblClick.emit({
+            originalEvent: event,
+            value: option
+        });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
@@ -143,13 +150,17 @@ var Listbox = (function () {
         __metadata('design:type', core_1.EventEmitter)
     ], Listbox.prototype, "onChange", void 0);
     __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], Listbox.prototype, "onDblClick", void 0);
+    __decorate([
         core_1.ContentChild(core_1.TemplateRef), 
         __metadata('design:type', core_1.TemplateRef)
     ], Listbox.prototype, "itemTemplate", void 0);
     Listbox = __decorate([
         core_1.Component({
             selector: 'p-listbox',
-            template: "\n        <div [ngClass]=\"{'ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled}\" [ngStyle]=\"style\" [class]=\"styleClass\">\n            <ul class=\"ui-listbox-list\">\n                <li #item *ngFor=\"let option of options\"\n                    [ngClass]=\"{'ui-listbox-item ui-corner-all':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(option)}\"\n                    (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"onOptionClick($event,option)\">\n                    <span *ngIf=\"!itemTemplate\">{{option.label}}</span>\n                    <template *ngIf=\"itemTemplate\" [pTemplateWrapper]=\"itemTemplate\" [item]=\"option\"></template>\n                </li>\n            </ul>\n        </div>\n    ",
+            template: "\n        <div [ngClass]=\"{'ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled}\" [ngStyle]=\"style\" [class]=\"styleClass\">\n            <ul class=\"ui-listbox-list\">\n                <li #item *ngFor=\"let option of options\"\n                    [ngClass]=\"{'ui-listbox-item ui-corner-all':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(option)}\"\n                    (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"onOptionClick($event,option)\" (dblclick)=\"onDoubleClick($event,option)\">\n                    <span *ngIf=\"!itemTemplate\">{{option.label}}</span>\n                    <template *ngIf=\"itemTemplate\" [pTemplateWrapper]=\"itemTemplate\" [item]=\"option\"></template>\n                </li>\n            </ul>\n        </div>\n    ",
             providers: [domhandler_1.DomHandler, exports.LISTBOX_VALUE_ACCESSOR]
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, domhandler_1.DomHandler])

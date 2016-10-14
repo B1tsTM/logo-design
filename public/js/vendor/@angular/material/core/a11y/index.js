@@ -14,13 +14,14 @@ import { InteractivityChecker } from './interactivity-checker';
 export { FocusTrap } from './focus-trap';
 export { MdLiveAnnouncer } from './live-announcer';
 export { InteractivityChecker } from './interactivity-checker';
+export var A11Y_PROVIDERS = [MdLiveAnnouncer, InteractivityChecker];
 export var A11yModule = (function () {
     function A11yModule() {
     }
     A11yModule.forRoot = function () {
         return {
             ngModule: A11yModule,
-            providers: [MdLiveAnnouncer, InteractivityChecker],
+            providers: A11Y_PROVIDERS,
         };
     };
     A11yModule = __decorate([

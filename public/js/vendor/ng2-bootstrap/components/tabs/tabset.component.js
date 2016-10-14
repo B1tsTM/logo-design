@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 // todo: add active event to tab
 // todo: fix? mixing static and dynamic tabs position tabs in order of creation
@@ -115,29 +106,20 @@ var TabsetComponent = (function () {
         );
         var _a;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TabsetComponent.prototype, "vertical", null);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TabsetComponent.prototype, "justified", null);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], TabsetComponent.prototype, "type", null);
-    __decorate([
-        core_1.HostBinding('class.tab-container'), 
-        __metadata('design:type', Boolean)
-    ], TabsetComponent.prototype, "clazz", void 0);
-    TabsetComponent = __decorate([
-        core_1.Component({
-            selector: 'tabset',
-            template: "\n    <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n        <li *ngFor=\"let tabz of tabs\" class=\"nav-item\"\n          [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n          <a href class=\"nav-link\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"\n            (click)=\"tabz.active = true\">\n            <span [ngTransclude]=\"tabz.headingRef\">{{tabz.heading}}</span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"glyphicon glyphicon-remove-circle\"></span>\n            </span>\n          </a>\n        </li>\n    </ul>\n    <div class=\"tab-content\">\n      <ng-content></ng-content>\n    </div>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TabsetComponent);
+    TabsetComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'tabset',
+                    template: "\n    <ul class=\"nav\" [ngClass]=\"classMap\" (click)=\"$event.preventDefault()\">\n        <li *ngFor=\"let tabz of tabs\" class=\"nav-item {{tabz.customClass}}\"\n          [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\">\n          <a href=\"javascript:void(0);\" class=\"nav-link\"\n            [class.active]=\"tabz.active\" [class.disabled]=\"tabz.disabled\"\n            (click)=\"tabz.active = true\">\n            <span [ngTransclude]=\"tabz.headingRef\">{{tabz.heading}}</span>\n            <span *ngIf=\"tabz.removable\">\n              <span (click)=\"$event.preventDefault(); removeTab(tabz);\" class=\"glyphicon glyphicon-remove-circle\"></span>\n            </span>\n          </a>\n        </li>\n    </ul>\n    <div class=\"tab-content\">\n      <ng-content></ng-content>\n    </div>\n  "
+                },] },
+    ];
+    /** @nocollapse */
+    TabsetComponent.ctorParameters = [];
+    TabsetComponent.propDecorators = {
+        'vertical': [{ type: core_1.Input },],
+        'justified': [{ type: core_1.Input },],
+        'type': [{ type: core_1.Input },],
+        'clazz': [{ type: core_1.HostBinding, args: ['class.tab-container',] },],
+    };
     return TabsetComponent;
 }());
 exports.TabsetComponent = TabsetComponent;

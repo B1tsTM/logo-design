@@ -54,9 +54,9 @@ var upgradeCount = 0;
  * ### Example
  *
  * ```
- * var adapter = new UpgradeAdapter(forwardRef(() => MyNg2Module));
+ * var adapter = new UpgradeAdapter(forwardRef(() => MyNg2Module), myCompilerOptions);
  * var module = angular.module('myExample', []);
- * module.directive('ng2Comp', adapter.downgradeNg2Component(Ng2));
+ * module.directive('ng2Comp', adapter.downgradeNg2Component(Ng2Component));
  *
  * module.directive('ng1Hello', function() {
  *   return {
@@ -94,8 +94,9 @@ var upgradeCount = 0;
  * @stable
  */
 export var UpgradeAdapter = (function () {
-    function UpgradeAdapter(ng2AppModule) {
+    function UpgradeAdapter(ng2AppModule, compilerOptions) {
         this.ng2AppModule = ng2AppModule;
+        this.compilerOptions = compilerOptions;
         /* @internal */
         this.idPrefix = "NG2_UPGRADE_" + upgradeCount++ + "_";
         /* @internal */
@@ -230,17 +231,17 @@ export var UpgradeAdapter = (function () {
      *   };
      * });
      *
-     * module.directive('ng2', adapter.downgradeNg2Component(Ng2));
+     * module.directive('ng2', adapter.downgradeNg2Component(Ng2Component));
      *
      * @Component({
      *   selector: 'ng2',
      *   template: 'ng2 template: <greet salutation="Hello" [name]="world">text</greet>'
      * })
-     * class Ng2 {
+     * class Ng2Component {
      * }
      *
      * @NgModule({
-     *   declarations: [Ng2, adapter.upgradeNg1Component('greet')],
+     *   declarations: [Ng2Component, adapter.upgradeNg1Component('greet')],
      *   imports: [BrowserModule]
      * })
      * class MyNg2Module {}
@@ -388,10 +389,13 @@ export var UpgradeAdapter = (function () {
                             ngDoBootstrap: function () { }
                         });
                         platformBrowserDynamic()
-                            ._bootstrapModuleWithZone(DynamicNgUpgradeModule, undefined, ngZone, function (componentFactories) {
+                            ._bootstrapModuleWithZone(DynamicNgUpgradeModule, _this.compilerOptions, ngZone, function (componentFactories) {
                             componentFactories.forEach(function (componentFactory) {
-                                componentFactoryRefMap[getComponentInfo(componentFactory.componentType)
-                                    .selector] = componentFactory;
+                                var type = componentFactory.componentType;
+                                if (_this.upgradedComponents.indexOf(type) !== -1) {
+                                    componentFactoryRefMap[getComponentInfo(type).selector] =
+                                        componentFactory;
+                                }
                             });
                         })
                             .then(function (ref) {
@@ -461,7 +465,6 @@ export var UpgradeAdapter = (function () {
      * var adapter = new UpgradeAdapter();
      * adapter.upgradeNg1Provider('server');
      * adapter.upgradeNg1Provider('login', {asToken: Login});
-     * adapter.addProvider(Example);
      *
      * adapter.bootstrap(document.body, ['myExample']).ready((ref) => {
      *   var example: Example = ref.ng2Injector.get(Example);
@@ -488,7 +491,6 @@ export var UpgradeAdapter = (function () {
      * }
      *
      * var adapter = new UpgradeAdapter();
-     * adapter.addProvider(Example);
      *
      * var module = angular.module('myExample', []);
      * module.factory('example', adapter.downgradeNg2Provider(Example));

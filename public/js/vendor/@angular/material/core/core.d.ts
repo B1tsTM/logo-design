@@ -15,6 +15,7 @@ export { MdRipple, MdRippleModule } from './ripple/ripple';
 export { AriaLivePoliteness, MdLiveAnnouncer, LIVE_ANNOUNCER_ELEMENT_TOKEN } from './a11y/live-announcer';
 export { FocusTrap } from './a11y/focus-trap';
 export { InteractivityChecker } from './a11y/interactivity-checker';
+export { A11yModule } from './a11y/index';
 export { MdUniqueSelectionDispatcher, MdUniqueSelectionDispatcherListener } from './coordination/unique-selection-dispatcher';
 export { MdLineModule, MdLine, MdLineSetter } from './line/line';
 export { applyCssTransform } from './style/apply-transform';

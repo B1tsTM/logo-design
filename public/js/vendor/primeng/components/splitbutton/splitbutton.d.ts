@@ -16,6 +16,7 @@ export declare class SplitButton implements OnInit, OnDestroy {
     styleClass: string;
     menuStyle: any;
     menuStyleClass: string;
+    disabled: boolean;
     protected hoverDefaultBtn: boolean;
     protected focusDefaultBtn: boolean;
     protected activeDefaultBtn: boolean;

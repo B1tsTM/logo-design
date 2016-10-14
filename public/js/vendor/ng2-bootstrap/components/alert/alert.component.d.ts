@@ -4,7 +4,7 @@ export declare class AlertComponent implements OnInit {
     dismissible: boolean;
     dismissOnTimeout: number;
     close: EventEmitter<AlertComponent>;
-    private closed;
+    closed: boolean;
     private classes;
     ngOnInit(): any;
     onClose(): void;

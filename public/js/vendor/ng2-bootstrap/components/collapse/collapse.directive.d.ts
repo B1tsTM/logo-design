@@ -2,12 +2,12 @@ import { ElementRef, EventEmitter, OnInit, Renderer } from '@angular/core';
 export declare class CollapseDirective implements OnInit {
     collapsed: EventEmitter<any>;
     expanded: EventEmitter<any>;
-    private display;
-    private isExpanded;
-    private isCollapsed;
-    private isCollapse;
-    private isCollapsing;
-    private collapse;
+    display: string;
+    isExpanded: boolean;
+    isCollapsed: boolean;
+    isCollapse: boolean;
+    isCollapsing: boolean;
+    collapse: boolean;
     private _el;
     private _renderer;
     constructor(_el: ElementRef, _renderer: Renderer);

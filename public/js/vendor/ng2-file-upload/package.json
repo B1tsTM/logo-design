@@ -1,11 +1,11 @@
 {
   "_args": [
     [
-      "ng2-file-upload",
-      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+      "ng2-file-upload@^1.1.0",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest"
     ]
   ],
-  "_from": "ng2-file-upload@latest",
+  "_from": "ng2-file-upload@>=1.1.0 <2.0.0",
   "_id": "ng2-file-upload@1.1.0",
   "_inCache": true,
   "_installable": true,
@@ -23,11 +23,11 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "ng2-file-upload",
-    "raw": "ng2-file-upload",
-    "rawSpec": "",
+    "raw": "ng2-file-upload@^1.1.0",
+    "rawSpec": "^1.1.0",
     "scope": null,
-    "spec": "latest",
-    "type": "tag"
+    "spec": ">=1.1.0 <2.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
@@ -35,8 +35,8 @@
   "_resolved": "https://registry.npmjs.org/ng2-file-upload/-/ng2-file-upload-1.1.0.tgz",
   "_shasum": "44d266d89fde1e6106c2d00926bcd17c4580499f",
   "_shrinkwrap": null,
-  "_spec": "ng2-file-upload",
-  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "_spec": "ng2-file-upload@^1.1.0",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest",
   "author": {
     "email": "vyacheslav.chub@valor-software.com",
     "name": "Vyacheslav Chub"

@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { NgModule } from '@angular/core';
-import { MdLiveAnnouncer, MdRippleModule, RtlModule, PortalModule, OverlayModule } from './core/index';
+import { MdRippleModule, RtlModule, PortalModule, OverlayModule, A11yModule } from './core/index';
 import { MdButtonToggleModule } from './button-toggle/index';
 import { MdButtonModule } from './button/index';
 import { MdCheckboxModule } from './checkbox/index';
@@ -56,6 +56,7 @@ var MATERIAL_MODULES = [
     OverlayModule,
     PortalModule,
     RtlModule,
+    A11yModule,
 ];
 export var MaterialRootModule = (function () {
     function MaterialRootModule() {
@@ -79,6 +80,7 @@ export var MaterialRootModule = (function () {
                 PortalModule.forRoot(),
                 RtlModule.forRoot(),
                 // These modules include providers.
+                A11yModule.forRoot(),
                 MdButtonToggleModule.forRoot(),
                 MdDialogModule.forRoot(),
                 MdIconModule.forRoot(),
@@ -91,7 +93,6 @@ export var MaterialRootModule = (function () {
                 OverlayModule.forRoot(),
             ],
             exports: MATERIAL_MODULES,
-            providers: [MdLiveAnnouncer]
         }), 
         __metadata('design:paramtypes', [])
     ], MaterialRootModule);

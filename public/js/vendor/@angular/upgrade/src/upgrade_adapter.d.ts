@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Injector, NgModuleRef, Type } from '@angular/core';
+import { CompilerOptions, Injector, NgModuleRef, Type } from '@angular/core';
 import * as angular from './angular_js';
 /**
  * Use `UpgradeAdapter` to allow AngularJS v1 and Angular v2 to coexist in a single application.
@@ -47,9 +47,9 @@ import * as angular from './angular_js';
  * ### Example
  *
  * ```
- * var adapter = new UpgradeAdapter(forwardRef(() => MyNg2Module));
+ * var adapter = new UpgradeAdapter(forwardRef(() => MyNg2Module), myCompilerOptions);
  * var module = angular.module('myExample', []);
- * module.directive('ng2Comp', adapter.downgradeNg2Component(Ng2));
+ * module.directive('ng2Comp', adapter.downgradeNg2Component(Ng2Component));
  *
  * module.directive('ng1Hello', function() {
  *   return {
@@ -88,7 +88,8 @@ import * as angular from './angular_js';
  */
 export declare class UpgradeAdapter {
     private ng2AppModule;
-    constructor(ng2AppModule: Type<any>);
+    private compilerOptions;
+    constructor(ng2AppModule: Type<any>, compilerOptions?: CompilerOptions);
     /**
      * Allows Angular v2 Component to be used from AngularJS v1.
      *
@@ -200,17 +201,17 @@ export declare class UpgradeAdapter {
      *   };
      * });
      *
-     * module.directive('ng2', adapter.downgradeNg2Component(Ng2));
+     * module.directive('ng2', adapter.downgradeNg2Component(Ng2Component));
      *
      * @Component({
      *   selector: 'ng2',
      *   template: 'ng2 template: <greet salutation="Hello" [name]="world">text</greet>'
      * })
-     * class Ng2 {
+     * class Ng2Component {
      * }
      *
      * @NgModule({
-     *   declarations: [Ng2, adapter.upgradeNg1Component('greet')],
+     *   declarations: [Ng2Component, adapter.upgradeNg1Component('greet')],
      *   imports: [BrowserModule]
      * })
      * class MyNg2Module {}
@@ -292,7 +293,6 @@ export declare class UpgradeAdapter {
      * var adapter = new UpgradeAdapter();
      * adapter.upgradeNg1Provider('server');
      * adapter.upgradeNg1Provider('login', {asToken: Login});
-     * adapter.addProvider(Example);
      *
      * adapter.bootstrap(document.body, ['myExample']).ready((ref) => {
      *   var example: Example = ref.ng2Injector.get(Example);
@@ -314,7 +314,6 @@ export declare class UpgradeAdapter {
      * }
      *
      * var adapter = new UpgradeAdapter();
-     * adapter.addProvider(Example);
      *
      * var module = angular.module('myExample', []);
      * module.factory('example', adapter.downgradeNg2Provider(Example));

@@ -17,12 +17,13 @@ export declare class CarouselComponent implements OnDestroy {
     noPause: boolean;
     noTransition: boolean;
     interval: number;
-    private slides;
+    slides: Array<SlideComponent>;
     private currentInterval;
     private isPlaying;
     private destroyed;
     private currentSlide;
     private _interval;
+    readonly isBS4: boolean;
     ngOnDestroy(): void;
     select(nextSlide: SlideComponent, direction?: Direction): void;
     play(): void;

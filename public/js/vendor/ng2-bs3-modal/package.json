@@ -1,19 +1,19 @@
 {
   "_args": [
     [
-      "ng2-bs3-modal",
-      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+      "ng2-bs3-modal@^0.10.3",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest"
     ]
   ],
-  "_from": "ng2-bs3-modal@latest",
-  "_id": "ng2-bs3-modal@0.10.3",
+  "_from": "ng2-bs3-modal@>=0.10.3 <0.11.0",
+  "_id": "ng2-bs3-modal@0.10.4",
   "_inCache": true,
   "_installable": true,
   "_location": "/ng2-bs3-modal",
   "_nodeVersion": "6.7.0",
   "_npmOperationalInternal": {
     "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/ng2-bs3-modal-0.10.3.tgz_1475212840112_0.7331606519874185"
+    "tmp": "tmp/ng2-bs3-modal-0.10.4.tgz_1475253459169_0.7817040979862213"
   },
   "_npmUser": {
     "email": "doug.ludlow@gmail.com",
@@ -23,20 +23,20 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "ng2-bs3-modal",
-    "raw": "ng2-bs3-modal",
-    "rawSpec": "",
+    "raw": "ng2-bs3-modal@^0.10.3",
+    "rawSpec": "^0.10.3",
     "scope": null,
-    "spec": "latest",
-    "type": "tag"
+    "spec": ">=0.10.3 <0.11.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/ng2-bs3-modal/-/ng2-bs3-modal-0.10.3.tgz",
-  "_shasum": "24e75638e7036d7c202f5aacfc085cb7ee0dee11",
+  "_resolved": "https://registry.npmjs.org/ng2-bs3-modal/-/ng2-bs3-modal-0.10.4.tgz",
+  "_shasum": "80f350cd3f7346193c8f9324c899d58db1714581",
   "_shrinkwrap": null,
-  "_spec": "ng2-bs3-modal",
-  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "_spec": "ng2-bs3-modal@^0.10.3",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest",
   "author": {
     "email": "doug.ludlow@gmail.com",
     "name": "Douglas Ludlow"
@@ -81,10 +81,10 @@
   },
   "directories": {},
   "dist": {
-    "shasum": "24e75638e7036d7c202f5aacfc085cb7ee0dee11",
-    "tarball": "https://registry.npmjs.org/ng2-bs3-modal/-/ng2-bs3-modal-0.10.3.tgz"
+    "shasum": "80f350cd3f7346193c8f9324c899d58db1714581",
+    "tarball": "https://registry.npmjs.org/ng2-bs3-modal/-/ng2-bs3-modal-0.10.4.tgz"
   },
-  "gitHead": "6438b3236dbd8a2f28cf6b9d0f5c6a350415c05f",
+  "gitHead": "68ec803b9a682bff889f63e777a10243504fb550",
   "homepage": "https://github.com/dougludlow/ng2-bs3-modal#readme",
   "keywords": [
     "angular2",
@@ -118,7 +118,7 @@
   "scripts": {
     "build": "npm run clean && npm run typings && npm run lint && npm run tsc && npm run bundle",
     "bundle": "npm run tsc:single && npm run uglify",
-    "clean": "rimraf bundles components directives ng2-bs3-modal.*",
+    "clean": "rimraf bundles components directives **/*.ngfactory.ts ng2-bs3-modal.* ",
     "lint": "tslint ./src/**/*.ts",
     "peer": "npm install es6-promise@^3.0.2 es6-shim@^0.33.3 reflect-metadata@0.1.2 rxjs@5.0.0-beta.0 zone.js@0.5.14",
     "prepublish": "npm run build",
@@ -130,5 +130,5 @@
     "typings": "typings install",
     "uglify": "uglifyjs ./bundles/ng2-bs3-modal.js --output ./bundles/ng2-bs3-modal.min.js"
   },
-  "version": "0.10.3"
+  "version": "0.10.4"
 }

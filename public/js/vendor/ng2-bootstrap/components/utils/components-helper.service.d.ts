@@ -8,10 +8,12 @@ export declare class ComponentsHelper {
     private applicationRef;
     private componentFactoryResolver;
     private injector;
+    root: ViewContainerRef;
     constructor(applicationRef: ApplicationRef, componentFactoryResolver: ComponentFactoryResolver, injector: Injector);
     getDocument(): any;
     /**
-     * This is a name conventional class to get application root view component ref
+     * In some cases, like using ngUpgrate,
+     * you need to explicitly set view container ref
      * to made this method working you need to add:
      * ```typescript
      *  @Component({
@@ -19,13 +21,17 @@ export declare class ComponentsHelper {
      *   ...
      *   })
      *  export class MyApp {
-     *    constructor(viewContainerRef: ViewContainerRef) {
+     *    constructor(componentsHelper:ComponentsHelper, viewContainerRef: ViewContainerRef) {
      *        // A Default view container ref, usually the app root container ref.
      *        // Has to be set manually until we can find a way to get it automatically.
-     *        this.viewContainerRef = viewContainerRef;
+     *        componentsHelper.setRootViewContainerRef(viewContainerRef)
      *      }
      *  }
      * ```
+     */
+    setRootViewContainerRef(value: ViewContainerRef): void;
+    /**
+     * This is a name conventional class to get application root view component ref
      * @returns {ViewContainerRef} - application root view component ref
      */
     getRootViewContainerRef(): ViewContainerRef;

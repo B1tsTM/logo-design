@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 /**
@@ -25,7 +16,8 @@ var ComponentsHelper = (function () {
         return this.injector.get(platform_browser_1.DOCUMENT);
     };
     /**
-     * This is a name conventional class to get application root view component ref
+     * In some cases, like using ngUpgrate,
+     * you need to explicitly set view container ref
      * to made this method working you need to add:
      * ```typescript
      *  @Component({
@@ -33,24 +25,39 @@ var ComponentsHelper = (function () {
      *   ...
      *   })
      *  export class MyApp {
-     *    constructor(viewContainerRef: ViewContainerRef) {
+     *    constructor(componentsHelper:ComponentsHelper, viewContainerRef: ViewContainerRef) {
      *        // A Default view container ref, usually the app root container ref.
      *        // Has to be set manually until we can find a way to get it automatically.
-     *        this.viewContainerRef = viewContainerRef;
+     *        componentsHelper.setRootViewContainerRef(viewContainerRef)
      *      }
      *  }
      * ```
+     */
+    ComponentsHelper.prototype.setRootViewContainerRef = function (value) {
+        this.root = value;
+    };
+    /**
+     * This is a name conventional class to get application root view component ref
      * @returns {ViewContainerRef} - application root view component ref
      */
     ComponentsHelper.prototype.getRootViewContainerRef = function () {
-        // The only way for now (by @mhevery)
-        // https://github.com/angular/angular/issues/6446#issuecomment-173459525
-        var appInstance = this.applicationRef.components[0].instance;
-        if (!appInstance.viewContainerRef) {
-            var appName = this.applicationRef.componentTypes[0].name;
-            throw new Error("Missing 'viewContainerRef' declaration in " + appName + " constructor");
+        // https://github.com/angular/angular/issues/9293
+        if (this.root) {
+            return this.root;
         }
-        return appInstance.viewContainerRef;
+        var comps = this.applicationRef.components;
+        if (!comps.length) {
+            throw new Error("ApplicationRef instance not found");
+        }
+        try {
+            /* one more ugly hack, read issue above for details */
+            var rootComponent = this.applicationRef._rootComponents[0];
+            this.root = rootComponent._hostElement.vcRef;
+            return this.root;
+        }
+        catch (e) {
+            throw new Error("ApplicationRef instance not found");
+        }
     };
     /**
      * Creates an instance of a Component and attaches it to the View Container found at the
@@ -90,10 +97,15 @@ var ComponentsHelper = (function () {
         ]);
         return this.appendNextToLocation(ComponentClass, location, providers);
     };
-    ComponentsHelper = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
-    ], ComponentsHelper);
+    ComponentsHelper.decorators = [
+        { type: core_1.Injectable },
+    ];
+    /** @nocollapse */
+    ComponentsHelper.ctorParameters = [
+        { type: core_1.ApplicationRef, },
+        { type: core_1.ComponentFactoryResolver, },
+        { type: core_1.Injector, },
+    ];
     return ComponentsHelper;
 }());
 exports.ComponentsHelper = ComponentsHelper;

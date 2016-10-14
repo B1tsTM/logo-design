@@ -12,6 +12,7 @@ export declare class Listbox implements ControlValueAccessor {
     styleClass: string;
     disabled: boolean;
     onChange: EventEmitter<any>;
+    onDblClick: EventEmitter<any>;
     itemTemplate: TemplateRef<any>;
     value: any;
     onModelChange: Function;
@@ -28,6 +29,7 @@ export declare class Listbox implements ControlValueAccessor {
     onOptionClickMultiple(event: any, option: any): void;
     isSelected(option: SelectItem): boolean;
     findIndex(option: SelectItem): number;
+    onDoubleClick(event: Event, option: SelectItem): any;
 }
 export declare class ListboxModule {
 }

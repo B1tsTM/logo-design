@@ -5,6 +5,7 @@ export declare class YearPickerComponent implements OnInit {
     private title;
     private rows;
     constructor(datePicker: DatePickerInnerComponent);
+    readonly isBS4: boolean;
     ngOnInit(): void;
     private getStartingYear(year);
 }

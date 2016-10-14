@@ -130,7 +130,7 @@ var Tree = (function () {
                     this.selectionChange.emit(node);
                 }
                 else if (this.isMultipleSelectionMode()) {
-                    this.selection = (!event.metaKey) ? [] : this.selection || [];
+                    this.selection = (!metaKey) ? [] : this.selection || [];
                     this.selection.push(node);
                     this.selectionChange.emit(this.selection);
                 }

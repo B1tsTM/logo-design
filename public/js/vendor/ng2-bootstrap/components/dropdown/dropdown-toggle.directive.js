@@ -1,18 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var dropdown_directive_1 = require('./dropdown.directive');
+/* tslint:disable-next-line */
+var MouseEvent = global.MouseEvent;
 var DropdownToggleDirective = (function () {
     function DropdownToggleDirective(dropdown, el) {
         this.isDisabled = false;
@@ -38,38 +28,24 @@ var DropdownToggleDirective = (function () {
         }
         return false;
     };
-    __decorate([
-        core_1.HostBinding('class.disabled'),
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DropdownToggleDirective.prototype, "isDisabled", void 0);
-    __decorate([
-        core_1.HostBinding('class.dropdown-toggle'),
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DropdownToggleDirective.prototype, "addToggleClass", void 0);
-    __decorate([
-        core_1.HostBinding('attr.aria-haspopup'), 
-        __metadata('design:type', Boolean)
-    ], DropdownToggleDirective.prototype, "addClass", void 0);
-    __decorate([
-        core_1.HostBinding('attr.aria-expanded'), 
-        __metadata('design:type', Boolean)
-    ], DropdownToggleDirective.prototype, "isOpen", null);
-    __decorate([
-        core_1.HostListener('click', ['$event']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [MouseEvent]), 
-        __metadata('design:returntype', Boolean)
-    ], DropdownToggleDirective.prototype, "toggleDropdown", null);
-    DropdownToggleDirective = __decorate([
-        core_1.Directive({
-            selector: '[dropdownToggle]',
-            exportAs: 'bs-dropdown-toggle'
-        }),
-        __param(0, core_1.Host()), 
-        __metadata('design:paramtypes', [dropdown_directive_1.DropdownDirective, core_1.ElementRef])
-    ], DropdownToggleDirective);
+    DropdownToggleDirective.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[dropdownToggle]',
+                    exportAs: 'bs-dropdown-toggle'
+                },] },
+    ];
+    /** @nocollapse */
+    DropdownToggleDirective.ctorParameters = [
+        { type: dropdown_directive_1.DropdownDirective, decorators: [{ type: core_1.Host },] },
+        { type: core_1.ElementRef, },
+    ];
+    DropdownToggleDirective.propDecorators = {
+        'isDisabled': [{ type: core_1.HostBinding, args: ['class.disabled',] }, { type: core_1.Input },],
+        'addToggleClass': [{ type: core_1.HostBinding, args: ['class.dropdown-toggle',] }, { type: core_1.Input },],
+        'addClass': [{ type: core_1.HostBinding, args: ['attr.aria-haspopup',] },],
+        'isOpen': [{ type: core_1.HostBinding, args: ['attr.aria-expanded',] },],
+        'toggleDropdown': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
+    };
     return DropdownToggleDirective;
 }());
 exports.DropdownToggleDirective = DropdownToggleDirective;

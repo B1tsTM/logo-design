@@ -27,4 +27,5 @@ export declare class DomHandler {
     getHeight(el: any): number;
     getViewport(): any;
     equals(obj1: any, obj2: any): boolean;
+    getUserAgent(): string;
 }

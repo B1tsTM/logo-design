@@ -59,6 +59,9 @@ The following is a list of basic demo projects that use the ng2-bs3-modal:
 - [SystemJS](https://github.com/dougludlow/ng2-bs3-modal-demo-systemjs)
 - [jspm](https://github.com/dougludlow/ng2-bs3-modal-demo-jspm)
 - [angular-cli](https://github.com/dougludlow/ng2-bs3-modal-demo-angular-cli)
+- [webpack](https://github.com/dougludlow/ng2-bs3-modal-demo-webpack)
+
+Feel free to request more.
 
 ## API
 

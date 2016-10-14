@@ -4,6 +4,7 @@ export declare class TabDirective implements OnDestroy {
     heading: string;
     disabled: boolean;
     removable: boolean;
+    customClass: string;
     /** tab active state toggle */
     active: boolean;
     select: EventEmitter<TabDirective>;

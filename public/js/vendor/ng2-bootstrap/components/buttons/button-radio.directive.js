@@ -1,28 +1,18 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
-// TODO: if uncheckable, null should be set to ngModel
-// if disabled, button should not be checkable
+/* tslint:disable */
+exports.RADIO_CONTROL_VALUE_ACCESSOR = {
+    provide: forms_1.NG_VALUE_ACCESSOR,
+    useExisting: core_1.forwardRef(function () { return ButtonRadioDirective; }),
+    multi: true
+};
+/* tslint:enable */
 var ButtonRadioDirective = (function () {
-    function ButtonRadioDirective(cd, el) {
+    function ButtonRadioDirective(el) {
+        this.el = el;
         this.onChange = Function.prototype;
         this.onTouched = Function.prototype;
-        // hack!
-        this.cd = cd;
-        this.el = el;
-        cd.valueAccessor = this;
     }
     Object.defineProperty(ButtonRadioDirective.prototype, "isActive", {
         get: function () {
@@ -32,25 +22,24 @@ var ButtonRadioDirective = (function () {
         configurable: true
     });
     ButtonRadioDirective.prototype.onClick = function () {
-        if (this.uncheckable && this.btnRadio === this.value) {
-            return this.cd.viewToModelUpdate(void 0);
+        if (this.el.nativeElement.attributes.disabled) {
+            return;
         }
-        this.cd.viewToModelUpdate(this.btnRadio);
+        if (this.uncheckable && this.btnRadio === this.value) {
+            this.value = undefined;
+        }
+        else {
+            this.value = this.btnRadio;
+        }
+        this.onTouched();
+        this.onChange(this.value);
     };
     ButtonRadioDirective.prototype.ngOnInit = function () {
         this.uncheckable = typeof this.uncheckable !== 'undefined';
     };
-    Object.defineProperty(ButtonRadioDirective.prototype, "value", {
-        // hack view model!
-        get: function () {
-            return this.cd.viewModel;
-        },
-        set: function (value) {
-            this.cd.viewModel = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    ButtonRadioDirective.prototype.onBlur = function () {
+        this.onTouched();
+    };
     // ControlValueAccessor
     // model -> view
     ButtonRadioDirective.prototype.writeValue = function (value) {
@@ -62,29 +51,20 @@ var ButtonRadioDirective = (function () {
     ButtonRadioDirective.prototype.registerOnTouched = function (fn) {
         this.onTouched = fn;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ButtonRadioDirective.prototype, "btnRadio", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], ButtonRadioDirective.prototype, "uncheckable", void 0);
-    __decorate([
-        core_1.HostBinding('class.active'), 
-        __metadata('design:type', Boolean)
-    ], ButtonRadioDirective.prototype, "isActive", null);
-    __decorate([
-        core_1.HostListener('click'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], ButtonRadioDirective.prototype, "onClick", null);
-    ButtonRadioDirective = __decorate([
-        core_1.Directive({ selector: '[btnRadio][ngModel]' }),
-        __param(0, core_1.Self()), 
-        __metadata('design:paramtypes', [forms_1.NgModel, core_1.ElementRef])
-    ], ButtonRadioDirective);
+    ButtonRadioDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[btnRadio]', providers: [exports.RADIO_CONTROL_VALUE_ACCESSOR] },] },
+    ];
+    /** @nocollapse */
+    ButtonRadioDirective.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    ButtonRadioDirective.propDecorators = {
+        'btnRadio': [{ type: core_1.Input },],
+        'uncheckable': [{ type: core_1.Input },],
+        'value': [{ type: core_1.Input },],
+        'isActive': [{ type: core_1.HostBinding, args: ['class.active',] },],
+        'onClick': [{ type: core_1.HostListener, args: ['click',] },],
+    };
     return ButtonRadioDirective;
 }());
 exports.ButtonRadioDirective = ButtonRadioDirective;

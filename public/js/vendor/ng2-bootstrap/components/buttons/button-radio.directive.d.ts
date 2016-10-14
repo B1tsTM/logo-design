@@ -1,18 +1,19 @@
 import { ElementRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NgModel } from '@angular/forms';
+import { ControlValueAccessor } from '@angular/forms';
+export declare const RADIO_CONTROL_VALUE_ACCESSOR: any;
 export declare class ButtonRadioDirective implements ControlValueAccessor, OnInit {
-    cd: NgModel;
-    el: ElementRef;
+    private el;
     onChange: any;
     onTouched: any;
-    private btnRadio;
-    private uncheckable;
+    btnRadio: any;
+    uncheckable: boolean;
+    value: any;
     readonly isActive: boolean;
     onClick(): void;
-    constructor(cd: NgModel, el: ElementRef);
+    constructor(el: ElementRef);
     ngOnInit(): void;
-    protected value: any;
+    onBlur(): void;
     writeValue(value: any): void;
-    registerOnChange(fn: (_: any) => {}): void;
-    registerOnTouched(fn: () => {}): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
 }

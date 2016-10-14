@@ -45,8 +45,12 @@ var Menu = (function () {
         this.preventDocumentDefault = true;
     };
     Menu.prototype.show = function (event) {
+        var target = event.target;
+        if (target.parentElement.nodeName == 'BUTTON') {
+            target = target.parentElement;
+        }
         this.container.style.display = 'block';
-        this.domHandler.absolutePosition(this.container, event.target);
+        this.domHandler.absolutePosition(this.container, target);
         this.domHandler.fadeIn(this.container, 250);
     };
     Menu.prototype.hide = function () {

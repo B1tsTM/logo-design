@@ -8,7 +8,7 @@
 import { Location, LocationStrategy } from '@angular/common';
 import { MockLocationStrategy, SpyLocation } from '@angular/common/testing';
 import { Compiler, Injectable, Injector, NgModule, NgModuleFactoryLoader } from '@angular/core';
-import { Router, RouterModule, RouterOutletMap, UrlSerializer, provideRoutes } from '@angular/router';
+import { NoPreloading, PreloadingStrategy, Router, RouterModule, RouterOutletMap, UrlSerializer, provideRoutes } from '@angular/router';
 import { ROUTER_PROVIDERS, ROUTES, flatten } from './private_import_router';
 /**
  * @whatItDoes Allows to simulate the loading of ng modules in tests.
@@ -80,7 +80,7 @@ export function setupTestingRouter(urlSerializer, outletMap, location, loader, c
  * ```
  * beforeEach(() => {
  *   TestBed.configureTestModule({
- *     modules: [
+ *     imports: [
  *       RouterTestingModule.withRoutes(
  *         [{path: '', component: BlankCmp}, {path: 'simple', component: SimpleCmp}])]
  *       )
@@ -116,7 +116,7 @@ export var RouterTestingModule = (function () {
                                 UrlSerializer, RouterOutletMap, Location, NgModuleFactoryLoader, Compiler, Injector, ROUTES
                             ]
                         },
-                        provideRoutes([])
+                        { provide: PreloadingStrategy, useExisting: NoPreloading }, provideRoutes([])
                     ]
                 },] },
     ];

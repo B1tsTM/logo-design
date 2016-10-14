@@ -1,16 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 // todo: implement global configuration via DI
@@ -126,6 +114,9 @@ var TimepickerComponent = (function () {
     TimepickerComponent.prototype.registerOnTouched = function (fn) {
         this.onTouched = fn;
     };
+    TimepickerComponent.prototype.setDisabledState = function (isDisabled) {
+        this.readonlyInput = isDisabled;
+    };
     TimepickerComponent.prototype.updateHours = function () {
         if (this.readonlyInput) {
             return;
@@ -149,7 +140,8 @@ var TimepickerComponent = (function () {
             this.refresh();
         }
     };
-    TimepickerComponent.prototype.hoursOnBlur = function () {
+    // tslint:disable-next-line:no-unused-variable
+    TimepickerComponent.prototype.hoursOnBlur = function (event) {
         if (this.readonlyInput) {
             return;
         }
@@ -181,7 +173,8 @@ var TimepickerComponent = (function () {
             this.refresh();
         }
     };
-    TimepickerComponent.prototype.minutesOnBlur = function () {
+    // tslint:disable-next-line:no-unused-variable
+    TimepickerComponent.prototype.minutesOnBlur = function (event) {
         if (this.readonlyInput) {
             return;
         }
@@ -208,6 +201,26 @@ var TimepickerComponent = (function () {
         if (!this.noDecrementMinutes()) {
             this.addMinutesToSelected(-this.minuteStep);
         }
+    };
+    TimepickerComponent.prototype.noIncrementHours = function () {
+        var incrementedSelected = addMinutes(this.selected, this.hourStep * 60);
+        return incrementedSelected > this.max ||
+            (incrementedSelected < this.selected && incrementedSelected < this.min);
+    };
+    TimepickerComponent.prototype.noDecrementHours = function () {
+        var decrementedSelected = addMinutes(this.selected, -this.hourStep * 60);
+        return decrementedSelected < this.min ||
+            (decrementedSelected > this.selected && decrementedSelected > this.max);
+    };
+    TimepickerComponent.prototype.noIncrementMinutes = function () {
+        var incrementedSelected = addMinutes(this.selected, this.minuteStep);
+        return incrementedSelected > this.max ||
+            (incrementedSelected < this.selected && incrementedSelected < this.min);
+    };
+    TimepickerComponent.prototype.noDecrementMinutes = function () {
+        var decrementedSelected = addMinutes(this.selected, -this.minuteStep);
+        return decrementedSelected < this.min ||
+            (decrementedSelected > this.selected && decrementedSelected > this.max);
     };
     TimepickerComponent.prototype.toggleMeridian = function () {
         if (!this.noToggleMeridian()) {
@@ -264,26 +277,6 @@ var TimepickerComponent = (function () {
             ? '0' + value
             : value.toString();
     };
-    TimepickerComponent.prototype.noIncrementHours = function () {
-        var incrementedSelected = addMinutes(this.selected, this.hourStep * 60);
-        return incrementedSelected > this.max ||
-            (incrementedSelected < this.selected && incrementedSelected < this.min);
-    };
-    TimepickerComponent.prototype.noDecrementHours = function () {
-        var decrementedSelected = addMinutes(this.selected, -this.hourStep * 60);
-        return decrementedSelected < this.min ||
-            (decrementedSelected > this.selected && decrementedSelected > this.max);
-    };
-    TimepickerComponent.prototype.noIncrementMinutes = function () {
-        var incrementedSelected = addMinutes(this.selected, this.minuteStep);
-        return incrementedSelected > this.max ||
-            (incrementedSelected < this.selected && incrementedSelected < this.min);
-    };
-    TimepickerComponent.prototype.noDecrementMinutes = function () {
-        var decrementedSelected = addMinutes(this.selected, -this.minuteStep);
-        return decrementedSelected < this.min ||
-            (decrementedSelected > this.selected && decrementedSelected > this.max);
-    };
     TimepickerComponent.prototype.addMinutesToSelected = function (minutes) {
         this.selected = addMinutes(this.selected, minutes);
         this.refresh();
@@ -299,58 +292,31 @@ var TimepickerComponent = (function () {
             return addMinutes(this.selected, -12 * 60) < this.min;
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], TimepickerComponent.prototype, "hourStep", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], TimepickerComponent.prototype, "minuteStep", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TimepickerComponent.prototype, "readonlyInput", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TimepickerComponent.prototype, "mousewheel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TimepickerComponent.prototype, "arrowkeys", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TimepickerComponent.prototype, "showSpinners", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], TimepickerComponent.prototype, "min", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], TimepickerComponent.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], TimepickerComponent.prototype, "meridians", void 0);
-    __decorate([
-        // ??
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TimepickerComponent.prototype, "showMeridian", null);
-    TimepickerComponent = __decorate([
-        core_1.Component({
-            /* tslint:disable */
-            selector: 'timepicker[ngModel]',
-            /* tslint:enable */
-            template: "\n    <table>\n      <tbody>\n        <tr class=\"text-center\" [ngClass]=\"{hidden: !showSpinners || readonlyInput}\">\n          <td><a (click)=\"incrementHours()\" [ngClass]=\"{disabled: noIncrementHours()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n          <td>&nbsp;</td>\n          <td><a (click)=\"incrementMinutes()\" [ngClass]=\"{disabled: noIncrementMinutes()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"></td>\n        </tr>\n        <tr>\n          <td class=\"form-group\" [ngClass]=\"{'has-error': invalidHours}\">\n            <input style=\"width:50px;\" type=\"text\" [(ngModel)]=\"hours\" (change)=\"updateHours()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" (blur)=\"hoursOnBlur($event)\" maxlength=\"2\">\n          </td>\n          <td>:</td>\n          <td class=\"form-group\" [ngClass]=\"{'has-error': invalidMinutes}\">\n            <input style=\"width:50px;\" type=\"text\" [(ngModel)]=\"minutes\" (change)=\"updateMinutes()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" (blur)=\"minutesOnBlur($event)\" maxlength=\"2\">\n          </td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"><button type=\"button\" [ngClass]=\"{disabled: noToggleMeridian() || readonlyInput}\" class=\"btn btn-default text-center\" (click)=\"toggleMeridian()\">{{meridian}}</button></td>\n        </tr>\n        <tr class=\"text-center\" [ngClass]=\"{hidden: !showSpinners || readonlyInput}\">\n          <td><a (click)=\"decrementHours()\" [ngClass]=\"{disabled: noDecrementHours()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n          <td>&nbsp;</td>\n          <td><a (click)=\"decrementMinutes()\" [ngClass]=\"{disabled: noDecrementMinutes()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
-            providers: [forms_1.NgModel]
-        }),
-        __param(0, core_1.Self()), 
-        __metadata('design:paramtypes', [forms_1.NgModel])
-    ], TimepickerComponent);
+    TimepickerComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    /* tslint:disable */
+                    selector: 'timepicker[ngModel]',
+                    /* tslint:enable */
+                    template: "\n    <table>\n      <tbody>\n        <tr class=\"text-center\" [ngClass]=\"{hidden: !showSpinners || readonlyInput}\">\n          <td><a (click)=\"incrementHours()\" [ngClass]=\"{disabled: noIncrementHours()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n          <td>&nbsp;</td>\n          <td><a (click)=\"incrementMinutes()\" [ngClass]=\"{disabled: noIncrementMinutes()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"></td>\n        </tr>\n        <tr>\n          <td class=\"form-group\" [ngClass]=\"{'has-error': invalidHours}\">\n            <input style=\"width:50px;\" type=\"text\" [(ngModel)]=\"hours\" (change)=\"updateHours()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" (blur)=\"hoursOnBlur($event)\" maxlength=\"2\">\n          </td>\n          <td>:</td>\n          <td class=\"form-group\" [ngClass]=\"{'has-error': invalidMinutes}\">\n            <input style=\"width:50px;\" type=\"text\" [(ngModel)]=\"minutes\" (change)=\"updateMinutes()\" class=\"form-control text-center\" [readonly]=\"readonlyInput\" (blur)=\"minutesOnBlur($event)\" maxlength=\"2\">\n          </td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"><button type=\"button\" [ngClass]=\"{disabled: noToggleMeridian() || readonlyInput}\" class=\"btn btn-default text-center\" (click)=\"toggleMeridian()\">{{meridian}}</button></td>\n        </tr>\n        <tr class=\"text-center\" [ngClass]=\"{hidden: !showSpinners || readonlyInput}\">\n          <td><a (click)=\"decrementHours()\" [ngClass]=\"{disabled: noDecrementHours()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n          <td>&nbsp;</td>\n          <td><a (click)=\"decrementMinutes()\" [ngClass]=\"{disabled: noDecrementMinutes()}\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n          <td [ngClass]=\"{hidden: !showMeridian}\" *ngIf=\"showMeridian\"></td>\n        </tr>\n      </tbody>\n    </table>\n  ",
+                    providers: [forms_1.NgModel]
+                },] },
+    ];
+    /** @nocollapse */
+    TimepickerComponent.ctorParameters = [
+        { type: forms_1.NgModel, decorators: [{ type: core_1.Self },] },
+    ];
+    TimepickerComponent.propDecorators = {
+        'hourStep': [{ type: core_1.Input },],
+        'minuteStep': [{ type: core_1.Input },],
+        'readonlyInput': [{ type: core_1.Input },],
+        'mousewheel': [{ type: core_1.Input },],
+        'arrowkeys': [{ type: core_1.Input },],
+        'showSpinners': [{ type: core_1.Input },],
+        'min': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'meridians': [{ type: core_1.Input },],
+        'showMeridian': [{ type: core_1.Input },],
+    };
     return TimepickerComponent;
 }());
 exports.TimepickerComponent = TimepickerComponent;

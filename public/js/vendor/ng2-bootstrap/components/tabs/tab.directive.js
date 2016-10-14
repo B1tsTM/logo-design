@@ -1,16 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var tabset_component_1 = require('./tabset.component');
 /* tslint:disable */
+/* tslint:enable */
 var TabDirective = (function () {
     function TabDirective(tabset) {
         this.select = new core_1.EventEmitter(false);
@@ -51,43 +43,24 @@ var TabDirective = (function () {
     TabDirective.prototype.ngOnDestroy = function () {
         this.tabset.removeTab(this);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], TabDirective.prototype, "heading", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TabDirective.prototype, "disabled", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TabDirective.prototype, "removable", void 0);
-    __decorate([
-        core_1.HostBinding('class.active'),
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TabDirective.prototype, "active", null);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], TabDirective.prototype, "select", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], TabDirective.prototype, "deselect", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], TabDirective.prototype, "removed", void 0);
-    __decorate([
-        core_1.HostBinding('class.tab-pane'), 
-        __metadata('design:type', Boolean)
-    ], TabDirective.prototype, "addClass", void 0);
-    TabDirective = __decorate([
-        core_1.Directive({ selector: 'tab, [tab]' }), 
-        __metadata('design:paramtypes', [tabset_component_1.TabsetComponent])
-    ], TabDirective);
+    TabDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: 'tab, [tab]' },] },
+    ];
+    /** @nocollapse */
+    TabDirective.ctorParameters = [
+        { type: tabset_component_1.TabsetComponent, },
+    ];
+    TabDirective.propDecorators = {
+        'heading': [{ type: core_1.Input },],
+        'disabled': [{ type: core_1.Input },],
+        'removable': [{ type: core_1.Input },],
+        'customClass': [{ type: core_1.Input },],
+        'active': [{ type: core_1.HostBinding, args: ['class.active',] }, { type: core_1.Input },],
+        'select': [{ type: core_1.Output },],
+        'deselect': [{ type: core_1.Output },],
+        'removed': [{ type: core_1.Output },],
+        'addClass': [{ type: core_1.HostBinding, args: ['class.tab-pane',] },],
+    };
     return TabDirective;
 }());
 exports.TabDirective = TabDirective;

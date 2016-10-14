@@ -6,7 +6,9 @@ export declare class DayPickerComponent implements OnInit {
     rows: Array<any>;
     weekNumbers: Array<number>;
     datePicker: DatePickerInnerComponent;
+    CURRENT_THEME_TEMPLATE: any;
     constructor(datePicker: DatePickerInnerComponent);
+    readonly isBS4: boolean;
     ngOnInit(): void;
     private getDates(startDate, n);
     private getISO8601WeekNumber(date);

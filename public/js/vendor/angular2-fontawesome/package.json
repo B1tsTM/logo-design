@@ -1,11 +1,11 @@
 {
   "_args": [
     [
-      "angular2-fontawesome",
-      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+      "angular2-fontawesome@^0.5.1",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest"
     ]
   ],
-  "_from": "angular2-fontawesome@latest",
+  "_from": "angular2-fontawesome@>=0.5.1 <0.6.0",
   "_id": "angular2-fontawesome@0.5.1",
   "_inCache": true,
   "_installable": true,
@@ -23,11 +23,11 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "angular2-fontawesome",
-    "raw": "angular2-fontawesome",
-    "rawSpec": "",
+    "raw": "angular2-fontawesome@^0.5.1",
+    "rawSpec": "^0.5.1",
     "scope": null,
-    "spec": "latest",
-    "type": "tag"
+    "spec": ">=0.5.1 <0.6.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
@@ -35,8 +35,8 @@
   "_resolved": "https://registry.npmjs.org/angular2-fontawesome/-/angular2-fontawesome-0.5.1.tgz",
   "_shasum": "3e77cfbf0eb91d8734f14e94fb2212b53d7ff6d5",
   "_shrinkwrap": null,
-  "_spec": "angular2-fontawesome",
-  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "_spec": "angular2-fontawesome@^0.5.1",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest",
   "author": {
     "email": "komei.t.f@gmail.com",
     "name": "Komei Shimamura"

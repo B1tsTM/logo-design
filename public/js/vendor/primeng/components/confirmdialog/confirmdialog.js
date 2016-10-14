@@ -23,16 +23,20 @@ var ConfirmDialog = (function () {
         this.confirmationService = confirmationService;
         this.acceptIcon = 'fa-check';
         this.acceptLabel = 'Yes';
+        this.acceptVisible = true;
         this.rejectIcon = 'fa-close';
         this.rejectLabel = 'No';
+        this.rejectVisible = true;
         this.closeOnEscape = true;
         this.closable = true;
         this.responsive = true;
         this.subscription = confirmationService.requireConfirmation$.subscribe(function (confirmation) {
             _this.confirmation = confirmation;
-            _this.message = _this.message || _this.confirmation.message;
-            _this.icon = _this.icon || _this.confirmation.icon;
-            _this.header = _this.header || _this.confirmation.header;
+            _this.message = _this.confirmation.message || _this.message;
+            _this.icon = _this.confirmation.icon || _this.icon;
+            _this.header = _this.confirmation.header || _this.header;
+            _this.rejectVisible = _this.confirmation.rejectVisible === false ? false : _this.rejectVisible;
+            _this.acceptVisible = _this.confirmation.acceptVisible === false ? false : _this.acceptVisible;
             if (_this.confirmation.accept) {
                 _this.confirmation.acceptEvent = new core_1.EventEmitter();
                 _this.confirmation.acceptEvent.subscribe(_this.confirmation.accept);
@@ -179,12 +183,20 @@ var ConfirmDialog = (function () {
     ], ConfirmDialog.prototype, "acceptLabel", void 0);
     __decorate([
         core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], ConfirmDialog.prototype, "acceptVisible", void 0);
+    __decorate([
+        core_1.Input(), 
         __metadata('design:type', String)
     ], ConfirmDialog.prototype, "rejectIcon", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
     ], ConfirmDialog.prototype, "rejectLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], ConfirmDialog.prototype, "rejectVisible", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -224,7 +236,7 @@ var ConfirmDialog = (function () {
     ConfirmDialog = __decorate([
         core_1.Component({
             selector: 'p-confirmDialog',
-            template: "\n        <div [ngClass]=\"{'ui-dialog ui-confirmdialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl}\" \n            [style.display]=\"visible ? 'block' : 'none'\" [style.width.px]=\"width\" [style.height.px]=\"height\" (mousedown)=\"moveOnTop()\" [@dialogState]=\"visible ? 'visible' : 'hidden'\">\n            <div class=\"ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top\">\n                <span class=\"ui-dialog-title\" *ngIf=\"header\">{{header}}</span>\n                <a [ngClass]=\"{'ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all':true,'ui-state-hover':hoverCloseIcon}\" href=\"#\" role=\"button\" *ngIf=\"closable\" \n                    (click)=\"hide($event)\" (mouseenter)=\"hoverCloseIcon=true\" (mouseleave)=\"hoverCloseIcon=false\">\n                    <span class=\"fa fa-fw fa-close\"></span>\n                </a>\n            </div>\n            <div class=\"ui-dialog-content ui-widget-content\">\n                <i [class]=\"icon\"></i>\n                <span class=\"ui-confirmdialog-message\">{{message}}</span>\n            </div>\n            <div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\" *ngIf=\"footer\">\n                <ng-content select=\"footer\"></ng-content>\n            </div>\n            <div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\" *ngIf=\"!footer\">\n                <button type=\"button\" pButton [icon]=\"reject\" [label]=\"rejectLabel\" (click)=\"reject()\"></button>\n                <button type=\"button\" pButton [icon]=\"acceptIcon\" [label]=\"acceptLabel\" (click)=\"accept()\"></button>\n            </div>\n        </div>\n    ",
+            template: "\n        <div [ngClass]=\"{'ui-dialog ui-confirmdialog ui-widget ui-widget-content ui-corner-all ui-shadow':true,'ui-dialog-rtl':rtl}\" \n            [style.display]=\"visible ? 'block' : 'none'\" [style.width.px]=\"width\" [style.height.px]=\"height\" (mousedown)=\"moveOnTop()\" [@dialogState]=\"visible ? 'visible' : 'hidden'\">\n            <div class=\"ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top\">\n                <span class=\"ui-dialog-title\" *ngIf=\"header\">{{header}}</span>\n                <a [ngClass]=\"{'ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all':true,'ui-state-hover':hoverCloseIcon}\" href=\"#\" role=\"button\" *ngIf=\"closable\" \n                    (click)=\"hide($event)\" (mouseenter)=\"hoverCloseIcon=true\" (mouseleave)=\"hoverCloseIcon=false\">\n                    <span class=\"fa fa-fw fa-close\"></span>\n                </a>\n            </div>\n            <div class=\"ui-dialog-content ui-widget-content\">\n                <i [class]=\"icon\"></i>\n                <span class=\"ui-confirmdialog-message\">{{message}}</span>\n            </div>\n            <div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\" *ngIf=\"footer\">\n                <ng-content select=\"footer\"></ng-content>\n            </div>\n            <div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\" *ngIf=\"!footer\">\n                <button type=\"button\" pButton [icon]=\"rejectIcon\" [label]=\"rejectLabel\" (click)=\"reject()\" *ngIf=\"rejectVisible\"></button>\n                <button type=\"button\" pButton [icon]=\"acceptIcon\" [label]=\"acceptLabel\" (click)=\"accept()\" *ngIf=\"acceptVisible\"></button>\n            </div>\n        </div>\n    ",
             animations: [
                 core_1.trigger('dialogState', [
                     core_1.state('hidden', core_1.style({

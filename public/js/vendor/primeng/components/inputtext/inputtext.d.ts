@@ -8,7 +8,8 @@ export declare class InputText {
     onMouseout(e: any): void;
     onFocus(e: any): void;
     onBlur(e: any): void;
-    isDisabled(): any;
+    disabled: boolean;
+    filled: boolean;
 }
 export declare class InputTextModule {
 }

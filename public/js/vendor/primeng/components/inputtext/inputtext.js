@@ -26,9 +26,20 @@ var InputText = (function () {
     InputText.prototype.onBlur = function (e) {
         this.focus = false;
     };
-    InputText.prototype.isDisabled = function () {
-        return this.el.nativeElement.disabled;
-    };
+    Object.defineProperty(InputText.prototype, "disabled", {
+        get: function () {
+            return this.el.nativeElement.disabled;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InputText.prototype, "filled", {
+        get: function () {
+            return this.el.nativeElement.value && this.el.nativeElement.value.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         core_1.HostListener('mouseover', ['$event']), 
         __metadata('design:type', Function), 
@@ -63,7 +74,8 @@ var InputText = (function () {
                 '[class.ui-widget]': 'true',
                 '[class.ui-state-hover]': 'hover',
                 '[class.ui-state-focus]': 'focus',
-                '[class.ui-state-disabled]': 'isDisabled()'
+                '[class.ui-state-disabled]': 'disabled',
+                '[class.ui-state-filled]': 'filled'
             }
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])

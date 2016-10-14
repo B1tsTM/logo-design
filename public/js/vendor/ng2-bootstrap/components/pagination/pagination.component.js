@@ -1,18 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+/* tslint:disable-next-line */
+var MouseEvent = global.MouseEvent;
 var paginationConfig = {
     maxSize: void 0,
     itemsPerPage: 10,
@@ -24,8 +14,9 @@ var paginationConfig = {
     lastText: 'Last',
     rotate: true
 };
-var PAGINATION_TEMPLATE = "\n  <ul class=\"pagination\" [ngClass]=\"classMap\">\n    <li class=\"pagination-first page-item\"\n        *ngIf=\"boundaryLinks\"\n        [class.disabled]=\"noPrevious()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(1, $event)\" [innerHTML]=\"getText('first')\"></a>\n    </li>\n\n    <li class=\"pagination-prev page-item\"\n        *ngIf=\"directionLinks\"\n        [class.disabled]=\"noPrevious()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(page - 1, $event)\" [innerHTML]=\"getText('previous')\"></a>\n      </li>\n\n    <li *ngFor=\"let pg of pages\"\n        [class.active]=\"pg.active\"\n        [class.disabled]=\"disabled&&!pg.active\"\n        class=\"pagination-page page-item\">\n      <a class=\"page-link\" href (click)=\"selectPage(pg.number, $event)\" [innerHTML]=\"pg.text\"></a>\n    </li>\n\n    <li class=\"pagination-next page-item\"\n        *ngIf=\"directionLinks\"\n        [class.disabled]=\"noNext()\">\n      <a class=\"page-link\" href (click)=\"selectPage(page + 1, $event)\" [innerHTML]=\"getText('next')\"></a></li>\n\n    <li class=\"pagination-last page-item\"\n        *ngIf=\"boundaryLinks\"\n        [class.disabled]=\"noNext()\">\n      <a class=\"page-link\" href (click)=\"selectPage(totalPages, $event)\" [innerHTML]=\"getText('last')\"></a></li>\n  </ul>\n  ";
+var PAGINATION_TEMPLATE = "\n  <ul class=\"pagination\" [ngClass]=\"classMap\">\n    <li class=\"pagination-first page-item\"\n        *ngIf=\"boundaryLinks\"\n        [class.disabled]=\"noPrevious()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(1, $event)\" [innerHTML]=\"getText('first')\"></a>\n    </li>\n\n    <li class=\"pagination-prev page-item\"\n        *ngIf=\"directionLinks\"\n        [class.disabled]=\"noPrevious()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(page - 1, $event)\" [innerHTML]=\"getText('previous')\"></a>\n      </li>\n\n    <li *ngFor=\"let pg of pages\"\n        [class.active]=\"pg.active\"\n        [class.disabled]=\"disabled&&!pg.active\"\n        class=\"pagination-page page-item\">\n      <a class=\"page-link\" href (click)=\"selectPage(pg.number, $event)\" [innerHTML]=\"pg.text\"></a>\n    </li>\n\n    <li class=\"pagination-next page-item\"\n        *ngIf=\"directionLinks\"\n        [class.disabled]=\"noNext()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(page + 1, $event)\" [innerHTML]=\"getText('next')\"></a></li>\n\n    <li class=\"pagination-last page-item\"\n        *ngIf=\"boundaryLinks\"\n        [class.disabled]=\"noNext()||disabled\">\n      <a class=\"page-link\" href (click)=\"selectPage(totalPages, $event)\" [innerHTML]=\"getText('last')\"></a></li>\n  </ul>\n  ";
 /* tslint:disable */
+/* tslint:enable */
 var PaginationComponent = (function () {
     function PaginationComponent(cd, renderer, elementRef) {
         this.numPages = new core_1.EventEmitter(false);
@@ -208,71 +199,35 @@ var PaginationComponent = (function () {
             : Math.ceil(this.totalItems / this.itemsPerPage);
         return Math.max(totalPages || 0, 1);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PaginationComponent.prototype, "align", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], PaginationComponent.prototype, "maxSize", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PaginationComponent.prototype, "boundaryLinks", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PaginationComponent.prototype, "directionLinks", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PaginationComponent.prototype, "firstText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PaginationComponent.prototype, "previousText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PaginationComponent.prototype, "nextText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PaginationComponent.prototype, "lastText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PaginationComponent.prototype, "rotate", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PaginationComponent.prototype, "disabled", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PaginationComponent.prototype, "numPages", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PaginationComponent.prototype, "pageChanged", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], PaginationComponent.prototype, "itemsPerPage", null);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], PaginationComponent.prototype, "totalItems", null);
-    PaginationComponent = __decorate([
-        core_1.Component({
-            selector: 'pagination[ngModel]',
-            template: PAGINATION_TEMPLATE,
-            providers: [forms_1.NgModel]
-        }),
-        __param(0, core_1.Self()), 
-        __metadata('design:paramtypes', [forms_1.NgModel, core_1.Renderer, core_1.ElementRef])
-    ], PaginationComponent);
+    PaginationComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'pagination[ngModel]',
+                    template: PAGINATION_TEMPLATE,
+                    providers: [forms_1.NgModel]
+                },] },
+    ];
+    /** @nocollapse */
+    PaginationComponent.ctorParameters = [
+        { type: forms_1.NgModel, decorators: [{ type: core_1.Self },] },
+        { type: core_1.Renderer, },
+        { type: core_1.ElementRef, },
+    ];
+    PaginationComponent.propDecorators = {
+        'align': [{ type: core_1.Input },],
+        'maxSize': [{ type: core_1.Input },],
+        'boundaryLinks': [{ type: core_1.Input },],
+        'directionLinks': [{ type: core_1.Input },],
+        'firstText': [{ type: core_1.Input },],
+        'previousText': [{ type: core_1.Input },],
+        'nextText': [{ type: core_1.Input },],
+        'lastText': [{ type: core_1.Input },],
+        'rotate': [{ type: core_1.Input },],
+        'disabled': [{ type: core_1.Input },],
+        'numPages': [{ type: core_1.Output },],
+        'pageChanged': [{ type: core_1.Output },],
+        'itemsPerPage': [{ type: core_1.Input },],
+        'totalItems': [{ type: core_1.Input },],
+    };
     return PaginationComponent;
 }());
 exports.PaginationComponent = PaginationComponent;

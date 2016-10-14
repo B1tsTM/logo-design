@@ -12,8 +12,10 @@ export declare class ConfirmDialog implements AfterViewInit, OnDestroy {
     message: string;
     acceptIcon: string;
     acceptLabel: string;
+    acceptVisible: boolean;
     rejectIcon: string;
     rejectLabel: string;
+    rejectVisible: boolean;
     width: any;
     height: any;
     closeOnEscape: boolean;

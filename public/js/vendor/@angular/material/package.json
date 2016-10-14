@@ -1,19 +1,19 @@
 {
   "_args": [
     [
-      "@angular/material",
-      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1"
+      "@angular/material@^2.0.0-alpha.9",
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest"
     ]
   ],
-  "_from": "@angular/material@latest",
-  "_id": "@angular/material@2.0.0-alpha.9",
+  "_from": "@angular/material@>=2.0.0-alpha.9 <3.0.0",
+  "_id": "@angular/material@2.0.0-alpha.9-3",
   "_inCache": true,
   "_installable": true,
   "_location": "/@angular/material",
   "_nodeVersion": "6.3.1",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/material-2.0.0-alpha.9.tgz_1474925870798_0.519230799516663"
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/material-2.0.0-alpha.9-3.tgz_1475195908989_0.23647442483343184"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
@@ -23,20 +23,20 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/material",
-    "raw": "@angular/material",
-    "rawSpec": "",
+    "raw": "@angular/material@^2.0.0-alpha.9",
+    "rawSpec": "^2.0.0-alpha.9",
     "scope": "@angular",
-    "spec": "latest",
-    "type": "tag"
+    "spec": ">=2.0.0-alpha.9 <3.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/material/-/material-2.0.0-alpha.9.tgz",
-  "_shasum": "ac86e09a041d751d4786b43b8945fcd4bdd0af9c",
+  "_resolved": "https://registry.npmjs.org/@angular/material/-/material-2.0.0-alpha.9-3.tgz",
+  "_shasum": "77e0f6a790069b2b9d48bff3eab78b5a59d244a0",
   "_shrinkwrap": null,
-  "_spec": "@angular/material",
-  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1",
+  "_spec": "@angular/material@^2.0.0-alpha.9",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest",
   "bugs": {
     "url": "https://github.com/angular/material2/issues"
   },
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "ac86e09a041d751d4786b43b8945fcd4bdd0af9c",
-    "tarball": "https://registry.npmjs.org/@angular/material/-/material-2.0.0-alpha.9.tgz"
+    "shasum": "77e0f6a790069b2b9d48bff3eab78b5a59d244a0",
+    "tarball": "https://registry.npmjs.org/@angular/material/-/material-2.0.0-alpha.9-3.tgz"
   },
   "homepage": "https://github.com/angular/material2#readme",
   "keywords": [
@@ -79,5 +79,5 @@
   },
   "scripts": {},
   "typings": "./index.d.ts",
-  "version": "2.0.0-alpha.9"
+  "version": "2.0.0-alpha.9-3"
 }

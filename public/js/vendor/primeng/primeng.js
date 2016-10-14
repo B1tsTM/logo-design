@@ -64,4 +64,5 @@ __export(require('./components/toolbar/toolbar'));
 __export(require('./components/tooltip/tooltip'));
 __export(require('./components/tree/tree'));
 __export(require('./components/treetable/treetable'));
+__export(require('./components/tristatecheckbox/tristatecheckbox'));
 //# sourceMappingURL=primeng.js.map

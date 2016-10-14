@@ -3,6 +3,10 @@ exports.ALWAYS = 'always';
 exports.DISABLED = 'disabled';
 exports.OUTSIDECLICK = 'outsideClick';
 exports.NONINPUT = 'nonInput';
+/* tslint:disable-next-line */
+var KeyboardEvent = global.KeyboardEvent;
+/* tslint:disable-next-line */
+var MouseEvent = global.MouseEvent;
 var DropdownService = (function () {
     function DropdownService() {
         this.closeDropdownBind = this.closeDropdown.bind(this);

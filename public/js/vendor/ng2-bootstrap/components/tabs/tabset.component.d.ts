@@ -4,13 +4,13 @@ export declare class TabsetComponent implements OnInit, OnDestroy {
     vertical: boolean;
     justified: boolean;
     type: string;
-    protected clazz: boolean;
+    clazz: boolean;
     tabs: Array<TabDirective>;
+    classMap: any;
     private isDestroyed;
     private _vertical;
     private _justified;
     private _type;
-    private classMap;
     ngOnInit(): void;
     ngOnDestroy(): void;
     addTab(tab: TabDirective): void;

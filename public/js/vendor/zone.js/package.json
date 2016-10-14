@@ -2,24 +2,24 @@
   "_args": [
     [
       "zone.js@^0.6.23",
-      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v4"
+      "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest"
     ]
   ],
   "_from": "zone.js@>=0.6.23 <0.7.0",
-  "_id": "zone.js@0.6.23",
+  "_id": "zone.js@0.6.25",
   "_inCache": true,
   "_installable": true,
   "_location": "/zone.js",
-  "_nodeVersion": "5.5.0",
+  "_nodeVersion": "5.11.0",
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/zone.js-0.6.23.tgz_1473889747894_0.8097059819847345"
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/zone.js-0.6.25.tgz_1474330836843_0.8244900833815336"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angularcore"
   },
-  "_npmVersion": "3.7.3",
+  "_npmVersion": "3.8.6",
   "_phantomChildren": {},
   "_requested": {
     "name": "zone.js",
@@ -32,11 +32,11 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.23.tgz",
-  "_shasum": "78fff1e27425e5f82fb875c8da435681850b7018",
+  "_resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.25.tgz",
+  "_shasum": "a41b57fe8c0ff3b8f077de3b193a86a234420301",
   "_shrinkwrap": null,
   "_spec": "zone.js@^0.6.23",
-  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v4",
+  "_where": "C:\\Users\\B1ts\\Desktop\\dizainoKonkursuIS\\v1upgradeTest",
   "author": {
     "name": "Brian Ford"
   },
@@ -67,7 +67,6 @@
     "karma-safari-launcher": "^0.1.1",
     "karma-sauce-launcher": "^0.2.10",
     "karma-sourcemap-loader": "^0.3.6",
-    "karma-webpack": "^1.7.0",
     "nodejs-websocket": "^1.2.0",
     "pump": "^1.0.1",
     "systemjs": "^0.19.37",
@@ -79,14 +78,14 @@
     "test": "test"
   },
   "dist": {
-    "shasum": "78fff1e27425e5f82fb875c8da435681850b7018",
-    "tarball": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.23.tgz"
+    "shasum": "a41b57fe8c0ff3b8f077de3b193a86a234420301",
+    "tarball": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.25.tgz"
   },
   "files": [
     "lib",
     "dist"
   ],
-  "gitHead": "473f01c83e753bf071e338443b6b4b418567dd0d",
+  "gitHead": "0c3ce2e170ffc2b3b2d41dc8d0b4820391606a3b",
   "homepage": "https://github.com/angular/zone.js#readme",
   "license": "MIT",
   "main": "dist/zone-node.js",
@@ -117,5 +116,5 @@
     "ws-server": "node ./test/ws-server.js"
   },
   "typings": "dist/zone.js.d.ts",
-  "version": "0.6.23"
+  "version": "0.6.25"
 }

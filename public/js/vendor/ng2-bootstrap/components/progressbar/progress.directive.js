@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var progressConfig = {
     animate: true,
@@ -16,6 +7,7 @@ var progressConfig = {
 // todo: progress element conflict with bootstrap.css
 // todo: need hack: replace host element with div
 /* tslint:disable */
+/* tslint:enable */
 var ProgressDirective = (function () {
     function ProgressDirective() {
         this.addClass = true;
@@ -47,23 +39,16 @@ var ProgressDirective = (function () {
     ProgressDirective.prototype.removeBar = function (bar) {
         this.bars.splice(this.bars.indexOf(bar), 1);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], ProgressDirective.prototype, "animate", void 0);
-    __decorate([
-        core_1.HostBinding('attr.max'),
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], ProgressDirective.prototype, "max", null);
-    __decorate([
-        core_1.HostBinding('class.progress'), 
-        __metadata('design:type', Boolean)
-    ], ProgressDirective.prototype, "addClass", void 0);
-    ProgressDirective = __decorate([
-        core_1.Directive({ selector: 'bs-progress, [progress]' }), 
-        __metadata('design:paramtypes', [])
-    ], ProgressDirective);
+    ProgressDirective.decorators = [
+        { type: core_1.Directive, args: [{ selector: 'bs-progress, [progress]' },] },
+    ];
+    /** @nocollapse */
+    ProgressDirective.ctorParameters = [];
+    ProgressDirective.propDecorators = {
+        'animate': [{ type: core_1.Input },],
+        'max': [{ type: core_1.HostBinding, args: ['attr.max',] }, { type: core_1.Input },],
+        'addClass': [{ type: core_1.HostBinding, args: ['class.progress',] },],
+    };
     return ProgressDirective;
 }());
 exports.ProgressDirective = ProgressDirective;
