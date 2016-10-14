@@ -84,6 +84,18 @@ var storageForAvatar = multer.diskStorage({
   }
 });
 
+router.get('/avatars/:id', function(req, res, next) {
+  var id = req.params.id;
+  User.findById(id, function(err, user) {
+    console.log(user);
+    var avatarUrl = user.avatar.avatarUrl;
+    res.status(200).json({
+      message: 'avataras gautas',
+      avatarUrl: avatarUrl
+    });
+  });
+});
+
 //router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
 router.post('/avatar', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
 //  res.end(JSON.stringify(req.files) + "/n");
