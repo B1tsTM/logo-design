@@ -20,6 +20,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
 import { DesignersService } from './services/designers.service';
+import { CanActivateProfilePageService } from './guards/can-activate-profile-page.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
@@ -40,6 +41,7 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent,
                   ProfilePageComponent ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, DesignersService ]
+  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, 
+               DesignersService, CanActivateProfilePageService ]
 })
 export class AppModule { }
