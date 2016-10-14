@@ -1,0 +1,21 @@
+// The whole header element (from left to right on the viewport)
+.app-header {
+	position: relative;
+	border-bottom: 1px solid #f0f0f0;
+	
+	// The wrapper around the header elements
+	&-inner {
+		padding: 10px 0;
+		display: flex;
+		align-items: center;
+	}
+
+	.user-controls {
+		margin-left: auto;
+	}
+}
+
+.site-logo {
+	display: inline-block;
+	font-size: 22px;
+}
