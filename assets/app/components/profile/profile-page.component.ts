@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'profile-page.component.html'
 })
 export class ProfilePageComponent implements OnInit {
-  userId: string = '';
+  avatarUrl: string = '';
   constructor(private authService: AuthService) { }
 
   ngOnInit() { 
@@ -15,7 +15,7 @@ export class ProfilePageComponent implements OnInit {
     this.authService.getProfileInfo(id)
       .subscribe(data => {
         console.log(data);
-        this.userId = data;
+        this.avatarUrl = data.avatarUrl;
       });
   }
 

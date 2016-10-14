@@ -72,13 +72,13 @@ var storageForAvatar = multer.diskStorage({
     cb(null, true);
   },
   destination: function (req, file, cb) {
-    cb(null, './public/uploads/avatar');
+    cb(null, './public/uploads/avatars');
   },
   filename: function (req, file, cb) {
     //cb(null, file.fieldname + '-' + Date.now() + '.jpg');
     crypto.pseudoRandomBytes(16, function (err, raw) {
       if (err) return cb(err);
-      cb(null, 'avatar.jpg');
+      cb(null, raw.toString('hex') + Date.now() + '.jpg');
       //cb(null, raw.toString('hex') + Date.now());
     });
   }
