@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 export class AbDesignComponent implements OnInit {
   filesToUpload: File[];
   percent = "0";
+  id = '';
   constructor() {
     this.filesToUpload = [];
    }
@@ -14,7 +15,8 @@ export class AbDesignComponent implements OnInit {
   ngOnInit() { }
 
   upload() {
-        this.makeFileRequest("http://localhost:3000/api/v1/avatar", [], this.filesToUpload).then((result) => {
+        this.id = localStorage.getItem('userId');
+        this.makeFileRequest("http://localhost:3000/api/v1/avatars/"+this.id, [], this.filesToUpload).then((result) => {
             console.log(result);
             this.filesToUpload = [];
         }, (error) => {

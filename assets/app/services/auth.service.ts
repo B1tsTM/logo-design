@@ -41,7 +41,7 @@ export class AuthService {
     return localStorage.getItem('token') !== null;
   }
 
-  getProfileInfo(id: string) {
+  getAvatar(id: string) {
     return this.http.get('http://localhost:3000/api/v1/avatars/'+id)
       .map(res => {
         var avatarUrl = res.json().avatarUrl;

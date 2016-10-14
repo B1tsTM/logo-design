@@ -97,7 +97,7 @@ router.get('/avatars/:id', function(req, res, next) {
 });
 
 //router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
-router.post('/avatar', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
+router.post('/avatars/:id', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
 //  res.end(JSON.stringify(req.files) + "/n");
 // console.log(req.files);
 //   var body = JSON.stringify(req.files);
@@ -110,19 +110,19 @@ router.post('/avatar', multer({storage: storageForAvatar}).array("avatar", 12), 
 //     //res.end('File is uploaded');
 //   });
 //res.send(req.files);
-
-User.findById("57eeda3ff9667e112cc51bf2", function(err, doc) {
+var id = req.params.id;
+User.findById(id, function(err, user) {
   if (err) {
       return res.status(404).json({
         title: 'Klaida !',
         error: err
       });
     }
-    console.log(doc);
+    console.log(user);
 
-    doc.avatar.avatarUrl = req.files[0].filename;
+    user.avatar.avatarUrl = req.files[0].filename;
 
-    doc.save(function(err, result) {
+    user.save(function(err, result) {
       if (err) {
       return res.status(404).json({
         title: 'Klaida !',

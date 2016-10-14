@@ -12,7 +12,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() { 
     var id = localStorage.getItem('userId');
-    this.authService.getProfileInfo(id)
+    this.authService.getAvatar(id)
       .subscribe(data => {
         console.log(data);
         this.avatarUrl = data.avatarUrl;
