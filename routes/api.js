@@ -7,6 +7,8 @@ var fs = require('fs');
 var app = express();
 var DIR = './uploads/';
 var upload = multer({dest: DIR});
+var crypto = require('crypto');
+var mime = require('mime');
 
 
 router.get('/konkursai', function(req,res,next) {
@@ -43,7 +45,27 @@ router.get('/dizaineriai', function (req,res,next) {
   });
 });
 
-router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
+var storage = multer.diskStorage({
+  fileFilter: function (req, file, cb) { //not working
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true);
+  },
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    //cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+    });
+  }
+});
+
+//router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
+router.post('/avatar', multer({storage: storage}).array("avatar", 12), function(req,res){
 //  res.end(JSON.stringify(req.files) + "/n");
 // console.log(req.files);
 //   var body = JSON.stringify(req.files);
@@ -55,7 +77,13 @@ router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), func
 //     res.json({file: 'test'});
 //     //res.end('File is uploaded');
 //   });
-res.send(req.files);
+//res.send(req.files);
+var fileNames = [];
+for (let i=0; i<req.files.length; i++) {
+  fileNames.push(req.files[i].filename);
+}
+
+res.json({files: req.files, filenames: fileNames});
 });
 
 module.exports = router;

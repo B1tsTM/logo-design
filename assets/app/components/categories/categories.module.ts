@@ -16,7 +16,8 @@ import { AbBannerComponent, AndroidAppComponent, BlogDesignComponent,
 import { AbDesignComponent, BillboardComponent, BookletComponent,
          CarAdComponent, EmailDesignComponent, FoodMenuComponent,
          LeafletComponent, OtherBusinessOrAdvertisingComponent, PostcardComponent,
-         PowerPointDesignComponent, MicrosoftWordDesignComponent, ResumeDesignComponent } from './business-and-advertising/index';
+         PowerPointDesignComponent, MicrosoftWordDesignComponent, ResumeDesignComponent,
+         FileUploadComponent } from './business-and-advertising/index';
 import { HaberDasheryDesignComponent, CapDesignComponent, MerchandiseDesignComponent,
          MugDesignComponent, OtherClothingOrMerchandiseComponent,
          SweatShirtDesignComponent, TShirtDesignComponent } from './clothing-and-merchandise/index';
@@ -60,7 +61,7 @@ import { categoriesRouting } from './categories.routing';
     CosmeticsProductsLabelOrPackagingDesignComponent, DrinkLabelDesignComponent,
     FoodProductsLabelOrPackagingDesignComponent, OtherProductsLabelOrPackagingDesignComponent,
     BookCoverDesignComponent, EBookCoverDesignComponent, MagazineCoverDesignComponent,
-    OtherDesignsComponent, FileSelectDirective, FileDropDirective
+    OtherDesignsComponent, FileSelectDirective, FileDropDirective, FileUploadComponent
   ]
 })
 

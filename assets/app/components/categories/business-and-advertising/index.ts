@@ -1,5 +1,6 @@
 export * from './ab-design/ab-design.component';
 export * from './billboard/billboard.component';
+export * from './billboard/file-upload.component';
 export * from './booklet/booklet.component';
 export * from './car-ad/car-ad.component';
 export * from './email-design/email-design.component';

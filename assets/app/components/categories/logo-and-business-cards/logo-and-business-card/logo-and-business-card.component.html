@@ -36,10 +36,10 @@
             </div>
 
             Multiple
-            <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple   /><br/>
 
             Single
-            <input type="file" ng2FileSelect [uploader]="uploader" />
+            <input type="file" ng2FileSelect [uploader]="uploader" (change)="submit()"  />
         </div>
 
         <div class="col-md-9" style="margin-bottom: 40px">

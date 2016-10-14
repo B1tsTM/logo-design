@@ -1,5 +1,6 @@
 <h1>Reklamos dizainas</h1>
 
-<input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
-<input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+<!-- <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." /> -->
+<input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
 <button type="button" (click)="upload()">Upload</button>
+{{percent}}
