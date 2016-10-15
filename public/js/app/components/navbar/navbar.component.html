@@ -1,3 +1,43 @@
+<header class="app-header">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-header-inner">
+					<h1 class="site-logo">Design contests</h1><!-- .app-logo -->
+					<nav class="site-navigation">
+						<ul>
+							<li><a routerLink="/kaip-tai-veikia" routerLinkActive="active">How it works</a></li>
+                            <li><a routerLink="/konkursai" routerLinkActive="active">Contests</a></li>
+							<li><a routerLink="/dizaineriai" routerLinkActive="active">Designers</a></li>
+							<li><a routerLink="/nugaletoju-galerija" routerLinkActive="active">Winners' gallery</a></li>
+						</ul>
+					</nav><!-- .site-navigation -->
+
+					<nav class="user-controls">
+						<ul>
+							<li *ngIf="!isLoggedIn()" (click)="loginModal.open()" class="login"><a href="#">Login</a></li>
+							<li *ngIf="!isLoggedIn()" (click)="registerModal.open()" class="register"><a href="#">Register</a></li>
+							<li class="user" *ngIf="isLoggedIn()">
+								Welcome, username
+								<i class="fa fa-caret-down"></i>
+
+								<ul class="dropdown">
+									<li class="settings">
+										<a routerLink="/profilis" routerLinkActive="active">Profilis<i class="fa fa-cog"></i></a>
+									</li>
+									<li class="logout">
+										<a (click)="logout()" href="#">Sign out <i class="fa fa-sign-out"></i></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav><!-- .user-navigation -->
+				</div><!-- .app-header-inner -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+</header><!-- .app-header -->
+
+
+<!--
 <nav class="navbar navbar-inverse">
       <div class="container">
         <div class="navbar-header">
@@ -12,25 +52,27 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a routerLink="/paskelbti-konkursa" routerLinkActive="active">Paskelbti konkursą</a></li> <!-- publish a contest -->
-            <li><a routerLink="/konkursai" routerLinkActive="active">Konkursai</a></li> <!-- contests -->
-            <li><a routerLink="/kategorijos" routerLinkActive="active">Kategorijos</a></li>  <!-- categories -->
-            <li><a routerLink="/dizaineriai" routerLinkActive="active">Dizaineriai</a></li> <!-- designers -->            
-            <li><a routerLink="/nugaletoju-galerija" routerLinkActive="active">Nugalėtojų galerija</a></li> <!-- winner's gallery. Implemented last or not at all -->            
-            <li><a routerLink="/kaip-tai-veikia" routerLinkActive="active">Kaip tai veikia?</a></li>  <!-- How it works -->
+            <li><a routerLink="/paskelbti-konkursa" routerLinkActive="active">Paskelbti konkursą</a></li> 
+            <li><a routerLink="/konkursai" routerLinkActive="active">Konkursai</a></li> 
+            <li><a routerLink="/kategorijos" routerLinkActive="active">Kategorijos</a></li>  
+            <li><a routerLink="/dizaineriai" routerLinkActive="active">Dizaineriai</a></li>            
+            <li><a routerLink="/nugaletoju-galerija" routerLinkActive="active">Nugalėtojų galerija</a></li>
+            <li><a routerLink="/kaip-tai-veikia" routerLinkActive="active">Kaip tai veikia?</a></li>  
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li *ngIf="!isLoggedIn()"><a href="#" (click)="loginModal.open()">Prisijungti</a></li> <!-- login. TODO remove hrefs without affecting UI -->
-            <li *ngIf="!isLoggedIn()"><a href="#" (click)="registerModal.open()">Registracija</a></li> <!-- register -->
-            <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Atsijungti</a></li> <!-- logout -->
+            <li *ngIf="!isLoggedIn()"><a href="#" (click)="loginModal.open()">Prisijungti</a></li> 
+            <li *ngIf="!isLoggedIn()"><a href="#" (click)="registerModal.open()">Registracija</a></li>
+            <li *ngIf="isLoggedIn()"><a href="#" (click)="logout()">Atsijungti</a></li> 
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
+-->
+
 
 <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
-        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> <!--#modalForm="ngForm"> -->
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Prisijungimas</h4>
             </modal-header>
@@ -53,7 +95,7 @@
 
 <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" [cssClass]="cssClass" #registerModal>
-        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> <!--#modalForm="ngForm"> -->
+        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Registracija</h4>
             </modal-header>
@@ -90,3 +132,4 @@
             </modal-footer>
         </form>
 </modal>
+

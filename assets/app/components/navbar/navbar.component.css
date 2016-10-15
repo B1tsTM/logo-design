@@ -1,3 +1,4 @@
+/*
 .navbar {
     position: relative;
     min-height: 50px;
@@ -9,9 +10,6 @@
     border-left: 5px solid #5cb85c; 
 }
 
-/*.ng-invalid:not(.ng-untouched):not(form) {
-    border-left: 5px solid #d9534f; 
-}*/
 
 .ng-invalid.ng-dirty:not(form) {
     border-left: 5px solid #d9534f; 
@@ -25,3 +23,4 @@
     display: inline-block;
     padding-left: 15px;
 }
+*/

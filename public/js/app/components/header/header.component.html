@@ -1,3 +1,4 @@
+<!--
 <div class="header">
   <div class="container">
     <div class="steps-title">
@@ -22,10 +23,10 @@
         <strong>3</strong>
         <div style="font-size: 20px">Išsirinkite geriausią dizainą</div>
       </div>
-    </div> <!-- EOF steps -->
+    </div> 
 
     <ul>
-      <li><a routerLink="/profilis" routerLinkActive="active">Profilis</a></li>  <!-- categories -->
+      <li><a routerLink="/profilis" routerLinkActive="active">Profilis</a></li> 
     </ul>
 
     <div class="gallery">
@@ -42,3 +43,127 @@
 
   </div>
 </div>
+-->
+
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/kategorijos" routerLinkActive="active">All categories</a>
+					<a href="#" class="current">Graphic design</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-innernav">
+		<div class="row">
+			<div class="column small-12">
+				<nav class="inner-navigation">
+					<ul>
+						<li><a href="#">Categories</a></li> <!-- Dropdown -->
+						<li class="current"><a href="#">Open Contests</a></li>
+						<li><a href="#">Finished Contests</a></li>
+					</ul>
+				</nav><!-- .inner-navigation -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-innernav -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Open project requests</h2><!-- .headline -->
+					<span class="subtitle">See the latest design requests here</span>
+					
+					<!-- This one is aligned to the right. -->
+					<a href="#" class="see-faq">See tutorials on publishing</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<!-- The component that switches tables, searches, has new request button -->
+				<div class="action-bar">
+					<div class="table-actions">
+						<div class="tab tab-active current">
+							<i class="fa fa-rotate-left"></i>
+							<span>Active</span>
+							<span class="label">45</span>
+						</div><!-- .tab -->
+						<div class="tab tab-finished">
+							<i class="fa fa-star"></i>
+							<span>Finished</span>
+							<span class="label">273</span>
+						</div><!-- .tab -->
+
+						<div class="table-search">
+							<i class="fa fa-search"></i>
+							<input type="text" class="search" placeholder="Search requests" />
+							<input type="submit" value="Search" />
+						</div><!-- .search -->
+					</div><!-- .table-actions -->
+					<a routerLink="/paskelbti-konkursa" routerLinkActive="active" class="button new-request">New contest</a><!-- .new-request button -->
+				</div><!-- .table-center -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<div class="table-primary">
+					<header class="table-header">
+						<strong class="status">Status</strong>
+						<strong class="category">Category</strong>
+						<strong class="name">Name</strong>
+						<strong class="price">Price</strong>
+						<strong class="submitions">Submitions</strong>
+						<strong class="time-remaining">Time Remaining</strong>
+					</header><!-- .table-header -->
+
+					<div class="table-row premium">
+						<div class="status">
+							<span class="active">Active</span>
+						</div>
+						<div class="category">
+							<span>Website</span>
+						</div>
+						<div class="name">
+							<span>U99 Designer</span>
+						</div>
+						<div class="price">
+							<span>3,442 EUR</span>
+						</div>
+						<div class="submitions">
+							<span>3</span>
+						</div>
+						<div class="time-remaining">
+							<span>14 hours</span>
+						</div>
+					</div><!-- .table-row -->
+
+					<div class="table-row">
+						<div class="status">
+							<span class="active">Active</span>
+						</div>
+						<div class="category">
+							<span>Website</span>
+						</div>
+						<div class="name">
+							<span>U99 Designer</span>
+						</div>
+						<div class="price">
+							<span>3,442 EUR</span>
+						</div>
+						<div class="submitions">
+							<span>3</span>
+						</div>
+						<div class="time-remaining">
+							<span>14 hours</span>
+						</div>
+					</div><!-- .table-row -->
+				</div><!-- .primary-table -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+</section><!-- .app-main -->
