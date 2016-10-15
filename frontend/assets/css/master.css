@@ -3068,8 +3068,6 @@ hr.clear {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
-  .app-header .user-controls {
-    margin-left: auto; }
 
 .site-logo {
   display: inline-block;
@@ -3357,4 +3355,220 @@ hr.clear {
     .app-main .page-headline .see-faq {
       opacity: 0.5;
       margin-left: auto;
-      display: inline-block; }
+      display: inline-block;
+      font-style: italic;
+      color: black;
+      font-size: 14px; }
+
+.action-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  margin-bottom: 20px; }
+  .action-bar .table-actions {
+    background-color: #f8f8f8;
+    box-shadow: inset 0 0 0 1px #ccc;
+    border-radius: 3px;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    margin-right: 20px; }
+  .action-bar .tab {
+    padding: 15px 30px;
+    cursor: pointer; }
+    .action-bar .tab:hover {
+      color: #000; }
+    .action-bar .tab.current {
+      box-shadow: inset 0 -3px 0 0 #4072db; }
+  .action-bar .new-request {
+    padding: 15px 30px;
+    background: #5ea54d;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    -webkit-transition: 0.3s;
+    transition: 0.3s; }
+    .action-bar .new-request:hover {
+      background: #7aba6b; }
+
+.table-primary .table-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  background-color: #ffffff; }
+  .table-primary .table-row:last-of-type {
+    border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
+  .table-primary .table-row:first-of-type {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+  .table-primary .table-row:hover {
+    background-color: #f8f8f8;
+    -webkit-transition: 0.1s;
+    transition: 0.1s; }
+  .table-primary .table-row.premium {
+    background-color: #fafdd8; }
+  .table-primary .table-row .name {
+    color: #4072db;
+    font-weight: bold; }
+
+.table-primary .table-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.table-primary .status, .table-primary .category, .table-primary .name, .table-primary .price, .table-primary .submitions, .table-primary .time-remaining {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  padding: 8px 14px; }
+
+.table-primary .status {
+  -ms-flex-preferred-size: 50px;
+      flex-basis: 50px; }
+  .table-primary .status span {
+    background: #ddd;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold; }
+  .table-primary .status .active {
+    background: #5ea54d;
+    color: white; }
+
+.table-primary .category {
+  -ms-flex-preferred-size: 100px;
+      flex-basis: 100px; }
+
+.table-primary .name {
+  -ms-flex-preferred-size: 100px;
+      flex-basis: 100px; }
+
+.table-primary .price {
+  -ms-flex-preferred-size: 50px;
+      flex-basis: 50px; }
+  .table-primary .price span {
+    background: #1a1a1a;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold; }
+
+.table-primary .submitions {
+  -ms-flex-preferred-size: 50px;
+      flex-basis: 50px; }
+
+.table-primary .time-remaining {
+  -ms-flex-preferred-size: 100px;
+      flex-basis: 100px; }
+
+.table-search {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+  .table-search input[type="submit"] {
+    display: none; }
+  .table-search .search {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px; }
+    .table-search .search:focus {
+      outline: none;
+      border: 1px solid #999; }
+  .table-search .fa-search {
+    margin-right: 10px;
+    color: #999; }
+
+.user-controls {
+  margin-left: auto; }
+  .user-controls .register a {
+    color: #4072db; }
+  .user-controls .user {
+    padding: 7px 10px;
+    border: 1px solid #4072db;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    position: relative; }
+    .user-controls .user:hover {
+      background-color: #4072db;
+      -webkit-transition: 0.1s;
+      transition: 0.1s;
+      color: white; }
+      .user-controls .user:hover .dropdown {
+        opacity: 1;
+        pointer-events: auto; }
+    .user-controls .user .dropdown {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 20px);
+      background: white;
+      text-align: right;
+      color: black;
+      width: 200px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 1px 20px -10px rgba(0, 0, 0, 0.3);
+      z-index: 90; }
+      .user-controls .user .dropdown:before {
+        content: '';
+        position: absolute;
+        top: -20px;
+        height: 20px;
+        width: 100%;
+        left: 0; }
+      .user-controls .user .dropdown li {
+        display: block; }
+      .user-controls .user .dropdown a {
+        color: black;
+        display: block;
+        font-weight: normal;
+        padding: 8px 10px;
+        border-bottom: 1px solid #ddd; }
+      .user-controls .user .dropdown a:hover {
+        background-color: #f9f9f9; }
+      .user-controls .user .dropdown li:last-of-type a {
+        border-bottom: none; }
+      .user-controls .user .dropdown .fa {
+        margin-left: 5px;
+        display: inline-block; }
+      .user-controls .user .dropdown .logout .fa {
+        color: #FB3537; }
+      .user-controls .user .dropdown .settings .fa {
+        color: #4072db; }

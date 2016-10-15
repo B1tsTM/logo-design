@@ -1,0 +1,86 @@
+// Seen in the header
+
+.user-controls {
+	margin-left: auto;
+
+	.register a {
+		color: $color-primary;
+	}
+
+	.user {
+		padding: 7px 10px;
+		border: 1px solid $color-primary;
+		border-radius: 3px;
+		cursor: pointer;
+		transition: 0.3s;
+		position: relative;
+
+		&:hover {
+			background-color: $color-primary;
+			transition: 0.1s;
+			color: white;
+
+			.dropdown {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
+		.dropdown {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			right: 0;
+			top: calc(100% + 20px);
+			background: white;
+			text-align: right;
+			color: black;
+			width: 200px;
+			box-shadow: 0 1px 1px rgba(black, 0.3),
+						0 1px 20px -10px rgba(black, 0.3);
+			z-index: 90;
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: -20px;
+				height: 20px;
+				width: 100%;
+				left: 0;
+			}
+
+			li {
+				display: block;
+			}
+
+			a {
+				color: black;
+				display: block;
+				font-weight: normal;
+				padding: 8px 10px;
+				border-bottom: 1px solid #ddd;
+			}
+
+			a:hover {
+				background-color: #f9f9f9;
+			}
+
+			li:last-of-type a {
+				border-bottom: none;
+			}
+
+			.fa {
+				margin-left: 5px;
+				display: inline-block;
+			}
+
+			// The different menus
+			.logout {
+				.fa { color: $color-red; }
+			}
+			.settings {
+				.fa { color: $color-blue; }
+			}
+		}
+	}
+}

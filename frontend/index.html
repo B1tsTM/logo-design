@@ -21,8 +21,21 @@
 
 					<nav class="user-controls">
 						<ul>
-							<li class="register"><a href="#">Login</a></li>
-							<li class="login"><a href="#">Register</a></li>
+							<li class="login"><a href="#">Login</a></li>
+							<li class="register"><a href="#">Register</a></li>
+							<li class="user">
+								Welcome, username
+								<i class="fa fa-caret-down"></i>
+
+								<ul class="dropdown">
+									<li class="settings">
+										<a href="#">Settings <i class="fa fa-cog"></i></a>
+									</li>
+									<li class="logout">
+										<a href="#">Sign out <i class="fa fa-sign-out"></i></a>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</nav><!-- .user-navigation -->
 				</div><!-- .app-header-inner -->
@@ -57,28 +70,47 @@
 
 	<section class="app-main">
 		<div class="row">
-			<div class="page-headline">
-				<h2 class="title">Open project requests</h2><!-- .headline -->
-				<span class="subtitle">See the latest design requests here</span>
-				
-				<!-- This one is aligned to the right. -->
-				<a href="#" class="see-faq">See tutorials on publishing</a>
-			</div><!-- .page-headline -->
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Open project requests</h2><!-- .headline -->
+					<span class="subtitle">See the latest design requests here</span>
+					
+					<!-- This one is aligned to the right. -->
+					<a href="#" class="see-faq">See tutorials on publishing</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 
 		<div class="row">
 			<div class="columns small-12">
 				<!-- The component that switches tables, searches, has new request button -->
 				<div class="action-bar">
-					<div class="table-actions"></div><!-- .table-actions -->
-					<a href="#" class="button new-request"></a><!-- .new-request button -->
+					<div class="table-actions">
+						<div class="tab tab-active current">
+							<i class="fa fa-rotate-left"></i>
+							<span>Active</span>
+							<span class="label">45</span>
+						</div><!-- .tab -->
+						<div class="tab tab-finished">
+							<i class="fa fa-star"></i>
+							<span>Finished</span>
+							<span class="label">273</span>
+						</div><!-- .tab -->
+
+						<div class="table-search">
+							<i class="fa fa-search"></i>
+							<input type="text" class="search" placeholder="Search requests" />
+							<input type="submit" value="Search" />
+						</div><!-- .search -->
+					</div><!-- .table-actions -->
+					<a href="#" class="button new-request">New request</a><!-- .new-request button -->
 				</div><!-- .table-center -->
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 
 		<div class="row">
 			<div class="columns small-12">
-				<div class="requests-table">
+				<div class="table-primary">
 					<header class="table-header">
 						<strong class="status">Status</strong>
 						<strong class="category">Category</strong>
@@ -108,7 +140,28 @@
 							<span>14 hours</span>
 						</div>
 					</div><!-- .table-row -->
-				</div><!-- .requests-table -->
+
+					<div class="table-row">
+						<div class="status">
+							<span class="active">Active</span>
+						</div>
+						<div class="category">
+							<span>Website</span>
+						</div>
+						<div class="name">
+							<span>U99 Designer</span>
+						</div>
+						<div class="price">
+							<span>3,442 EUR</span>
+						</div>
+						<div class="submitions">
+							<span>3</span>
+						</div>
+						<div class="time-remaining">
+							<span>14 hours</span>
+						</div>
+					</div><!-- .table-row -->
+				</div><!-- .primary-table -->
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 	</section><!-- .app-main -->
