@@ -16,6 +16,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
   PublishContestComponent, ProfilePageComponent } from './components/index';
+import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
@@ -34,7 +35,7 @@ import { ErrorComponent, ErrorService } from './errors/index';
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
              TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule ],
-  declarations: [ AppComponent, NavbarComponent, HeaderComponent, 
+  declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,

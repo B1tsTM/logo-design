@@ -1,5 +1,6 @@
 export * from './notfound/notfound.component';
 export * from './navbar/navbar.component';
+export * from './navbar/user-navigation.component';
 export * from './howitworks/howitworks.component';
 export * from './header/header.component';
 export * from './footer/footer.component';

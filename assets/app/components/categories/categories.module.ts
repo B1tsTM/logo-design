@@ -31,6 +31,7 @@ import { CosmeticsProductsLabelOrPackagingDesignComponent, DrinkLabelDesignCompo
          FoodProductsLabelOrPackagingDesignComponent, OtherProductsLabelOrPackagingDesignComponent } from './packaging-and-label/index';
 import { BookCoverDesignComponent, EBookCoverDesignComponent, MagazineCoverDesignComponent } from './books-and-magazines/index';
 import { OtherDesignsComponent } from './other-designs/other-designs.component';
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
 import { categoriesRouting } from './categories.routing';
@@ -38,7 +39,7 @@ import { categoriesRouting } from './categories.routing';
 @NgModule({
   imports: [
     CommonModule, InputTextModule, ReactiveFormsModule,
-    categoriesRouting, MaterialModule.forRoot()
+    categoriesRouting, MaterialModule.forRoot(), Ng2Bs3ModalModule
   ],
   declarations: [
     CategoriesDashboardComponent, BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent,

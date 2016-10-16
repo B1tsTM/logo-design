@@ -1,0 +1,81 @@
+						<ul>
+							<li *ngIf="!isLoggedIn()" class="login"><a href="#" (click)="loginModal.open()">Login</a></li>
+							<li *ngIf="!isLoggedIn()" class="register"><a href="#" (click)="registerModal.open()">Register</a></li>
+                         
+							<li class="user" *ngIf="isLoggedIn()">
+								Welcome, username
+								<i class="fa fa-caret-down"></i>
+
+								<ul class="dropdown">
+									<li class="settings">
+										<a routerLink="/profilis" routerLinkActive="active">Profilis<i class="fa fa-cog"></i></a>
+									</li>
+									<li class="logout">
+										<a (click)="logout()" href="#">Sign out <i class="fa fa-sign-out"></i></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> 
+            <modal-header [show-close]="true">
+                <h4 class="modal-title text-center">Prisijungimas</h4>
+            </modal-header>
+            <modal-body>
+                <div class="form-group">
+                    <label for="firstName">El. Paštas</label>
+                    <input autofocus type="text" class="form-control" formControlName="email" name="email" id="email" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Slaptažodis</label>
+                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
+                </div>
+            </modal-body>
+            <modal-footer>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="loginModal.dismiss()">Atšaukti</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="loginModal.close()">Prisijungti</button>
+            </modal-footer>
+        </form>
+</modal>
+
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" [cssClass]="cssClass" #registerModal>
+        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> 
+            <modal-header [show-close]="true">
+                <h4 class="modal-title text-center">Registracija</h4>
+            </modal-header>
+            <modal-body>
+              <div class="form-group">
+                    <label for="firstName">Vardas</label>
+                    <input autofocus type="text" class="form-control" formControlName="firstName" name="firstName" id="firstName" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Pavardė</label>
+                    <input type="text" class="form-control" formControlName="lastName" name="lastName" id="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">El. Paštas</label>
+                    <input type="text" class="form-control" formControlName="email" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Slaptažodis</label>
+                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
+                </div>
+                <div class="form-group">
+                    <label style="display: block">Dizaineris ar užsakovas?</label>
+                    <div *ngFor="let type of userTypes" class="radios">
+                    <label>
+                    <input type="radio" class="form-control" formControlName="userType" name="userType" id="userType" [value]="type.value">
+                    {{ type.display }}
+                    </label>
+                    </div>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="registerModal.dismiss()">Atšaukti</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="registerModal.close()">Registruotis</button>
+            </modal-footer>
+        </form>
+</modal>

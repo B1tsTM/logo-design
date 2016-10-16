@@ -2,7 +2,7 @@
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-header-inner">
-					<h1 class="site-logo">Design contests</h1><!-- .app-logo -->
+					<h1 class="site-logo"><a routerLink="/">Design contests</a></h1><!-- .app-logo -->
 					<nav class="site-navigation">
 						<ul>
 							<li><a routerLink="/kaip-tai-veikia" routerLinkActive="active">How it works</a></li>
@@ -11,26 +11,9 @@
 							<li><a routerLink="/nugaletoju-galerija" routerLinkActive="active">Winners' gallery</a></li>
 						</ul>
 					</nav><!-- .site-navigation -->
-
-					<nav class="user-controls">
-						<ul>
-							<li *ngIf="!isLoggedIn()" (click)="loginModal.open()" class="login"><a href="#">Login</a></li>
-							<li *ngIf="!isLoggedIn()" (click)="registerModal.open()" class="register"><a href="#">Register</a></li>
-							<li class="user" *ngIf="isLoggedIn()">
-								Welcome, username
-								<i class="fa fa-caret-down"></i>
-
-								<ul class="dropdown">
-									<li class="settings">
-										<a routerLink="/profilis" routerLinkActive="active">Profilis<i class="fa fa-cog"></i></a>
-									</li>
-									<li class="logout">
-										<a (click)="logout()" href="#">Sign out <i class="fa fa-sign-out"></i></a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</nav><!-- .user-navigation -->
+                    <nav class="user-controls">
+					<user-nav></user-nav>
+                    </nav> <!-- .user-navigation -->
 				</div><!-- .app-header-inner -->
 			</div><!-- .column small-12 -->
 		</div><!-- .row -->
@@ -68,68 +51,3 @@
       </div>
     </nav>
 -->
-
-
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
-        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> 
-            <modal-header [show-close]="true">
-                <h4 class="modal-title text-center">Prisijungimas</h4>
-            </modal-header>
-            <modal-body>
-                <div class="form-group">
-                    <label for="firstName">El. Paštas</label>
-                    <input type="text" class="form-control" formControlName="email" name="email" id="email" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Slaptažodis</label>
-                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
-                </div>
-            </modal-body>
-            <modal-footer>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="loginModal.dismiss()">Atšaukti</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="loginModal.close()">Prisijungti</button>
-            </modal-footer>
-        </form>
-</modal>
-
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" [cssClass]="cssClass" #registerModal>
-        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> 
-            <modal-header [show-close]="true">
-                <h4 class="modal-title text-center">Registracija</h4>
-            </modal-header>
-            <modal-body>
-              <div class="form-group">
-                    <label for="firstName">Vardas</label>
-                    <input type="text" class="form-control" formControlName="firstName" name="firstName" id="firstName" autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Pavardė</label>
-                    <input type="text" class="form-control" formControlName="lastName" name="lastName" id="lastName">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">El. Paštas</label>
-                    <input type="text" class="form-control" formControlName="email" name="email" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Slaptažodis</label>
-                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
-                </div>
-                <div class="form-group">
-                    <label style="display: block">Dizaineris ar užsakovas?</label>
-                    <div *ngFor="let type of userTypes" class="radios">
-                    <label>
-                    <input type="radio" class="form-control" formControlName="userType" name="userType" id="userType" [value]="type.value">
-                    {{ type.display }}
-                    </label>
-                    </div>
-                </div>
-            </modal-body>
-            <modal-footer>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="registerModal.dismiss()">Atšaukti</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="registerModal.close()">Registruotis</button>
-            </modal-footer>
-        </form>
-</modal>
-
