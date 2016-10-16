@@ -29,6 +29,8 @@
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "font-awesome": "^4.6.3",
+    "fs": "0.0.1-security",
+    "git-rev": "^0.2.1",
     "hbs": "~4.0.0",
     "jquery": "^3.1.1",
     "jsonwebtoken": "^7.1.9",
