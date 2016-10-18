@@ -19,7 +19,7 @@ var upload = multer({dest: DIR});
 
 var app = express();
 
-mongoose.connect('localhost:27017/logos');
+mongoose.connect('admin:admin@ds035036.mlab.com:35036/logo-konkursai');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,8 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next) {
-//res.setHeader('Access-Control-Allow-Origin', '*');
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+res.setHeader('Access-Control-Allow-Origin', '*');
+//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 next();
@@ -58,7 +58,7 @@ next();
 //   }
 // }).any());
 
-app.use('/prisijungti', loginRoutes); // TODO find a way to render html with JSON attached
+app.use('/prisijungti', loginRoutes); 
 app.use('/registracija', regRoutes);
 app.use('/konkursai', contestsRoutes);
 app.use('/api/v1', apiRoutes);
