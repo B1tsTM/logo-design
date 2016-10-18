@@ -7,7 +7,7 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent } from './components/index';
       
-import { CanActivateProfilePageService } from './guards/can-activate-profile-page.service';
+import { CanActivateOnLoginService } from './guards/can-activate-profile-page.service';
 
 
 const appRoutes: Routes = [
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
   { path: 'prisijungti', component: LoginComponent },
   { path: 'registracija', component: RegisterComponent },
-  { path: 'profilis', component: ProfilePageComponent, canActivate: [CanActivateProfilePageService] },
+  { path: 'profilis', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
   { path: 'nerasta', component: PageNotFoundComponent },
   { path: '', component: HeaderComponent },
   { path: '**', redirectTo: 'nerasta' }

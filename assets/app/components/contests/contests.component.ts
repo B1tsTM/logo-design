@@ -26,7 +26,7 @@ export class ContestsComponent implements OnInit {
       console.log(this.contests);
     });
 
-    this.contestsService.messageEdited
+    this.contestsService.contestEdited
       .subscribe(contest => {
         this.contest = contest;
       });

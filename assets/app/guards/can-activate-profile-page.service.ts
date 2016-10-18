@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { CanActivate } from '@angular/router';
 
 @Injectable()
-export class CanActivateProfilePageService {
+export class CanActivateOnLoginService {
 
   constructor(private authService: AuthService) { }
 

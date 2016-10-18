@@ -9,7 +9,7 @@ import 'rxjs/Rx';
 export class ContestsService {
   contests = [];
   designers = [];
-  messageEdited = new EventEmitter<Contest>();
+  contestEdited = new EventEmitter<Contest>();
   constructor(private http: Http) { }
 
   getContests() {
@@ -54,7 +54,7 @@ export class ContestsService {
   
 
   editContest(contest: any) {
-    this.messageEdited.emit(contest);
+    this.contestEdited.emit(contest);
   }
 
   deleteContest(contest: any) {

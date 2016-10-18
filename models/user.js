@@ -16,6 +16,7 @@ var schema = new Schema({
     designUrl: {type: String},
     designIsPublic: {type: Boolean}
   }],
+  galleryUrls: [{type: String}],
   avatar: {
     avatarUrl: {type: String}
   },

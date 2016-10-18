@@ -21,7 +21,7 @@ import { UserNavigationComponent } from './components/navbar/user-navigation.com
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
 import { DesignersService } from './services/designers.service';
-import { CanActivateProfilePageService } from './guards/can-activate-profile-page.service';
+import { CanActivateOnLoginService } from './guards/can-activate-profile-page.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
@@ -43,6 +43,6 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   ProfilePageComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, 
-               DesignersService, CanActivateProfilePageService ]
+               DesignersService, CanActivateOnLoginService ]
 })
 export class AppModule { }

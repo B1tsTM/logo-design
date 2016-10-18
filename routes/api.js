@@ -85,6 +85,26 @@ var storageForAvatar = multer.diskStorage({
   }
 });
 
+var storageForGallery = multer.diskStorage({
+  fileFilter: function (req, file, cb) { //not working
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true);
+  },
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads/gallery');
+  },
+  filename: function (req, file, cb) {
+    //cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, raw.toString('hex') + Date.now() + '.jpg');
+      //cb(null, raw.toString('hex') + Date.now());
+    });
+  }
+});
+
 router.get('/avatars/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
@@ -134,6 +154,59 @@ User.findById(id, function(err, user) {
     for (let i=0; i<req.files.length; i++) {
       fileNames.push(req.files[i].filename);
     }
+      res.status(200).json({
+        message: 'Avataras išsaugotas',
+        obj: result,
+        files: req.files,
+        filenames: fileNames
+      });
+    });
+  });
+
+});
+
+
+router.post('/gallery/:id', multer({storage: storageForGallery}).array("gallery", 12), function(req,res){
+
+var id = req.params.id;
+//User.findById(id, function(err, user) {
+User.findByIdAndUpdate(id, {new: true},  function(err, user) {
+  if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log(user);
+
+    var fileNames = [];
+    for (let i=0; i<req.files.length; i++) {
+      fileNames.push(req.files[i].filename);
+    }
+
+    console.log(fileNames);
+
+    User.update({_id: id}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
+      if(err){
+          console.log(err);
+        }else{
+          console.log("Images uploaded !");
+        }
+    });
+
+  //  for(let i = 0; i< req.files.length; i++) {
+       //user.gallery.designUrl.push(req.files[i].filename);
+       //user.update({id: id}, {$push: {gallery: req.files[i].filename}});
+  //  }
+   // user.gallery.designUrl = req.files[0].filename;
+
+    user.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
       res.status(200).json({
         message: 'Avataras išsaugotas',
         obj: result,
