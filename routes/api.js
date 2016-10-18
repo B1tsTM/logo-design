@@ -108,6 +108,12 @@ var storageForGallery = multer.diskStorage({
 router.get('/avatars/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
     console.log(user);
     var avatarUrl = user.avatar.avatarUrl;
     res.status(200).json({
@@ -120,29 +126,22 @@ router.get('/avatars/:id', function(req, res, next) {
 router.get('/gallery/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
     var galleryUrls = user.galleryUrls;
       console.log(galleryUrls);
     res.status(200).json({
-      message: 'avataras gautas',
+      message: 'galerija gauta',
       galleryUrls: galleryUrls
     });
   });
 });
 
-//router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
 router.post('/avatars/:id', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
-//  res.end(JSON.stringify(req.files) + "/n");
-// console.log(req.files);
-//   var body = JSON.stringify(req.files);
-//   return res.json({file: 'test', file2: body});
-//   upload(req, res, function (err) {
-//     if (err) {
-//       return res.end(err.toString());
-//     }
-//     res.json({file: 'test'});
-//     //res.end('File is uploaded');
-//   });
-//res.send(req.files);
 var id = req.params.id;
 User.findById(id, function(err, user) {
   if (err) {
@@ -192,8 +191,10 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
     console.log(user);
 
     var fileNames = [];
+    console.log(req.files);
     for (let i=0; i<req.files.length; i++) {
       fileNames.push(req.files[i].filename);
+      //fileNames.push(req.files[i]);
     }
 
     console.log(fileNames);
