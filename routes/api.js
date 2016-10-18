@@ -117,6 +117,18 @@ router.get('/avatars/:id', function(req, res, next) {
   });
 });
 
+router.get('/gallery/:id', function(req, res, next) {
+  var id = req.params.id;
+  User.findById(id, function(err, user) {
+    var galleryUrls = user.galleryUrls;
+      console.log(galleryUrls);
+    res.status(200).json({
+      message: 'avataras gautas',
+      galleryUrls: galleryUrls
+    });
+  });
+});
+
 //router.post('/avatar', multer({dest: "./uploads/"}).array("uploads[]", 12), function(req,res,next){
 router.post('/avatars/:id', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
 //  res.end(JSON.stringify(req.files) + "/n");

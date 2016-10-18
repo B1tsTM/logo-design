@@ -50,4 +50,13 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  getGallery(id: string) {
+    return this.http.get('http://localhost:3000/api/v1/gallery/'+id)
+      .map(res => {
+        var galleryUrls = res.json().galleryUrls;
+        return {galleryUrls: galleryUrls}
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
 }
