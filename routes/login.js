@@ -30,7 +30,8 @@ router.post('/', function(req, res, next) {
     res.status(200).json({
       message: 'Prisijungta sekmingai',
       token: token,
-      userId: doc._id
+      userId: doc._id,
+      userType: doc.userType
     });
   });
 });

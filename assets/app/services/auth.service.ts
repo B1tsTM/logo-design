@@ -31,7 +31,8 @@ export class AuthService {
       .map(res => {
         var token = res.json().token;
         var userId = res.json().userId;
-        return {token: token, userId: userId};
+        var userType = res.json().userType;
+        return {token: token, userId: userId, userType: userType};
         
       })
       .catch(error => Observable.throw(error.json()));
@@ -39,6 +40,14 @@ export class AuthService {
 
   isLoggedIn() {
     return localStorage.getItem('token') !== null;
+  }
+
+  isClient() {
+    return localStorage.getItem('userType') == 'uzsakovas';
+  }
+
+  isDesigner() {
+    return localStorage.getItem('userType') == 'dizaineris';
   }
 
   getAvatar(id: string) {

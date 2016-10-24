@@ -33,8 +33,8 @@ export class UserNavigationComponent implements OnInit {
   public registerForm: FormGroup;
   public submitted: boolean = false;
   public userTypes = [
-    { value: 'client', display: 'Client' },
-    { value: 'designer', display: 'Designer' }
+    { value: 'uzsakovas', display: 'Užsakovas' },
+    { value: 'dizaineris', display: 'Dizaineris' }
 ];
 
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private errorService: ErrorService) { }
@@ -84,6 +84,7 @@ export class UserNavigationComponent implements OnInit {
          console.log('Sekmingai prisijungta');
          localStorage.setItem('token', data.token);
          localStorage.setItem('userId', data.userId);
+         localStorage.setItem('userType', data.userType);
          this.router.navigateByUrl('/');
        },
        error => this.errorService.handleError(error))
@@ -96,6 +97,14 @@ export class UserNavigationComponent implements OnInit {
             console.log(data);
           },
           error => this.errorService.handleError(error))
+    }
+
+    isClient() {
+      return this.authService.isClient();
+    }
+
+    isDesigner() {
+      return this.authService.isDesigner();
     }
 
     private isValidEmail(control: FormControl): {[s: string]: boolean} {
