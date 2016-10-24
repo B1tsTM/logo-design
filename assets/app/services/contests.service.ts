@@ -20,7 +20,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitions, data[i].daysRemaining, data[i].user.firstName, data[i].user._id);
+          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitions, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].user.firstName, data[i].user._id);
           objs.push(contest);
         };
         return objs;
@@ -36,7 +36,7 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.status, data.submitions, data.daysRemaining, data.user.firstName, data.user._id);
+      let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.status, data.submitions, data.daysRemaining, data.startDate, data.endDate,data.user.firstName, data.user._id);
       return contest;
     })
     .catch(error => Observable.throw(error.json()));

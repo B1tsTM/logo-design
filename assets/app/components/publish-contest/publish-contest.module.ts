@@ -35,7 +35,7 @@ import { publishContestRouting } from './publish-contest.routing';
 
 @NgModule({
   imports: [
-    CommonModule, InputTextModule, ReactiveFormsModule,
+    CommonModule, InputTextModule, ReactiveFormsModule, FormsModule,
     publishContestRouting, MaterialModule.forRoot()
   ],
   declarations: [

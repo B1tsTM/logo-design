@@ -41,6 +41,8 @@ router.post('/', function(req, res, next) {
     status: req.body.status,
     submitions: req.body.submitions,
     daysRemaining: req.body.daysRemaining,
+    startDate: Date.now(),
+    endDate: Date.now(),
     designer: req.body.designer,
     user: doc
   });
