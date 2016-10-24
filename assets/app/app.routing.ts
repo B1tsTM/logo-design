@@ -5,13 +5,17 @@ import { ModuleWithProviders } from '@angular/core';
 import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
-         ProfilePageComponent } from './components/index';
+         ProfilePageComponent, MyContestsComponent, ContestDetailsComponent } from './components/index';
       
-import { CanActivateOnLoginService } from './guards/can-activate-profile-page.service';
+import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
 
 const appRoutes: Routes = [
   { path: 'konkursai', component: ContestsComponent },
+  { path: 'mano-konkursai', children: [
+    {path: '', component: MyContestsComponent},
+    {path: ':id', component: ContestDetailsComponent}
+  ] },
   { path: 'paskelbti-konkursa', component: PublishContestComponent },
   { path: 'kategorijos', component: CategoriesComponent },
   { path: 'nugaletoju-galerija', component: WinnersGalleryComponent },

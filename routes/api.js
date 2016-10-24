@@ -29,6 +29,24 @@ router.get('/konkursai', function(req,res,next) {
     });
 });
 
+router.get('/konkursai/:id', function(req,res,next) {
+  var id = req.params.id;
+  Contest.findById(id)
+    .populate('user', 'firstName')
+    .exec(function(err, docs) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
 router.get('/dizaineriai', function (req,res,next) {
   User.find({'userType': 'designer'})
  // .populate('contests')

@@ -15,13 +15,14 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
-  PublishContestComponent, ProfilePageComponent } from './components/index';
+  PublishContestComponent, ProfilePageComponent, MyContestsComponent,
+  ContestDetailsComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
 import { DesignersService } from './services/designers.service';
-import { CanActivateOnLoginService } from './guards/can-activate-profile-page.service';
+import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
@@ -40,7 +41,7 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent,
-                  ProfilePageComponent ],
+                  ProfilePageComponent, MyContestsComponent, ContestDetailsComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, CanActivateOnLoginService ]

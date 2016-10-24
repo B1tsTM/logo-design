@@ -9,6 +9,8 @@ export * from './categories/categories.component';
 export * from './bs-components/bs-alert/alert.component';
 export * from './bs-components/bs-datetime/datetime.component';
 export * from './contests/contests.component';
+export * from './contests/my-contests.component';
+export * from './contests/contest-details.component';
 export * from './login/login.component';
 export * from './register/register.component';
 export * from './winners-gallery/winners-gallery.component';

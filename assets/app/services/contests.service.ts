@@ -28,6 +28,35 @@ export class ContestsService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  getIndividualContests(id: any) {
+    return this.http.get('http://localhost:3000/api/v1/konkursai')
+      .map(res => {
+        console.log(res.json());
+//        const data = res.json().obj;
+        const data = res.json().obj;
+        let objs: any[] = [];
+        for(let i=0; i< data.length; i++) {
+          if (data[i].user._id == id) {
+          let contest = new Contest(data[i].name, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitions, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].user.firstName, data[i].user._id);
+          objs.push(contest);
+          }
+        };
+        return objs;
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  getIndividualContest(id: any) {
+    return this.http.get('http://localhost:3000/api/v1/konkursai/' + id)
+      .map(res => {
+        console.log(res.json());
+        const data = res.json().obj;
+        let contest = new Contest(data.name, data._id, data.category, data.description, data.award, data.status, data.submitions, data.daysRemaining, data.startDate, data.endDate,data.user.firstName, data.user._id);
+        return contest;
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
   addContest(contest: Contest) {
     const body = JSON.stringify(contest);
     const headers = new Headers({'Content-Type': 'application/json'});
