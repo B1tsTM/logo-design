@@ -34,7 +34,10 @@ export class LogoAndBusinessCardComponent implements OnInit {
       this.contests = contests;
       this.contestsService.contests = contests;
       console.log(this.contests);
-    });
+    },
+    error => {
+          this.errorService.handleError(error);
+        });
 
     this.contestsService.contestEdited
       .subscribe(contest => {

@@ -15,7 +15,8 @@ export class ContestDetailsComponent implements OnInit {
   contest: Contest = null;
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private contestsService: ContestsService) { }
+              private contestsService: ContestsService,
+              private errorService: ErrorService) { }
 
   ngOnInit() { 
     this.route.params.subscribe((params: Params) => {
@@ -24,6 +25,9 @@ export class ContestDetailsComponent implements OnInit {
     this.contestsService.getIndividualContest(this.contestId)
       .subscribe(contest => {
         this.contest = contest;
+      }, 
+      error => {
+          this.errorService.handleError(error);
       });
 
   }

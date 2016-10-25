@@ -37,6 +37,20 @@ router.post('/', function(req, res, next) {
       });
     }
     var idName = kebab(req.body.name);
+    Contest.findOne({'idName': idName}, function(err, result){
+      if(err) { //should never execute this
+        return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      if (result != null) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {title: "Klaida !", message: "Toks konkurso pavadinimas jau yra ! Pasirinkite unikalų pavadinimą"}
+      });
+    }
+    }); 
     console.log(req.body);
     console.log(idName);
     var contest = new Contest({
