@@ -3,18 +3,20 @@ import { Contest } from '../../../../models/contest';
 import { ContestsService } from '../../../../services/contests.service';
 import { ErrorService } from '../../../../errors/index';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'logo-and-business-card.component.html'
+  templateUrl: 'logo-and-business-card.component.html',
+  styleUrls: ['logo-and-business-card.component.css']
 })
 export class LogoAndBusinessCardComponent implements OnInit {
   contest: Contest = null;
   contests: any = [];
   public contestForm: FormGroup;
 
-  constructor(private contestsService: ContestsService, private errorService: ErrorService, private fb: FormBuilder) {
+  constructor(private contestsService: ContestsService, private errorService: ErrorService, private fb: FormBuilder, private router: Router) {
     
   }
 
@@ -22,7 +24,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
 
     this.contestForm = this.fb.group({
       contestName: ['', Validators.required],
-      contestCategory: ['', Validators.required],
+      contestCategory: ['Logotipas ir vizitinė kortelė', Validators.required],
       contestDescription: ['', Validators.required],
       contestAward: ['', Validators.required]
     });
@@ -68,7 +70,6 @@ export class LogoAndBusinessCardComponent implements OnInit {
           console.log(data);
           this.contestsService.contests.push(data);
           form.contestName.value = '';
-          form.contestCategory.value = '';
           form.contestDescription.value = '';
           form.contestAward.value = '';
         },
@@ -99,4 +100,9 @@ export class LogoAndBusinessCardComponent implements OnInit {
   belongsToUser(userId: string) {
     return localStorage.getItem('userId') == userId;
   }
+
+  goBack() {
+    this.router.navigateByUrl('/paskelbti-konkursa');
+  }
+
 }

@@ -24,19 +24,20 @@
     </form>-->
     <form [formGroup]="contestForm" novalidate (ngSubmit)="addContest(f)" #f> 
         <div class="form-group">
-            <label for="firstName">Konkurso pavadinimas</label>
+            <label for="contestName">Konkurso pavadinimas</label>
             <input autofocus type="text" class="form-control" formControlName="contestName" name="contestName" id="contestName" autofocus>
         </div>
         <div class="form-group">
-            <label for="firstName">Kategorija(select)</label>
-            <input type="text" class="form-control" formControlName="contestCategory" name="contestCategory" id="contestCategory">
+            <label for="contestCategory">Kategorija(select)</label>
+            <input [readonly]="true" type="text" class="form-control" formControlName="contestCategory" name="contestCategory" id="contestCategory">
+            <span (click)="goBack()">Pakeisti</span>
         </div>
         <div class="form-group">
-            <label for="firstName">Aprašymas</label>
+            <label for="contestDescription">Aprašymas</label>
             <input type="text" class="form-control" formControlName="contestDescription" name="contestDescription" id="contestDescription">
         </div>
         <div class="form-group">
-            <label for="lastName">Prizas</label>
+            <label for="contestAward">Prizas</label>
             <input type="text" class="form-control" formControlName="contestAward" name="contestAward" id="contestAward">
         </div>
         <button type="submit" class="btn btn-primary">{{ !contest ? 'Pridėti konkursą' : 'Saugoti pakeitimus' }}</button>
@@ -51,24 +52,4 @@
             </div>-->
     </form>
 </section>
-
-  <div class="col-md-8 col-md-offset-2 pad-10">
-          <div *ngFor="let contest of contests">
-    <div class="panel panel-default">
-
-        <div class="panel-body">
-            {{ contest.name }}
-        </div>
-        <div class="panel-footer">   
-          <div class="author">         
-            {{ contest.category }} - {{ contest.userName }}
-          </div>
-          <div class="config" *ngIf="belongsToUser(contest.user)">
-          <a (click)="editContest(contest)">Edit</a>
-          <a (click)="deleteContest(contest)">Delete</a>
-        </div>
-        </div>    
-      </div>
-    </div>
-  </div>
 </div>
