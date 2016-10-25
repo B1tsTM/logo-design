@@ -6,9 +6,7 @@ var Contest = require('../models/contests');
 var User = require('../models/user');
 
 function kebab(str) {
-  var kebab =  str.replace(/(?!^)([A-Z])/g, ' $1')
-            .replace(/[_\s]+(?=[a-zA-Z])/g, '-').toLowerCase();
-  
+  var kebab =  str.replace(/\s+/g, '-').toLowerCase();
   return kebab;
 }
 
