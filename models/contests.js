@@ -7,6 +7,9 @@ var schema = new Schema({
     type: String,
     required: true
   },
+  idName: {
+    type: String
+  },
   category: {
     type: String
   },

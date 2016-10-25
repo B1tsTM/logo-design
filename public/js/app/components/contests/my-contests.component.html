@@ -10,7 +10,7 @@
         </div>
         <div class="panel-footer">   
           <div class="author">         
-            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.userName}} View Contest: <a [routerLink]="['/mano-konkursai', contest.id]">Details</a>
+            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.userName}} View Contest: <a [routerLink]="['/mano-konkursai', contest.idName]">Details</a>
           </div>
           <div class="config" *ngIf="belongsToUser(contest.user)">
           <!-- <a (click)="editContest(contest)">Edit</a> -->

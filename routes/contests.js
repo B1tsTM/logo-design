@@ -5,6 +5,13 @@ var jwt = require('jsonwebtoken');
 var Contest = require('../models/contests');
 var User = require('../models/user');
 
+function kebab(str) {
+  var kebab =  str.replace(/(?!^)([A-Z])/g, ' $1')
+            .replace(/[_\s]+(?=[a-zA-Z])/g, '-').toLowerCase();
+  
+  return kebab;
+}
+
 router.get('/', function (req,res,next) {
   res.render('index');
 });
@@ -31,10 +38,13 @@ router.post('/', function(req, res, next) {
         error: err
       });
     }
+    var idName = kebab(req.body.name);
     console.log(req.body);
+    console.log(idName);
     var contest = new Contest({
     contestId: req.body.contestId,
     name: req.body.name,
+    idName: idName,
     category: req.body.category,
     description: req.body.description,
     award: req.body.award,

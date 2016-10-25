@@ -31,7 +31,8 @@ router.get('/konkursai', function(req,res,next) {
 
 router.get('/konkursai/:id', function(req,res,next) {
   var id = req.params.id;
-  Contest.findById(id)
+  //Contest.findById(id)
+  Contest.findOne({'idName': id})
     .populate('user', 'firstName')
     .exec(function(err, docs) {
       if (err) {
