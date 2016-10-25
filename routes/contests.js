@@ -6,7 +6,7 @@ var Contest = require('../models/contests');
 var User = require('../models/user');
 
 function kebab(str) {
-  var kebab =  str.replace(/\s+/g, '-').toLowerCase();
+  var kebab =  str.replace('. ', '-').replace('.', '-').replace('.-', '-').replace('.', '-').replace(',', '').replace('.', '').replace('. ', '-').replace(/\s+/g, '-').replace(',', '').toLowerCase();
   return kebab;
 }
 
@@ -44,44 +44,43 @@ router.post('/', function(req, res, next) {
         error: err
       });
       }
-      if (result != null) {
+      if (result != null) { // findOne() query returns null and no errors if no contest found. find() returns []
       return res.status(404).json({
         title: 'Klaida !',
         error: {title: "Klaida !", message: "Toks konkurso pavadinimas jau yra ! Pasirinkite unikalų pavadinimą"}
       });
-    }
-    }); 
-    console.log(req.body);
-    console.log(idName);
-    var contest = new Contest({
-    contestId: req.body.contestId,
-    name: req.body.name,
-    idName: idName,
-    category: req.body.category,
-    description: req.body.description,
-    award: req.body.award,
-    status: req.body.status,
-    submitions: req.body.submitions,
-    daysRemaining: req.body.daysRemaining,
-    startDate: Date.now(),
-    endDate: Date.now(),
-    designer: req.body.designer,
-    user: doc
-  });
-  contest.save(function(err, result) {
-    if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
+    } else {
+        var contest = new Contest({
+        contestId: req.body.contestId,
+        name: req.body.name,
+        idName: idName,
+        category: req.body.category,
+        description: req.body.description,
+        award: req.body.award,
+        status: req.body.status,
+        submitions: req.body.submitions,
+        daysRemaining: req.body.daysRemaining,
+        startDate: Date.now(),
+        endDate: Date.now(),
+        designer: req.body.designer,
+        user: doc
+      });
+      contest.save(function(err, result) {
+        if (err) {
+          return res.status(404).json({
+            title: 'Klaida !',
+            error: err
+          });
+        }
+        doc.contests.push(result);
+        doc.save();
+        res.status(201).json({
+          contest: 'Konkursas įkeltas',
+          obj: result
+        });
       });
     }
-    doc.contests.push(result);
-    doc.save();
-    res.status(201).json({
-      contest: 'Konkursas įkeltas',
-      obj: result
-    });
-  });
+    });  
   });
 });
 
