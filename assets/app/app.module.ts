@@ -22,6 +22,7 @@ import { UserNavigationComponent } from './components/navbar/user-navigation.com
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
 import { DesignersService } from './services/designers.service';
+import { ApiService } from './services/api.service';
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
@@ -44,6 +45,6 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   ProfilePageComponent, MyContestsComponent, ContestDetailsComponent ],
   bootstrap: [ AppComponent ],
   providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, 
-               DesignersService, CanActivateOnLoginService ]
+               DesignersService, ApiService, CanActivateOnLoginService ]
 })
 export class AppModule { }

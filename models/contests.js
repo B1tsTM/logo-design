@@ -28,9 +28,13 @@ var schema = new Schema({
   daysRemaining: {
     type: Number
   },
-  submitions: {
+  submitionCount: {
     type: Number
   },
+  submitions: [{
+    submitionUrl: {type: String},
+    submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+  }],
   startDate: {
     type: Date, default: Date.now()
   },
@@ -45,7 +49,8 @@ var schema = new Schema({
   },
   participants: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
   user: {
     type: Schema.Types.ObjectId,

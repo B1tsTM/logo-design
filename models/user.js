@@ -17,6 +17,10 @@ var schema = new Schema({
     designIsPublic: {type: Boolean}
   }],
   galleryUrls: [{type: String}],
+  // galleryUrls: [{
+  //     submitionUrl: {type: String},
+  //     submitionAuthor: {type: Schema.Types.ObjectId}
+  // }],
   avatar: {
     avatarUrl: {type: String}
   },
