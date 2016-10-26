@@ -22,7 +22,7 @@ export class ApiService {
           let submitions: any[] = [];
           for(let i=0; i< data.length; i++) {
             //let designer = new User(data[i].email, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].contestsWon, data[i].designsCreated, data[i].publicDesigns);
-            let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor};
+            let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating};
             console.log('submition in loop');
             console.log(submition);
             submitions.push(submition);

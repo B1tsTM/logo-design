@@ -33,6 +33,7 @@ var schema = new Schema({
   },
   submitions: [{
     submitionUrl: {type: String},
+    submitionRating: {type: Number},
     submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
   }],
   startDate: {

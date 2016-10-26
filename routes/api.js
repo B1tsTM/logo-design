@@ -71,7 +71,10 @@ router.get('/konkursai/:id', function(req,res,next) {
 
 router.get('/submitions/contest/:id', function(req, res, next) {
   var id = req.params.id;
-  Contest.findOne({'idName': id}, function(err, contest) {
+  //Contest.findOne({'idName': id}, function(err, contest) {
+  Contest.findOne({'idName': id})
+  .populate('submitions.submitionAuthor')
+  .exec(function(err, contest) {
     console.log('contest after findOne');
     console.log(contest);
     if (err) {
@@ -383,8 +386,8 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
     console.log(req.files);
     for (let i=0; i<req.files.length; i++) {
       fileNames.push(req.files[i].filename);
-      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId});
-      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId});
+      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0});
+      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0});
       //fileNames.push(req.files[i]);
     }
     console.log('submitions array:');
