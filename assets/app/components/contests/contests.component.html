@@ -1,26 +1,4 @@
 <div class="row spacing">
-<section class="col-md-8 col-md-offset-2">
-    <form (ngSubmit)="onSubmit(f)" #f>
-        <div class="form-group">
-            <label>Konkurso pavadinimas</label>
-            <input ngControl="name" name="name" id="name" type="text" class="form-control" #name [ngModel]="contest?.name">
-        </div>
-        <div class="form-group">
-            <label>Konkurso kategorija (select list)</label>
-            <input ngControl="category" name="category" id="category" type="text" class="form-control" #category [ngModel]="contest?.category">
-        </div>
-        <div class="form-group">
-            <label>Konkurso Aprašymas</label>
-            <input ngControl="description" name="description" id="description" type="text" class="form-control" #description [ngModel]="contest?.description">
-        </div>
-        <div class="form-group">
-            <label>Konkurso Prizas</label>
-            <input ngControl="award" name="award" id="award" type="text" class="form-control" #award [ngModel]="contest?.award">
-        </div>
-        <button type="submit" class="btn btn-primary">{{ !contest ? 'Pridėti konkursą' : 'Saugoti pakeitimus' }}</button>
-        <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="contest">Atšaukti</button>
-    </form>
-</section>
 
   <div class="col-md-8 col-md-offset-2 pad-10">
           <div *ngFor="let contest of contests">
@@ -31,12 +9,8 @@
         </div>
         <div class="panel-footer">   
           <div class="author">         
-            {{ contest.category }} - {{ contest.userName }}
+            {{ contest.category }} - {{ contest.userName }} - <a [routerLink]="['/mano-konkursai', contest.idName]">Info</a>
           </div>
-          <div class="config" *ngIf="belongsToUser(contest.user)">
-          <a (click)="editContest(contest)">Edit</a>
-          <a (click)="deleteContest(contest)">Delete</a>
-        </div>
         </div>    
       </div>
     </div>

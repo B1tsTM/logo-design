@@ -22,6 +22,8 @@ router.get('/konkursai', function(req,res,next) {
         error: err
       });
       }
+      console.log('All contests:');
+      console.log(docs);
       res.status(200).json({
         message: 'Success',
         obj: docs

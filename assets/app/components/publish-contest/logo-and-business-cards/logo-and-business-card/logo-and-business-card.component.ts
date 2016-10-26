@@ -29,7 +29,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
       contestAward: ['', Validators.required]
     });
 
-    this.contestsService.getContests()
+    this.contestsService.getAllContests()
     .subscribe(contests => {
       this.contests = contests;
       this.contestsService.contests = contests;
