@@ -39,10 +39,10 @@ export class LogoAndBusinessCardComponent implements OnInit {
           this.errorService.handleError(error);
         });
 
-    this.contestsService.contestEdited
-      .subscribe(contest => {
-        this.contest = contest;
-      });
+    // this.contestsService.contestEdited
+    //   .subscribe(contest => {
+    //     this.contest = contest;
+    //   });
    }
 
   addContest(form: any) {

@@ -53,18 +53,19 @@ var schema = new Schema({
     ref: 'User',
     unique: true
   }],
-  user: {
+  publisher: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
 });
 
-schema.post('remove', function(doc) { // schema.pre another option
-  var deletedContest = doc;
-  User.findById(doc.user, function(err, doc) {
-    doc.contests.pull(deletedContest);
-    doc.save();
-  });
-});
+// TODO gotta rethink this...
+// schema.post('remove', function(doc) { // schema.pre another option
+//   var deletedContest = doc;
+//   User.findById(doc.user, function(err, doc) {
+//     doc.contests.pull(deletedContest);
+//     doc.save();
+//   });
+// });
 
 module.exports = mongoose.model('Contests', schema);

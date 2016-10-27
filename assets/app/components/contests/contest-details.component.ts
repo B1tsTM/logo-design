@@ -77,6 +77,18 @@ export class ContestDetailsComponent implements OnInit {
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, [], this.filesToUpload).then((result) => {
             console.log(result);
             this.filesToUpload = [];
+            //reload submitions
+            this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
+        .subscribe(submitions => {
+            console.log('submitions from apiservice in contest-details');
+            console.log(submitions);
+            this.submitions = submitions;
+            console.log(this.submitions);
+        },
+        error => {
+          this.errorService.handleError(error);
+        });
+        //end of reloading submitions
         }, (error) => {
             console.error(error);
         });

@@ -58,13 +58,15 @@ router.post('/', function(req, res, next) {
         description: req.body.description,
         award: req.body.award,
         status: req.body.status,
-        submitions: req.body.submitions,
+        submitionCount: req.body.submitionCount,
         daysRemaining: req.body.daysRemaining,
         startDate: Date.now(),
         endDate: Date.now(),
         designer: req.body.designer,
-        user: doc
+        publisher: doc._id
       });
+      console.log('POST /konkursai contest var');
+      console.log(contest);
       contest.save(function(err, result) {
         if (err) {
           return res.status(404).json({
@@ -99,7 +101,7 @@ router.patch('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
-    if (doc.user != decoded.user._id) {
+    if (doc.publisher._id != decoded.user._id) { //TODO think about implementing/changing this
       return res.status(401).json({
         title: 'Neturite privilegiju !',
         error: {message: 'Negalima pakeisti konkurso'}
@@ -140,7 +142,7 @@ router.delete('/:id', function(req,res,next) {
         error: {message: 'Nerasta konkurso'}
       });
     }
-    if (doc.user != decoded.user._id) {
+    if (doc.publisher._id != decoded.publisher._id) {
       return res.status(401).json({
         title: 'Neturite privilegiju !',
         error: {message: 'Negalima pakeisti konkurso'}

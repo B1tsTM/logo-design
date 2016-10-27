@@ -3,16 +3,17 @@
 <div class="col-md-8 col-md-offset-2 pad-10">
   <div class="container" *ngIf="contests.length == 0">No contests published</div>
   <div *ngFor="let contest of contests; let i = index">
-    <div class="panel panel-default" *ngIf="belongsToUser(contest.user)">
+    <div>Contest JSON: {{contest | json}}</div>
+    <div class="panel panel-default" *ngIf="belongsToUser(contest.publisher._id)">
 
         <div class="panel-body">
-            <strong>{{i+1}}.</strong>Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.userName}} Name: {{ contest.name }} Category: {{contest.category}} Start date: {{contest.startDate | date}} Status: {{contest.status}} 
+            <strong>{{i+1}}.</strong>Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.publisher.firstName}} Name: {{ contest.name }} Category: {{contest.category}} Start date: {{contest.startDate | date}} Status: {{contest.status}} 
         </div>
         <div class="panel-footer">   
           <div class="author">         
-            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.userName}} View Contest: <a [routerLink]="['/mano-konkursai', contest.idName]">Details</a>
+            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.publisher.firstName}} View Contest: <a [routerLink]="['/mano-konkursai', contest.idName]">Details</a>
           </div>
-          <div class="config" *ngIf="belongsToUser(contest.user)">
+          <div class="config" *ngIf="belongsToUser(contest.publisher._id)">
           <!-- <a (click)="editContest(contest)">Edit</a> -->
           <a (click)="deleteContest(contest)">Delete</a>
         </div>

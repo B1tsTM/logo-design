@@ -14,7 +14,7 @@ var mime = require('mime');
 
 router.get('/konkursai', function(req,res,next) {
   Contest.find()
-    .populate('user', 'firstName')
+    .populate('publisher', 'firstName')
     .exec(function(err, docs) {
       if (err) {
       return res.status(404).json({
@@ -35,7 +35,7 @@ router.get('/konkursai/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)
   Contest.findOne({'idName': id})
-    //.populate('user', 'firstName')
+    .populate('publisher', 'firstName')
     .exec(function(err, docs) {
       console.log('/konkursai/:id contest');
       console.log(docs);
