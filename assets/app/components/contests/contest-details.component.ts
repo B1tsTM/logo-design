@@ -20,6 +20,7 @@ export class ContestDetailsComponent implements OnInit {
   filesToUpload: File[] = [];
   percent: number;
   submitions: any[] = [];
+  mySubmitions: any[] = [];
   constructor(private route: ActivatedRoute,
               private router: Router,
               private contestsService: ContestsService,
@@ -50,6 +51,19 @@ export class ContestDetailsComponent implements OnInit {
         error => {
           this.errorService.handleError(error);
       });
+      if (this.isLoggedIn()) {
+        this.apiService.getMySubmitions(this.contestId)
+          .subscribe(mySubmitions => {
+            console.log('MySubmitions from apiservice in contest-details');
+            console.log(mySubmitions);
+            this.mySubmitions = mySubmitions;
+            console.log('this.mySubmitions');
+            console.log(this.mySubmitions);
+        },
+        error => {
+          this.errorService.handleError(error);
+      });
+    }
   }
 
   isClient() {
@@ -89,6 +103,20 @@ export class ContestDetailsComponent implements OnInit {
           this.errorService.handleError(error);
         });
         //end of reloading submitions
+        // --------------------------
+        //reloading my submitions
+        this.apiService.getMySubmitions(this.contestId)
+        .subscribe(mySubmitions => {
+            console.log('MySubmitions from apiservice in contest-details');
+            console.log(mySubmitions);
+            this.mySubmitions = mySubmitions;
+            console.log('this.mySubmitions');
+            console.log(this.mySubmitions);
+        },
+        error => {
+          this.errorService.handleError(error);
+      });
+        //end of reloading my submitions
         }, (error) => {
             console.error(error);
         });

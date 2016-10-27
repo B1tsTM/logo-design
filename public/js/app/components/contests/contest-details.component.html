@@ -23,6 +23,14 @@
   </div>
 </div>
 <br>
+<div *ngIf="mySubmitions.length > 0">
+  <h2>My submitions:</h2>
+  <div *ngFor="let mySubmition of mySubmitions">
+    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
+      <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}})</span>
+  </div>
+  <br>
+</div>  
 <div *ngIf="!isLoggedIn()">To participate, you must be logged in as a designer</div>
 <div *ngIf="isDesigner()">
   <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
