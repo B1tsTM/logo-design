@@ -6,10 +6,11 @@ var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
   var user;
-  if (req.body.userType == 'designer') {
+  if (req.body.userType == 'dizaineris') {
   user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    nickName: req.body.nickName,
     password: passwordHash.generate(req.body.password),
     email: req.body.email,
     userType: req.body.userType,
@@ -21,6 +22,7 @@ router.post('/', function(req, res, next) {
   user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    nickName: req.body.nickName,
     password: passwordHash.generate(req.body.password),
     email: req.body.email,
     userType: req.body.userType

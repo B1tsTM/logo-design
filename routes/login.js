@@ -7,7 +7,9 @@ var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
 
-  User.findOne({email: req.body.email}, function(err, doc) {
+  User.findOne({nickName: req.body.nickName}, function(err, doc) {
+    console.log('doc:');
+    console.log(doc);
     if (err) {
       return res.status(404).json({
         title: 'Klaida !',

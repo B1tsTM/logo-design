@@ -25,14 +25,14 @@
 
 <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
-        <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" #f> 
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="login(l)" #l> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Prisijungimas</h4>
             </modal-header>
             <modal-body>
                 <div class="form-group">
-                    <label for="firstName">El. Paštas</label>
-                    <input autofocus type="text" class="form-control" formControlName="email" name="email" id="email" autofocus>
+                    <label for="nickName">Slapyvardis</label>
+                    <input autofocus type="text" class="form-control" formControlName="nickName" name="nickName" id="nickName" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Slaptažodis</label>
@@ -48,7 +48,7 @@
 
 <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" [cssClass]="cssClass" #registerModal>
-        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()" #f> 
+        <form [formGroup]="registerForm" novalidate (ngSubmit)="register(f)" #f> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Registracija</h4>
             </modal-header>
@@ -64,6 +64,10 @@
                 <div class="form-group">
                     <label for="firstName">El. Paštas</label>
                     <input type="text" class="form-control" formControlName="email" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Slapyvardis</label>
+                    <input type="text" class="form-control" formControlName="nickName" name="nickName" id="nickName">
                 </div>
                 <div class="form-group">
                     <label for="lastName">Slaptažodis</label>

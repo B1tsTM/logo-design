@@ -41,13 +41,15 @@ export class UserNavigationComponent implements OnInit {
 
   ngOnInit() { 
     this.loginForm = this.fb.group({
-      email: ['', Validators.compose([Validators.required, this.isValidEmail])],
+      //email: ['', Validators.compose([Validators.required, this.isValidEmail])],
+      nickName: ['', Validators.required],
       password: ['', Validators.required]
     });
 
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      nickName: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       password: ['', Validators.required],
       userType: [this.userTypes[0].value, Validators.required]
@@ -76,8 +78,10 @@ export class UserNavigationComponent implements OnInit {
         console.log('Modal opened');
     }
 
-    login() {
-       const user = new User(this.loginForm.value.email, this.loginForm.value.password);
+    login(form: any) {
+       const user = new User(form.nickName.value, form.password.value);
+       console.log('user-navigation login user const');
+       console.log(user);
        this.authService.signin(user)
        .subscribe(data => {
          console.log(data);
@@ -90,11 +94,18 @@ export class UserNavigationComponent implements OnInit {
        error => this.errorService.handleError(error))
     }
 
-    register() {
-      const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName, 0, 0, 0);
+    register(form: any) {
+      //const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName, 0, 0, 0);
+      //const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0, 0);
+      const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0, 0);
         this.authService.signup(user)
           .subscribe(data => {
             console.log(data);
+            form.firstName.value = '';
+            form.lastName.value = '';
+            form.nickName.value = '';
+            form.email.value = '';
+            form.password.value = '';
           },
           error => this.errorService.handleError(error))
     }
