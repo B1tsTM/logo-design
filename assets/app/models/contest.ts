@@ -1,5 +1,6 @@
 export class Contest {
   constructor(public name: string, 
+              public uniqueId?: number,
               public idName?:string, 
               public id?:string, 
               public category?: string, 

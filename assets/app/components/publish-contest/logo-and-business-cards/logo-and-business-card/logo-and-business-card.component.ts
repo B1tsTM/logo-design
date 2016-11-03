@@ -66,7 +66,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
     } else {
       console.log(form);
       //const contest: any = {contests: input, type: 'Logo', designer: 'John Lohke'};
-      const contest = new Contest(form.contestName.value, null, null, form.contestCategory.value, form.contestDescription.value, form.contestAward.value, 'active', 10, 5, Date.now(), Date.now());
+      const contest = new Contest(form.contestName.value, null, null, null, form.contestCategory.value, form.contestDescription.value, form.contestAward.value, 'active', 10, 5, Date.now(), Date.now());
       console.log(contest);
       this.contestsService.addContest(contest)
         .subscribe(data => {

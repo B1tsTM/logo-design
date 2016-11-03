@@ -94,7 +94,7 @@ router.get('/submitions/contest/:id', function(req, res, next) {
 });
 
 router.get('/dizaineriai', function (req,res,next) {
-  User.find({'userType': 'designer'})
+  User.find({'userType': 'dizaineris'})
  // .populate('contests')
   .exec(function(err, docs) {
     if (err) {

@@ -20,7 +20,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
           objs.push(contest);
         };
         return objs;
@@ -37,7 +37,7 @@ export class ContestsService {
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
           if (data[i].publisher._id == id) {
-          let contest = new Contest(data[i].name, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
           objs.push(contest);
           }
         };
@@ -53,7 +53,7 @@ export class ContestsService {
       .map(res => {
         console.log(res.json());
         const data = res.json().obj;
-        let contest = new Contest(data.name, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
+        let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
         return contest;
       })
       .catch(error => Observable.throw(error.json()));
@@ -67,7 +67,7 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      let contest = new Contest(data.name, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
+      let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
       return contest;
     })
     .catch(error => Observable.throw(error.json()));

@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var User = require('../models/user');
+var autoIncrement = require('mongoose-auto-increment');
+
+var db = mongoose.connection;
+
+autoIncrement.initialize(db);
 
 var schema = new Schema({
   name: {
@@ -56,6 +61,9 @@ var schema = new Schema({
   publisher: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  uniqueId: {
+    type: Number
   }
 });
 
@@ -67,5 +75,12 @@ var schema = new Schema({
 //     doc.save();
 //   });
 // });
+
+schema.plugin(autoIncrement.plugin, {
+  model: 'Contests',
+  field: 'uniqueId',
+  startAt: 1,
+  incrementBy: 1
+});
 
 module.exports = mongoose.model('Contests', schema);

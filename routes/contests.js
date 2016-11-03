@@ -38,6 +38,8 @@ router.post('/', function(req, res, next) {
     }
     var idName = kebab(req.body.name);
     Contest.findOne({'idName': idName}, function(err, result){
+      console.log('contests.js Contest.findOne result var');
+      console.log(result);
       if(err) { //should never execute this
         return res.status(404).json({
         title: 'Klaida !',
@@ -52,6 +54,7 @@ router.post('/', function(req, res, next) {
     } else {
         var contest = new Contest({
         contestId: req.body.contestId,
+        //uniqueId: result.uniqueId,
         name: req.body.name,
         idName: idName,
         category: req.body.category,
@@ -76,6 +79,8 @@ router.post('/', function(req, res, next) {
         }
         doc.contests.push(result);
         doc.save();
+        console.log('contests.js Contest.findOne result var AFTER save()');
+        console.log(result);
         res.status(201).json({
           contest: 'Konkursas įkeltas',
           obj: result

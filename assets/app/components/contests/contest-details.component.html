@@ -3,39 +3,41 @@
 
 <div *ngIf="!contest">Kraunama...</div>
 <div *ngIf="contest">  
-<h2>ID: {{contestId}}</h2>
-<h3>ID Name: {{contest.idName}}</h3>
-<h3>contest name: {{contest.name}}</h3>
-<h3>contest category: {{contest.category}}</h3>
-<h3>contest description: {{contest.description}}</h3>
-<h3>contest award: {{contest.award}}</h3>
-<h3>contest status: {{contest.status}}</h3>
-<h3>contest start date: {{contest.startDate | date}}</h3>
-<h3>contest end date: {{contest.endDate | date}}</h3>
-<h3>contest submition count: {{contest.submitionCount}}</h3>
-<h3>contest published by: {{contest.publisher.firstName}}</h3>
-<br>
-<h2>Submitions:</h2>
-<div *ngIf="contestId">
-  <div *ngFor="let submition of submitions">
-    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
-    <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}})</span>
-  </div>
-</div>
-<br>
-<div *ngIf="mySubmitions.length > 0 && isDesigner()">
-  <h2>My submitions:</h2>
-  <div *ngFor="let mySubmition of mySubmitions">
-    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
-      <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}})</span>
+  <h2>ID: {{contestId}}</h2>
+  <h3>ID Name: {{contest.idName}}</h3>
+  <h3>Generated unique ID: {{contest.uniqueId}}</h3>
+  <h3>contest name: {{contest.name}}</h3>
+  <h3>contest category: {{contest.category}}</h3>
+  <h3>contest description: {{contest.description}}</h3>
+  <h3>contest award: {{contest.award}}</h3>
+  <h3>contest status: {{contest.status}}</h3>
+  <h3>contest start date: {{contest.startDate | date}}</h3>
+  <h3>contest end date: {{contest.endDate | date}}</h3>
+  <h3>contest submition count: {{contest.submitionCount}}</h3>
+  <h3>contest published by: {{contest.publisher.firstName}}</h3>
+  <br>
+  <h2>Submitions:</h2>
+  <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
+  <div *ngIf="contestId">
+    <div *ngFor="let submition of submitions">
+      <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
+      <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}})</span>
+    </div>
   </div>
   <br>
-</div>  
-<div *ngIf="!isLoggedIn()">To participate, you must be logged in as a designer</div>
-<div *ngIf="isDesigner()">
-  <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-<button type="button" (click)="upload()">Upload</button>
-{{percent}} %
-</div>
-<div *ngIf="isClient()">Must be signed in as designer to upload files</div>
+  <div *ngIf="mySubmitions.length > 0 && isDesigner()">
+    <h2>My submitions:</h2>
+    <div *ngFor="let mySubmition of mySubmitions">
+      <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
+        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}})</span>
+    </div>
+    <br>
+  </div>  
+  <div *ngIf="!isLoggedIn()">To participate, you must be logged in as a designer</div>
+  <div *ngIf="isDesigner()">
+    <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+  <button type="button" (click)="upload()">Upload</button>
+  {{percent}} %
+  </div>
+  <div *ngIf="isClient()">Must be signed in as designer to upload files</div>
 </div>
