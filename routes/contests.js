@@ -52,6 +52,9 @@ router.post('/', function(req, res, next) {
         error: {title: "Klaida !", message: "Toks konkurso pavadinimas jau yra ! Pasirinkite unikalų pavadinimą"}
       });
     } else {
+        var days = 7;
+        var dateNow = new Date();
+        var dateLater = new Date(dateNow.getTime() + (days * 24 * 60 * 60 * 1000)); // ms equal to 1 day
         var contest = new Contest({
         contestId: req.body.contestId,
         //uniqueId: result.uniqueId,
@@ -63,8 +66,8 @@ router.post('/', function(req, res, next) {
         status: req.body.status,
         submitionCount: req.body.submitionCount,
         daysRemaining: req.body.daysRemaining,
-        startDate: Date.now(),
-        endDate: Date.now(),
+        startDate: dateNow,
+        endDate: dateLater,
         designer: req.body.designer,
         publisher: doc._id
       });

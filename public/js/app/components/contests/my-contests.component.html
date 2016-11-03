@@ -11,7 +11,7 @@
         </div>
         <div class="panel-footer">   
           <div class="author">         
-            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.publisher.firstName}} View Contest: <a [routerLink]="['/mano-konkursai', contest.idName]">Details</a>
+            Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.publisher.firstName}} View Contest: <a [routerLink]="['/konkursai', contest.idName]">Details</a>
           </div>
           <div class="config" *ngIf="belongsToUser(contest.publisher._id)">
           <!-- <a (click)="editContest(contest)">Edit</a> -->

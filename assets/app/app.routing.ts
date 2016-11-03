@@ -11,10 +11,12 @@ import { CanActivateOnLoginService } from './guards/can-activate-on-login.servic
 
 
 const appRoutes: Routes = [
-  { path: 'konkursai', component: ContestsComponent },
-  { path: 'mano-konkursai', children: [
-    {path: '', component: MyContestsComponent},
+  { path: 'konkursai', children: [
+    {path: '', component: ContestsComponent},
     {path: ':id', component: ContestDetailsComponent}
+  ] },
+  { path: 'mano-konkursai', children: [
+    {path: '', component: MyContestsComponent}
   ] },
   { path: 'paskelbti-konkursa', component: PublishContestComponent },
   { path: 'kategorijos', component: CategoriesComponent },
