@@ -39,7 +39,8 @@ var schema = new Schema({
   submitions: [{
     submitionUrl: {type: String},
     submitionRating: {type: Number},
-    submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+    submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
+    submitionId: {type: Number}
   }],
   startDate: {
     type: Date, default: Date.now()
@@ -75,6 +76,13 @@ var schema = new Schema({
 //     doc.save();
 //   });
 // });
+
+schema.plugin(autoIncrement.plugin, {
+  model: 'Contests',
+  field: 'submitions.submitionId',
+  startAt: 1,
+  incrementBy: 1
+});
 
 schema.plugin(autoIncrement.plugin, {
   model: 'Contests',

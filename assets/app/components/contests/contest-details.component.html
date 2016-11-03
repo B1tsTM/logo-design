@@ -21,7 +21,7 @@
   <div *ngIf="contestId">
     <div *ngFor="let submition of submitions">
       <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
-      <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}})</span>
+      <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}}) SubmitionID: {{submition.submitionId}}</span>
     </div>
   </div>
   <br>

@@ -11,6 +11,8 @@ var upload = multer({dest: DIR});
 var crypto = require('crypto');
 var mime = require('mime');
 
+var globalSubmitionId = 1;
+
 
 router.get('/konkursai', function(req,res,next) {
   Contest.find()
@@ -386,8 +388,9 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
     console.log(req.files);
     for (let i=0; i<req.files.length; i++) {
       fileNames.push(req.files[i].filename);
-      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0});
-      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0});
+      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: globalSubmitionId});
+      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: globalSubmitionId});
+      globalSubmitionId++;
       //fileNames.push(req.files[i]);
     }
     console.log('submitions array:');
