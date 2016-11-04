@@ -5,6 +5,8 @@ import { ContestsService } from '../../services/contests.service';
 import { ErrorService } from '../../errors/index';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 
 @Component({
@@ -21,6 +23,9 @@ export class ContestDetailsComponent implements OnInit {
   percent: number;
   submitions: any[] = [];
   mySubmitions: any[] = [];
+  //locale = moment.locale('lt');
+  //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
+  momentDate: any;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private contestsService: ContestsService,
@@ -29,6 +34,11 @@ export class ContestDetailsComponent implements OnInit {
               private apiService: ApiService) { }
 
   ngOnInit() { 
+   moment.locale('lt-lt');
+    //   console.log('LOCALE');
+    //   console.log(locale);
+      //this.momentDate = moment().format('YYYY MMMM Do');
+      this.momentDate = moment().add(3, 'days').calendar();
     this.route.params.subscribe((params: Params) => {
       this.contestId = params['id'];
     });

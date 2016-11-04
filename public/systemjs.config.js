@@ -3,7 +3,7 @@ var map = {
   'rxjs': 'js/vendor/rxjs',
   '@angular': 'js/vendor/@angular',
   'ng2-bootstrap': 'js/vendor/ng2-bootstrap',
-  'moment': 'js/vendor/moment/moment.js',
+  'moment': 'js/vendor/moment',
   'primeng': 'js/vendor/primeng',
   '@angular/material': 'js/vendor/@angular/material',
   'ng2-bs3-modal': 'js/vendor/ng2-bs3-modal',
@@ -18,7 +18,8 @@ var packages = {
   'primeng': { defaultExtension: 'js' },
   '@angular/material': { main: 'material.umd.js', defaultExtension: 'js' },
   'ng2-bs3-modal': { main: 'ng2-bs3-modal.js', defaultExtension: 'js' },
-  'ng2-file-upload': { main: 'ng2-file-upload.js', defaultExtension: 'js' }
+  'ng2-file-upload': { main: 'ng2-file-upload.js', defaultExtension: 'js' },
+  'moment': { main: 'moment.js', defaultExtension: 'js' }
   //'angular2-fontawesome': { defaultExtension: 'js' }
 };
 

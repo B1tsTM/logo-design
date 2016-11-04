@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule, LOCALE_ID }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing,
          appRoutingProviders }  from './app.routing';
@@ -30,6 +30,9 @@ import { PublishContestModule } from './components/publish-contest/publish-conte
 
 import { ErrorComponent, ErrorService } from './errors/index';
 
+import { LocalDateFromNowPipe } from './pipes/local-date-from-now-pipe';
+import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
+
 
 
 @NgModule({
@@ -42,9 +45,10 @@ import { ErrorComponent, ErrorService } from './errors/index';
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent,
-                  ProfilePageComponent, MyContestsComponent, ContestDetailsComponent ],
+                  ProfilePageComponent, MyContestsComponent, ContestDetailsComponent,
+                  LocalDateFromNowPipe, LocalDateStandartPipe ],
   bootstrap: [ AppComponent ],
-  providers: [ appRoutingProviders, ContestsService, AuthService, ErrorService, 
+  providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService ]
 })
 export class AppModule { }
