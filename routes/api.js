@@ -10,6 +10,7 @@ var DIR = './uploads/';
 var upload = multer({dest: DIR});
 var crypto = require('crypto');
 var mime = require('mime');
+var jwt = require('jsonwebtoken');
 
 
 router.get('/konkursai', function(req,res,next) {
@@ -89,6 +90,48 @@ router.get('/submitions/contest/:id', function(req, res, next) {
     res.status(200).json({
       message: 'submitions received',
       submitions: submitions
+    });
+  });
+});
+
+router.patch('/submitions/:id', function(req,res,next) {
+  var decoded = jwt.decode(req.query.token);
+  var id = req.params.id;
+  console.log('req ID');
+  console.log(id)
+  Contest.findOne({'idName': id})
+  .exec(function(err, contest) {
+    console.log('PATCH req contest after findOne');
+    console.log(contest);
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    var newRating = req.body.submitionRating;
+    var subId = req.body.submitionId;
+    console.log('newRating');
+    console.log(newRating);
+    console.log('submition ID');
+    console.log(subId);
+    for (let i=0; i<contest.submitions.length; i++) {
+      if(contest.submitions[i].submitionId == subId) {
+        contest.submitions[i].submitionRating = newRating;
+      }
+    }
+
+    contest.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Reitingas pakeistas',
+        obj: result
+      });
     });
   });
 });
@@ -365,6 +408,8 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
 
 });
 //TEST
+
+
 
 //Submitions
 router.post('/submitions/:contestId/:userId', submitionsUpload.array("submition", 12), function(req,res){

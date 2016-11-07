@@ -96,5 +96,15 @@ export class ContestsService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  updateSubmitionRating(contest: any, submition: any) {
+    const body = JSON.stringify(submition);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+
+    return this.http.patch("http://localhost:3000/api/v1/submitions/" + contest.idName + token, body, {headers: headers})
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
   
 }

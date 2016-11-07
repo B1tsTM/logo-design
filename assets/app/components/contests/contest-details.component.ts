@@ -176,4 +176,20 @@ export class ContestDetailsComponent implements OnInit {
 
 }
 
+    onRating(obj: any) {
+        var submition = this.submitions.filter((item: any) => item.submitionId == obj.submitionId);
+        console.log('onRating() submition after filter');
+        console.log(submition);
+        if (!!submition && submition.length == 1) {
+            //this.submitions[0].submitionRating = obj.rating;
+            submition[0].submitionRating = obj.rating;
+            this.contestsService.updateSubmitionRating(this.contest, submition[0])
+                .subscribe(data => {
+                    console.log('Rating changed');
+                    console.log(data);
+                })
+        }
+
+    }
+
 }
