@@ -189,7 +189,11 @@ export class ContestDetailsComponent implements OnInit {
                     console.log(data);
                 })
         }
+    }
 
+    isContestPublisher(contestAuthorId: string) {
+        var userId = localStorage.getItem('userId');
+        return contestAuthorId == userId;
     }
 
 }

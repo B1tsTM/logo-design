@@ -4,9 +4,9 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
     overflow: hidden;
 }
  
-div {
+/*div {
     cursor: pointer;
-}
+}*/
 .glyphicon{
     float:left;
 }
