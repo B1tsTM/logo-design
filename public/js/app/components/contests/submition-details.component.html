@@ -6,7 +6,9 @@
                 <h4 class="modal-title text-center">Dizaino info</h4>
             </modal-header>
             <modal-body>
-                <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submitionUrl}}" alt="Dizainas">
+                <h3>Submition ID: {{submition.submitionId}}</h3>
+                <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+                <h3>Author: {{submition.submitionAuthor.firstName}}</h3>
             </modal-body>
             <modal-footer>
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>

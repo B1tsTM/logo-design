@@ -23,7 +23,7 @@
     <div *ngFor="let submition of submitions">
       <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}}) SubmitionID: {{submition.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
-      <div><submition-details [contestId]="contestId" [submitionUrl]="submition.submitionUrl"></submition-details></div>
+      <div><submition-details [contestId]="contestId" [submition]="submition"></submition-details></div>
     </div>
   </div>
   <br>

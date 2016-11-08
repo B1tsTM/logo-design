@@ -13,9 +13,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class SubmitionDetailsComponent implements OnInit {
     @Input() contestId: string;
-    @Input() submitionUrl: string;
+    @Input() submition: any;
     cssClass: string = '';
-    submition: any;
     submitions: any[] = [];
     animation: boolean = true;
     keyboard: boolean = true;
