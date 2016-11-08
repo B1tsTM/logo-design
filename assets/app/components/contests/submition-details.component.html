@@ -1,0 +1,14 @@
+<button type="button" (click)="detailsModal.open()">Look at</button>
+
+<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" [cssClass]="cssClass" #detailsModal>
+            <modal-header [show-close]="true">
+                <h4 class="modal-title text-center">Dizaino info</h4>
+            </modal-header>
+            <modal-body>
+                <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submitionUrl}}" alt="Dizainas">
+            </modal-body>
+            <modal-footer>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>
+            </modal-footer>
+</modal>

@@ -12,7 +12,7 @@
   <h3>contest award: {{contest.award}}</h3>
   <h3>contest status: {{contest.status}}</h3>
   <h3>contest start date: {{contest.startDate | localDateStandart}}</h3>
-  <h3>contest end date: {{contest.endDate | localDateFromNow}}</h3>
+  <h3>contest end date: {{contest.endDate | localDateFromNow}} ({{contest.endDate | date: 'yyyy-MM-dd'}})</h3>
   <h3>contest submition count: {{contest.submitionCount}}</h3>
   <h3>contest published by: {{contest.publisher.firstName}}</h3>
   <h3>MomentJS date test: {{momentDate}}</h3>
@@ -23,6 +23,7 @@
     <div *ngFor="let submition of submitions">
       <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}}) SubmitionID: {{submition.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
+      <div><submition-details [contestId]="contestId" [submitionUrl]="submition.submitionUrl"></submition-details></div>
     </div>
   </div>
   <br>
@@ -30,7 +31,7 @@
     <h2>My submitions:</h2>
     <div *ngFor="let mySubmition of mySubmitions">
       <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
-        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}})</span>
+        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}}) <star-rating [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
     </div>
     <br>
   </div>  
@@ -41,4 +42,5 @@
   {{percent}} %
   </div>
   <div *ngIf="isClient()">Must be signed in as designer to upload files</div>
+  
 </div>

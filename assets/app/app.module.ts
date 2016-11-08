@@ -19,6 +19,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   ContestDetailsComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
+import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
 
 import { ContestsService } from './services/contests.service';
 import { AuthService } from './services/auth.service';
@@ -47,7 +48,8 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent,
                   ProfilePageComponent, MyContestsComponent, ContestDetailsComponent,
-                  LocalDateFromNowPipe, LocalDateStandartPipe, StarRatingComponent ],
+                  LocalDateFromNowPipe, LocalDateStandartPipe, StarRatingComponent,
+                  SubmitionDetailsComponent ],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService ]
