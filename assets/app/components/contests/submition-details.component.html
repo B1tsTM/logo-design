@@ -9,6 +9,8 @@
                 <h3>Submition ID: {{submition.submitionId}}</h3>
                 <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
                 <h3>Author: {{submition.submitionAuthor.firstName}}</h3>
+                <div><star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+                </div>
             </modal-body>
             <modal-footer>
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>

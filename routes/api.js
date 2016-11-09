@@ -335,6 +335,24 @@ router.get('/avatars/:id', function(req, res, next) {
   });
 });
 
+router.get('/users/:id', function(req,res,next) {
+  var id = req.params.id;
+  User.findById(id, function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log('get /users/:id user var');
+    console.log(user);
+    res.status(200).json({
+      message: 'vartotojas gautas',
+      user: user
+    });
+  });
+});
+
 router.get('/gallery/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {

@@ -69,4 +69,15 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  getUserInfo(userId: string) {
+    return this.http.get('http://localhost:3000/api/v1/users/'+userId)
+    .map(res => {
+      const user = res.json().user;
+      console.log('getUserInfo user var');
+      console.log(user);
+      return user;
+    })
+    .catch(error => Observable.throw(error.json()));
+  }
+
 }

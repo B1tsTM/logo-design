@@ -5,6 +5,7 @@ import { ContestsService } from '../../services/contests.service';
 import { ErrorService } from '../../errors/index';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import 'moment/min/locales';
 
@@ -34,6 +35,7 @@ export class ContestDetailsComponent implements OnInit {
               private apiService: ApiService) { }
 
   ngOnInit() { 
+      
    moment.locale('lt-lt');
     //   console.log('LOCALE');
     //   console.log(locale);
@@ -74,6 +76,7 @@ export class ContestDetailsComponent implements OnInit {
           this.errorService.handleError(error);
       });
     }
+
   }
 
   isClient() {
@@ -195,5 +198,7 @@ export class ContestDetailsComponent implements OnInit {
         var userId = localStorage.getItem('userId');
         return contestAuthorId == userId;
     }
+
+   
 
 }

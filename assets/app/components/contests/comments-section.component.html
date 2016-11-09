@@ -1,0 +1,14 @@
+<h2>Comments</h2>
+   
+  <h2>Post a comment</h2>
+  <!--<form [formGroup]="commentsForm" #cForm>
+    <div class="form-control">
+      <input type="text" class="form-control" formControlName="comment" required #comment>
+      <textarea formControlName="comment" rows="40" cols="8"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addComment(cForm)">Komentuoti</button>
+  </form>-->
+  <form>
+    <textarea name="comment" cols="30" rows="10" [(ngModel)]="commentField"></textarea>
+    <button type="button" class="btn btn-primary" (click)="addComment(commentField)">Pridėti komentarą</button>
+  </form>
