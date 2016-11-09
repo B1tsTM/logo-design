@@ -14,17 +14,15 @@ export class ApiService {
   getContestSubmitions(id: string) {
     return this.http.get('http://localhost:3000/api/v1/submitions/contest/'+id)
       .map(res => {
-        console.log('submitions from apiservice');
-        console.log(res.json());
+        //console.log('submitions from apiservice');
+        //console.log(res.json());
         const data = res.json().submitions;
-        console.log('apiService data variable');
-        console.log(data);
+        //console.log('apiService data variable');
+        //console.log(data);
           let submitions: any[] = [];
           for(let i=0; i< data.length; i++) {
             //let designer = new User(data[i].email, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].contestsWon, data[i].designsCreated, data[i].publicDesigns);
             let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId};
-            console.log('submition in loop');
-            console.log(submition);
             submitions.push(submition);
           };
           console.log('submitions after loop');
@@ -41,20 +39,20 @@ export class ApiService {
   getMySubmitions(contestId: string) {
     return this.http.get('http://localhost:3000/api/v1/submitions/contest/'+contestId)
       .map(res => {
-        console.log('MySubmitions from apiservice');
-        console.log(res.json());
+        //console.log('MySubmitions from apiservice');
+        //console.log(res.json());
         const data = res.json().submitions;
-        console.log('apiService data variable for MySubmitions');
-        console.log(data);
+        //console.log('apiService data variable for MySubmitions');
+        //console.log(data);
           let userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : '';
           let mySubmitions: any[] = [];
           for(let i=0; i< data.length; i++) {
-            console.log('submition author');
-            console.log(data[i].submitionAuthor);
+            //console.log('submition author');
+            //console.log(data[i].submitionAuthor);
             if (data[i].submitionAuthor._id == userId) {
             let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, sumbitionId: data[i].submitionId};
-            console.log('MySubmition in loop');
-            console.log(mySubmition);
+            //console.log('MySubmition in loop');
+            //console.log(mySubmition);
             mySubmitions.push(mySubmition);
             }
           };
@@ -78,6 +76,29 @@ export class ApiService {
       return user;
     })
     .catch(error => Observable.throw(error.json()));
+  }
+
+  addComment(obj:any, contestId: string) {
+    const body = JSON.stringify(obj);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/contest/' + contestId, body, {headers: headers})
+    .map(res => {
+      const comments = res.json().obj.comments;
+      console.log('api service addComment comments var');
+      console.log(comments);
+      return comments;
+    })
+    .catch(error => Observable.throw(error.json()));
+  }
+
+  getComments(contestId: string) {
+    return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/comments')
+    .map(res => {
+      const comments = res.json().obj.comments;
+      console.log('api service getComments comments var');
+      console.log(comments);
+      return comments;
+    });
   }
 
 }

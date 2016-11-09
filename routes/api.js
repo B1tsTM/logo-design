@@ -94,6 +94,59 @@ router.get('/submitions/contest/:id', function(req, res, next) {
   });
 });
 
+router.get('/contest/:id/comments', function(req, res, next) {
+   var id = req.params.id;
+   Contest.findOne({'idName': id})
+   .populate('comments.commentAuthor')
+   .exec(function(err, contest){
+     console.log('contest/:id/comments GET req contest after findOne');
+     console.log(contest);
+     if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    res.status(200).json({
+        message: 'Komentarai gauti',
+        obj: contest
+      });
+   });
+});
+
+router.patch('/contest/:id', function(req,res,next) {
+  var id = req.params.id;
+  Contest.findOne({'idName': id})
+  .populate('comments.commentAuthor')
+  .exec(function(err, contest){
+    console.log('contest/:id PATCH req contest after findOne');
+    console.log(contest);
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log('/contest/:id req body');
+    console.log(req.body);
+    contest.comments.push(req.body);
+    console.log('/contest/:id comments');
+    console.log(contest.comments);
+    contest.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Komentaras ikeltas',
+        obj: result
+      });
+    });
+  });
+});
+
 router.patch('/submitions/:id', function(req,res,next) {
   var decoded = jwt.decode(req.query.token);
   var id = req.params.id;

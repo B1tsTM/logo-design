@@ -42,6 +42,10 @@ var schema = new Schema({
     submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
     submitionId: {type: Number}
   }],
+  comments: [{
+    comment: {type: String},
+    commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+  }],
   startDate: {
     type: Date, default: Date.now()
   },

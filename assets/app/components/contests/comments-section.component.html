@@ -1,14 +1,22 @@
 <h2>Comments</h2>
-   
+<div *ngIf="comments.length == 0">Komentarų nėra</div>
+<div *ngIf="comments.length > 0">
+  <div *ngFor="let comment of comments && (isDesigner() || isContestPublisher(contest.publisher._id))">
+    <em>{{comment.comment}}</em>
+    <br>
+    <small>- {{comment.commentAuthor.nickName}}</small>
+    <br>
+    <br>
+  </div>
+</div>
+<div *ngIf="isDesigner() || isContestPublisher(contest.publisher._id)">   <!-- TODO to add ngIf checks -->
   <h2>Post a comment</h2>
-  <!--<form [formGroup]="commentsForm" #cForm>
-    <div class="form-control">
-      <input type="text" class="form-control" formControlName="comment" required #comment>
-      <textarea formControlName="comment" rows="40" cols="8"></textarea>
-    </div>
-    <button type="button" class="btn btn-primary" (click)="addComment(cForm)">Komentuoti</button>
-  </form>-->
   <form>
-    <textarea name="comment" cols="30" rows="10" [(ngModel)]="commentField"></textarea>
+    <textarea name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
+    <br>
     <button type="button" class="btn btn-primary" (click)="addComment(commentField)">Pridėti komentarą</button>
   </form>
+</div>
+<div *ngIf="isClient() && !isContestPublisher(contest.publisher._id)">
+  <strong>Comments are only visible to designers and publisher</strong>
+</div>
