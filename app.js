@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 
 var appRoutes = require('./routes/app');
 var apiRoutes = require('./routes/api');
@@ -43,20 +44,31 @@ res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content
 next();
 });
 
+mkdirp('./public/uploads/avatars', function (err) {
+  if (err) console.error(err);
+  else console.log('Avatars folder created!');
+});
+mkdirp('./public/uploads/contests', function (err) {
+  if (err) console.error(err);
+  else console.log('Contests folder created!');
+});
+mkdirp('./public/uploads/gallery', function (err) {
+  if (err) console.error(err);
+  else console.log('Gallery folder created!');
+});
 
-
-// app.use(multer({
-//   dest: DIR,
-//   rename: function (fieldname, filename) {
-//     return filename + Date.now();
-//   },
-//   onFileUploadStart: function (file) {
-//     console.log(file.originalname + ' is starting ...');
-//   },
-//   onFileUploadComplete: function (file) {
-//     console.log(file.fieldname + ' uploaded to  ' + file.path);
-//   }
-// }).any());
+// var dirAvatar = './public/uploads/avatars';
+// var dirContests = './public/uploads/contests';
+// var dirGallery = './public/uploads/gallery';
+// if (!fs.existsSync(dirAvatar)) {
+//   fs.mkdirSync(dirAvatar);
+// }
+// if (!fs.existsSync(dirContests)) {
+//   fs.mkdirSync(dirAvatar);
+// }
+// if (!fs.existsSync(dirGallery)) {
+//   fs.mkdirSync(dirAvatar);
+// }
 
 app.use('/prisijungti', loginRoutes); 
 app.use('/registracija', regRoutes);
@@ -93,7 +105,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: {}
+    //error: {}
+    error: err
   });
 });
 

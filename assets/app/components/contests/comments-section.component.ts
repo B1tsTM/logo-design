@@ -50,6 +50,8 @@ export class CommentsSectionComponent implements OnInit {
         console.log('comments-section getComments comments var');
         console.log(comments);
         this.comments = comments;
+        console.log('this.comments');
+        console.log(this.comments);
       },
       error => {
           this.errorService.handleError(error);

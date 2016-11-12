@@ -13,199 +13,6 @@ var mime = require('mime');
 var jwt = require('jsonwebtoken');
 
 
-router.get('/konkursai', function(req,res,next) {
-  Contest.find()
-    .populate('publisher', 'firstName')
-    .exec(function(err, docs) {
-      if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      console.log('All contests:');
-      console.log(docs);
-      res.status(200).json({
-        message: 'Success',
-        obj: docs
-      });
-    });
-});
-
-router.get('/konkursai/:id', function(req,res,next) {
-  var id = req.params.id;
-  //Contest.findById(id)
-  Contest.findOne({'idName': id})
-    .populate('publisher', 'firstName')
-    .exec(function(err, docs) {
-      console.log('/konkursai/:id contest');
-      console.log(docs);
-      if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      res.status(200).json({
-        message: 'Success',
-        obj: docs
-      });
-    });
-});
-
-// router.get('/submitions/contest/:id', function(req,res,next) {
-//   var id = req.params.id;
-//   Contest.findOne({'idName': id})
-//     .exec(function(err, docs) {
-//       if (err) {
-//       return res.status(404).json({
-//         title: 'Klaida !',
-//         error: err
-//       });
-//       }
-//       res.status(200).json({
-//         message: 'Success',
-//         obj: docs
-//       });
-//     });
-// });
-
-router.get('/submitions/contest/:id', function(req, res, next) {
-  var id = req.params.id;
-  //Contest.findOne({'idName': id}, function(err, contest) {
-  Contest.findOne({'idName': id})
-  .populate('submitions.submitionAuthor')
-  .exec(function(err, contest) {
-    console.log('contest after findOne');
-    console.log(contest);
-    if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-    }
-    var submitions = contest.submitions;
-    console.log('submitions var');
-    console.log(submitions);
-    res.status(200).json({
-      message: 'submitions received',
-      submitions: submitions
-    });
-  });
-});
-
-router.get('/contest/:id/comments', function(req, res, next) {
-   var id = req.params.id;
-   Contest.findOne({'idName': id})
-   .populate('comments.commentAuthor')
-   .exec(function(err, contest){
-     console.log('contest/:id/comments GET req contest after findOne');
-     console.log(contest);
-     if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-    }
-    res.status(200).json({
-        message: 'Komentarai gauti',
-        obj: contest
-      });
-   });
-});
-
-router.patch('/contest/:id', function(req,res,next) {
-  var id = req.params.id;
-  Contest.findOne({'idName': id})
-  .populate('comments.commentAuthor')
-  .exec(function(err, contest){
-    console.log('contest/:id PATCH req contest after findOne');
-    console.log(contest);
-    if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-    }
-    console.log('/contest/:id req body');
-    console.log(req.body);
-    contest.comments.push(req.body);
-    console.log('/contest/:id comments');
-    console.log(contest.comments);
-    contest.save(function(err, result) {
-      if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      res.status(200).json({
-        message: 'Komentaras ikeltas',
-        obj: result
-      });
-    });
-  });
-});
-
-router.patch('/submitions/:id', function(req,res,next) {
-  var decoded = jwt.decode(req.query.token);
-  var id = req.params.id;
-  console.log('req ID');
-  console.log(id)
-  Contest.findOne({'idName': id})
-  .exec(function(err, contest) {
-    console.log('PATCH req contest after findOne');
-    console.log(contest);
-    if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-    }
-    var newRating = req.body.submitionRating;
-    var subId = req.body.submitionId;
-    console.log('newRating');
-    console.log(newRating);
-    console.log('submition ID');
-    console.log(subId);
-    for (let i=0; i<contest.submitions.length; i++) {
-      if(contest.submitions[i].submitionId == subId) {
-        contest.submitions[i].submitionRating = newRating;
-      }
-    }
-
-    contest.save(function(err, result) {
-      if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      res.status(200).json({
-        message: 'Reitingas pakeistas',
-        obj: result
-      });
-    });
-  });
-});
-
-router.get('/dizaineriai', function (req,res,next) {
-  User.find({'userType': 'dizaineris'})
- // .populate('contests')
-  .exec(function(err, docs) {
-    if (err) {
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: err
-      });
-      }
-      res.status(200).json({
-        message: 'Success',
-        obj: docs
-      });
-  });
-});
-
 var storage = multer.diskStorage({
   fileFilter: function (req, file, cb) { //not working
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -370,6 +177,188 @@ var storageForGallery = multer.diskStorage({
   }
 });
 
+router.get('/konkursai', function(req,res,next) {
+  Contest.find()
+    .populate('publisher', 'firstName')
+    .exec(function(err, docs) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      console.log('All contests:');
+      console.log(docs);
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
+router.get('/konkursai/:id', function(req,res,next) {
+  var id = req.params.id;
+  //Contest.findById(id)
+  Contest.findOne({'idName': id})
+    .populate('publisher', 'firstName')
+    .exec(function(err, docs) {
+      console.log('/konkursai/:id contest');
+      console.log(docs);
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
+router.get('/submitions/contest/:id', function(req, res, next) {
+  var id = req.params.id;
+  //Contest.findOne({'idName': id}, function(err, contest) {
+  Contest.findOne({'idName': id})
+  .populate('submitions.submitionAuthor')
+  .exec(function(err, contest) {
+    console.log('contest after findOne');
+    console.log(contest);
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    var submitions = [];
+    for (let i=0; i<contest.submitions.length; i++) {
+      if(contest.submitions[i].status == 'active') {
+        submitions.push(contest.submitions[i]);
+      }
+    }
+    //var submitions = contest.submitions;
+    console.log('submitions var');
+    console.log(submitions);
+    res.status(200).json({
+      message: 'submitions received',
+      submitions: submitions
+    });
+  });
+});
+
+router.get('/contest/:id/comments', function(req, res, next) {
+   var id = req.params.id;
+   Contest.findOne({'idName': id})
+   .populate('comments.commentAuthor')
+   .exec(function(err, contest){
+     console.log('contest/:id/comments GET req contest after findOne');
+     console.log(contest);
+     if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    res.status(200).json({
+        message: 'Komentarai gauti',
+        obj: contest
+      });
+   });
+});
+
+router.patch('/contest/:id', function(req,res,next) {
+  var id = req.params.id;
+  Contest.findOne({'idName': id})
+  .populate('comments.commentAuthor')
+  .exec(function(err, contest){
+    console.log('contest/:id PATCH req contest after findOne');
+    console.log(contest);
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log('/contest/:id req body');
+    console.log(req.body);
+    contest.comments.push(req.body);
+    console.log('/contest/:id comments');
+    console.log(contest.comments);
+    contest.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Komentaras ikeltas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/submitions/:id', function(req,res,next) {
+  var decoded = jwt.decode(req.query.token);
+  var id = req.params.id;
+  console.log('req ID');
+  console.log(id)
+  Contest.findOne({'idName': id})
+  .exec(function(err, contest) {
+    console.log('PATCH req contest after findOne');
+    console.log(contest);
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    var newRating = req.body.submitionRating;
+    var subId = req.body.submitionId;
+    console.log('newRating');
+    console.log(newRating);
+    console.log('submition ID');
+    console.log(subId);
+    for (let i=0; i<contest.submitions.length; i++) {
+      if(contest.submitions[i].submitionId == subId) {
+        contest.submitions[i].submitionRating = newRating;
+      }
+    }
+
+    contest.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Reitingas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.get('/dizaineriai', function (req,res,next) {
+  User.find({'userType': 'dizaineris'})
+ // .populate('contests')
+  .exec(function(err, docs) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+  });
+});
+
 router.get('/avatars/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
@@ -499,16 +488,16 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
     console.log('SUBMITIONS LENGTH');
     console.log(contest.submitions.length);
 
-    var submitionId = contest.submitions.length + 1;
+    //var submitionId = contest.submitions.length + 1;
 
     var fileNames = [];
     var submitions = [];
     console.log(req.files);
     for (let i=0; i<req.files.length; i++) {
+      var submitionId = contest.submitions.length + 1;
       fileNames.push(req.files[i].filename);
-      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId});
-      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId});
-      submitionId++;
+      submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId, status: "active"});
+      contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId, status: "active"});
       //fileNames.push(req.files[i]);
     }
     console.log('submitions array:');

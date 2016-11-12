@@ -40,7 +40,8 @@ var schema = new Schema({
     submitionUrl: {type: String},
     submitionRating: {type: Number},
     submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
-    submitionId: {type: Number}
+    submitionId: {type: Number},
+    status: {type: String} // active/deleted
   }],
   comments: [{
     comment: {type: String},
@@ -81,17 +82,17 @@ var schema = new Schema({
 //   });
 // });
 
-schema.plugin(autoIncrement.plugin, {
-  model: 'Contests',
-  field: 'submitions.submitionId',
-  startAt: 1,
-  incrementBy: 1
-});
+// schema.plugin(autoIncrement.plugin, {
+//   model: 'Contests',
+//   field: 'submitions.submitionId',
+//   startAt: 1,
+//   incrementBy: 1
+// });
 
 schema.plugin(autoIncrement.plugin, {
   model: 'Contests',
   field: 'uniqueId',
-  startAt: 1,
+  startAt: 10,
   incrementBy: 1
 });
 
