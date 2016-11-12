@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { User } from '../../models/user';
 import { ErrorService } from '../../errors/index';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -36,8 +37,16 @@ export class UserNavigationComponent implements OnInit {
     { value: 'uzsakovas', display: 'Užsakovas' },
     { value: 'dizaineris', display: 'Dizaineris' }
 ];
+  public options = {
+      position: ["bottom", "left"],
+      timeOut: 3000
+    };
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private errorService: ErrorService) { }
+  constructor(private router: Router, 
+              private authService: AuthService, 
+              private fb: FormBuilder, 
+              private errorService: ErrorService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
     this.loginForm = this.fb.group({
@@ -89,6 +98,7 @@ export class UserNavigationComponent implements OnInit {
          localStorage.setItem('token', data.token);
          localStorage.setItem('userId', data.userId);
          localStorage.setItem('userType', data.userType);
+         this.notificationsService.success('Teisingai', 'Sėkmingai prisijungta');
          this.router.navigateByUrl('/');
        },
        error => this.errorService.handleError(error))
@@ -122,5 +132,13 @@ export class UserNavigationComponent implements OnInit {
       let emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"); 
       return emailRegex.test(control.value) ? null : {invalidEmail: true}
       }
+
+      created(ev) {
+      console.log('notification created');
+    }
+
+    destroyed(ev) {
+      console.log('notification destroyed');
+    }
 
 }

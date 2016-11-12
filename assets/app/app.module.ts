@@ -10,6 +10,7 @@ import { MaterialModule } from '@angular/material';
 
 import { AlertModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { NavbarComponent, HeaderComponent, FooterComponent, 
   CategoriesComponent, DesignersComponent, HowItWorksComponent, 
@@ -42,7 +43,8 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
-             TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule ],
+             TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule,
+             SimpleNotificationsModule ],
   declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,

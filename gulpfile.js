@@ -58,6 +58,9 @@ gulp.task('vendor', function() {
   gulp.src('node_modules/angular2-fontawesome/**')
   .pipe(gulp.dest(vendor + "/angular2-fontawesome/"));
 
+  gulp.src('node_modules/angular2-notifications/**')
+  .pipe(gulp.dest(vendor + "/angular2-notifications/"));
+
   return gulp.src('node_modules/zone.js/**')
   .pipe(gulp.dest(vendor + "/zone.js/"));
 });
