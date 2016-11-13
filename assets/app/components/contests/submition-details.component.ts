@@ -4,6 +4,7 @@ import { ErrorService } from '../../errors/index';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -20,12 +21,16 @@ export class SubmitionDetailsComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
+    public options = {
+      position: ["top","right"]
+    };
     
   constructor(private apiService: ApiService, 
               private errorService: ErrorService,
               private contestsService: ContestsService, 
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
     // this.route.params.subscribe((params: Params) => {
@@ -41,7 +46,8 @@ export class SubmitionDetailsComponent implements OnInit {
             console.log(this.submitions);
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     //   console.log('ngOnInit submition details this.submitionS');
     //   console.log(this.submitions);
@@ -84,6 +90,8 @@ export class SubmitionDetailsComponent implements OnInit {
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                }, error => {
+                    this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
                 })
         }
     }

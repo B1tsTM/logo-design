@@ -38,8 +38,7 @@ export class UserNavigationComponent implements OnInit {
     { value: 'dizaineris', display: 'Dizaineris' }
 ];
   public options = {
-      position: ["bottom", "left"],
-      timeOut: 3000
+      position: ["top","right"]
     };
 
   constructor(private router: Router, 
@@ -98,10 +97,11 @@ export class UserNavigationComponent implements OnInit {
          localStorage.setItem('token', data.token);
          localStorage.setItem('userId', data.userId);
          localStorage.setItem('userType', data.userType);
-         this.notificationsService.success('Teisingai', 'Sėkmingai prisijungta');
+         this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
          this.router.navigateByUrl('/');
        },
-       error => this.errorService.handleError(error))
+       //error => this.errorService.handleError(error))
+       error => this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}))
     }
 
     register(form: any) {
@@ -116,8 +116,10 @@ export class UserNavigationComponent implements OnInit {
             form.nickName.value = '';
             form.email.value = '';
             form.password.value = '';
+            this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote', {timeOut: 3000, showProgressBar: false});
           },
-          error => this.errorService.handleError(error))
+          //error => this.errorService.handleError(error))
+          error => this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus', {timeOut: 3000, showProgressBar: false}))
     }
 
     isClient() {

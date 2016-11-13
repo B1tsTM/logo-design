@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Params, ActivatedRoute } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -21,12 +22,16 @@ export class CommentsSectionComponent implements OnInit {
    userId: string = '';
    user: any;
    contestId: string;
+   public options = {
+      position: ["top","right"]
+    };
    constructor(private contestsService: ContestsService,
               private errorService: ErrorService,
               private authService: AuthService,
               private apiService: ApiService,
               private fb: FormBuilder,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private notificationsService: NotificationsService) { 
                 
               }
               
@@ -54,7 +59,8 @@ export class CommentsSectionComponent implements OnInit {
         console.log(this.comments);
       },
       error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti komentarų', {timeOut: 3000, showProgressBar: false})
       });
       // this.commentsForm = this.fb.group({
       //   comment: ['']
@@ -75,9 +81,11 @@ export class CommentsSectionComponent implements OnInit {
         console.log('comments-section addComment comments var');
         console.log(comments);
         this.comments = comments;
+        this.notificationsService.success('Prisijungta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
       }, 
       error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko pridėti komentaro', {timeOut: 3000, showProgressBar: false})
       });
     this.commentField = '';
     console.log(this.comments);

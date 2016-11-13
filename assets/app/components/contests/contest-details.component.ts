@@ -8,6 +8,7 @@ import { ApiService } from '../../services/api.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import 'moment/min/locales';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -27,12 +28,16 @@ export class ContestDetailsComponent implements OnInit {
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
   momentDate: any;
+  public options = {
+      position: ["top","right"]
+    };
   constructor(private route: ActivatedRoute,
               private router: Router,
               private contestsService: ContestsService,
               private errorService: ErrorService,
               private authService: AuthService,
-              private apiService: ApiService) { }
+              private apiService: ApiService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
       
@@ -51,7 +56,8 @@ export class ContestDetailsComponent implements OnInit {
         console.log(this.contest);
       }, 
       error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso informacijos', {timeOut: 3000, showProgressBar: false})
       });
     this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
@@ -61,7 +67,8 @@ export class ContestDetailsComponent implements OnInit {
             console.log(this.submitions);
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
       });
       if (this.isLoggedIn()) {
         this.apiService.getMySubmitions(this.contestId)
@@ -73,7 +80,8 @@ export class ContestDetailsComponent implements OnInit {
             console.log(this.mySubmitions);
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     }
 
@@ -111,9 +119,11 @@ export class ContestDetailsComponent implements OnInit {
             console.log(submitions);
             this.submitions = submitions;
             console.log(this.submitions);
+            this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti dizainų', {timeOut: 3000, showProgressBar: false})
         });
         //end of reloading submitions
         // --------------------------
@@ -127,7 +137,8 @@ export class ContestDetailsComponent implements OnInit {
             console.log(this.mySubmitions);
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
         //end of reloading my submitions
         }, (error) => {
@@ -190,6 +201,7 @@ export class ContestDetailsComponent implements OnInit {
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                    this.notificationsService.success('Atnaujinta', 'Reitingas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false})
                 })
         }
     }

@@ -3,6 +3,7 @@ import { ContestsService } from '../../services/contests.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../errors/index';
 import { Contest } from '../../models/contest';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class MyContestsComponent implements OnInit {
   id: string = '';
   constructor(private contestsService: ContestsService, 
               private errorService: ErrorService, 
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
     this.id = localStorage.getItem('userId');
@@ -26,6 +28,8 @@ export class MyContestsComponent implements OnInit {
       this.contests = contests;
       this.contestsService.contests = contests;
       console.log(this.contests);
+    }, error => {
+      this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
     });
   }
 

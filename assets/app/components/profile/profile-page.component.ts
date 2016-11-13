@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,10 @@ export class ProfilePageComponent implements OnInit {
   filesToUpload: File[];
   percent = "0";
   id = '';
-  constructor(private authService: AuthService) {
+  public options = {
+      position: ["top","right"]
+    };
+  constructor(private authService: AuthService, private notificationsService: NotificationsService) {
     this.filesToUpload = [];
    }
 
@@ -21,6 +25,8 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.avatarUrl = data.avatarUrl;
+      }, error => {
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
       });
   }
 
@@ -31,6 +37,8 @@ export class ProfilePageComponent implements OnInit {
               .subscribe(data => {
               console.log(data);
               this.avatarUrl = data.avatarUrl;
+            }, error => {
+                this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
             });
             this.filesToUpload = [];
         }, (error) => {

@@ -20,3 +20,5 @@
 <div *ngIf="isClient() && !isContestPublisher(contest.publisher._id)">
   <strong>Comments are only visible to designers and publisher</strong>
 </div>
+
+<simple-notifications [options]="options"></simple-notifications>

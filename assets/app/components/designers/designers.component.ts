@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DesignersService } from '../../services/designers.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +10,10 @@ import { DesignersService } from '../../services/designers.service';
 })
 export class DesignersComponent implements OnInit {
   designers: any;
-  constructor(private designersService: DesignersService) { }
+  public options = {
+      position: ["top","right"]
+    };
+  constructor(private designersService: DesignersService, private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
     this.designersService.getDesigners()
@@ -17,6 +21,8 @@ export class DesignersComponent implements OnInit {
       this.designers = designers;
       this.designersService.designers = designers;
       console.log(this.designers);
+    }, error => {
+      this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti dizainerių informacijos', {timeOut: 3000, showProgressBar: false})
     });
 
   }

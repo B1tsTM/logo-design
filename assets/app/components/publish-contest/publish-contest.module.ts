@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { PublishContestDashboardComponent } from './publish-contest-dashboard/publish-contest-dashboard.component';
 import { BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent } from './logo-and-business-cards/index';
@@ -36,7 +37,7 @@ import { publishContestRouting } from './publish-contest.routing';
 @NgModule({
   imports: [
     CommonModule, InputTextModule, ReactiveFormsModule, FormsModule,
-    publishContestRouting, MaterialModule.forRoot()
+    publishContestRouting, SimpleNotificationsModule, MaterialModule.forRoot()
   ],
   declarations: [
     PublishContestDashboardComponent, BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent,

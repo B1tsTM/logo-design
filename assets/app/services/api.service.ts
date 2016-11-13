@@ -98,7 +98,8 @@ export class ApiService {
       console.log('api service getComments comments var');
       console.log(comments);
       return comments;
-    });
+    })
+    .catch(error => Observable.throw(error.json()));
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Contest } from '../../models/contest';
 import { ContestsService } from '../../services/contests.service';
 import { ErrorService } from '../../errors/index';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,12 @@ import { ErrorService } from '../../errors/index';
 export class ContestsComponent implements OnInit {
   contest: Contest = null;
   contests: any = [];
-  constructor(private contestsService: ContestsService, private errorService: ErrorService) {
+  public options = {
+      position: ["top","right"]
+    };
+  constructor(private contestsService: ContestsService, 
+              private errorService: ErrorService,
+              private notificationsService: NotificationsService) {
     
   }
 
@@ -24,6 +30,8 @@ export class ContestsComponent implements OnInit {
       this.contests = contests;
       this.contestsService.contests = contests;
       console.log(this.contests);
+    }, error => {
+      this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
     });
    }
 

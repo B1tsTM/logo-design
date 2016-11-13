@@ -4,6 +4,7 @@ import { ContestsService } from '../../../../services/contests.service';
 import { ErrorService } from '../../../../errors/index';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -15,8 +16,15 @@ export class LogoAndBusinessCardComponent implements OnInit {
   contest: Contest = null;
   contests: any = [];
   public contestForm: FormGroup;
+  public options = {
+      position: ["top","right"]
+    };
 
-  constructor(private contestsService: ContestsService, private errorService: ErrorService, private fb: FormBuilder, private router: Router) {
+  constructor(private contestsService: ContestsService, 
+              private errorService: ErrorService, 
+              private fb: FormBuilder, 
+              private router: Router,
+              private notificationsService: NotificationsService) {
     
   }
 
@@ -36,7 +44,8 @@ export class LogoAndBusinessCardComponent implements OnInit {
       console.log(this.contests);
     },
     error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
         });
 
     // this.contestsService.contestEdited
@@ -59,13 +68,13 @@ export class LogoAndBusinessCardComponent implements OnInit {
           console.log(data);
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
         })
       this.contest = null;
 
     } else {
       console.log(form);
-      //const contest: any = {contests: input, type: 'Logo', designer: 'John Lohke'};
       const contest = new Contest(form.contestName.value, null, null, null, form.contestCategory.value, form.contestDescription.value, form.contestAward.value, 'active', 10, 5, Date.now(), Date.now());
       console.log(contest);
       this.contestsService.addContest(contest)
@@ -75,9 +84,11 @@ export class LogoAndBusinessCardComponent implements OnInit {
           form.contestName.value = '';
           form.contestDescription.value = '';
           form.contestAward.value = '';
+          this.notificationsService.success('Įkelta', 'Konkursas įkeltas', {timeOut: 3000, showProgressBar: false})
         },
         error => {
-          this.errorService.handleError(error);
+          //this.errorService.handleError(error);
+          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
         });
     }
   }
