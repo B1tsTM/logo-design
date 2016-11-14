@@ -15,6 +15,7 @@ export class MailCreateForUserComponent implements OnInit {
   results:any;
   userId: string;
   sender: any;
+  topic: string;
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit() { 
@@ -31,7 +32,7 @@ export class MailCreateForUserComponent implements OnInit {
   }
 
   sendMessage() {
-    this.apiService.sendMessage(this.nickname, this.message)
+    this.apiService.sendMessage(this.nickname, this.topic, this.message)
       .subscribe(res => {
         console.log(res);
       });

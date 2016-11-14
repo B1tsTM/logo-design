@@ -5,6 +5,8 @@
     <label>Gavėjas</label>
     <!--<input type="text" class="form-control" name="nickname" [(ngModel)]="nickname">-->
     <p-autoComplete [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete>
+    <label for="topic">Tema</label>
+    <input type="text" class="form-control" name="topic" [(ngModel)]="topic">
     <label for="message">Žinutė</label>
     <textarea class="form-control" rows="8" cols="40" name="message" [(ngModel)]="message"></textarea>
     <button type="button" (click)="sendMessage()">Siųsti žinutę</button>

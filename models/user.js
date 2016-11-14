@@ -15,8 +15,9 @@ var schema = new Schema({
   contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
   messages: [{
     messageId: {type: Number},
+    topic: {type: String},
     message: {type: String},
-    sender: {type: Schema.Types.ObjectId, ref: 'Contests'},
+    sender: {type: Schema.Types.ObjectId, ref: 'User'},
     recipient: {type: String},
     timeSent: {type: Date, default: Date.now()},
     status: {type: String} //neperziureta, perziureta, issiusta

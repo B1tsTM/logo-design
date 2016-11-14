@@ -2,3 +2,13 @@
 
 <a routerLink="/profilis/pastas/rasyti-laiska">Rasyti laiska</a>
 <a routerLink="/profilis/pastas/rasyti-laiska/user">Rasyti laiska vartotojui 'user'</a>
+
+<h2>Žinutės:</h2>
+<div *ngIf="messages.length == 0">Žinučių nėra</div>
+<div *ngIf="messages.length > 0">
+  <div *ngFor="let message of messages">
+    <div>
+      {{message?.message}} - {{message?.sender?.nickName}}
+    </div>
+  </div>
+</div>

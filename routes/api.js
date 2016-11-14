@@ -283,6 +283,26 @@ router.get('/contest/:id/comments', function(req, res, next) {
    });
 });
 
+router.get('/messages/:userId', function(req,res,next) {
+  var userId = req.params.userId;
+  User.findById(userId)
+  .populate('messages.sender')
+  .exec(function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log('user for messages');
+    console.log(user);
+    res.status(200).json({
+        message: 'Zinutes gautos',
+        obj: user
+    });
+  });
+});
+
 router.patch('/message/:recipient', function(req, res, next) {
   console.log('REQ BODY');
   console.log(req.body);
