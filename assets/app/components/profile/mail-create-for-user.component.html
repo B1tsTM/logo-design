@@ -1,0 +1,23 @@
+<h1>Mail for user: {{nickname | json}}</h1>
+
+<form>
+  <div class="form-group">
+    <label>Gavėjas</label>
+    <!--<input type="text" class="form-control" name="nickname" [(ngModel)]="nickname">-->
+    <p-autoComplete [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete>
+    <label for="message">Žinutė</label>
+    <textarea class="form-control" rows="8" cols="40" name="message" [(ngModel)]="message"></textarea>
+    <button type="button" (click)="sendMessage()">Siųsti žinutę</button>
+    <button type="button" (click)="searchUsers()">Search users</button>
+  </div>
+</form>
+
+
+
+<!--<form [formGroup]="mailForm" (ngSubmit)="sendMail(f)" #f>
+  <div class="form-group">
+    <label for="nickname">Gavėjas</label>
+    <input type="text" class="form-control" formControlName="nickname">
+  </div>
+
+</form>-->

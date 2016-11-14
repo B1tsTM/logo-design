@@ -6,7 +6,7 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
-        MailCreateComponent } from './components/index';
+        MailCreateComponent, MailCreateForUserComponent } from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
@@ -31,7 +31,10 @@ const appRoutes: Routes = [
     {path: '', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
     {path: 'pastas', children: [
       {path: '', component: MailListComponent, canActivateChild: [CanActivateOnLoginService]},
-      {path: 'rasyti-laiska', component: MailCreateComponent, canActivateChild: [CanActivateOnLoginService]}
+      {path: 'rasyti-laiska', children: [
+        {path: '', component: MailCreateComponent, canActivateChild: [CanActivateOnLoginService]},
+        {path: ':nickname', component: MailCreateForUserComponent, canActivateChild: [CanActivateOnLoginService]}
+        ]}
       ]}
     ]},
   { path: 'nerasta', component: PageNotFoundComponent },

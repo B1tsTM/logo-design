@@ -102,4 +102,22 @@ export class ApiService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  searchUsers(searchStr) {
+    return this.http.get('http://localhost:3000/api/v1/search/' + searchStr)
+      .map(res => res.json().obj)
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  sendMessage(recipient, message) {
+    var sender = localStorage.getItem('userId');
+    var obj = {message: message, recipient: recipient, sender: sender};
+    const body = JSON.stringify(obj);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/message/' + recipient, body, {headers: headers})
+      .map(res => {
+        res => res.json().obj
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
 }

@@ -5,7 +5,7 @@ import { routing,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent }  from './app.component';
-import { TabViewModule, InputTextModule } from 'primeng/primeng';
+import { TabViewModule, InputTextModule, AutoCompleteModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';
 
 import { AlertModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
@@ -17,7 +17,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
-  ContestDetailsComponent, MailListComponent, MailCreateComponent } from './components/index';
+  ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -44,7 +44,7 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
              TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule,
-             SimpleNotificationsModule ],
+             SimpleNotificationsModule, AutoCompleteModule ],
   declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
@@ -53,7 +53,7 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
                   ProfilePageComponent, MyContestsComponent, ContestDetailsComponent,
                   LocalDateFromNowPipe, LocalDateStandartPipe, StarRatingComponent,
                   SubmitionDetailsComponent, CommentsSectionComponent, MailListComponent,
-                  MailCreateComponent ],
+                  MailCreateComponent, MailCreateForUserComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService ]

@@ -13,6 +13,11 @@ var schema = new Schema({
   designsCreated: {type: Number},
   publicDesigns: {type: Number},
   contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
+  messages: [{
+    message: {type: String},
+    sender: {type: String},
+    recipient: {type: String}
+  }],
   designs: [{
     designUrl: {type: String},
     designIsPublic: {type: Boolean}

@@ -217,6 +217,22 @@ router.get('/konkursai/:id', function(req,res,next) {
     });
 });
 
+router.get('/search/:searchStr', function(req,res,next) {
+  var searchStr = req.params.searchStr;
+  User.find({nickName: new RegExp(searchStr, "i")}, function(err, users) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: users
+      });
+  });
+});
+
 router.get('/submitions/contest/:id', function(req, res, next) {
   var id = req.params.id;
   //Contest.findOne({'idName': id}, function(err, contest) {
@@ -265,6 +281,37 @@ router.get('/contest/:id/comments', function(req, res, next) {
         obj: contest
       });
    });
+});
+
+router.patch('/message/:recipient', function(req, res, next) {
+  console.log('REQ BODY');
+  console.log(req.body);
+  var recipient = req.params.recipient;
+  var sender = req.body.sender;
+  User.findOne({'nickName': recipient})
+  .exec(function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    console.log('RECIPIENT');
+    console.log(user);
+    user.messages.push(req.body);
+    user.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Zinute issiusta',
+        obj: user
+      });
+    });
+  });
 });
 
 router.patch('/contest/:id', function(req,res,next) {
