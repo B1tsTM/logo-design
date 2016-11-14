@@ -19,3 +19,4 @@ export * from './profile/profile-page.component';
 export * from './profile/mail-list.component';
 export * from './profile/mail-create.component';
 export * from './profile/mail-create-for-user.component';
+export * from './profile/read-message.component';

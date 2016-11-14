@@ -124,12 +124,6 @@ export class ApiService {
     return this.http.get('http://localhost:3000/api/v1/messages/' + userId)
       .map(res => {
         return res.json().obj.messages;
-        // let messages = [];
-        // const data = res.json().obj;
-        // for(let i=0; i<data.length; i++) {
-        //   messages.push(data[i].messages);
-        // }
-        // return messages;
       })
       .catch(error => Observable.throw(error.json()));
   }

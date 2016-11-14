@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,7 @@ import { ApiService } from '../../services/api.service';
 export class MailListComponent implements OnInit {
   messages = [];
   userId: string;
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() { 
     this.userId = localStorage.getItem('userId');
@@ -20,5 +21,9 @@ export class MailListComponent implements OnInit {
         console.log('THIS.MESSAGES');
         console.log(this.messages);
       });
+  }
+
+  viewMessage(messageId: number) {
+    this.router.navigate(['zinutes', messageId], {relativeTo: this.route})
   }
 }

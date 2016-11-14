@@ -17,7 +17,8 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
-  ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent } from './components/index';
+  ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent,
+  ReadMessageComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -53,7 +54,7 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
                   ProfilePageComponent, MyContestsComponent, ContestDetailsComponent,
                   LocalDateFromNowPipe, LocalDateStandartPipe, StarRatingComponent,
                   SubmitionDetailsComponent, CommentsSectionComponent, MailListComponent,
-                  MailCreateComponent, MailCreateForUserComponent],
+                  MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService ]

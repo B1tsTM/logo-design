@@ -7,7 +7,7 @@
 <div *ngIf="messages.length == 0">Žinučių nėra</div>
 <div *ngIf="messages.length > 0">
   <div *ngFor="let message of messages">
-    <div>
+    <div (click)="viewMessage(message.messageId)">
       {{message?.message}} - {{message?.sender?.nickName}}
     </div>
   </div>
