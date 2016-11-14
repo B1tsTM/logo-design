@@ -128,4 +128,13 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  deleteMessage(messageId: number) {
+    var userId = localStorage.getItem('userId');
+    return this.http.delete('http://localhost:3000/api/v1/message/' + userId + '/' + messageId)
+    .map(res => {
+      return res.json().obj.messages;
+    })
+    .catch(error => Observable.throw(error.json()));
+  }
+
 }

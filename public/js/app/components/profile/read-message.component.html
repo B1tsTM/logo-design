@@ -1,2 +1,11 @@
 <h1>Read message</h1>
-ID: {{messageId}}
+<div *ngIf="!message">No message loaded / Message deleted</div>
+<div *ngIf="message">
+  <div>Sent by: {{message.sender.nickName}}</div>
+  <div>Message: {{message.message}}</div>
+</div>
+
+<button type="button" (click)="reply()">Reply</button>
+<button type="button" (click)="deleteMessage()">Delete</button>
+
+<simple-notifications [options]="options"></simple-notifications>
