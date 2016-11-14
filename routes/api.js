@@ -288,6 +288,19 @@ router.patch('/message/:recipient', function(req, res, next) {
   console.log(req.body);
   var recipient = req.params.recipient;
   var sender = req.body.sender;
+  User.findById(sender, function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    req.body.messageId = user.messages.length + 1;
+    req.body.status = 'Išsiųsta';
+    user.messages.push(req.body);
+    user.save();
+    console.log('Message added to senders messages list');
+  });
   User.findOne({'nickName': recipient})
   .exec(function(err, user) {
     if (err) {
@@ -298,6 +311,8 @@ router.patch('/message/:recipient', function(req, res, next) {
     }
     console.log('RECIPIENT');
     console.log(user);
+    req.body.status = 'Neperžiūrėta';
+    req.body.messageId = user.messages.length + 1;
     user.messages.push(req.body);
     user.save(function(err, result) {
       if (err) {
@@ -308,7 +323,7 @@ router.patch('/message/:recipient', function(req, res, next) {
       }
       res.status(200).json({
         message: 'Zinute issiusta',
-        obj: user
+        obj: result
       });
     });
   });

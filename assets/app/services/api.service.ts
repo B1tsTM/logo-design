@@ -115,7 +115,7 @@ export class ApiService {
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/api/v1/message/' + recipient, body, {headers: headers})
       .map(res => {
-        res => res.json().obj
+          return res.json().obj;
       })
       .catch(error => Observable.throw(error.json()));
   }

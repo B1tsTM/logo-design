@@ -14,9 +14,12 @@ var schema = new Schema({
   publicDesigns: {type: Number},
   contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
   messages: [{
+    messageId: {type: Number},
     message: {type: String},
-    sender: {type: String},
-    recipient: {type: String}
+    sender: {type: Schema.Types.ObjectId, ref: 'Contests'},
+    recipient: {type: String},
+    timeSent: {type: Date, default: Date.now()},
+    status: {type: String} //neperziureta, perziureta, issiusta
   }],
   designs: [{
     designUrl: {type: String},
