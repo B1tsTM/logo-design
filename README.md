@@ -1,5 +1,4 @@
-Open working directory:
-1. npm run gulp
-2. Open MongoD shell
+1. open working directory
+2. npm run gulp
 3. npm start
 4. check http://localhost:3000

@@ -5,7 +5,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
-         ProfilePageComponent, MyContestsComponent, ContestDetailsComponent } from './components/index';
+         ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
+        MailCreateComponent } from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
@@ -25,7 +26,14 @@ const appRoutes: Routes = [
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
   { path: 'prisijungti', component: LoginComponent },
   { path: 'registracija', component: RegisterComponent },
-  { path: 'profilis', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
+  //{ path: 'profilis', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
+  { path: 'profilis', children: [
+    {path: '', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
+    {path: 'pastas', children: [
+      {path: '', component: MailListComponent, canActivateChild: [CanActivateOnLoginService]},
+      {path: 'rasyti-laiska', component: MailCreateComponent, canActivateChild: [CanActivateOnLoginService]}
+      ]}
+    ]},
   { path: 'nerasta', component: PageNotFoundComponent },
   { path: '', component: HeaderComponent },
   { path: '**', redirectTo: 'nerasta' }

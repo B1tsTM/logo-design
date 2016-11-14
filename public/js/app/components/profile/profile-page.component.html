@@ -1,11 +1,15 @@
 <h1>Profile page</h1>
 
 <!--<img src="http://localhost:3000/uploads/avatar/avatar.jpg" alt="Image"> -->
-<img *ngIf="avatarUrl" src="http://localhost:3000/uploads/avatars/{{avatarUrl}}" alt="Image">
+<img *ngIf="avatarUrl" src="http://localhost:3000/uploads/avatars/{{avatarUrl}}" alt="Avatar">
 <img *ngIf="!avatarUrl" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Nėra avataro">
-
+<div>
 <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+</div>
+<div>
 <button type="button" (click)="upload()">Upload</button>
 {{percent}}
+</div>
+<a routerLink="/profilis/pastas">Pastas</a>
 
 <simple-notifications [options]="options"></simple-notifications>

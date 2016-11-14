@@ -16,3 +16,5 @@ export * from './register/register.component';
 export * from './winners-gallery/winners-gallery.component';
 export * from './publish-contest/publish-contest.component';
 export * from './profile/profile-page.component';
+export * from './profile/mail-list.component';
+export * from './profile/mail-create.component';
