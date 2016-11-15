@@ -23,3 +23,4 @@ export * from './profile/read-message.component';
 export * from './profile/sent-mail.component';
 export * from './shared/fading-spinner.component';
 export * from './shared/fading-circle.component';
+export * from './shared/test-spinner.component';

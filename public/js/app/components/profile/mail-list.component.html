@@ -10,7 +10,7 @@
 <div *ngIf="messages.length > 0">
   <div *ngFor="let message of messages">
     <div (click)="viewMessage(message.messageId)">
-      {{message?.message}} - {{message?.sender?.nickName}}
+      {{message?.topic}} - {{message?.sender?.nickName}}
     </div>
   </div>
 </div>

@@ -12,9 +12,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SentMailComponent implements OnInit {
   messages = [];
   userId: string;
+  loading: boolean = false;
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() { 
+    this.loading = true;
     this.userId = localStorage.getItem('userId');
     this.apiService.getMessages(this.userId)
       .subscribe(messages => {

@@ -47,8 +47,8 @@ export class MailCreateForUserComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
-        //this.router.navigate(['/profilis', 'pastas']);
-        //this.loading = false;
+        this.loading = false;
+        this.router.navigate(['/profilis', 'pastas']);
       }, error => {
         this.notificationsService.error('Įvyko klaida', 'Nepavyko išsiųsti žinutės', {timeOut: 3000, showProgressBar: false})
       });
