@@ -1,18 +1,30 @@
-<h1>Mail for user: {{nickname | json}}</h1>
+<!--<h1>Mail for user: {{nickname | json}}</h1>-->
+<h1>Rašyti laišką</h1>
 
 <form>
   <div class="form-group">
     <label>Gavėjas</label>
     <!--<input type="text" class="form-control" name="nickname" [(ngModel)]="nickname">-->
     <p-autoComplete [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete>
+  </div>
+  <div>
     <label for="topic">Tema</label>
     <input type="text" class="form-control" name="topic" [(ngModel)]="topic">
-    <label for="message">Žinutė</label>
-    <textarea class="form-control" rows="8" cols="40" name="message" [(ngModel)]="message"></textarea>
+  </div>
+  <div>
+    <div><label for="message">Žinutė</label></div>
+    <textarea class="form-control" rows="5" cols="40" name="message" [(ngModel)]="message"></textarea>
+  </div>
+  <div>
     <button type="button" (click)="sendMessage()">Siųsti žinutę</button>
-    <button type="button" (click)="searchUsers()">Search users</button>
   </div>
 </form>
+
+<div>
+  <button type="button" (click)="goBack()">Grįžti atgal</button>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
 
 
 

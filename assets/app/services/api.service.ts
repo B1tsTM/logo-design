@@ -123,7 +123,7 @@ export class ApiService {
   getMessages(userId: string) {
     return this.http.get('http://localhost:3000/api/v1/messages/' + userId)
       .map(res => {
-        return res.json().obj.messages;
+        return res.json().obj.messages; //no filtering
       })
       .catch(error => Observable.throw(error.json()));
   }

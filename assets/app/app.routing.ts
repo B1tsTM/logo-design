@@ -6,7 +6,7 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
-        MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent } from './components/index';
+        MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent } from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
@@ -31,6 +31,7 @@ const appRoutes: Routes = [
     {path: '', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
     {path: 'pastas', children: [
       {path: '', component: MailListComponent, canActivateChild: [CanActivateOnLoginService]},
+      {path: 'issiusta', component: SentMailComponent, canActivateChild: [CanActivateOnLoginService]},
       {path: 'zinutes', children: [
         {path: '', component: MailListComponent, canActivateChild: [CanActivateOnLoginService]},
         {path: ':messageId', component: ReadMessageComponent, canActivateChild: [CanActivateOnLoginService]}

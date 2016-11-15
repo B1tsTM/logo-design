@@ -54,4 +54,8 @@ export class ReadMessageComponent implements OnInit {
       });
   }
 
+  goBack() {
+    this.router.navigate(['/profilis', 'pastas']);
+  }
+
 }

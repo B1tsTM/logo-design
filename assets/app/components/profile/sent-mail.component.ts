@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   moduleId: module.id,
-  selector: 'mail-list',
-  templateUrl: 'mail-list.component.html',
-  styleUrls: ['mail-list.component.css']
+  selector: 'sent-mail',
+  templateUrl: 'sent-mail.component.html',
+  styleUrls: ['sent-mail.component.css']
 })
-export class MailListComponent implements OnInit {
+export class SentMailComponent implements OnInit {
   messages = [];
   userId: string;
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
@@ -17,10 +18,9 @@ export class MailListComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.apiService.getMessages(this.userId)
       .subscribe(messages => {
-        
         let filteredMessages = [];
         for (let i=0; i<messages.length; i++) {
-          if(messages[i].status == 'Neperžiūrėta' || messages[i].status == 'Peržiūrėta') {
+          if(messages[i].status == 'Išsiųsta') {
             filteredMessages.push(messages[i]);
           }
         }
@@ -31,6 +31,10 @@ export class MailListComponent implements OnInit {
   }
 
   viewMessage(messageId: number) {
-    this.router.navigate(['zinutes', messageId], {relativeTo: this.route})
+    this.router.navigate(['../zinutes', messageId], {relativeTo: this.route})
+  }
+
+  goBack() {
+    this.router.navigate(['/profilis', 'pastas']);
   }
 }
