@@ -21,3 +21,5 @@ export * from './profile/mail-create.component';
 export * from './profile/mail-create-for-user.component';
 export * from './profile/read-message.component';
 export * from './profile/sent-mail.component';
+export * from './shared/fading-spinner.component';
+export * from './shared/fading-circle.component';

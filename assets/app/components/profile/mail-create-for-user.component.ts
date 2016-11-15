@@ -17,6 +17,7 @@ export class MailCreateForUserComponent implements OnInit {
   userId: string;
   sender: any;
   topic: string;
+  loading: boolean = false;
   public options = {
       position: ["top","right"]
     };
@@ -41,11 +42,13 @@ export class MailCreateForUserComponent implements OnInit {
   }
 
   sendMessage() {
+    this.loading = true;
     this.apiService.sendMessage(this.nickname, this.topic, this.message)
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
-        this.router.navigate(['/profilis', 'pastas']);
+        //this.router.navigate(['/profilis', 'pastas']);
+        //this.loading = false;
       }, error => {
         this.notificationsService.error('Įvyko klaida', 'Nepavyko išsiųsti žinutės', {timeOut: 3000, showProgressBar: false})
       });
