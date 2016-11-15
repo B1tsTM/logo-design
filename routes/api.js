@@ -303,6 +303,38 @@ router.get('/messages/:userId', function(req,res,next) {
   });
 });
 
+router.patch('/message/:userId/:messageId', function(req, res, next) {
+  var userId = req.params.userId;
+  var messageId = req.params.messageId;
+  User.findById(userId, function(err, user) {
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    for(let i=0; i<user.messages.length; i++) {
+      if(user.messages[i].messageId == messageId) {
+        if(user.messages[i].status == 'Neperžiūrėta') {
+          user.messages[i].status = req.body.status;
+        }
+      }
+    }
+    user.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Zinutes statusas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
 router.patch('/message/:recipient', function(req, res, next) {
   console.log('REQ BODY');
   console.log(req.body);
@@ -778,7 +810,9 @@ router.delete('/message/:userId/:messageId', function(req, res, next) {
       }
       for(let i=0; i<user.messages.length; i++) {
       if(user.messages[i].messageId == messageId) {
-        user.messages.splice(i, 1);
+        //user.messages.splice(i, 1);
+        //delete user.messages[i]; //why doesn't this work?
+        user.messages[i].status = 'Ištrinta';
         console.log('deleted message with id of ' + i);
       }
     }

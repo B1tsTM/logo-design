@@ -31,6 +31,12 @@ export class MailListComponent implements OnInit {
   }
 
   viewMessage(messageId: number) {
+    this.apiService.changeMessageStatus(this.userId, messageId)
+      .subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.error(error);
+      });
     this.router.navigate(['zinutes', messageId], {relativeTo: this.route})
   }
 }

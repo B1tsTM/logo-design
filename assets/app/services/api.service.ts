@@ -137,4 +137,14 @@ export class ApiService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  changeMessageStatus(userId, messageId) {
+    const body = JSON.stringify({status: 'Peržiūrėta'});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/message/' + userId + '/' + messageId, body, {headers: headers})
+      .map(res => {
+        return res.json();
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
 }
