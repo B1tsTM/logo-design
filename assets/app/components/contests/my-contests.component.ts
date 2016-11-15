@@ -16,6 +16,9 @@ export class MyContestsComponent implements OnInit {
   contests: any = [];
   contest: Contest = null;
   id: string = '';
+  public options = {
+      position: ["top","right"]
+    };
   constructor(private contestsService: ContestsService, 
               private errorService: ErrorService, 
               private authService: AuthService,
