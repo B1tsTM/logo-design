@@ -12,6 +12,7 @@ export class ProfilePageComponent implements OnInit {
   filesToUpload: File[];
   percent = "0";
   id = '';
+  isLoading = false;
   public options = {
       position: ["top","right"]
     };
@@ -20,23 +21,27 @@ export class ProfilePageComponent implements OnInit {
    }
 
   ngOnInit() { 
+      this.isLoading = true;
     this.id = localStorage.getItem('userId');
     this.authService.getAvatar(this.id)
       .subscribe(data => {
         console.log(data);
         this.avatarUrl = data.avatarUrl;
+        this.isLoading = false;
       }, error => {
           this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
       });
   }
 
   upload() {
-        this.makeFileRequest("http://localhost:3000/api/v1/avatars/"+this.id, [], this.filesToUpload).then((result) => {
+      this.isLoading = true;
+        this.makeFileRequest("http://localhost:3000/api/v1/avatars/"+this.id, this.filesToUpload).then((result) => {
             console.log(result);
             this.authService.getAvatar(this.id)
               .subscribe(data => {
               console.log(data);
               this.avatarUrl = data.avatarUrl;
+              this.isLoading = false;
             }, error => {
                 this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
             });
@@ -55,7 +60,7 @@ export class ProfilePageComponent implements OnInit {
         console.log(this.filesToUpload);
     }
  
-    makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+    makeFileRequest(url: string, files: Array<File>) {
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();

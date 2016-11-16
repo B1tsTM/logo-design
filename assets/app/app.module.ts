@@ -19,7 +19,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
   ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent,
   ReadMessageComponent, SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-  TestSpinnerComponent } from './components/index';
+  TestSpinnerComponent, TestLoaderComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -57,7 +57,7 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
                   SubmitionDetailsComponent, CommentsSectionComponent, MailListComponent,
                   MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent,
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-                  TestSpinnerComponent],
+                  TestSpinnerComponent, TestLoaderComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService ]

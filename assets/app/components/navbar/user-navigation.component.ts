@@ -28,6 +28,7 @@ export class UserNavigationComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
+    isLoading = false;
  //   css: boolean = false;
 
   public loginForm: FormGroup;
@@ -87,6 +88,7 @@ export class UserNavigationComponent implements OnInit {
     }
 
     login(form: any) {
+      this.isLoading = true;
        const user = new User(form.nickName.value, form.password.value);
        console.log('user-navigation login user const');
        console.log(user);
@@ -97,14 +99,19 @@ export class UserNavigationComponent implements OnInit {
          localStorage.setItem('token', data.token);
          localStorage.setItem('userId', data.userId);
          localStorage.setItem('userType', data.userType);
+         this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
          this.router.navigateByUrl('/');
        },
        //error => this.errorService.handleError(error))
-       error => this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}))
+       error => {
+         this.isLoading = false; 
+         this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}) 
+      })
     }
 
     register(form: any) {
+      this.isLoading = true;
       //const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName, 0, 0, 0);
       //const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0, 0);
       const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0, 0);
@@ -116,10 +123,15 @@ export class UserNavigationComponent implements OnInit {
             form.nickName.value = '';
             form.email.value = '';
             form.password.value = '';
+            this.isLoading = false;
             this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote', {timeOut: 3000, showProgressBar: false});
           },
           //error => this.errorService.handleError(error))
-          error => this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus', {timeOut: 3000, showProgressBar: false}))
+          
+          error => { 
+            this.isLoading = false;
+            this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus', {timeOut: 3000, showProgressBar: false})
+        }) 
     }
 
     isClient() {

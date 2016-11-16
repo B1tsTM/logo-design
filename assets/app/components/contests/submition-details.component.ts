@@ -21,6 +21,7 @@ export class SubmitionDetailsComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
+    isLoading = false;
     public options = {
       position: ["top","right"]
     };
@@ -33,6 +34,7 @@ export class SubmitionDetailsComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
+      this.isLoading = true;
     // this.route.params.subscribe((params: Params) => {
     //   this.contestId = params['id'];
     //   console.log('ngOnInit params id (contestId)');
@@ -43,10 +45,12 @@ export class SubmitionDetailsComponent implements OnInit {
             console.log('submitions from apiservice in submition-details');
             console.log(submitions);
             this.submitions = submitions;
+            this.isLoading = false;
             console.log(this.submitions);
         },
         error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     //   console.log('ngOnInit submition details this.submitionS');
@@ -80,6 +84,7 @@ export class SubmitionDetailsComponent implements OnInit {
     }
 
     onRating(obj: any) {
+        this.isLoading = true;
         var submition = this.submitions.filter((item: any) => item.submitionId == obj.submitionId);
         console.log('onRating() submition after filter');
         console.log(submition);
@@ -90,7 +95,9 @@ export class SubmitionDetailsComponent implements OnInit {
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                    this.isLoading = false;
                 }, error => {
+                    this.isLoading = false;
                     this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
                 })
         }

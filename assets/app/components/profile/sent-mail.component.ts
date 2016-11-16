@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -12,11 +13,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SentMailComponent implements OnInit {
   messages = [];
   userId: string;
-  loading: boolean = false;
-  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
+  isLoading: boolean = false;
+  public options = {
+      position: ["top","right"]
+    };
+  constructor(private apiService: ApiService, 
+              private router: Router, 
+              private route: ActivatedRoute
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
-    this.loading = true;
+    this.isLoading = true;
     this.userId = localStorage.getItem('userId');
     this.apiService.getMessages(this.userId)
       .subscribe(messages => {
@@ -27,8 +34,12 @@ export class SentMailComponent implements OnInit {
           }
         }
         this.messages = filteredMessages;
+        this.isLoading = false;
         console.log('THIS.MESSAGES');
         console.log(this.messages);
+      }, error => {
+        this.isLoading = false;
+        this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti žinučių', {timeOut: 3000, showProgressBar: false})
       });
   }
 

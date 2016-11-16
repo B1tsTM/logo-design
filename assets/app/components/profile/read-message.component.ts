@@ -13,6 +13,7 @@ export class ReadMessageComponent implements OnInit {
   messageId: number;
   userId: string;
   message: any;
+  isLoading = false;
   public options = {
       position: ["top","right"]
     };
@@ -22,6 +23,7 @@ export class ReadMessageComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
+    this.isLoading = true;
     this.userId = localStorage.getItem('userId');
     this.route.params.subscribe((params: Params) => {
     this.messageId = params['messageId']
@@ -33,7 +35,9 @@ export class ReadMessageComponent implements OnInit {
             this.message = messages[i];
           }
         }
+        this.isLoading = false;
       }, error => {
+        this.isLoading = false;
         this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti žinučių', {timeOut: 3000, showProgressBar: false})
       });
   }
@@ -43,13 +47,16 @@ export class ReadMessageComponent implements OnInit {
   }
 
   deleteMessage() {
+    this.isLoading = true;
     this.apiService.deleteMessage(this.messageId)
       .subscribe(res => {
         console.log(res);
         //this.message = null;
+        this.isLoading = false;
         this.notificationsService.info('Ištrinta', 'Žinutė ištrinta', {timeOut: 3000, showProgressBar: false})
         this.router.navigate(['/profilis', 'pastas']);
       }, error => {
+        this.isLoading = false;
         this.notificationsService.error('Įvyko klaida', 'Nepavyko ištrinti žinutės', {timeOut: 3000, showProgressBar: false})
       });
   }

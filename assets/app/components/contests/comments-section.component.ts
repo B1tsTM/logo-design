@@ -22,6 +22,7 @@ export class CommentsSectionComponent implements OnInit {
    userId: string = '';
    user: any;
    contestId: string;
+   isLoading = false;
    public options = {
       position: ["top","right"]
     };
@@ -37,6 +38,7 @@ export class CommentsSectionComponent implements OnInit {
               
 
   ngOnInit() {
+    this.isLoading = true;
     this.route.params.subscribe((params: Params) => {
     this.contestId = params['id'];
     });
@@ -48,18 +50,22 @@ export class CommentsSectionComponent implements OnInit {
         this.user = user;
       },
       error => {
-          this.errorService.handleError(error);
+        this.isLoading = false;
+        this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti vartotojo informacijos', {timeOut: 3000, showProgressBar: false})
+          //this.errorService.handleError(error);
       });
     this.apiService.getComments(this.contestId)
       .subscribe(comments => {
         console.log('comments-section getComments comments var');
         console.log(comments);
         this.comments = comments;
+        this.isLoading = false;
         console.log('this.comments');
         console.log(this.comments);
       },
       error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti komentarų', {timeOut: 3000, showProgressBar: false})
       });
       // this.commentsForm = this.fb.group({
@@ -74,6 +80,7 @@ export class CommentsSectionComponent implements OnInit {
 //         //this.comment.value = '';
 //     }
   addComment(comment: string) {
+    this.isLoading = true;
     console.log(comment);
     this.comments.push({comment: comment, commentAuthor: this.user});
     this.apiService.addComment({comment: comment, commentAuthor: this.user}, this.contestId)
@@ -81,10 +88,12 @@ export class CommentsSectionComponent implements OnInit {
         console.log('comments-section addComment comments var');
         console.log(comments);
         this.comments = comments;
+        this.isLoading = false;
         this.notificationsService.success('Prisijungta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
       }, 
       error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko pridėti komentaro', {timeOut: 3000, showProgressBar: false})
       });
     this.commentField = '';

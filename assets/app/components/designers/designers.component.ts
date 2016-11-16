@@ -10,18 +10,22 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class DesignersComponent implements OnInit {
   designers: any;
+  isLoading = false;
   public options = {
       position: ["top","right"]
     };
   constructor(private designersService: DesignersService, private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
+    this.isLoading = true;
     this.designersService.getDesigners()
     .subscribe(designers => {
       this.designers = designers;
       this.designersService.designers = designers;
+      this.isLoading = false;
       console.log(this.designers);
     }, error => {
+      this.isLoading = false;
       this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti dizainerių informacijos', {timeOut: 3000, showProgressBar: false})
     });
 

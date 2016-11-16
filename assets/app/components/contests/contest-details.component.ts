@@ -28,6 +28,7 @@ export class ContestDetailsComponent implements OnInit {
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
   momentDate: any;
+  isLoading = false;
   public options = {
       position: ["top","right"]
     };
@@ -40,7 +41,7 @@ export class ContestDetailsComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
-      
+    this.isLoading = true;
    moment.locale('lt-lt');
     //   console.log('LOCALE');
     //   console.log(locale);
@@ -57,6 +58,7 @@ export class ContestDetailsComponent implements OnInit {
       }, 
       error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso informacijos', {timeOut: 3000, showProgressBar: false})
       });
     this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
@@ -64,10 +66,12 @@ export class ContestDetailsComponent implements OnInit {
             console.log('submitions from apiservice in contest-details');
             console.log(submitions);
             this.submitions = submitions;
+            this.isLoading = false;
             console.log(this.submitions);
         },
         error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
       });
       if (this.isLoggedIn()) {
@@ -81,6 +85,7 @@ export class ContestDetailsComponent implements OnInit {
         },
         error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     }
@@ -102,14 +107,16 @@ export class ContestDetailsComponent implements OnInit {
   //FILE UPLOAD STUFF
 
   upload() {
+      this.isLoading = true;
         this.userId = localStorage.getItem('userId');
-        this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId, [], this.filesToUpload).then((result) => {
+        this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload).then((result) => {
             console.log(result);
             //this.filesToUpload = [];
         }, (error) => {
-            console.error(error);
+            this.isLoading = false;
+            this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti dizainų', {timeOut: 3000, showProgressBar: false})
         });
-        this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, [], this.filesToUpload).then((result) => {
+        this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload).then((result) => {
             console.log(result);
             this.filesToUpload = [];
             //reload submitions
@@ -118,11 +125,13 @@ export class ContestDetailsComponent implements OnInit {
             console.log('submitions from apiservice in contest-details');
             console.log(submitions);
             this.submitions = submitions;
+            this.isLoading = false;
             console.log(this.submitions);
             this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
         },
         error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti dizainų', {timeOut: 3000, showProgressBar: false})
         });
         //end of reloading submitions
@@ -138,11 +147,13 @@ export class ContestDetailsComponent implements OnInit {
         },
         error => {
           //this.errorService.handleError(error);
+          this.isLoading = false;
           this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
         //end of reloading my submitions
         }, (error) => {
-            console.error(error);
+            this.isLoading = false;
+            this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
         });
     }
 
@@ -155,7 +166,7 @@ export class ContestDetailsComponent implements OnInit {
         console.log(this.filesToUpload);
     }
  
-    makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+    makeFileRequest(url: string, files: Array<File>) {
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
@@ -191,6 +202,7 @@ export class ContestDetailsComponent implements OnInit {
 }
 
     onRating(obj: any) {
+        this.isLoading = true;
         var submition = this.submitions.filter((item: any) => item.submitionId == obj.submitionId);
         console.log('onRating() submition after filter');
         console.log(submition);
@@ -201,7 +213,11 @@ export class ContestDetailsComponent implements OnInit {
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                    this.isLoading = false;
                     this.notificationsService.success('Atnaujinta', 'Reitingas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false})
+                }, error => {
+                    this.isLoading = false;
+                    this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
                 })
         }
     }

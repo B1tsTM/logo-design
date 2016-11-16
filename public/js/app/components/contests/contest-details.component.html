@@ -40,7 +40,7 @@
   <div *ngIf="!isLoggedIn()">To participate, you must be logged in as a designer</div>
   <div *ngIf="isDesigner()">
     <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-  <button type="button" (click)="upload()">Upload</button>
+  <button type="button" [disabled]="filesToUpload.length == 0" (click)="upload()">Upload</button>
   {{percent}} %
   </div>
   <div *ngIf="isClient()">Must be signed in as designer to upload files</div>
@@ -50,3 +50,5 @@
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>
+
+<test-loader></test-loader>

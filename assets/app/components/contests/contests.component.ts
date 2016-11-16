@@ -14,6 +14,7 @@ import { NotificationsService } from 'angular2-notifications';
 export class ContestsComponent implements OnInit {
   contest: Contest = null;
   contests: any = [];
+  isLoading = false;
   public options = {
       position: ["top","right"]
     };
@@ -24,13 +25,15 @@ export class ContestsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.isLoading = true;
     this.contestsService.getAllContests()
     .subscribe(contests => {
       this.contests = contests;
       this.contestsService.contests = contests;
+      this.isLoading = false;
       console.log(this.contests);
     }, error => {
+      this.isLoading = false;
       this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
     });
    }

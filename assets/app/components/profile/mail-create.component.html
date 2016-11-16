@@ -23,8 +23,6 @@
   <button type="button" (click)="goBack()">Grįžti atgal</button>
 </div>
 
-<div *ngIf="loading">
-  <fading-spinner [isRunning]="loading"></fading-spinner>
-</div>
+<test-loader></test-loader>
 
 <simple-notifications [options]="options"></simple-notifications>
