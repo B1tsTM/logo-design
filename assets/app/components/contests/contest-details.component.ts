@@ -86,7 +86,7 @@ export class ContestDetailsComponent implements OnInit {
         error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
+          //this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     }
 

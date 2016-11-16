@@ -7,7 +7,7 @@
 <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
 </div>
 <div>
-<button type="button" (click)="upload()">Upload</button>
+<button type="button" [disabled]="filesToUpload.length == 0" (click)="upload()">Upload</button>
 {{percent}}
 </div>
 <a routerLink="/profilis/pastas">Pastas</a>
