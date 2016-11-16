@@ -13,6 +13,9 @@
                 </div>
             </modal-body>
             <modal-footer>
+                <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
+                <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId); detailsModal.dismiss()">Patvirtinti</button>
+                <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>
             </modal-footer>
 </modal>

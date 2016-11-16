@@ -21,6 +21,7 @@ export class SubmitionDetailsComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
+    confirmationVisible: boolean = false;
     isLoading = false;
     public options = {
       position: ["top","right"]
@@ -72,6 +73,7 @@ export class SubmitionDetailsComponent implements OnInit {
 
     dismissed() {
         console.log('Modal dismissed');
+        this.confirmationVisible = false;
     }
 
     opened() {
@@ -101,6 +103,19 @@ export class SubmitionDetailsComponent implements OnInit {
                     this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
                 })
         }
+    }
+
+    selectWinner(contestIdName, submitionId) {
+        this.isLoading = true;
+        console.log('you win ' + contestIdName +', '+ submitionId);
+        this.apiService.selectWinner(contestIdName, submitionId)
+            .subscribe(data => {
+                console.log(data);
+                this.isLoading = false;
+            }, error => {
+                this.isLoading = false;
+                this.notificationsService.error('Įvyko klaida', 'Nepavyko išrinkti nugalėtojo', {timeOut: 3000, showProgressBar: false})
+            });
     }
 
 }

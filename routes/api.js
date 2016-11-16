@@ -456,6 +456,40 @@ router.patch('/submitions/:id', function(req,res,next) {
   });
 });
 
+router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,next) {
+  var contestIdName = req.params.contestIdName;
+  var submitionId = req.params.submitionId;
+  Contest.findOne({'idName': contestIdName})
+  .exec(function(err, contest) {
+    //var winnerSubmition;
+    if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    contest.status = 'Užbaigtas';
+    for(var i=0; i<contest.submitions.length; i++) {
+      if (contest.submitions[i].submitionId == submitionId) {
+        //winnerSubmition = contest.submitions[i];
+        contest.submitions[i].status = 'Nugalėtojas';
+      }
+    }
+    contest.save(function(err, result) {
+      if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      res.status(200).json({
+        message: 'Nugalėtojas paskelbtas',
+        obj: result
+      });
+    });
+  });
+});
+
 router.get('/dizaineriai', function (req,res,next) {
   User.find({'userType': 'dizaineris'})
  // .populate('contests')

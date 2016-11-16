@@ -55,25 +55,25 @@ export class LogoAndBusinessCardComponent implements OnInit {
    }
 
   addContest(form: any) {
-    if (this.contest) {
-      //Edit
-      console.log(this.contest);
+    // if (this.contest) {
+    //   //Edit
+    //   console.log(this.contest);
       
-      this.contest.name = form.contestName.value;
-      this.contest.category = form.contestCategory.value;
-      this.contest.description = form.contestDescription.value;
-      this.contest.award = form.contestAward.value;
-      this.contestsService.updateContest(this.contest)
-        .subscribe(data => {
-          console.log(data);
-        },
-        error => {
-          //this.errorService.handleError(error);
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
-        })
-      this.contest = null;
+    //   this.contest.name = form.contestName.value;
+    //   this.contest.category = form.contestCategory.value;
+    //   this.contest.description = form.contestDescription.value;
+    //   this.contest.award = form.contestAward.value;
+    //   this.contestsService.updateContest(this.contest)
+    //     .subscribe(data => {
+    //       console.log(data);
+    //     },
+    //     error => {
+    //       //this.errorService.handleError(error);
+    //       this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
+    //     })
+    //   this.contest = null;
 
-    } else {
+    // } else {
       console.log(form);
       const contest = new Contest(form.contestName.value, null, null, null, form.contestCategory.value, form.contestDescription.value, form.contestAward.value, 'active', 10, 5, Date.now(), Date.now());
       console.log(contest);
@@ -90,7 +90,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
           //this.errorService.handleError(error);
           this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
         });
-    }
+    //}
   }
 
   editContest(contest: any) {

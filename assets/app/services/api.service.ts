@@ -147,4 +147,14 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  selectWinner(contestIdName, submitionId) {
+    const body = JSON.stringify({idName: contestIdName, submitionId: submitionId});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/contest/winner/' + contestIdName + '/' + submitionId, body, {headers: headers})
+      .map(res => {
+        return res.json();
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
 }
