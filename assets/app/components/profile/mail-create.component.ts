@@ -10,7 +10,7 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['mail-create.component.css']
 })
 export class MailCreateComponent implements OnInit {
-  nickname: string = '';
+  nickname: any;
   message: string;
   results:any;
   userId: string;
@@ -39,7 +39,7 @@ export class MailCreateComponent implements OnInit {
 
   sendMessage() {
     this.isLoading = true;
-    this.apiService.sendMessage(this.nickname, this.topic, this.message)
+    this.apiService.sendMessage(this.nickname.nickName, this.topic, this.message)
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
@@ -61,7 +61,7 @@ export class MailCreateComponent implements OnInit {
   }
   onSelect(obj) {
     console.log(event);
-    this.nickname = obj.nickName;
+    //this.nickname = obj.nickName;
   }
 
   goBack() {
