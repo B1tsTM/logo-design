@@ -12,9 +12,10 @@ import { Component, OnInit, Input } from '@angular/core';
     width: 80px;
     height: 80px;
     animation: spin 1s linear infinite;
-    position: absolute;
-    right: 15px;
-    top: 15px;
+    position: fixed; 
+    top: 15px; 
+    right: 15px; 
+    z-index:90;
 }
 
 @keyframes spin {
