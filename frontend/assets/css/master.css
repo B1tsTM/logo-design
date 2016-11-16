@@ -3572,3 +3572,62 @@ hr.clear {
         color: #FB3537; }
       .user-controls .user .dropdown .settings .fa {
         color: #4072db; }
+
+.input-forms {
+  margin: 0 auto;
+  padding: 80px;
+  background: white;
+  max-width: 1000px;
+  box-shadow: 0 40px 120px -40px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  border-radius: 5px; }
+  .input-forms input,
+  .input-forms textarea,
+  .input-forms select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    border-radius: 3px;
+    width: 100%; }
+  .input-forms select {
+    height: 40px; }
+  .input-forms .sep {
+    margin: 40px 0; }
+  .input-forms .submit {
+    background: #4072db;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 60px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    width: auto; }
+
+.input-row {
+  padding: 0;
+  border: none;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 20px; }
+
+.input-label {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 300px;
+          flex: 0 1 300px; }
+  .input-label small {
+    display: block;
+    opacity: 0.5; }
+
+.input-field {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto; }
