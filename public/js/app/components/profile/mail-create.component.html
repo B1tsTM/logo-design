@@ -23,6 +23,6 @@
   <button type="button" (click)="goBack()">Grįžti atgal</button>
 </div>
 
-<test-loader></test-loader>
+<test-loader *ngIf="isLoading"></test-loader>>
 
 <simple-notifications [options]="options"></simple-notifications>

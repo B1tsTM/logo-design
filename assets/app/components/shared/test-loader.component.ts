@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'test-loader',
-  template: `<div class="test-loader" *ngIf="isLoading"></div>`,
+  template: `<div class="test-loader"></div>`,
   styles: [`
   .test-loader {
     border: 16px solid #f3f3f3; /* Light grey */
