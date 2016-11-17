@@ -6,7 +6,8 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
-        MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent } from './components/index';
+         MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent,
+         SubmitionDetailsComponent} from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
@@ -14,7 +15,10 @@ import { CanActivateOnLoginService } from './guards/can-activate-on-login.servic
 const appRoutes: Routes = [
   { path: 'konkursai', children: [
     {path: '', component: ContestsComponent},
-    {path: ':id', component: ContestDetailsComponent}
+    {path: ':id', children: [
+      {path: '', component: ContestDetailsComponent},
+      {path: ':subId', component: SubmitionDetailsComponent}
+    ]}
   ] },
   { path: 'mano-konkursai', children: [
     {path: '', component: MyContestsComponent}

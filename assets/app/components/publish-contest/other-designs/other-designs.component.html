@@ -1,1 +1,111 @@
-<h1>Kitas dizainas?</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a (click)="backToList()">Visos kategorijos</a>
+					<a href="#" class="current">Kitas dizainas</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Užpildykite formą žemiau</h2><!-- .headline -->
+					<span class="subtitle">Page <strong>1</strong> of 3</span>
+					
+					<!-- This one is aligned to the right. -->
+        <a (click)="backToList()" class="see-faq">Atgal į sąrašą</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="input-forms">
+			<div class="input-row">
+				<div class="input-label">
+					<span>Projekto pavadinimas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Projekto pavadinimas" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Projekto aprašymas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Projekto tikslai" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Projekto reikalavimai</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Projekto reikalavimai" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Organizacijos aprašymas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Organizacijos pavadinimas, veikla" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="textarea-row">
+				<div class="input-label textarea-label">
+					<span>Papildoma informacija</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<textarea type="text" placeholder="Papildoma informacija"></textarea>
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Select a country:</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<select name="" id="">
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+					</select>
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+	
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<hr class="sep" />
+
+			<input type="submit" class="submit" />
+		</div><!-- .input-forms -->

@@ -1,24 +1,15 @@
-<button type="button" (click)="detailsModal.open()">Look at</button>
-
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" [cssClass]="cssClass" #detailsModal>
-            <modal-header [show-close]="true">
-                <h4 class="modal-title text-center">Dizaino info</h4>
-            </modal-header>
-            <modal-body>
-                <h3>Submition ID: {{submition.submitionId}}</h3>
-                <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
-                <h3>Author: {{submition.submitionAuthor.firstName}}</h3>
-                <div><star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
-                </div>
-            </modal-body>
-            <modal-footer>
-                <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
-                <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId); detailsModal.dismiss()">Patvirtinti</button>
-                <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>
-            </modal-footer>
-</modal>
+<div>
+    <h4 class="modal-title text-center">Dizaino info</h4>
+    <h3>Submition ID: {{submition.submitionId}}</h3>
+    <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+    <h3>Author: {{submition.submitionAuthor.firstName}}</h3>
+    <div><star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+    </div>
+    <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
+    <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId); detailsModal.dismiss()">Patvirtinti</button>
+    <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="detailsModal.dismiss()">Uždaryti</button>
+</div>
 
 <simple-notifications [options]="options"></simple-notifications>
 

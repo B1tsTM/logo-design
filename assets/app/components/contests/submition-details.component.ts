@@ -13,14 +13,10 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['submition-details.component.css']
 })
 export class SubmitionDetailsComponent implements OnInit {
-    @Input() contestId: string;
-    @Input() contest: any;
-    @Input() submition: any;
-    cssClass: string = '';
+    contestId: string;
+    contest: any;
+    submition: any;
     submitions: any[] = [];
-    animation: boolean = true;
-    keyboard: boolean = true;
-    backdrop: string | boolean = true;
     confirmationVisible: boolean = false;
     isLoading = false;
     public options = {
@@ -36,6 +32,10 @@ export class SubmitionDetailsComponent implements OnInit {
 
   ngOnInit() { 
       this.isLoading = true;
+      console.log(this.contestsService.submitionDetails);
+      this.contestId = this.contestsService.submitionDetails.contestId;
+      this.contest = this.contestsService.submitionDetails.contest;
+      this.submition = this.contestsService.submitionDetails.submition;
     // this.route.params.subscribe((params: Params) => {
     //   this.contestId = params['id'];
     //   console.log('ngOnInit params id (contestId)');
@@ -112,6 +112,8 @@ export class SubmitionDetailsComponent implements OnInit {
             .subscribe(data => {
                 console.log(data);
                 this.isLoading = false;
+                //this.contestsService.winnerContest = {};
+                //this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {
                 this.isLoading = false;
                 this.notificationsService.error('Įvyko klaida', 'Nepavyko išrinkti nugalėtojo', {timeOut: 3000, showProgressBar: false})

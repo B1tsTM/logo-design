@@ -227,6 +227,10 @@ export class ContestDetailsComponent implements OnInit {
         return contestAuthorId == userId;
     }
 
-   
+   viewSubmitionDetails(contestId, contest, submition) {
+       this.contestsService.submitionDetails = {contestId: contestId, contest: contest, submition: submition};
+       console.log(this.contestsService.submitionDetails);
+       this.router.navigate([submition.submitionId], {relativeTo: this.route});
+   }
 
 }

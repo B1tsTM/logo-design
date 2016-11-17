@@ -1,0 +1,26 @@
+.textarea-row {
+    padding: 0;
+    border: none;
+    margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.textarea-label {
+  padding-top: 5px;
+}
+
+a {
+  cursor: pointer;
+}
+
+.input-label {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 250px;
+  flex: 0 1 250px;
+}

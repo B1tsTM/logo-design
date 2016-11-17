@@ -10,6 +10,7 @@ export class ContestsService {
   contests = [];
   designers = [];
   contestEdited = new EventEmitter<Contest>();
+  submitionDetails: any;
   constructor(private http: Http) { }
 
   getAllContests() {
