@@ -17,9 +17,10 @@ router.get('/', function (req,res,next) {
 router.use('/', function(req, res, next) {
   jwt.verify(req.query.token, 'secret', function(err, decoded) {
     if (err) {
+      console.log(err);
       return res.status(401).json({
         title: 'Klaida prisijungiant',
-        error: err
+        error: {message: 'Klaida prisijungiant'}
       });
     }
     next();
@@ -31,9 +32,10 @@ router.post('/', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
   User.findById(decoded.user._id, function(err, doc) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     var idName = kebab(req.body.name);
@@ -41,9 +43,10 @@ router.post('/', function(req, res, next) {
       console.log('contests.js Contest.findOne result var');
       console.log(result);
       if(err) { //should never execute this
+        console.log(err);
         return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       if (result != null) { // findOne() query returns null and no errors if no contest found. find() returns []
@@ -75,9 +78,10 @@ router.post('/', function(req, res, next) {
       console.log(contest);
       contest.save(function(err, result) {
         if (err) {
+          console.log(err);
           return res.status(404).json({
             title: 'Klaida !',
-            error: err
+            error: {message: 'Įvyko klaida'}
           });
         }
         doc.contests.push(result);
@@ -139,9 +143,10 @@ router.delete('/:id', function(req,res,next) {
   var decoded = jwt.decode(req.query.token);
   Contest.findById(req.params.id, function(err, doc) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     if (!doc) {
@@ -153,15 +158,16 @@ router.delete('/:id', function(req,res,next) {
     if (doc.publisher._id != decoded.publisher._id) {
       return res.status(401).json({
         title: 'Neturite privilegiju !',
-        error: {message: 'Negalima pakeisti konkurso'}
+        error: {message: 'Negalima ištrinti konkurso'}
       });
     }
 
     doc.remove(function(err, result) {
       if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({

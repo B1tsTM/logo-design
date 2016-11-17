@@ -29,7 +29,7 @@ export class ProfilePageComponent implements OnInit {
         this.avatarUrl = data.avatarUrl;
         this.isLoading = false;
       }, error => {
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 
@@ -43,7 +43,7 @@ export class ProfilePageComponent implements OnInit {
               this.avatarUrl = data.avatarUrl;
               this.isLoading = false;
             }, error => {
-                this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti avataro', {timeOut: 3000, showProgressBar: false})
+                this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             });
             this.filesToUpload = [];
         }, (error) => {

@@ -51,7 +51,7 @@ export class WinnerDetailsComponent implements OnInit {
         },
         error => {
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
    } // End of ngOnInit
 

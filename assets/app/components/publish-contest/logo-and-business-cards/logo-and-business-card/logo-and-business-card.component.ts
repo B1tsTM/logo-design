@@ -45,7 +45,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
     },
     error => {
           //this.errorService.handleError(error);
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
 
     // this.contestsService.contestEdited
@@ -88,7 +88,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
         },
         error => {
           //this.errorService.handleError(error);
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti konkurso', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
     //}
   }

@@ -34,7 +34,7 @@ export class ContestsComponent implements OnInit {
       console.log(this.contests);
     }, error => {
       this.isLoading = false;
-      this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
+      this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
     });
    }
 

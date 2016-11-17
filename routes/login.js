@@ -7,13 +7,14 @@ var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
 
-  User.findOne({nickName: req.body.nickName}, function(err, doc) {
+  User.findOne({nickName: new RegExp(req.body.nickName, "i")}, function(err, doc) {
     console.log('doc:');
     console.log(doc);
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida !'}
       });
       }
        if (!doc) {

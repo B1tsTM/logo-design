@@ -182,9 +182,10 @@ router.get('/konkursai', function(req,res,next) {
     .populate('publisher', 'firstName')
     .exec(function(err, docs) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       console.log('All contests:');
@@ -205,9 +206,10 @@ router.get('/konkursai/:id', function(req,res,next) {
       console.log('/konkursai/:id contest');
       console.log(docs);
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -221,9 +223,10 @@ router.get('/search/:searchStr', function(req,res,next) {
   var searchStr = req.params.searchStr;
   User.find({nickName: new RegExp(searchStr, "i")}, function(err, users) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -242,9 +245,10 @@ router.get('/submitions/contest/:id', function(req, res, next) {
     console.log('contest after findOne');
     console.log(contest);
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     var submitions = [];
@@ -271,9 +275,10 @@ router.get('/contest/:id/comments', function(req, res, next) {
      console.log('contest/:id/comments GET req contest after findOne');
      console.log(contest);
      if (err) {
+       console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     res.status(200).json({
@@ -289,9 +294,10 @@ router.get('/messages/:userId', function(req,res,next) {
   .populate('messages.sender')
   .exec(function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log('user for messages');
@@ -308,9 +314,10 @@ router.patch('/message/:userId/:messageId', function(req, res, next) {
   var messageId = req.params.messageId;
   User.findById(userId, function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     for(let i=0; i<user.messages.length; i++) {
@@ -322,9 +329,10 @@ router.patch('/message/:userId/:messageId', function(req, res, next) {
     }
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -340,17 +348,18 @@ router.patch('/message/:recipient', function(req, res, next) {
   console.log(req.body);
   var recipient = req.params.recipient;
   var sender = req.body.sender;
-  if(recipient == null) {
+  if(!recipient) {
     return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įveskite gavėjo slapyvardį'}
       });
   }
   User.findById(sender, function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     req.body.messageId = user.messages.length + 1;
@@ -362,15 +371,16 @@ router.patch('/message/:recipient', function(req, res, next) {
   User.findOne({'nickName': { $regex: new RegExp(recipient, "i") }})
   .exec(function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     if (!user) {
       return res.status(404).json({
-        title: 'Klaida !',
-        error: err
+        title: 'Blogas gavėjas !',
+        error: {message: 'Tokio vartotojo nerasta'}
       });
     }
     console.log('RECIPIENT');
@@ -380,9 +390,10 @@ router.patch('/message/:recipient', function(req, res, next) {
     user.messages.push(req.body);
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -401,9 +412,10 @@ router.patch('/contest/:id', function(req,res,next) {
     console.log('contest/:id PATCH req contest after findOne');
     console.log(contest);
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log('/contest/:id req body');
@@ -413,9 +425,10 @@ router.patch('/contest/:id', function(req,res,next) {
     console.log(contest.comments);
     contest.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -436,9 +449,10 @@ router.patch('/submitions/:id', function(req,res,next) {
     console.log('PATCH req contest after findOne');
     console.log(contest);
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     var newRating = req.body.submitionRating;
@@ -455,9 +469,10 @@ router.patch('/submitions/:id', function(req,res,next) {
 
     contest.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -475,9 +490,10 @@ router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,nex
   .exec(function(err, contest) {
     //var winnerSubmition;
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     contest.status = 'Užbaigtas';
@@ -489,9 +505,10 @@ router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,nex
     }
     contest.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -507,9 +524,10 @@ router.get('/dizaineriai', function (req,res,next) {
  // .populate('contests')
   .exec(function(err, docs) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -523,9 +541,10 @@ router.get('/avatars/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(user);
@@ -541,9 +560,10 @@ router.get('/users/:id', function(req,res,next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log('get /users/:id user var');
@@ -559,9 +579,10 @@ router.get('/gallery/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     var galleryUrls = user.galleryUrls;
@@ -580,9 +601,10 @@ var id = req.params.id;
 //User.findById(id, function(err, user) {
 User.findByIdAndUpdate(id, {new: true},  function(err, user) {
   if (err) {
+    console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(user);
@@ -599,6 +621,10 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
     User.update({_id: id}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
       if(err){
           console.log(err);
+          return res.status(404).json({
+          title: 'Klaida !',
+          error: {message: 'Įvyko klaida'}
+      });
         }else{
           console.log("Images uploaded !");
         }
@@ -612,9 +638,10 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
 
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -639,9 +666,10 @@ var userId = req.params.userId;
 //User.findById(id, function(err, user) {
 Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': userId}}, {new: true},  function(err, contest) {
   if (err) {
+    console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(contest);
@@ -670,9 +698,10 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 
     User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
       if(err){
+        console.log(err);
         return res.status(404).json({
           title: 'Klaida !',
-          error: err
+          error: {message: 'Įvyko klaida'}
         });
         }else{
           console.log("Images uploaded !");
@@ -683,9 +712,10 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 
     contest.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -709,9 +739,10 @@ var userId = req.params.userId;
 //User.findById(id, function(err, user) {
 Contest.findOneAndUpdate({'idName': contestId}, {new: true},  function(err, contest) {
   if (err) {
+    console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(contest);
@@ -734,9 +765,10 @@ Contest.findOneAndUpdate({'idName': contestId}, {new: true},  function(err, cont
 
     contest.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -755,9 +787,10 @@ router.post('/avatars/:id', multer({storage: storageForAvatar}).array("avatar", 
 var id = req.params.id;
 User.findById(id, function(err, user) {
   if (err) {
+    console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(user);
@@ -766,9 +799,10 @@ User.findById(id, function(err, user) {
 
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       var fileNames = [];
@@ -793,9 +827,10 @@ var id = req.params.id;
 //User.findById(id, function(err, user) {
 User.findByIdAndUpdate(id, {new: true},  function(err, user) {
   if (err) {
+    console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
     }
     console.log(user);
@@ -812,6 +847,10 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
     User.update({_id: id}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
       if(err){
           console.log(err);
+          return res.status(404).json({
+            title: 'Klaida !',
+            error: {message: 'Įvyko klaida'}
+          });
         }else{
           console.log("Images uploaded !");
         }
@@ -825,9 +864,10 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
 
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({
@@ -849,9 +889,10 @@ router.delete('/message/:userId/:messageId', function(req, res, next) {
   .populate('messages.sender')
   .exec(function(err, user) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       for(let i=0; i<user.messages.length; i++) {
@@ -864,9 +905,10 @@ router.delete('/message/:userId/:messageId', function(req, res, next) {
     }
     user.save(function(err, result) {
       if (err) {
+        console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida'}
       });
       }
       res.status(200).json({

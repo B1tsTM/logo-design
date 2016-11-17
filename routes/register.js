@@ -7,15 +7,16 @@ var User = require('../models/user');
 router.post('/', function(req, res, next) {
   User.findOne({'nickName': new RegExp(req.body.nickName, "i")}, function(err, dupe) {
     if(err) {
+        console.log(err);
         return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida !'}
       });
       }
       if (dupe) {
         return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Šis slapyvardis užimtas !'}
       });
       }
     });
@@ -46,9 +47,10 @@ router.post('/', function(req, res, next) {
   //user.avatar.avatarUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName + '/avatar';
   user.save(function(err, result) {
     if (err) {
+      console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: err
+        error: {message: 'Įvyko klaida !'}
       });
       }
       res.status(201).json({

@@ -26,7 +26,7 @@ export class DesignersComponent implements OnInit {
       console.log(this.designers);
     }, error => {
       this.isLoading = false;
-      this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti dizainerių informacijos', {timeOut: 3000, showProgressBar: false})
+      this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
     });
 
   }

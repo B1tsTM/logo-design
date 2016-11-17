@@ -68,6 +68,7 @@ export class UserNavigationComponent implements OnInit {
   logout() {
     localStorage.clear();
     console.log('localStorage cleared, logging out...');
+    this.notificationsService.info('Atsijungiama...', 'Sėkmingai atsijungėte', {timeOut: 3000, showProgressBar: false});
     this.router.navigate(['/']);
   }
 
@@ -106,7 +107,8 @@ export class UserNavigationComponent implements OnInit {
        //error => this.errorService.handleError(error))
        error => {
          this.isLoading = false; 
-         this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}) 
+         //this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}) 
+         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       })
     }
 
@@ -130,7 +132,8 @@ export class UserNavigationComponent implements OnInit {
           
           error => { 
             this.isLoading = false;
-            this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus. Pasirinkite unikalų slapyvardį', {timeOut: 3000, showProgressBar: false})
+            //this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus. Pasirinkite unikalų slapyvardį', {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         }) 
     }
 

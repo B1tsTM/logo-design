@@ -52,7 +52,7 @@ export class SubmitionDetailsComponent implements OnInit {
         error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
     //   console.log('ngOnInit submition details this.submitionS');
     //   console.log(this.submitions);
@@ -101,7 +101,7 @@ export class SubmitionDetailsComponent implements OnInit {
                     this.notificationsService.success('Pakeista', 'Dizaino reitingas pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {
                     this.isLoading = false;
-                    this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
+                    this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
                 })
         }
     }
@@ -118,7 +118,7 @@ export class SubmitionDetailsComponent implements OnInit {
                 this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {
                 this.isLoading = false;
-                this.notificationsService.error('Įvyko klaida', 'Nepavyko išrinkti nugalėtojo', {timeOut: 3000, showProgressBar: false})
+                this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             });
     }
 

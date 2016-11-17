@@ -51,7 +51,7 @@ export class CommentsSectionComponent implements OnInit {
       },
       error => {
         this.isLoading = false;
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti vartotojo informacijos', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
           //this.errorService.handleError(error);
       });
     this.apiService.getComments(this.contestId)
@@ -66,7 +66,7 @@ export class CommentsSectionComponent implements OnInit {
       error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti komentarų', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
       // this.commentsForm = this.fb.group({
       //   comment: ['']
@@ -94,7 +94,7 @@ export class CommentsSectionComponent implements OnInit {
       error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko pridėti komentaro', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
     this.commentField = '';
     console.log(this.comments);

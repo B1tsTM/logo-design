@@ -59,7 +59,7 @@ export class ContestDetailsComponent implements OnInit {
       error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso informacijos', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
     this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
@@ -72,7 +72,7 @@ export class ContestDetailsComponent implements OnInit {
         error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkursų informacijos', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
       if (this.isLoggedIn()) {
         this.apiService.getMySubmitions(this.contestId)
@@ -114,7 +114,7 @@ export class ContestDetailsComponent implements OnInit {
             //this.filesToUpload = [];
         }, (error) => {
             this.isLoading = false;
-            this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti dizainų', {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload).then((result) => {
             console.log(result);
@@ -132,7 +132,7 @@ export class ContestDetailsComponent implements OnInit {
         error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko įkelti dizainų', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
         //end of reloading submitions
         // --------------------------
@@ -148,12 +148,12 @@ export class ContestDetailsComponent implements OnInit {
         error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
         //end of reloading my submitions
         }, (error) => {
             this.isLoading = false;
-            this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
     }
 
@@ -217,7 +217,7 @@ export class ContestDetailsComponent implements OnInit {
                     this.notificationsService.success('Atnaujinta', 'Reitingas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {
                     this.isLoading = false;
-                    this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
+                    this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
                 })
         }
     }

@@ -38,7 +38,7 @@ export class ReadMessageComponent implements OnInit {
         this.isLoading = false;
       }, error => {
         this.isLoading = false;
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti žinučių', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 
@@ -57,7 +57,7 @@ export class ReadMessageComponent implements OnInit {
         this.router.navigate(['/profilis', 'pastas']);
       }, error => {
         this.isLoading = false;
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko ištrinti žinutės', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 

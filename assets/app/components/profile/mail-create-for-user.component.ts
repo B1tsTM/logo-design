@@ -42,7 +42,7 @@ export class MailCreateForUserComponent implements OnInit {
         console.log('THIS.SENDER');
         console.log(this.sender);
       }, error => {
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti siuntėjo informacijos', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 
@@ -62,7 +62,7 @@ export class MailCreateForUserComponent implements OnInit {
         this.router.navigate(['/profilis', 'pastas']);
       }, error => {
         this.isLoading = false;
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko išsiųsti žinutės! Patikrinkite gavėjo slapyvardį', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 
@@ -84,7 +84,7 @@ export class MailCreateForUserComponent implements OnInit {
       .subscribe(res => {
         this.results = res;
       }, error => {
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko rasti vartotojo', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
   onSelect(obj) {
