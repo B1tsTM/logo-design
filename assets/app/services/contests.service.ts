@@ -11,6 +11,8 @@ export class ContestsService {
   designers = [];
   contestEdited = new EventEmitter<Contest>();
   submitionDetails: any;
+  contestWinner: any;
+  mailTopic: string;
   constructor(private http: Http) { }
 
   getAllContests() {

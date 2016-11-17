@@ -340,6 +340,12 @@ router.patch('/message/:recipient', function(req, res, next) {
   console.log(req.body);
   var recipient = req.params.recipient;
   var sender = req.body.sender;
+  if(recipient == null) {
+    return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+  }
   User.findById(sender, function(err, user) {
     if (err) {
       return res.status(404).json({
@@ -353,9 +359,15 @@ router.patch('/message/:recipient', function(req, res, next) {
     user.save();
     console.log('Message added to senders messages list');
   });
-  User.findOne({'nickName': recipient})
+  User.findOne({'nickName': { $regex: new RegExp(recipient, "i") }})
   .exec(function(err, user) {
     if (err) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+    }
+    if (!user) {
       return res.status(404).json({
         title: 'Klaida !',
         error: err

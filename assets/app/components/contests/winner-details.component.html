@@ -1,0 +1,19 @@
+<h1>Sveikiname išsirinkus nugalėtoją !</h1>
+
+<div>
+    <h4>Dizaino info</h4>
+    <h3>Dizaino numeris: {{submition.submitionId}}</h3>
+    <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+    <h3>Dizaineris: {{submition.submitionAuthor.firstName}}</h3>
+    <br>
+    <h4>Kad konkursas būtų laikomas įvykusiu, jį patvirtint turės išrinkto dizaino autorius ({{submition?.submitionAuthor?.nickName}}):</h4>
+    <h5>1. Susisiekite su juo paspaudę mygtuką žemiau</h5>
+    <h5>2. Kai Jūs gausite reikiamus failus ir susimokėsite, {{submition?.submitionAuthor?.nickName}} turės tai patvirtinti administracijai ir konkursas bus laikomas įvykusiu</h5>
+
+    <button type="button" (click)="contactWinner(submition.submitionAuthor.nickName)">Susisiekti</button>
+    <button type="button" (click)="goBack()">Grįžti atgal</button>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<test-loader *ngIf="isLoading"></test-loader>

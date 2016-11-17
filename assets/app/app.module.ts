@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID }      from '@angular/core';
+import { NgModule, LOCALE_ID, ValueProvider }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing,
          appRoutingProviders }  from './app.routing';
@@ -19,7 +19,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
   ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent,
   ReadMessageComponent, SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-  TestSpinnerComponent, TestLoaderComponent } from './components/index';
+  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -39,6 +39,10 @@ import { ErrorComponent, ErrorService } from './errors/index';
 import { LocalDateFromNowPipe } from './pipes/local-date-from-now-pipe';
 import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
 
+const WINDOW_PROVIDER: ValueProvider = {
+    provide: Window,
+    useValue: window
+};
 
 
 @NgModule({
@@ -57,9 +61,9 @@ import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
                   SubmitionDetailsComponent, CommentsSectionComponent, MailListComponent,
                   MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent,
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-                  TestSpinnerComponent, TestLoaderComponent],
+                  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
-               DesignersService, ApiService, CanActivateOnLoginService ]
+               DesignersService, ApiService, CanActivateOnLoginService, WINDOW_PROVIDER ]
 })
 export class AppModule { }

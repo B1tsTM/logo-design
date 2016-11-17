@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { ContestsService } from '../../services/contests.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -24,9 +25,13 @@ export class MailCreateForUserComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
               private apiService: ApiService,
               private notificationsService: NotificationsService,
-              private router: Router) { }
+              private router: Router,
+              private contestsService: ContestsService) { }
 
   ngOnInit() { 
+    if (this.contestsService.mailTopic) {
+      this.topic = this.contestsService.mailTopic;
+    }
     this.userId = localStorage.getItem('userId');
     this.route.params.subscribe((params: Params) => {
     this.nickname = params['nickname'];
@@ -43,7 +48,13 @@ export class MailCreateForUserComponent implements OnInit {
 
   sendMessage() {
     this.isLoading = true;
-    this.apiService.sendMessage(this.nickname.nickName, this.topic, this.message)
+    var recipient;
+    if (typeof this.nickname === 'string') {
+      recipient = this.nickname;
+    } else {
+      recipient = this.nickname.nickName;
+    }
+    this.apiService.sendMessage(recipient, this.topic, this.message)
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
@@ -51,7 +62,7 @@ export class MailCreateForUserComponent implements OnInit {
         this.router.navigate(['/profilis', 'pastas']);
       }, error => {
         this.isLoading = false;
-        this.notificationsService.error('Įvyko klaida', 'Nepavyko išsiųsti žinutės', {timeOut: 3000, showProgressBar: false})
+        this.notificationsService.error('Įvyko klaida', 'Nepavyko išsiųsti žinutės! Patikrinkite gavėjo slapyvardį', {timeOut: 3000, showProgressBar: false})
       });
   }
 

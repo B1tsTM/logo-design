@@ -98,6 +98,7 @@ export class SubmitionDetailsComponent implements OnInit {
                     console.log('Rating changed');
                     console.log(data);
                     this.isLoading = false;
+                    this.notificationsService.success('Pakeista', 'Dizaino reitingas pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {
                     this.isLoading = false;
                     this.notificationsService.error('Įvyko klaida', 'Nepavyko pakeisti reitingo', {timeOut: 3000, showProgressBar: false})
@@ -105,19 +106,25 @@ export class SubmitionDetailsComponent implements OnInit {
         }
     }
 
-    selectWinner(contestIdName, submitionId) {
+    selectWinner(contestIdName, submitionId, contest) {
         this.isLoading = true;
         console.log('you win ' + contestIdName +', '+ submitionId);
         this.apiService.selectWinner(contestIdName, submitionId)
             .subscribe(data => {
                 console.log(data);
                 this.isLoading = false;
-                //this.contestsService.winnerContest = {};
-                //this.router.navigate(['nugaletojas'], {relativeTo: this.route});
+                this.contestsService.contestWinner = {contestId: contestIdName, submitionId: submitionId, submition: this.submition, contest: contest};
+                window.scrollTo(0,0);
+                this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {
                 this.isLoading = false;
                 this.notificationsService.error('Įvyko klaida', 'Nepavyko išrinkti nugalėtojo', {timeOut: 3000, showProgressBar: false})
             });
+    }
+
+    goBack() {
+        window.scrollTo(0,0);
+        this.router.navigate(['./'], {relativeTo: this.route});
     }
 
 }

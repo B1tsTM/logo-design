@@ -130,7 +130,7 @@ export class UserNavigationComponent implements OnInit {
           
           error => { 
             this.isLoading = false;
-            this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus', {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus. Pasirinkite unikalų slapyvardį', {timeOut: 3000, showProgressBar: false})
         }) 
     }
 

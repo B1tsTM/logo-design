@@ -5,6 +5,21 @@ var passwordHash = require('password-hash');
 var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
+  User.findOne({'nickName': new RegExp(req.body.nickName, "i")})
+    .exec (function(err, userDuplicate) {
+      if(err) {
+        return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+      if (res) {
+        return res.status(404).json({
+        title: 'Klaida !',
+        error: err
+      });
+      }
+    });
   var user;
   if (req.body.userType == 'dizaineris') {
   user = new User({

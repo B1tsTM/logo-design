@@ -7,7 +7,7 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
          MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent,
-         SubmitionDetailsComponent} from './components/index';
+         SubmitionDetailsComponent, WinnerDetailsComponent} from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 
@@ -17,7 +17,10 @@ const appRoutes: Routes = [
     {path: '', component: ContestsComponent},
     {path: ':id', children: [
       {path: '', component: ContestDetailsComponent},
-      {path: ':subId', component: SubmitionDetailsComponent}
+      {path: ':subId', children: [
+        {path: '', component: SubmitionDetailsComponent},
+        {path: 'nugaletojas', component: WinnerDetailsComponent}
+      ]}
     ]}
   ] },
   { path: 'mano-konkursai', children: [
