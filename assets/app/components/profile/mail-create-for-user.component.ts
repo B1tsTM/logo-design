@@ -54,7 +54,7 @@ export class MailCreateForUserComponent implements OnInit {
     } else {
       recipient = this.nickname.nickName;
     }
-    this.apiService.sendMessage(recipient, this.topic, this.message)
+    this.apiService.sendMessage(recipient, this.topic, this.message, this.sender.nickName)
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})

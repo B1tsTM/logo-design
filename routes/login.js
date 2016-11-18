@@ -7,7 +7,7 @@ var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
 
-  User.findOne({nickName: new RegExp(req.body.nickName, "i")}, function(err, doc) {
+  User.findOne({nickName: {$regex: new RegExp(req.body.nickName, "i")}}, function(err, doc) {
     console.log('doc:');
     console.log(doc);
     if (err) {

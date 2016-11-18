@@ -179,7 +179,7 @@ var storageForGallery = multer.diskStorage({
 
 router.get('/konkursai', function(req,res,next) {
   Contest.find()
-    .populate('publisher', 'firstName')
+    .populate('publisher')
     .exec(function(err, docs) {
       if (err) {
         console.log(err);
@@ -201,7 +201,7 @@ router.get('/konkursai/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)
   Contest.findOne({'idName': id})
-    .populate('publisher', 'firstName')
+    .populate('publisher')
     .exec(function(err, docs) {
       console.log('/konkursai/:id contest');
       console.log(docs);
@@ -221,7 +221,7 @@ router.get('/konkursai/:id', function(req,res,next) {
 
 router.get('/search/:searchStr', function(req,res,next) {
   var searchStr = req.params.searchStr;
-  User.find({nickName: new RegExp(searchStr, "i")}, function(err, users) {
+  User.find({nickName: {$regex: new RegExp(searchStr, "i")}}, function(err, users) {
     if (err) {
       console.log(err);
       return res.status(404).json({
@@ -291,7 +291,7 @@ router.get('/contest/:id/comments', function(req, res, next) {
 router.get('/messages/:userId', function(req,res,next) {
   var userId = req.params.userId;
   User.findById(userId)
-  .populate('messages.sender')
+  //.populate('messages.sender')
   .exec(function(err, user) {
     if (err) {
       console.log(err);
@@ -348,13 +348,14 @@ router.patch('/message/:recipient', function(req, res, next) {
   console.log(req.body);
   var recipient = req.params.recipient;
   var sender = req.body.sender;
+  console.log(recipient + ", " + sender);
   if(!recipient) {
     return res.status(404).json({
         title: 'Klaida !',
         error: {message: 'Įveskite gavėjo slapyvardį'}
       });
   }
-  User.findById(sender, function(err, user) {
+  User.findOne({'nickName': {$regex: new RegExp(sender, "i")}}, function(err, user) {
     if (err) {
       console.log(err);
       return res.status(404).json({
@@ -396,7 +397,7 @@ router.patch('/message/:recipient', function(req, res, next) {
         error: {message: 'Įvyko klaida'}
       });
       }
-      res.status(200).json({
+      res.status(201).json({
         message: 'Zinute issiusta',
         obj: result
       });
@@ -886,7 +887,7 @@ router.delete('/message/:userId/:messageId', function(req, res, next) {
   var messageId = req.params.messageId;
 
   User.findById(userId)
-  .populate('messages.sender')
+  //.populate('messages.sender')
   .exec(function(err, user) {
     if (err) {
       console.log(err);

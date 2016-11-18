@@ -1,8 +1,9 @@
 <h1>Read message</h1>
 <div *ngIf="!message">No message loaded / Message deleted</div>
 <div *ngIf="message">
-  <div>Sent by: {{message.sender.nickName}}</div>
-  <div>Message: {{message.message}}</div>
+  <div>Sent by: {{message?.sender}}</div>
+  <div>Message: {{message?.message}}</div>
+  <div>Received at: {{message?.timeSent}}</div>
 </div>
 
 <button type="button" (click)="reply()">Reply</button>

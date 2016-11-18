@@ -17,7 +17,8 @@ var schema = new Schema({
     messageId: {type: Number},
     topic: {type: String},
     message: {type: String},
-    sender: {type: Schema.Types.ObjectId, ref: 'User'},
+    //sender: {type: Schema.Types.ObjectId, ref: 'User'},
+    sender: {type: String},
     recipient: {type: String},
     timeSent: {type: Date, default: Date.now()},
     status: {type: String} //neperziureta, perziureta, issiusta

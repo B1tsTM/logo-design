@@ -18,6 +18,9 @@ var multer = require('multer');
 var DIR = './uploads/';
 var upload = multer({dest: DIR});
 
+var User = require('./models/user');
+var passwordHash = require('password-hash');
+
 var app = express();
 
 mongoose.connect('admin:admin@ds035036.mlab.com:35036/logo-konkursai');
@@ -55,6 +58,28 @@ mkdirp('./public/uploads/contests', function (err) {
 mkdirp('./public/uploads/gallery', function (err) {
   if (err) console.error(err);
   else console.log('Gallery folder created!');
+});
+
+User.findOne({'nickName': 'Admin'}, function(err, admin) {
+  if (!admin) {
+    user = new User({
+    firstName: 'Irmantas',
+    lastName: 'Liepis',
+    nickName: 'Admin',
+    password: passwordHash.generate('Admin'),
+    email: 'info@dizainokonkursai.lt',
+    userType: 'Admin',
+  });
+  user.save(function(err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('New Admin:');
+      console.log(result);
+    }
+  });
+  }
+  console.log('Admin already exists');
 });
 
 // var dirAvatar = './public/uploads/avatars';

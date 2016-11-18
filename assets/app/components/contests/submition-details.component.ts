@@ -108,12 +108,30 @@ export class SubmitionDetailsComponent implements OnInit {
 
     selectWinner(contestIdName, submitionId, contest) {
         this.isLoading = true;
+        const topic = "Pergalė konkurse " + contest.name;
+        const message = "Sveikiname laimėjus konkursą '" + contest.name + "'! Su jumis artimiausiu metu susisieks konkurso autorius " + contest.publisher.nickName + ". Kai Jūs išsiųsite atitinkamus dizaino failus ir gausite už tai pinigus, Jums reikės tai patvirtinti atrašant į ši laišką, įtraukiant konkurso pavadinimą (bei paminėti iškilusias problemas, jei tokių buvo) arba susisiekti el. pašto adresu info@dizainokonkursai.lt . Tai padarius konkursas bus laikomas užbaigtu. Sveikiname ir linkime Jums geros dienos!";
         console.log('you win ' + contestIdName +', '+ submitionId);
+        const messageForAdmin = "Konkursą " + contest.name + "laimėjo " + this.submition.submitionAuthor.nickName + " laiku " + Date.now(); // TODO proper date format
         this.apiService.selectWinner(contestIdName, submitionId)
             .subscribe(data => {
                 console.log(data);
                 this.isLoading = false;
                 this.contestsService.contestWinner = {contestId: contestIdName, submitionId: submitionId, submition: this.submition, contest: contest};
+                this.apiService.sendMessage(this.submition.submitionAuthor.nickName, topic, message, "Admin") //.add sender param, figure out how to change it in api.service
+                    .subscribe(res => {
+                        console.log('Zinute laimetojui issiusta');
+                        this.notificationsService.success('Sveikiname', 'Laimėtoją informavome apie pergalę', {timeOut: 5000, showProgressBar: false})
+                    }, error => {
+                        this.isLoading = false;
+                        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+                    });
+                this.apiService.sendMessage('Admin', topic, messageForAdmin, 'Admin')
+                    .subscribe(res => {
+                        console.log('Zinute administatoriui issiusta');
+                    }, error => {
+                        this.isLoading = false;
+                        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+                    });
                 window.scrollTo(0,0);
                 this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {

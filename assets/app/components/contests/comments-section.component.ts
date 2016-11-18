@@ -89,7 +89,7 @@ export class CommentsSectionComponent implements OnInit {
         console.log(comments);
         this.comments = comments;
         this.isLoading = false;
-        this.notificationsService.success('Prisijungta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
+        this.notificationsService.success('Įkelta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
       }, 
       error => {
           //this.errorService.handleError(error);

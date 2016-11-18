@@ -108,8 +108,8 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
-  sendMessage(recipient, topic, message) {
-    var sender = localStorage.getItem('userId');
+  sendMessage(recipient, topic, message, sender) {
+    //var sender = localStorage.getItem('userId');
     var obj = {message: message, recipient: recipient, topic: topic, sender: sender};
     const body = JSON.stringify(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
