@@ -67,6 +67,16 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  getWinnerSubmition(contestId) {
+    return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/winner')
+      .map(res => {
+        console.log('DEBUG service res.json()');
+        console.log(res.json());
+        return res.json().obj;
+      })
+      .catch(error => Observable.throw(error.json())); 
+  }
+
   getUserInfo(userId: string) {
     return this.http.get('http://localhost:3000/api/v1/users/'+userId)
     .map(res => {
@@ -147,8 +157,8 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
-  selectWinner(contestIdName, submitionId) {
-    const body = JSON.stringify({idName: contestIdName, submitionId: submitionId});
+  selectWinner(contestIdName, submitionId, contestId, winnerId, submition) {
+    const body = JSON.stringify({idName: contestIdName, submitionId: submitionId, contestId: contestId, winnerId: winnerId, submition: submition});
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/api/v1/contest/winner/' + contestIdName + '/' + submitionId, body, {headers: headers})
       .map(res => {
@@ -156,5 +166,18 @@ export class ApiService {
       })
       .catch(error => Observable.throw(error.json()));
   }
+
+  // addWinningContest(contestId, winnerId) {
+  //   console.log('DEBUG apiservice params');
+  //   console.log('contestId: ' + contestId);
+  //   console.log('winnerId: ' + winnerId);
+  //   const body = JSON.stringify({winnerId: winnerId, contestId: contestId});
+  //   const headers = new Headers({'Content-Type': 'application/json'});
+  //   return this.http.patch('http://localhost:3000/api/v1/contest/winner/add/' + contestId + "/" + winnerId, body, {headers: headers})
+  //     .map(res => {
+  //       return res.json();
+  //     })
+  //     .catch(error => Observable.throw(error.json()));
+  // }
 
 }

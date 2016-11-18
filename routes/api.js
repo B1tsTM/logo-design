@@ -180,6 +180,7 @@ var storageForGallery = multer.diskStorage({
 router.get('/konkursai', function(req,res,next) {
   Contest.find()
     .populate('publisher')
+    .sort({endDate : 1})
     .exec(function(err, docs) {
       if (err) {
         console.log(err);
@@ -188,8 +189,8 @@ router.get('/konkursai', function(req,res,next) {
         error: {message: 'Įvyko klaida'}
       });
       }
-      console.log('All contests:');
-      console.log(docs);
+     // console.log('All contests:');
+      //console.log(docs);
       res.status(200).json({
         message: 'Success',
         obj: docs
@@ -219,309 +220,9 @@ router.get('/konkursai/:id', function(req,res,next) {
     });
 });
 
-router.get('/search/:searchStr', function(req,res,next) {
-  var searchStr = req.params.searchStr;
-  User.find({nickName: {$regex: new RegExp(searchStr, "i")}}, function(err, users) {
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Success',
-        obj: users
-      });
-  });
-});
-
-router.get('/submitions/contest/:id', function(req, res, next) {
-  var id = req.params.id;
-  //Contest.findOne({'idName': id}, function(err, contest) {
-  Contest.findOne({'idName': id})
-  .populate('submitions.submitionAuthor')
-  .exec(function(err, contest) {
-    console.log('contest after findOne');
-    console.log(contest);
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    var submitions = [];
-    for (let i=0; i<contest.submitions.length; i++) {
-      if(contest.submitions[i].status == 'active') {
-        submitions.push(contest.submitions[i]);
-      }
-    }
-    //var submitions = contest.submitions;
-    console.log('submitions var');
-    console.log(submitions);
-    res.status(200).json({
-      message: 'submitions received',
-      submitions: submitions
-    });
-  });
-});
-
-router.get('/contest/:id/comments', function(req, res, next) {
-   var id = req.params.id;
-   Contest.findOne({'idName': id})
-   .populate('comments.commentAuthor')
-   .exec(function(err, contest){
-     console.log('contest/:id/comments GET req contest after findOne');
-     console.log(contest);
-     if (err) {
-       console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    res.status(200).json({
-        message: 'Komentarai gauti',
-        obj: contest
-      });
-   });
-});
-
-router.get('/messages/:userId', function(req,res,next) {
-  var userId = req.params.userId;
-  User.findById(userId)
-  //.populate('messages.sender')
-  .exec(function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    console.log('user for messages');
-    console.log(user);
-    res.status(200).json({
-        message: 'Zinutes gautos',
-        obj: user
-    });
-  });
-});
-
-router.patch('/message/:userId/:messageId', function(req, res, next) {
-  var userId = req.params.userId;
-  var messageId = req.params.messageId;
-  User.findById(userId, function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    for(let i=0; i<user.messages.length; i++) {
-      if(user.messages[i].messageId == messageId) {
-        if(user.messages[i].status == 'Neperžiūrėta') {
-          user.messages[i].status = req.body.status;
-        }
-      }
-    }
-    user.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Zinutes statusas pakeistas',
-        obj: result
-      });
-    });
-  });
-});
-
-router.patch('/message/:recipient', function(req, res, next) {
-  console.log('REQ BODY');
-  console.log(req.body);
-  var recipient = req.params.recipient;
-  var sender = req.body.sender;
-  console.log(recipient + ", " + sender);
-  if(!recipient) {
-    return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įveskite gavėjo slapyvardį'}
-      });
-  }
-  User.findOne({'nickName': {$regex: new RegExp(sender, "i")}}, function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    req.body.messageId = user.messages.length + 1;
-    req.body.status = 'Išsiųsta';
-    user.messages.push(req.body);
-    user.save();
-    console.log('Message added to senders messages list');
-  });
-  User.findOne({'nickName': { $regex: new RegExp(recipient, "i") }})
-  .exec(function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    if (!user) {
-      return res.status(404).json({
-        title: 'Blogas gavėjas !',
-        error: {message: 'Tokio vartotojo nerasta'}
-      });
-    }
-    console.log('RECIPIENT');
-    console.log(user);
-    req.body.status = 'Neperžiūrėta';
-    req.body.messageId = user.messages.length + 1;
-    user.messages.push(req.body);
-    user.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(201).json({
-        message: 'Zinute issiusta',
-        obj: result
-      });
-    });
-  });
-});
-
-router.patch('/contest/:id', function(req,res,next) {
-  var id = req.params.id;
-  Contest.findOne({'idName': id})
-  .populate('comments.commentAuthor')
-  .exec(function(err, contest){
-    console.log('contest/:id PATCH req contest after findOne');
-    console.log(contest);
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    console.log('/contest/:id req body');
-    console.log(req.body);
-    contest.comments.push(req.body);
-    console.log('/contest/:id comments');
-    console.log(contest.comments);
-    contest.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Komentaras ikeltas',
-        obj: result
-      });
-    });
-  });
-});
-
-router.patch('/submitions/:id', function(req,res,next) {
-  var decoded = jwt.decode(req.query.token);
-  var id = req.params.id;
-  console.log('req ID');
-  console.log(id)
-  Contest.findOne({'idName': id})
-  .exec(function(err, contest) {
-    console.log('PATCH req contest after findOne');
-    console.log(contest);
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    var newRating = req.body.submitionRating;
-    var subId = req.body.submitionId;
-    console.log('newRating');
-    console.log(newRating);
-    console.log('submition ID');
-    console.log(subId);
-    for (let i=0; i<contest.submitions.length; i++) {
-      if(contest.submitions[i].submitionId == subId) {
-        contest.submitions[i].submitionRating = newRating;
-      }
-    }
-
-    contest.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Reitingas pakeistas',
-        obj: result
-      });
-    });
-  });
-});
-
-router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,next) {
-  var contestIdName = req.params.contestIdName;
-  var submitionId = req.params.submitionId;
-  Contest.findOne({'idName': contestIdName})
-  .exec(function(err, contest) {
-    //var winnerSubmition;
-    if (err) {
-      console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    contest.status = 'Užbaigtas';
-    for(var i=0; i<contest.submitions.length; i++) {
-      if (contest.submitions[i].submitionId == submitionId) {
-        //winnerSubmition = contest.submitions[i];
-        contest.submitions[i].status = 'Nugalėtojas';
-      }
-    }
-    contest.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Nugalėtojas paskelbtas',
-        obj: result
-      });
-    });
-  });
-});
-
 router.get('/dizaineriai', function (req,res,next) {
-  User.find({'userType': 'dizaineris'})
+  User.find({'userType': 'dizaineris'}) 
+  .sort({nickName : 1}) // TODO see if this works. Didn't seem to work.. Later should be filtered by contests won
  // .populate('contests')
   .exec(function(err, docs) {
     if (err) {
@@ -595,7 +296,423 @@ router.get('/gallery/:id', function(req, res, next) {
   });
 });
 
-//TEST
+router.get('/search/:searchStr', function(req,res,next) {
+  var searchStr = req.params.searchStr;
+  User.find({nickName: {$regex: new RegExp(searchStr, "i")}})
+  .sort({nickName : 1})
+  .exec(function(err, users) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: users
+      });
+  });
+});
+
+router.get('/submitions/contest/:id', function(req, res, next) {
+  var id = req.params.id;
+  //Contest.findOne({'idName': id}, function(err, contest) {
+  Contest.findOne({'idName': id})
+  .populate('submitions.submitionAuthor')
+  .exec(function(err, contest) {
+    //console.log('contest after findOne');
+    //console.log(contest);
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    var submitions = [];
+    for (let i=0; i<contest.submitions.length; i++) {
+      if(contest.submitions[i].status == 'active' || contest.submitions[i].status == 'Nugalėtojas') {
+        submitions.push(contest.submitions[i]);
+      }
+    }
+    //var submitions = contest.submitions;
+    console.log('submitions var');
+    console.log(submitions);
+    res.status(200).json({
+      message: 'submitions received',
+      submitions: submitions
+    });
+  });
+});
+
+router.get('/contest/:id/comments', function(req, res, next) {
+   var id = req.params.id;
+   Contest.findOne({'idName': id})
+   .populate('comments.commentAuthor')
+   .exec(function(err, contest){
+     console.log('contest/:id/comments GET req contest after findOne');
+     console.log(contest);
+     if (err) {
+       console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    res.status(200).json({
+        message: 'Komentarai gauti',
+        obj: contest
+      });
+   });
+});
+
+router.get('/messages/:userId', function(req,res,next) {
+  var userId = req.params.userId;
+  User.findById(userId)
+  //.populate('messages.sender')
+  .exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    //console.log('user for messages');
+    //console.log(user);
+    res.status(200).json({
+        message: 'Zinutes gautos',
+        obj: user
+    });
+  });
+});
+
+router.get('/contest/:contestId/winner', function(req,res,next) {
+  var contestId = req.params.contestId;
+  Contest.findOne({'idName': contestId})
+  .exec(function(err, contest) {
+    if(err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    if(contest.winnerSubmition) {
+      console.log('DEBUG contest');
+      console.log(contest);
+      var winnerSubmition = contest.winnerSubmition;
+      return res.status(201).json({
+        message: 'Laimetojo konkursas gautas',
+        obj: winnerSubmition
+      });
+    } else {
+      console.log('ELSE');
+      return res.status(404).json({
+        title: 'Nera nugaletojo',
+        error: {message: 'Nera nugaletojo'}
+      });
+    }
+  });
+});
+
+// ------------------- END OF GETs --------------------
+
+router.patch('/contest/winner/add/:contestId/:winnerId', function(req, res, next) {
+  var contestId = req.params.contestIdName;
+  var winnerId = req.params.winnerId;
+  Contest.findById(contestId)
+  .exec(function(err, contest) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    contest.winner = winnerId;
+    contest.save(function (err, result) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          title: 'Klaida !',
+          error: {message: 'Įvyko klaida'}
+      });
+      }
+      console.log('Contest winner updated');
+    });
+  });
+  User.findById(winnerId)
+  .exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    user.contestsWon.push(contestId);
+    user.save(function(err, result) {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({
+          title: 'Klaida !',
+          error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Konkurso ir vartotojo informacija laimejus konkursa atnaujinta',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/message/:userId/:messageId', function(req, res, next) {
+  var userId = req.params.userId;
+  var messageId = req.params.messageId;
+  User.findById(userId, function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    for(let i=0; i<user.messages.length; i++) {
+      if(user.messages[i].messageId == messageId) {
+        if(user.messages[i].status == 'Neperžiūrėta') {
+          user.messages[i].status = req.body.status;
+        }
+      }
+    }
+    user.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Zinutes statusas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/message/:recipient', function(req, res, next) {
+  // console.log('REQ BODY');
+  // console.log(req.body);
+  var recipient = req.params.recipient;
+  var sender = req.body.sender;
+  //console.log(recipient + ", " + sender);
+  if(!recipient) {
+    return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įveskite gavėjo slapyvardį'}
+      });
+  }
+  User.findOne({'nickName': {$regex: new RegExp(sender, "i")}}, function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    req.body.messageId = user.messages.length + 1;
+    req.body.status = 'Išsiųsta';
+    user.messages.push(req.body);
+    user.save();
+    console.log('Message added to senders messages list');
+  });
+  User.findOne({'nickName': { $regex: new RegExp(recipient, "i") }})
+  .exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    if (!user) {
+      return res.status(404).json({
+        title: 'Blogas gavėjas !',
+        error: {message: 'Tokio vartotojo nerasta'}
+      });
+    }
+    //console.log('RECIPIENT');
+    //console.log(user);
+    req.body.status = 'Neperžiūrėta';
+    req.body.messageId = user.messages.length + 1;
+    user.messages.push(req.body);
+    user.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Zinute issiusta',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/contest/:id', function(req,res,next) {
+  var id = req.params.id;
+  Contest.findOne({'idName': id})
+  .populate('comments.commentAuthor')
+  .exec(function(err, contest){
+    //console.log('contest/:id PATCH req contest after findOne');
+    //console.log(contest);
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    //console.log('/contest/:id req body');
+    //console.log(req.body);
+    contest.comments.push(req.body);
+    //console.log('/contest/:id comments');
+    //console.log(contest.comments);
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Komentaras ikeltas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/submitions/:id', function(req,res,next) {
+  var decoded = jwt.decode(req.query.token);
+  var id = req.params.id;
+  //console.log('req ID');
+  //console.log(id)
+  Contest.findOne({'idName': id})
+  .exec(function(err, contest) {
+    //console.log('PATCH req contest after findOne');
+    //console.log(contest);
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    var newRating = req.body.submitionRating;
+    var subId = req.body.submitionId;
+    //console.log('newRating');
+    //console.log(newRating);
+    //console.log('submition ID');
+    //console.log(subId);
+    for (let i=0; i<contest.submitions.length; i++) {
+      if(contest.submitions[i].submitionId == subId) {
+        contest.submitions[i].submitionRating = newRating;
+      }
+    }
+
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Reitingas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,next) {
+  var contestIdName = req.params.contestIdName;
+  var submitionId = req.params.submitionId;
+  console.log('REQ BODY ContestId: ' + req.body.contestId);
+  console.log('REQ body winnerId: ' + req.body.winnerId);
+  User.findById(req.body.winnerId)
+  .exec(function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    if (!user) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Nerasta vartotojo'}
+      });
+    }
+    user.contestsWon.push(req.body.contestId);
+    user.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      console.log('Winner profile update');
+    });
+  });
+  Contest.findOne({'idName': contestIdName})
+  .exec(function(err, contest) {
+    //var winnerSubmition;
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    //contest.winner = req.body.winnerId;
+    contest.winnerSubmition = req.body.submition;
+    contest.status = 'Užbaigtas';
+    for(var i=0; i<contest.submitions.length; i++) {
+      if (contest.submitions[i].submitionId == submitionId) {
+        //winnerSubmition = contest.submitions[i];
+        contest.submitions[i].status = 'Nugalėtojas';
+      }
+    }
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Nugalėtojas paskelbtas',
+        obj: result
+      });
+    });
+  });
+});
+
+// ------------------- END OF GETs --------------------
+
 router.post('/gallery/:id', dynamicUpload.array("gallery", 12), function(req,res){
 
 var id = req.params.id;
@@ -653,9 +770,8 @@ User.findByIdAndUpdate(id, {new: true},  function(err, user) {
       });
     });
   });
-
 });
-//TEST
+
 
 
 
@@ -689,8 +805,8 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
       contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId, status: "active"});
       //fileNames.push(req.files[i]);
     }
-    console.log('submitions array:');
-    console.log(submitions);
+    //console.log('submitions array:');
+    //console.log(submitions);
     //console.log(fileNames);
 
     //Contest.findOneAndUpdate({'idName': contestId}, {$push: {submitions: {$each:submitions}}});

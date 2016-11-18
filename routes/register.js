@@ -29,8 +29,7 @@ router.post('/', function(req, res, next) {
     password: passwordHash.generate(req.body.password),
     email: req.body.email,
     userType: req.body.userType,
-    contestsWon: req.body.contestsWon,
-    designsCreated: req.body.designsCreated,
+    designsCreated: 0,
     publicDesigns: req.body.publicDesigns
   });
   } else { // client

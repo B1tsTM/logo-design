@@ -70,6 +70,10 @@ var schema = new Schema({
   },
   uniqueId: {
     type: Number
+  },
+  winnerSubmition: {
+    //type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.Mixed
   }
 });
 

@@ -17,6 +17,12 @@
   <h3>contest published by: {{contest.publisher.firstName}}</h3>
   <h3>MomentJS date test: {{momentDate}}</h3>
   <br>
+  <div *ngIf="winnerSubmition">
+    <h2>Winner:</h2>
+      <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
+        <br>
+        <span>Author: {{winnerSubmition.submitionAuthor.firstName}} {{winnerSubmition.submitionAuthor.lastName}} ({{winnerSubmition.submitionAuthor._id}}) SubmitionID: {{winnerSubmition.submitionId}}</span>
+  </div>
   <h2>Submitions:</h2>
   <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
   <div *ngIf="contestId">

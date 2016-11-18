@@ -9,7 +9,8 @@ var schema = new Schema({
   email: {type: String, required: true}, //, unique: true 
   nickName: {type: String, required: true, unique: true},
   userType: {type: String, required: true},
-  contestsWon: {type: Number},
+  //contestsWon: {type: Number},
+  contestsWon: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
   designsCreated: {type: Number},
   publicDesigns: {type: Number},
   contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],

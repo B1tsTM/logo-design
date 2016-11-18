@@ -36,6 +36,8 @@ export class SubmitionDetailsComponent implements OnInit {
       this.contestId = this.contestsService.submitionDetails.contestId;
       this.contest = this.contestsService.submitionDetails.contest;
       this.submition = this.contestsService.submitionDetails.submition;
+      console.log('DEBUG THis.submition');
+                console.log(this.submition.submitionAuthor._id);
     // this.route.params.subscribe((params: Params) => {
     //   this.contestId = params['id'];
     //   console.log('ngOnInit params id (contestId)');
@@ -106,15 +108,17 @@ export class SubmitionDetailsComponent implements OnInit {
         }
     }
 
-    selectWinner(contestIdName, submitionId, contest) {
+    selectWinner(contestIdName, submitionId, contest, submition) {
         this.isLoading = true;
         const topic = "Pergalė konkurse " + contest.name;
         const message = "Sveikiname laimėjus konkursą '" + contest.name + "'! Su jumis artimiausiu metu susisieks konkurso autorius " + contest.publisher.nickName + ". Kai Jūs išsiųsite atitinkamus dizaino failus ir gausite už tai pinigus, Jums reikės tai patvirtinti atrašant į ši laišką, įtraukiant konkurso pavadinimą (bei paminėti iškilusias problemas, jei tokių buvo) arba susisiekti el. pašto adresu info@dizainokonkursai.lt . Tai padarius konkursas bus laikomas užbaigtu. Sveikiname ir linkime Jums geros dienos!";
         console.log('you win ' + contestIdName +', '+ submitionId);
         const messageForAdmin = "Konkursą " + contest.name + "laimėjo " + this.submition.submitionAuthor.nickName + " laiku " + Date.now(); // TODO proper date format
-        this.apiService.selectWinner(contestIdName, submitionId)
+        this.apiService.selectWinner(contestIdName, submitionId, contest.id, this.submition.submitionAuthor._id, submition)
             .subscribe(data => {
                 console.log(data);
+                console.log('DEBUG THis.submition');
+                console.log(this.submition);
                 this.isLoading = false;
                 this.contestsService.contestWinner = {contestId: contestIdName, submitionId: submitionId, submition: this.submition, contest: contest};
                 this.apiService.sendMessage(this.submition.submitionAuthor.nickName, topic, message, "Admin") //.add sender param, figure out how to change it in api.service
@@ -132,6 +136,13 @@ export class SubmitionDetailsComponent implements OnInit {
                         this.isLoading = false;
                         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
                     });
+                    // this.apiService.addWinningContest(contest._id, this.submition.submitionAuthor._id)
+                    // .subscribe(data => {
+                    //     console.log(data);
+                    // }, error => {
+                    //     this.isLoading = false;
+                    //     this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+                    // });
                 window.scrollTo(0,0);
                 this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {

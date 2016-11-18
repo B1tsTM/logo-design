@@ -25,6 +25,7 @@ export class ContestDetailsComponent implements OnInit {
   percent: number;
   submitions: any[] = [];
   mySubmitions: any[] = [];
+  winnerSubmition: any;
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
   momentDate: any;
@@ -89,8 +90,16 @@ export class ContestDetailsComponent implements OnInit {
           //this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     }
+    this.apiService.getWinnerSubmition(this.contestId)
+        .subscribe(data => {
+            console.log(data);
+            this.winnerSubmition = data;
+        }, error => {
+           this.isLoading = false;
+          this.notificationsService.info(error.title, error.error.message, {timeOut: 3000, showProgressBar: false}) 
+        })
 
-  }
+  } //End of ngOnInit
 
   isClient() {
       return this.authService.isClient();

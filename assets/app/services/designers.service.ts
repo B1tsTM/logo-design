@@ -18,7 +18,7 @@ export class DesignersService {
           const data = res.json().obj;
           let objs: any[] = [];
           for(let i=0; i< data.length; i++) {
-            let designer = new User(data[i].nickName, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].email, data[i].contestsWon, data[i].designsCreated, data[i].publicDesigns);
+            let designer = new User(data[i].nickName, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].email, data[i].designsCreated, data[i].publicDesigns);
             objs.push(designer);
           };
           return objs;
