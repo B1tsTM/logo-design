@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logo Design</title>
+	<link rel="stylesheet" href="assets/css/master.css" />
+</head>
+<body>
+	<header class="app-header">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-header-inner">
+					<h1 class="site-logo">AppLogo</h1><!-- .app-logo -->
+					<nav class="site-navigation">
+						<ul>
+							<li><a href="#">About</a></li>
+							<li><a href="#">How it works</a></li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Support</a></li>
+						</ul>
+					</nav><!-- .site-navigation -->
+
+					<nav class="user-controls">
+						<ul>
+							<li class="login"><a href="#">Login</a></li>
+							<li class="register"><a href="#">Register</a></li>
+							<li class="user">
+								Welcome, username
+								<i class="fa fa-caret-down"></i>
+
+								<ul class="dropdown">
+									<li class="settings">
+										<a href="#">Settings <i class="fa fa-cog"></i></a>
+									</li>
+									<li class="logout">
+										<a href="#">Sign out <i class="fa fa-sign-out"></i></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav><!-- .user-navigation -->
+				</div><!-- .app-header-inner -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</header><!-- .app-header -->
+
+	<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a href="#">All Categories</a>
+					<a href="#" class="current">Submit new project</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Please fill in the input fields below</h2><!-- .headline -->
+					<span class="subtitle">Page <strong>1</strong> of 3</span>
+					
+					<!-- This one is aligned to the right. -->
+					<a href="#" class="see-faq">Go back to categories</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="input-forms">
+			<div class="input-row">
+				<div class="input-label">
+					<span>Your name:</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Select a country:</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<select name="" id="">
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+					</select>
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+	
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<hr class="sep" />
+
+			<input type="submit" class="submit" />
+		</div><!-- .input-forms -->
+
+
+	<footer class="app-footer">
+		<div class="row"></div><!-- .row -->
+	</footer><!-- .app-footer -->
+
+	<div id="timestamp" style="position: fixed; bottom: 0; right: 0; background; white; font-size: 10px; padding: 5px; z-index: 999999;"></div><!-- .timestamp -->
+
+	<script src="timestampOutput.js"></script>
+	<script>
+		document.getElementById('timestamp').innerHTML = projectTimestamp;
+	</script>
+</body>
+</html>

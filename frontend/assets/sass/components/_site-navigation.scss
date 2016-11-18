@@ -1,0 +1,23 @@
+.site-navigation {
+	font-size: 14px;
+	margin-left: 40px;
+
+	li {
+		display: inline-block;
+		font-weight: bold;
+	}
+
+	a {
+		color: black;
+		padding: rem-calc(8px);
+		display: inline-block;
+
+		&:hover {
+			color: $color-primary;
+		}
+	}
+}
+
+.user-controls {
+	@extend .site-navigation;
+}

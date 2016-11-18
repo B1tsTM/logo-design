@@ -1,0 +1,31 @@
+.app-breadcrumbs {
+	font-size: 28px;
+	font-weight: 300;
+	font-style: italic;
+
+	a {
+		opacity: 0.5;
+		transition: 0.3s;
+
+		&:after {
+			content: '/';
+			display: inline-block;
+			margin: 0 10px;
+		}
+	}
+
+	a:hover {
+		opacity: 1;
+		transition: 0.1s;
+	}
+
+	.current {
+		font-weight: bold;
+		font-style: normal;
+		opacity: 1;
+
+		&:after {
+			content: '';
+		}
+	}
+}
