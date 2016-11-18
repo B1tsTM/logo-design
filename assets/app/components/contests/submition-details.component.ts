@@ -153,7 +153,7 @@ export class SubmitionDetailsComponent implements OnInit {
 
     goBack() {
         window.scrollTo(0,0);
-        this.router.navigate(['./'], {relativeTo: this.route});
+        this.router.navigate(['/konkursai', this.contestId]);
     }
 
 }

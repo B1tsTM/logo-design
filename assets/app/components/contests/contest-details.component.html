@@ -17,6 +17,8 @@
   <h3>contest published by: {{contest.publisher.firstName}}</h3>
   <h3>MomentJS date test: {{momentDate}}</h3>
   <br>
+  <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
+  <br>
   <div *ngIf="winnerSubmition">
     <h2>Winner:</h2>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
@@ -43,13 +45,13 @@
     </div>
     <br>
   </div>  
-  <div *ngIf="!isLoggedIn()">To participate, you must be logged in as a designer</div>
-  <div *ngIf="isDesigner()">
+  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas'">To participate, you must be logged in as a designer</div>
+  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas'">
     <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <button type="button" [disabled]="filesToUpload.length == 0" (click)="upload()">Upload</button>
   {{percent}} %
   </div>
-  <div *ngIf="isClient()">Must be signed in as designer to upload files</div>
+  <div *ngIf="isClient() && contest.status != 'Užbaigtas'">Must be signed in as designer to upload files</div>
 
   <comments-section [contest]="contest"></comments-section>
   

@@ -5,10 +5,12 @@
     <h3>Author: {{submition.submitionAuthor.firstName}}</h3>
     <div><star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
     </div>
-    <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
-    <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
-    <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
-    <button type="button" class="btn btn-default" (click)="goBack()">Grįžti atgal</button>
+    <div *ngIf="contest.status != 'Užbaigtas'">
+        <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
+        <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
+        <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
+    </div>
+    <button *ngIf="contest" type="button" class="btn btn-default" (click)="goBack()">Grįžti atgal</button>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>
