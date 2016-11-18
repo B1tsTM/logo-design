@@ -1,0 +1,104 @@
+.table-primary {
+	.table-row {
+		display: flex;
+		justify-content: space-between;
+
+		border: 1px solid #ddd;
+		border-bottom: none;
+		cursor: pointer;
+		transition: 0.3s;
+		background-color: #ffffff;
+
+		&:last-of-type {
+			border-bottom: 1px solid #ddd;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+
+		&:first-of-type {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}	
+
+		&:hover {
+			background-color: #f8f8f8;
+			transition: 0.1s;
+		}
+
+		&.premium {
+			background-color: #fafdd8;
+		}
+
+		// Any row specifics
+		.name {
+			color: $color-blue;
+			font-weight: bold;
+		}
+	}
+
+	.table-header {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	// The different table columns
+	%columnBase { 
+		flex-grow: 1; 
+		flex-shrink: 1; 
+
+		padding: 8px 14px;
+	}
+
+	.status {
+		@extend %columnBase;
+		flex-basis: 50px;
+
+		span {
+			background: #ddd;
+			// color: white;
+			padding: 3px 10px;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: bold;
+		}
+
+		.active {
+			background: $color-green;
+			color: white;
+		}
+	}
+
+	.category {
+		@extend %columnBase;
+		flex-basis: 100px;
+	}
+
+	.name {
+		@extend %columnBase;
+		flex-basis: 100px;
+	}
+
+	.price {
+		@extend %columnBase;
+		flex-basis: 50px;
+
+		span {
+			background: #1a1a1a;
+			color: white;
+			padding: 3px 10px;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: bold;
+		}
+	}
+
+	.submitions {
+		@extend %columnBase;
+		flex-basis: 50px;
+	}
+
+	.time-remaining {
+		@extend %columnBase;
+		flex-basis: 100px;
+	}
+}

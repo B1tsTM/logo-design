@@ -1,0 +1,63 @@
+.input-forms {
+	margin: 0 auto;
+	padding: 80px;
+	background: white; 
+	max-width: 1000px;
+	box-shadow: 0 40px 120px -40px rgba(black,0.2);
+	border: 1px solid #eee;
+	border-radius: 5px;
+
+	input,
+	textarea,
+	select {
+		padding: 8px 12px;
+		border: 1px solid #ddd;
+		background-color: #fafafa;
+		border-radius: 3px;
+		width: 100%;
+	}
+
+	select {
+		height: 40px;
+	}
+
+	.sep {
+		margin: 40px 0;
+	}
+
+	.submit {
+		background: $color-primary;
+		border: none;
+		border-radius: 5px;
+		padding: 15px 60px;
+		color: white;
+		font-size: 18px;
+		font-weight: bold;
+		display: inline-block;
+		width: auto;
+	}
+}
+
+.input-row {
+	padding: 0;
+	border: none;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	align-items: baseline;
+	margin-bottom: 20px;
+}
+
+.input-label {
+	flex: 0 1 300px;
+
+	small {
+		display: block;
+		opacity: 0.5;
+	}
+}
+
+.input-field {
+	flex: 1 1 auto;
+}
