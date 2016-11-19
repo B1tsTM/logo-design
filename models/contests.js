@@ -41,7 +41,11 @@ var schema = new Schema({
     submitionRating: {type: Number},
     submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
     submitionId: {type: Number},
-    status: {type: String} // active/deleted
+    status: {type: String}, // active/deleted
+    comments: [{
+      comment: {type: String},
+      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+    }]
   }],
   comments: [{
     comment: {type: String},

@@ -12,6 +12,7 @@ export * from './contests/contests.component';
 export * from './contests/my-contests.component';
 export * from './contests/contest-details.component';
 export * from './contests/submition-details.component';
+export * from './contests/submition-comments-section.component';
 export * from './contests/winner-details.component';
 export * from './login/login.component';
 export * from './register/register.component';

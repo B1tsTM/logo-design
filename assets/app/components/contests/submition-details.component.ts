@@ -30,7 +30,7 @@ export class SubmitionDetailsComponent implements OnInit {
               private router: Router,
               private notificationsService: NotificationsService) { }
 
-  ngOnInit() { 
+  ngOnInit() {  // TODO add comments to users's comments array
       this.isLoading = true;
       console.log(this.contestsService.submitionDetails);
       this.contestId = this.contestsService.submitionDetails.contestId;

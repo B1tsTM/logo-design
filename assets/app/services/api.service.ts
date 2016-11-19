@@ -101,10 +101,36 @@ export class ApiService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  addSubmitionComment(obj:any, contestId: string, submitionId: number) {
+    const body = JSON.stringify(obj);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/contest/' + contestId + '/submition/' + submitionId + '/comment', body, {headers: headers})
+    .map(res => {
+      const contest = res.json().obj;
+      console.log('api service addComment contest var');
+      console.log(contest);
+      return contest;
+    })
+    .catch(error => Observable.throw(error.json()));
+  }
+
   getComments(contestId: string) {
     return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/comments')
     .map(res => {
       const comments = res.json().obj.comments;
+      console.log('api service getComments comments var');
+      console.log(comments);
+      return comments;
+    })
+    .catch(error => Observable.throw(error.json()));
+  }
+
+  getSubmitionComments(contestId: string, submitionId: number) {
+    return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/submition/'+ submitionId + '/comments')
+    .map(res => {
+      console.log('RES JSON');
+      console.log(res.json());
+      const comments = res.json().obj;
       console.log('api service getComments comments var');
       console.log(comments);
       return comments;

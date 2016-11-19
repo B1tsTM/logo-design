@@ -346,6 +346,32 @@ router.get('/submitions/contest/:id', function(req, res, next) {
   });
 });
 
+router.get('/contest/:contestId/submition/:submitionId/comments', function(req,res,next) {
+  var contestId = req.params.contestId;
+  var submitionId = req.params.submitionId;
+  Contest.findOne({'idName': contestId})
+  .populate('submitions.comments.commentAuthor')
+  .exec(function(err, contest) {
+    if (err) {
+       console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    var submition;
+    for(let i=0; i<contest.submitions.length; i++) {
+      if (contest.submitions[i].submitionId == submitionId) {
+        submition = contest.submitions[i];
+      }
+    }
+    res.status(200).json({
+      title: 'Success',
+      obj: submition.comments
+    });
+  });
+});
+
 router.get('/contest/:id/comments', function(req, res, next) {
    var id = req.params.id;
    Contest.findOne({'idName': id})
@@ -594,6 +620,48 @@ router.patch('/contest/:id', function(req,res,next) {
       }
       res.status(200).json({
         message: 'Komentaras ikeltas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/contest/:contestId/submition/:submitionId/comment', function(req,res,next) {
+  var contestId = req.params.contestId;
+  var submitionId = req.params.submitionId;
+  Contest.findOne({'idName': contestId})
+  .populate('comments.commentAuthor')
+  .exec(function(err, contest){
+    //console.log('contest/:id PATCH req contest after findOne');
+    //console.log(contest);
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    //console.log('/contest/:id req body');
+    //console.log(req.body);
+    for (let i=0; i<contest.submitions.length; i++) {
+      if (contest.submitions[i].submitionId == submitionId) {
+        contest.submitions[i].comments.push(req.body);
+      }
+    }
+
+    //contest.comments.push(req.body);
+    //console.log('/contest/:id comments');
+    //console.log(contest.comments);
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Submition komentaras ikeltas',
         obj: result
       });
     });

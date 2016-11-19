@@ -10,7 +10,20 @@
         <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
         <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
     </div>
-    <button type="button" class="btn btn-default" (click)="goBack()">Grįžti atgal</button>
+    <button *ngIf="contest" type="button" class="btn btn-default" (click)="goBack()">Grįžti atgal</button>
+    <br>
+    <!--<h3>Comments:</h3>
+    <div *ngIf="submition.comments.length == 0">Nėra komentarų</div>
+    <div *ngIf="submition.comments.length > 0">
+        <div *ngFor="let comment of submition.comments">
+            {{comment.comment}}
+            <br>
+            - {{comment.commentAuthor}} - {{comment?.commentAuthor?.nickName}}
+        </div>
+    </div>-->
+    <div *ngIf="submition">
+        <submition-comments-section [contest]="contest" [submition]="submition"></submition-comments-section>
+    </div>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>
