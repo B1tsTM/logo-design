@@ -22,7 +22,7 @@ export class ApiService {
           let submitions: any[] = [];
           for(let i=0; i< data.length; i++) {
             //let designer = new User(data[i].email, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].contestsWon, data[i].designsCreated, data[i].publicDesigns);
-            let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId, status: data[i].status};
+            let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
             submitions.push(submition);
           };
           console.log('submitions after loop');
@@ -50,7 +50,7 @@ export class ApiService {
             //console.log('submition author');
             //console.log(data[i].submitionAuthor);
             if (data[i].submitionAuthor._id == userId) {
-            let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, sumbitionId: data[i].submitionId, status: data[i].status};
+            let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, sumbitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
             //console.log('MySubmition in loop');
             //console.log(mySubmition);
             mySubmitions.push(mySubmition);

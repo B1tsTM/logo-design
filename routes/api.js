@@ -649,6 +649,9 @@ router.patch('/contest/:contestId/submition/:submitionId/comment', function(req,
     for (let i=0; i<contest.submitions.length; i++) {
       if (contest.submitions[i].submitionId == submitionId) {
         contest.submitions[i].comments.push(req.body);
+        if (contest.submitions[i].status == 'Nugalėtojas') {
+          contest.winnerSubmition.comments.push(req.body);
+        }
       }
     }
 

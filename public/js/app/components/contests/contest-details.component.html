@@ -24,6 +24,8 @@
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
         <br>
         <span>Author: {{winnerSubmition?.submitionAuthor?.firstName}} {{winnerSubmition?.submitionAuthor?.lastName}} ({{winnerSubmition?.submitionAuthor?._id}}) SubmitionID: {{winnerSubmition?.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="true" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
+
+        <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
   </div>
   <h2>Submitions:</h2>
   <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
@@ -32,6 +34,7 @@
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <br>
       <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}}) SubmitionID: {{submition.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
+      <span *ngIf="submition.comments">{{submition.comments.length}} comments</span>
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
@@ -41,7 +44,8 @@
     <div *ngFor="let mySubmition of mySubmitions">
       <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
         <br>
-        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}}) <star-rating [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
+        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}}) <star-rating [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span> 
+        <span *ngIf="mySubmition.comments">{{mySubmition.comments.length}} comments</span>
     </div>
     <br>
   </div>  
