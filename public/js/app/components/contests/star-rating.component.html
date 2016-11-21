@@ -1,5 +1,5 @@
 <div class='crop' #stars (mouseenter)="changeCursor()" (mouseleave)="removeCursor()">
-    <div [title]='rating' *ngFor='let index of range'>
+    <div class="star-column" [title]='rating' *ngFor='let index of range'>
         <i class='glyphicon' [ngClass]="index <= rating ? 'glyphicon-star' : 'glyphicon-star-empty'" (click)="changeRating(index)"></i>
     </div>
 </div>

@@ -1,13 +1,15 @@
 <div>
     <h4 class="modal-title text-center">Dizaino info</h4>
-    <h3>Submition ID: {{submition?.submitionId}}</h3>
-    <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
-    <h3>Author: {{submition?.submitionAuthor?.firstName}}</h3>
-    <div>
-        <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
-        <star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+    <h3 class="text-center">Submition ID: {{submition?.submitionId}}</h3>
+    <div class="img-container">
+        <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
     </div>
-    <div *ngIf="contest.status != 'Užbaigtas'">
+    <h3 class="text-center">Author: {{submition?.submitionAuthor?.firstName}}</h3>
+    <div class="text-center">
+        <star-rating class="star-rating" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+        <star-rating class="star-rating" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+    </div>
+    <div class="text-center" *ngIf="contest.status != 'Užbaigtas'">
         <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
         <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
         <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
@@ -23,7 +25,7 @@
             - {{comment.commentAuthor}} - {{comment?.commentAuthor?.nickName}}
         </div>
     </div>-->
-    <div *ngIf="submition">
+    <div class="comments-section" *ngIf="submition">
         <submition-comments-section [contest]="contest" [submition]="submition"></submition-comments-section>
     </div>
 </div>

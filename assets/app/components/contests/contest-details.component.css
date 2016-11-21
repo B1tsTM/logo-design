@@ -2,3 +2,38 @@
   width: 200px;
   height: 200px;
 }
+
+.star-rating {
+  display: inline-block;
+  padding-left: 60px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.thumbnail-container {
+  padding: 20px;
+}
+
+.winner-container {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.comments-section {
+  text-align: center;
+}
+
+.thumbnail-row {
+  max-width: 100%;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.pad-left-60 {
+  padding-left: 60px;
+}

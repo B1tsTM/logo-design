@@ -1,51 +1,69 @@
-<h1>Contest details</h1>
+<h1 class="text-center">Contest details</h1>
 <br>
 
 <div *ngIf="!contest">Kraunama...</div>
 <div *ngIf="contest">  
   <h2>ID: {{contestId}}</h2>
-  <h3>ID Name: {{contest.idName}}</h3>
-  <h3>Generated unique ID: {{contest.uniqueId}}</h3>
-  <h3>contest name: {{contest.name}}</h3>
-  <h3>contest category: {{contest.category}}</h3>
-  <h3>contest description: {{contest.description}}</h3>
-  <h3>contest award: {{contest.award}}</h3>
-  <h3>contest status: {{contest.status}}</h3>
-  <h3>contest start date: {{contest.startDate | localDateStandart}}</h3>
-  <h3>contest end date: {{contest.endDate | localDateFromNow}} ({{contest.endDate | date: 'yyyy-MM-dd'}})</h3>
-  <h3>contest submition count: {{contest.submitionCount}}</h3>
-  <h3>contest published by: {{contest.publisher.firstName}}</h3>
-  <h3>MomentJS date test: {{momentDate}}</h3>
+  <small>ID Name: {{contest.idName}}</small>
+  <small>Generated unique ID: {{contest.uniqueId}}</small>
+  <small>contest name: {{contest.name}}</small>
+  <small>contest category: {{contest.category}}</small>
+  <small>contest description: {{contest.description}}</small>
+  <small>contest award: {{contest.award}}</small>
+  <small>contest status: {{contest.status}}</small>
+  <small>contest start date: {{contest.startDate | localDateStandart}}</small>
+  <small>contest end date: {{contest.endDate | localDateFromNow}} ({{contest.endDate | date: 'yyyy-MM-dd'}})</small>
+  <small>contest submition count: {{contest.submitionCount}}</small>
+  <small>contest published by: {{contest.publisher.firstName}}</small>
+  <small>MomentJS date test: {{momentDate}}</small>
   <br>
   <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
   <br>
   <div *ngIf="winnerSubmition">
-    <h2>Winner:</h2>
+    <h2 class="text-center">Winner:</h2>
+    <div class="winner-container">
+      <div>SubmitionID: {{winnerSubmition?.submitionId}} </div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
         <br>
-        <span>Author: {{winnerSubmition?.submitionAuthor?.firstName}} {{winnerSubmition?.submitionAuthor?.lastName}} ({{winnerSubmition?.submitionAuthor?._id}}) SubmitionID: {{winnerSubmition?.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="true" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
+        <span>Author: {{winnerSubmition?.submitionAuthor?.nickName}}</span>
+        <div>
+          <star-rating class="inline-block" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="true" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+          <star-rating class="inline-block" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+        </div>
 
         <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
+    </div>
   </div>
-  <h2>Submitions:</h2>
+  <h2 class="text-center">Submitions:</h2>
   <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
-  <div *ngIf="contestId">
-    <div *ngFor="let submition of submitions">
+  <div class="thumbnail-row" *ngIf="contestId">
+    <div class="inline-block thumbnail-container" *ngFor="let submition of submitions">
+      <div class="pad-left-60">SubmitionID: {{submition.submitionId}}</div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <br>
-      <span>Author: {{submition.submitionAuthor.firstName}} {{submition.submitionAuthor.lastName}} ({{submition.submitionAuthor._id}}) SubmitionID: {{submition.submitionId}} <star-rating *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating><star-rating *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span>
-      <span *ngIf="submition.comments">{{submition.comments.length}} comments</span>
+      <span class="pad-left-60">Author: {{submition.submitionAuthor.nickName}}</span>
+      <div>
+        <star-rating class="star-rating" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+        <star-rating class="star-rating" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+      </div>
+      <span class="pad-left-60" *ngIf="submition.comments">{{submition.comments.length}} comments</span>
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
-    <h2>My submitions:</h2>
-    <div *ngFor="let mySubmition of mySubmitions">
-      <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
-        <br>
-        <span>Author: {{mySubmition.submitionAuthor.firstName}} {{mySubmition.submitionAuthor.lastName}} ({{mySubmition.submitionAuthor._id}}) <star-rating [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating></span> 
-        <span *ngIf="mySubmition.comments">{{mySubmition.comments.length}} comments</span>
+    <h2 class="text-center">My submitions:</h2>
+    <div class="thumbnail-row">
+      <div class="inline-block thumbnail-container" *ngFor="let mySubmition of mySubmitions">
+        <div class="pad-left-60">SubmitionID: {{mySubmition.submitionId}}</div>
+        <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
+          <br>
+          <span class="pad-left-60">Author: {{mySubmition.submitionAuthor.nickName}} (debug only) </span>
+            <div>
+              <star-rating class="star-rating" [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+            </div> 
+          <span class="pad-left-60" *ngIf="mySubmition.comments">{{mySubmition.comments.length}} comments</span>
+      </div>
     </div>
     <br>
   </div>  
@@ -58,7 +76,9 @@
   </div>
   <div *ngIf="isClient() && contest.status != 'Užbaigtas'">Must be signed in as designer to upload files</div>
 
-  <comments-section [contest]="contest"></comments-section>
+  <div class="comments-section">
+    <comments-section [contest]="contest"></comments-section>
+  </div>
   
 </div>
 
