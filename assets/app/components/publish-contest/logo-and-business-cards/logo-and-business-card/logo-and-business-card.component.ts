@@ -84,7 +84,8 @@ export class LogoAndBusinessCardComponent implements OnInit {
           form.contestName.value = '';
           form.contestDescription.value = '';
           form.contestAward.value = '';
-          this.notificationsService.success('Įkelta', 'Konkursas įkeltas', {timeOut: 3000, showProgressBar: false})
+          this.notificationsService.success('Įkelta', 'Konkursas įkeltas', {timeOut: 3000, showProgressBar: false});
+          this.router.navigate(['/']);
         },
         error => {
           //this.errorService.handleError(error);

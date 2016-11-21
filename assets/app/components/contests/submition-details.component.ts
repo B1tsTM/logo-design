@@ -99,6 +99,8 @@ export class SubmitionDetailsComponent implements OnInit {
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                    //this.contestsService.submitionDetails.submition = data.obj.submitions[obj.submitionId - 1];
+                    console.log(this.contestsService.submitionDetails.submition); 
                     this.isLoading = false;
                     this.notificationsService.success('Pakeista', 'Dizaino reitingas pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {

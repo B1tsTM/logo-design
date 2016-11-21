@@ -93,7 +93,11 @@ export class ContestDetailsComponent implements OnInit {
     this.apiService.getWinnerSubmition(this.contestId)
         .subscribe(data => {
             console.log(data);
-            this.winnerSubmition = data;
+            if (data.submitionUrl) {
+                this.winnerSubmition = data;
+            }
+              console.log('WINNNNNNNNNNER');
+              console.log(this.winnerSubmition);
         }, error => {
            this.isLoading = false;
           this.notificationsService.info(error.title, error.error.message, {timeOut: 3000, showProgressBar: false}) 
@@ -217,11 +221,15 @@ export class ContestDetailsComponent implements OnInit {
         console.log(submition);
         if (!!submition && submition.length == 1) {
             //this.submitions[0].submitionRating = obj.rating;
+
             submition[0].submitionRating = obj.rating;
             this.contestsService.updateSubmitionRating(this.contest, submition[0])
                 .subscribe(data => {
                     console.log('Rating changed');
                     console.log(data);
+                    if (submition[0].status == 'Nugalėtojas') { 
+                        this.winnerSubmition.submitionRating = data.obj.submitions[obj.submitionId - 1].submitionRating;
+                    }
                     this.isLoading = false;
                     this.notificationsService.success('Atnaujinta', 'Reitingas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {

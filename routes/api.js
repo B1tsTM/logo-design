@@ -417,6 +417,9 @@ router.get('/messages/:userId', function(req,res,next) {
 router.get('/contest/:contestId/winner', function(req,res,next) {
   var contestId = req.params.contestId;
   Contest.findOne({'idName': contestId})
+  //.populate('submitions.submitionAuthor')
+  .populate('winnerSubmition.submitionAuthor')
+  .populate('winnerSubmition.comments.commentAuthor')
   .exec(function(err, contest) {
     if(err) {
       console.log(err);
@@ -674,6 +677,7 @@ router.patch('/submitions/:id', function(req,res,next) {
   //console.log('req ID');
   //console.log(id)
   Contest.findOne({'idName': id})
+  .populate('submitions.submitionAuthor')
   .exec(function(err, contest) {
     //console.log('PATCH req contest after findOne');
     //console.log(contest);
@@ -693,6 +697,12 @@ router.patch('/submitions/:id', function(req,res,next) {
     for (let i=0; i<contest.submitions.length; i++) {
       if(contest.submitions[i].submitionId == subId) {
         contest.submitions[i].submitionRating = newRating;
+        if (contest.submitions[i].status == 'Nugalėtojas') {
+          contest.winnerSubmition = contest.submitions[i];
+          contest.winnerSubmition.submitionRating = newRating;
+          console.log('RRRRRRRRRRRR ' + contest.winnerSubmition.submitionRating);
+          console.log('EEEEEEEEEEee ' + contest.winnerSubmition);
+        }
       }
     }
 

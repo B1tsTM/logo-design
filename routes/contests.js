@@ -6,7 +6,7 @@ var Contest = require('../models/contests');
 var User = require('../models/user');
 
 function kebab(str) {
-  var kebab =  str.replace('. ', '-').replace('.', '-').replace('.-', '-').replace('.', '-').replace(',', '').replace('.', '').replace('. ', '-').replace(/\s+/g, '-').replace(',', '').toLowerCase();
+  var kebab =  str.replace(' & ', '-').replace('&', '-').replace('. ', '-').replace('.', '-').replace('.-', '-').replace('.', '-').replace(',', '').replace('.', '').replace('. ', '-').replace(/\s+/g, '-').replace(',', '').toLowerCase();
   return kebab;
 }
 

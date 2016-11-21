@@ -19,7 +19,7 @@
     </form>
   </div>
   <div *ngIf="!isSubmitionAuthor() && !isContestPublisher(contest.publisher._id)">
-    <strong>Comments are only visible to designers and publisher</strong>
+    <strong>Comments are only visible to the designer and publisher</strong>
   </div>
 <!--</div>-->
 <simple-notifications [options]="options"></simple-notifications>

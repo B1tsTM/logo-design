@@ -75,9 +75,20 @@ var schema = new Schema({
   uniqueId: {
     type: Number
   },
+  // winnerSubmition: {
+  //   //type: Schema.Types.ObjectId, ref: 'User'
+  //   type: Schema.Types.Mixed
+  // }
   winnerSubmition: {
-    //type: Schema.Types.ObjectId, ref: 'User'
-    type: Schema.Types.Mixed
+    submitionUrl: {type: String},
+    submitionRating: {type: Number},
+    submitionAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
+    submitionId: {type: Number},
+    status: {type: String}, // active/deleted
+    comments: [{
+      comment: {type: String},
+      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+    }]
   }
 });
 
