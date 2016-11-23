@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   contests: any = [];
   isLoading = false;
   status = "Aktyvus";
+  firstTabActive = true;
+  secondTabActive = false;
   @ViewChild('search') searchElRef: ElementRef;
   public options = {
       position: ["top","right"]
@@ -46,6 +48,7 @@ export class HeaderComponent implements OnInit {
     this.ngzone.runOutsideAngular(() => {
       Observable.fromEvent(this.searchElRef.nativeElement, 'keyup')
       .debounceTime(1000)
+      .distinctUntilChanged() // TODO test if this works. Update: not working. Needs a custom callback to check for whitespace
       .subscribe(event => {
         this.contestsService.getFilteredContests(event.target.value) //searchString
         .subscribe(contests => {
@@ -59,13 +62,61 @@ export class HeaderComponent implements OnInit {
           this.cdRef.detectChanges();
         }, error => {
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-        })
+        });
       });
     });
   }
 
-  filterContests(searchString) {
-    this.contestsService.getAllContests()
+  selectFirstTab() {
+    this.firstTabActive = true;
+    this.secondTabActive = false;
+    if (this.status == "Aktyvus") {
+      //do nothing
+    } else {
+    this.status = "Aktyvus";
+    this.isLoading = true;
+    this.contestsService.getFilteredContests("") // = get all
+        .subscribe(contests => {
+          console.log('Filter layer 1 contests');
+          console.log(contests);
+          var unfilteredContests = contests;
+          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
+          console.log('Filter layer 2 contests');
+          console.log(filteredContests);
+          this.contests = filteredContests;
+          this.cdRef.detectChanges();
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        });
+    }
+  }
+
+  selectSecondTab() {
+    this.firstTabActive = false;
+    this.secondTabActive = true;
+    if (this.status == "Užbaigtas") {
+      //do nothing
+    } else {
+    this.status = "Užbaigtas";
+    this.isLoading = true;
+    this.contestsService.getFilteredContests("") // = get all
+        .subscribe(contests => {
+          console.log('Filter layer 1 contests');
+          console.log(contests);
+          var unfilteredContests = contests;
+          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
+          console.log('Filter layer 2 contests');
+          console.log(filteredContests);
+          this.contests = filteredContests;
+          this.cdRef.detectChanges();
+          this.isLoading = false;
+        }, error => {
+          this.isLoading = false;
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        });
+    }
   }
 
 }

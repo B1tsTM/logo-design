@@ -74,7 +74,7 @@
 		<div class="row">
 			<div class="columns small-12">
 				<div class="page-headline">
-					<h2 class="title">Aktyvių konkursų sąrašas</h2><!-- .headline -->
+					<h2 class="title">Konkursų sąrašas</h2><!-- .headline -->
 					<span class="subtitle">Peržvelkite naujausius konkursus žemiau</span>
 					
 					<!-- This one is aligned to the right. -->
@@ -88,12 +88,12 @@
 				<!-- The component that switches tables, searches, has new request button -->
 				<div class="action-bar">
 					<div class="table-actions">
-						<div class="tab tab-active current">
+						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
 							<i class="fa fa-rotate-left"></i>
 							<span>Aktyvūs</span>
 							<span class="label">45</span>
 						</div><!-- .tab -->
-						<div class="tab tab-finished">
+						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
 							<i class="fa fa-star"></i>
 							<span>Užbaigti</span>
 							<span class="label">273</span>
@@ -115,8 +115,8 @@
 				<div class="table-primary">
 					<header class="table-header">
 						<strong class="status">Būsena</strong>
-						<strong class="category">Kategorija</strong>
 						<strong class="name">Pavadinimas</strong>
+						<strong class="category">Kategorija</strong>
 						<strong class="price">Prizas</strong>
 						<strong class="submitions">Įkelta dizainų</strong>
 						<strong class="time-remaining">Konkurso pabaiga</strong>
@@ -142,16 +142,19 @@
 							<span>1 diena</span>
 						</div>
 					</div>-->
+						<div *ngIf="contests.length == 0" class="table-row">
+							<span class="no-contests-label">Konkurso nerasta</span>
+						</div>
 					
 						<div *ngFor="let contest of contests" class="table-row">
 							<div class="status">
 								<span class="active">{{contest.status}}</span>
 							</div>
-							<div class="category">
-								<span>{{contest.category}}</span>
-							</div>
 							<div class="name">
 								<span>{{contest.name}}</span>
+							</div>
+							<div class="category">
+								<span>{{contest.category}}</span>
 							</div>
 							<div class="price">
 								<span>{{contest.award}}</span>

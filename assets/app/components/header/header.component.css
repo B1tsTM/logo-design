@@ -74,3 +74,11 @@ strong {
   margin-right: 30px;
 }
 */
+
+.no-contests-label {
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none;
+  font-style: italic;
+}
