@@ -101,7 +101,7 @@
 
 						<div class="table-search">
 							<i class="fa fa-search"></i>
-							<input type="text" class="search" placeholder="Ieškoti konkurso" />
+							<input type="text" class="search" placeholder="Ieškoti konkurso" #search /> <!--(keyup)="filterContests(search.value)"-->
 							<input type="submit" value="Search" />
 						</div><!-- .search -->
 					</div><!-- .table-actions -->
@@ -119,10 +119,10 @@
 						<strong class="name">Pavadinimas</strong>
 						<strong class="price">Prizas</strong>
 						<strong class="submitions">Įkelta dizainų</strong>
-						<strong class="time-remaining">Likęs laikas</strong>
+						<strong class="time-remaining">Konkurso pabaiga</strong>
 					</header><!-- .table-header -->
 
-					<div class="table-row premium">
+					<!--<div class="table-row premium">
 						<div class="status">
 							<span class="active">Aktyvus</span>
 						</div>
@@ -141,29 +141,34 @@
 						<div class="time-remaining">
 							<span>1 diena</span>
 						</div>
-					</div><!-- .table-row -->
-
-					<div class="table-row">
-						<div class="status">
-							<span class="active">Aktyvus</span>
+					</div>-->
+					
+						<div *ngFor="let contest of contests" class="table-row">
+							<div class="status">
+								<span class="active">{{contest.status}}</span>
+							</div>
+							<div class="category">
+								<span>{{contest.category}}</span>
+							</div>
+							<div class="name">
+								<span>{{contest.name}}</span>
+							</div>
+							<div class="price">
+								<span>{{contest.award}}</span>
+							</div>
+							<div class="submitions">
+								<span>{{contest.submitions.length}}</span>
+							</div>
+							<div class="time-remaining">
+								<span>{{contest.endDate | localDateFromNow}}</span>
+							</div>
 						</div>
-						<div class="category">
-							<span>Tinklalapis</span>
-						</div>
-						<div class="name">
-							<span>U99 puslapis</span>
-						</div>
-						<div class="price">
-							<span>549 EUR</span>
-						</div>
-						<div class="submitions">
-							<span>3</span>
-						</div>
-						<div class="time-remaining">
-							<span>2 dienos</span>
-						</div>
-					</div><!-- .table-row -->
+					
 				</div><!-- .primary-table -->
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 </section><!-- .app-main -->
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<test-loader *ngIf="isLoading"></test-loader>

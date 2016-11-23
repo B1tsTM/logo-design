@@ -31,6 +31,29 @@ export class ContestsService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  getFilteredContests(searchString: string) {
+    if(searchString.match(/^\s+$/) || !searchString) { // If all whitespace or empty string
+      return this.http.get('http://localhost:3000/api/v1/konkursai')
+      .map(res => {
+        const data = res.json().obj;
+        let objs: any[] = [];
+        for(let i=0; i< data.length; i++) {
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          objs.push(contest);
+        };
+        return objs;
+      })
+      .catch(error => Observable.throw(error.json()));
+    } else {
+    return this.http.get('http://localhost:3000/api/v1/konkursai/filter/' + searchString)
+      .map(res => {
+        console.log(res.json());
+        return res.json().obj;
+      })
+      .catch(error => Observable.throw(error.json()));
+      }
+  }
+
   getIndividualContests(id: any) {
     return this.http.get('http://localhost:3000/api/v1/konkursai')
       .map(res => {

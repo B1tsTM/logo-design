@@ -198,6 +198,28 @@ router.get('/konkursai', function(req,res,next) {
     });
 });
 
+router.get('/konkursai/filter/:searchString', function(req,res,next) {
+  var searchString = req.params.searchString;
+  Contest.find({name: new RegExp(searchString, 'i')})
+    //.populate('publisher')
+    .sort({endDate : 1})
+    .exec(function(err, docs) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      //console.log('Filtered contests:');
+      //console.log(docs);
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
 router.get('/konkursai/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)
