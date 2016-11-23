@@ -102,7 +102,7 @@ export class UserNavigationComponent implements OnInit {
          sessionStorage.setItem('userType', data.userType);
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
-         this.router.navigateByUrl('/');
+         //this.router.navigateByUrl('/');
        },
        //error => this.errorService.handleError(error))
        error => {
@@ -120,11 +120,11 @@ export class UserNavigationComponent implements OnInit {
         this.authService.signup(user)
           .subscribe(data => {
             console.log(data);
-            form.firstName.value = '';
-            form.lastName.value = '';
-            form.nickName.value = '';
-            form.email.value = '';
-            form.password.value = '';
+            form.firstName.value = null;
+            form.lastName.value = null;
+            form.nickName.value = null;
+            form.email.value = null;
+            form.password.value = null;
             this.isLoading = false;
             this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote', {timeOut: 3000, showProgressBar: false});
           },

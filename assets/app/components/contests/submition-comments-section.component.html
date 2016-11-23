@@ -1,6 +1,6 @@
 <h2>Comments</h2>
 <!--<div *ngIf="comments">-->
-  <div *ngIf="comments.length == 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id))">Komentarų nėra</div>
+  <div *ngIf="comments.length == 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) && isLoggedIn()">Komentarų nėra</div>
   <div *ngIf="comments.length > 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id))">
     <div *ngFor="let comment of comments">
       <em>{{comment?.comment}}</em>
@@ -18,7 +18,7 @@
       <button type="button" class="btn btn-primary" (click)="addComment(commentField)">Pridėti komentarą</button>
     </form>
   </div>
-  <div *ngIf="!isSubmitionAuthor() && !isContestPublisher(contest.publisher._id)">
+  <div *ngIf="(!isSubmitionAuthor() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
     <strong>Comments are only visible to the designer and publisher</strong>
   </div>
 <!--</div>-->

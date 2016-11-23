@@ -51,7 +51,7 @@ export class CommentsSectionComponent implements OnInit {
       },
       error => {
         this.isLoading = false;
-        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
           //this.errorService.handleError(error);
       });
     this.apiService.getComments(this.contestId)
@@ -66,7 +66,13 @@ export class CommentsSectionComponent implements OnInit {
       error => {
           //this.errorService.handleError(error);
           this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+          // if(this.user) {
+          //   this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+          // } else {
+          //   this.user = null;
+          // }
+          
+          //this.comments = [];
       });
       // this.commentsForm = this.fb.group({
       //   comment: ['']
@@ -111,6 +117,10 @@ export class CommentsSectionComponent implements OnInit {
 
   isClient() {
     return this.authService.isClient();
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
 }

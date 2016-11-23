@@ -57,8 +57,8 @@ export class SubmitionCommentsSectionComponent implements OnInit {
       },
       error => {
         this.isLoading = false;
-        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-          //this.errorService.handleError(error);
+        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        //this.errorService.handleError(error);
       });
     this.apiService.getSubmitionComments(this.contestId, this.submition.submitionId)
       .subscribe(comments => {
@@ -123,6 +123,10 @@ export class SubmitionCommentsSectionComponent implements OnInit {
 
   isSubmitionAuthor() {
     return this.submition.submitionAuthor._id == this.userId
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
 }
