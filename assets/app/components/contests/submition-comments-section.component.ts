@@ -48,7 +48,7 @@ export class SubmitionCommentsSectionComponent implements OnInit {
     this.contestId = this.contest.idName;
     console.log('DEBUG contest idname');
     console.log(this.contestId);
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.apiService.getUserInfo(this.userId)
       .subscribe(user => {
         console.log('comments-section comp user var');
@@ -113,7 +113,7 @@ export class SubmitionCommentsSectionComponent implements OnInit {
   }
 
   isContestPublisher(contestAuthorId: string) {
-    var userId = localStorage.getItem('userId');
+    var userId = sessionStorage.getItem('userId');
     return contestAuthorId == userId;
   }
 

@@ -32,7 +32,7 @@ export class MailCreateForUserComponent implements OnInit {
     if (this.contestsService.mailTopic) {
       this.topic = this.contestsService.mailTopic;
     }
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.route.params.subscribe((params: Params) => {
     this.nickname = params['nickname'];
     });

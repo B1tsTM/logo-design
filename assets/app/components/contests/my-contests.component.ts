@@ -27,7 +27,7 @@ export class MyContestsComponent implements OnInit {
 
   ngOnInit() { 
     this.isLoading = true;
-    this.id = localStorage.getItem('userId');
+    this.id = sessionStorage.getItem('userId');
     this.contestsService.getIndividualContests(this.id)
     .subscribe(contests => {
       this.contests = contests;
@@ -63,7 +63,7 @@ export class MyContestsComponent implements OnInit {
   }
 
   belongsToUser(userId: string) {
-    return localStorage.getItem('userId') == userId;
+    return sessionStorage.getItem('userId') == userId;
   }
 
 }

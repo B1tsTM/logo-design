@@ -42,15 +42,15 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return localStorage.getItem('token') !== null;
+    return sessionStorage.getItem('token') !== null;
   }
 
   isClient() {
-    return localStorage.getItem('userType') == 'uzsakovas';
+    return sessionStorage.getItem('userType') == 'uzsakovas';
   }
 
   isDesigner() {
-    return localStorage.getItem('userType') == 'dizaineris';
+    return sessionStorage.getItem('userType') == 'dizaineris';
   }
 
   getAvatar(id: string) {

@@ -113,7 +113,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
   }
 
   belongsToUser(userId: string) {
-    return localStorage.getItem('userId') == userId;
+    return sessionStorage.getItem('userId') == userId;
   }
 
   goBack() {

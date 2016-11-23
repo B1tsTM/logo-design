@@ -44,7 +44,7 @@ export class ApiService {
         const data = res.json().submitions;
         //console.log('apiService data variable for MySubmitions');
         //console.log(data);
-          let userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : '';
+          let userId = sessionStorage.getItem('userId') ? sessionStorage.getItem('userId') : '';
           let mySubmitions: any[] = [];
           for(let i=0; i< data.length; i++) {
             //console.log('submition author');
@@ -145,7 +145,7 @@ export class ApiService {
   }
 
   sendMessage(recipient, topic, message, sender) {
-    //var sender = localStorage.getItem('userId');
+    //var sender = sessionStorage.getItem('userId');
     var obj = {message: message, recipient: recipient, topic: topic, sender: sender};
     const body = JSON.stringify(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -165,7 +165,7 @@ export class ApiService {
   }
 
   deleteMessage(messageId: number) {
-    var userId = localStorage.getItem('userId');
+    var userId = sessionStorage.getItem('userId');
     return this.http.delete('http://localhost:3000/api/v1/message/' + userId + '/' + messageId)
     .map(res => {
       return res.json().obj.messages;

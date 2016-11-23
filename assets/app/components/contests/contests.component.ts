@@ -39,7 +39,7 @@ export class ContestsComponent implements OnInit {
    }
 
   belongsToUser(userId: string) {
-    return localStorage.getItem('userId') == userId;
+    return sessionStorage.getItem('userId') == userId;
   }
 
 }

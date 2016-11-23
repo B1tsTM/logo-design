@@ -16,7 +16,7 @@ export class AndroidAppComponent implements OnInit {
   ngOnInit() { }
 
   upload() {
-        this.id = localStorage.getItem('userId');
+        this.id = sessionStorage.getItem('userId');
         this.makeFileRequest("http://localhost:3000/api/v1/gallery/"+this.id, [], this.filesToUpload).then((result) => {
             console.log(result);
             this.filesToUpload = [];

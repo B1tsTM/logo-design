@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passwordHash = require('password-hash');
+var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
@@ -26,7 +27,7 @@ router.post('/', function(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     nickName: req.body.nickName,
-    password: passwordHash.generate(req.body.password),
+    password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email,
     userType: req.body.userType,
     designsCreated: 0,
@@ -37,7 +38,7 @@ router.post('/', function(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     nickName: req.body.nickName,
-    password: passwordHash.generate(req.body.password),
+    password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email,
     userType: req.body.userType
     });

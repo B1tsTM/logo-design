@@ -24,7 +24,7 @@ export class ReadMessageComponent implements OnInit {
 
   ngOnInit() { 
     this.isLoading = true;
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.route.params.subscribe((params: Params) => {
     this.messageId = params['messageId']
     })

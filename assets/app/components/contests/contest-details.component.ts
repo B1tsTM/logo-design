@@ -121,7 +121,7 @@ export class ContestDetailsComponent implements OnInit {
 
   upload() {
       this.isLoading = true;
-        this.userId = localStorage.getItem('userId');
+        this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload).then((result) => {
             console.log(result);
             //this.filesToUpload = [];
@@ -240,7 +240,7 @@ export class ContestDetailsComponent implements OnInit {
     }
 
     isContestPublisher(contestAuthorId: string) {
-        var userId = localStorage.getItem('userId');
+        var userId = sessionStorage.getItem('userId');
         return contestAuthorId == userId;
     }
 

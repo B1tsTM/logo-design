@@ -26,7 +26,7 @@ export class MailCreateComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() { 
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.apiService.getUserInfo(this.userId)
       .subscribe(res => {
         this.sender = res;

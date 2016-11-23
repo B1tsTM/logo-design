@@ -31,7 +31,7 @@
           <star-rating class="inline-block" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
         </div>
 
-        <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length > 0 ? winnerSubmition.comments.length comments : winnerSubmition.comments.length comment}}</span>
+        <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
     </div>
   </div>
   <h2 class="text-center">Submitions:</h2>

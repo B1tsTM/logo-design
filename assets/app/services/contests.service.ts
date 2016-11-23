@@ -65,7 +65,7 @@ export class ContestsService {
   addContest(contest: Contest) {
     const body = JSON.stringify(contest);
     const headers = new Headers({'Content-Type': 'application/json'});
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
 
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
@@ -79,7 +79,7 @@ export class ContestsService {
   updateContest(contest: Contest) {
     const body = JSON.stringify(contest);
     const headers = new Headers({'Content-Type': 'application/json'});
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
 
     return this.http.patch("http://localhost:3000/konkursai/" + contest.id + token, body, {headers: headers})
     .map(res => res.json())
@@ -92,7 +92,7 @@ export class ContestsService {
   }
 
   deleteContest(contest: any) {
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
     this.contests.splice(this.contests.indexOf(contest), 1);
     return this.http.delete("http://localhost:3000/konkursai/" + contest.id + token)
       .map(res => res.json())
@@ -102,7 +102,7 @@ export class ContestsService {
   updateSubmitionRating(contest: any, submition: any) {
     const body = JSON.stringify(submition);
     const headers = new Headers({'Content-Type': 'application/json'});
-    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
 
     return this.http.patch("http://localhost:3000/api/v1/submitions/" + contest.idName + token, body, {headers: headers})
     .map(res => res.json())

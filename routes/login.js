@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var passwordHash = require('password-hash');
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
+
 
 router.post('/', function(req, res, next) {
 
@@ -23,13 +25,13 @@ router.post('/', function(req, res, next) {
         error: {message: 'Nerasta vartotojo'}
       });
     }
-    if (!passwordHash.verify(req.body.password, doc.password)) {
-      return res.status(404).json({
+    if (!bcrypt.compareSync(req.body.password, doc.password)) {
+      return res.status(401).json({
         title: 'Negalima prisijungti !',
-        error: {message: 'Neteisingas slaptazodis'}
+        error: {message: 'Neteisingas slaptazodis'} // TODO add generic message for production
       });
     }
-    var token = jwt.sign({user: doc}, 'secret', {expiresIn: 3600});
+    var token = jwt.sign({user: doc}, 'secret', {expiresIn: "2 days"});
     res.status(200).json({
       message: 'Prisijungta sekmingai',
       token: token,

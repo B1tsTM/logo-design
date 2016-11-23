@@ -83,7 +83,7 @@ export class SubmitionDetailsComponent implements OnInit {
     }
 
     isContestPublisher(contestAuthorId: string) {
-        var userId = localStorage.getItem('userId');
+        var userId = sessionStorage.getItem('userId');
         return contestAuthorId == userId;
     }
 

@@ -42,7 +42,7 @@ export class CommentsSectionComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
     this.contestId = params['id'];
     });
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.apiService.getUserInfo(this.userId)
       .subscribe(user => {
         console.log('comments-section comp user var');
@@ -105,7 +105,7 @@ export class CommentsSectionComponent implements OnInit {
   }
 
   isContestPublisher(contestAuthorId: string) {
-    var userId = localStorage.getItem('userId');
+    var userId = sessionStorage.getItem('userId');
     return contestAuthorId == userId;
   }
 

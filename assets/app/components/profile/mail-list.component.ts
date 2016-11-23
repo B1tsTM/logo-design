@@ -23,7 +23,7 @@ export class MailListComponent implements OnInit {
 
   ngOnInit() { 
     this.isLoading = true;
-    this.userId = localStorage.getItem('userId');
+    this.userId = sessionStorage.getItem('userId');
     this.apiService.getMessages(this.userId)
       .subscribe(messages => {
         

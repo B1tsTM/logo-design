@@ -12,7 +12,7 @@ export class AbBannerComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() { 
-    this.id = localStorage.getItem('userId');
+    this.id = sessionStorage.getItem('userId');
     this.authService.getGallery(this.id)
               .subscribe(data => {
               console.log(data);

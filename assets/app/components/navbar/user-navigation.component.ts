@@ -66,8 +66,8 @@ export class UserNavigationComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
-    console.log('localStorage cleared, logging out...');
+    sessionStorage.clear();
+    console.log('sessionStorage cleared, logging out...');
     this.notificationsService.info('Atsijungiama...', 'Sėkmingai atsijungėte', {timeOut: 3000, showProgressBar: false});
     this.router.navigate(['/']);
   }
@@ -97,9 +97,9 @@ export class UserNavigationComponent implements OnInit {
        .subscribe(data => {
          console.log(data);
          console.log('Sekmingai prisijungta');
-         localStorage.setItem('token', data.token);
-         localStorage.setItem('userId', data.userId);
-         localStorage.setItem('userType', data.userType);
+         sessionStorage.setItem('token', data.token);
+         sessionStorage.setItem('userId', data.userId);
+         sessionStorage.setItem('userType', data.userType);
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
          this.router.navigateByUrl('/');
