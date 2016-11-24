@@ -55,6 +55,9 @@ gulp.task('vendor', function() {
   gulp.src('node_modules/ng2-file-upload/**')
   .pipe(gulp.dest(vendor + "/ng2-file-upload/"));
 
+  gulp.src('node_modules/ng2-pagination/**')
+  .pipe(gulp.dest(vendor + "/ng2-pagination/"));
+
   gulp.src('node_modules/angular2-fontawesome/**')
   .pipe(gulp.dest(vendor + "/angular2-fontawesome/"));
 

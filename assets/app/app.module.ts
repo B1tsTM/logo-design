@@ -36,6 +36,8 @@ import { PublishContestModule } from './components/publish-contest/publish-conte
 
 import { ErrorComponent, ErrorService } from './errors/index';
 
+import { Ng2PaginationModule } from 'ng2-pagination';
+
 import { LocalDateFromNowPipe } from './pipes/local-date-from-now-pipe';
 import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
 
@@ -50,7 +52,7 @@ const WINDOW_PROVIDER: ValueProvider = {
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
              TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule,
-             SimpleNotificationsModule, AutoCompleteModule ],
+             SimpleNotificationsModule, AutoCompleteModule, Ng2PaginationModule ],
   declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,

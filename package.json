@@ -46,6 +46,7 @@
     "ng2-bootstrap": "^1.1.5",
     "ng2-bs3-modal": "^0.10.3",
     "ng2-file-upload": "^1.1.0",
+    "ng2-pagination": "^1.0.1",
     "password-hash": "^1.2.2",
     "primeng": "^1.0.0-beta.16",
     "reflect-metadata": "^0.1.8",

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Contest } from '../../models/contest';
 import { ContestsService } from '../../services/contests.service';
 import { ErrorService } from '../../errors/index';
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit {
               private errorService: ErrorService,
               private notificationsService: NotificationsService,
               private ngzone: NgZone,
-              private cdRef: ChangeDetectorRef) { }
+              private cdRef: ChangeDetectorRef,
+              private router: Router) { }
 
   ngOnInit() { 
     this.isLoading = true;
@@ -48,16 +50,16 @@ export class HeaderComponent implements OnInit {
     this.ngzone.runOutsideAngular(() => {
       Observable.fromEvent(this.searchElRef.nativeElement, 'keyup')
       .debounceTime(1000)
-      .distinctUntilChanged() // TODO test if this works. Update: not working. Needs a custom callback to check for whitespace
+      .distinctUntilChanged() // TODO Update: not working. Needs a custom callback to check for whitespace differences
       .subscribe(event => {
         this.contestsService.getFilteredContests(event.target.value) //searchString
         .subscribe(contests => {
-          console.log('Filter layer 1 contests');
-          console.log(contests);
+          //console.log('Filter layer 1 contests');
+          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          console.log('Filter layer 2 contests');
-          console.log(filteredContests);
+          //console.log('Filter layer 2 contests');
+          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
         }, error => {
@@ -75,14 +77,15 @@ export class HeaderComponent implements OnInit {
     } else {
     this.status = "Aktyvus";
     this.isLoading = true;
+    this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          console.log('Filter layer 1 contests');
-          console.log(contests);
+          //console.log('Filter layer 1 contests');
+          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          console.log('Filter layer 2 contests');
-          console.log(filteredContests);
+          //console.log('Filter layer 2 contests');
+          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
           this.isLoading = false;
@@ -101,14 +104,15 @@ export class HeaderComponent implements OnInit {
     } else {
     this.status = "Užbaigtas";
     this.isLoading = true;
+    this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          console.log('Filter layer 1 contests');
-          console.log(contests);
+          //console.log('Filter layer 1 contests');
+          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          console.log('Filter layer 2 contests');
-          console.log(filteredContests);
+          //console.log('Filter layer 2 contests');
+          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
           this.isLoading = false;
@@ -117,6 +121,10 @@ export class HeaderComponent implements OnInit {
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
     }
+  }
+
+  goToContestDetails(idName: string) {
+    this.router.navigate(['/konkursai', idName]);
   }
 
 }
