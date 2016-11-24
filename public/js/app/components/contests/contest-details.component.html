@@ -34,10 +34,10 @@
         <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
     </div>
   </div>
-  <h2 class="text-center">Submitions:</h2>
+  <h2 class="text-center">Submitions ({{submitions.length}})</h2>
   <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
   <div class="thumbnail-row" *ngIf="contestId">
-    <div class="inline-block thumbnail-container" *ngFor="let submition of submitions">
+    <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="pad-left-60">SubmitionID: {{submition.submitionId}}</div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <br>
@@ -50,11 +50,12 @@
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
+  <pagination-controls id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
-    <h2 class="text-center">My submitions:</h2>
+    <h2 class="text-center">My submitions ({{mySubmitions.length}})</h2>
     <div class="thumbnail-row">
-      <div class="inline-block thumbnail-container" *ngFor="let mySubmition of mySubmitions">
+      <div class="inline-block thumbnail-container" *ngFor="let mySubmition of mySubmitions | paginate: {id: 'two', itemsPerPage: 10, currentPage: p2}">
         <div class="pad-left-60">SubmitionID: {{mySubmition.submitionId}}</div>
         <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
           <br>
@@ -67,6 +68,7 @@
     </div>
     <br>
   </div>  
+  <pagination-controls id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
   <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas'">To participate, you must be logged in as a designer</div>
   <div *ngIf="isDesigner() && contest.status != 'Užbaigtas'">
     <h2>Participate:</h2>
