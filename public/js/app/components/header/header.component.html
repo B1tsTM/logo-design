@@ -91,12 +91,12 @@
 						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
 							<i class="fa fa-rotate-left"></i>
 							<span>Aktyvūs</span>
-							<span class="label">45</span>
+							<span class="label">{{allActiveContests.length}}</span>
 						</div><!-- .tab -->
 						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
 							<i class="fa fa-star"></i>
 							<span>Užbaigti</span>
-							<span class="label">273</span>
+							<span class="label">{{allFinishedContests.length}}</span>
 						</div><!-- .tab -->
 
 						<div class="table-search">

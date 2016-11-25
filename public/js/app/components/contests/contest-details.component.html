@@ -50,7 +50,7 @@
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
-  <pagination-controls id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+  <pagination-controls *ngIf="submitions.length > 0 && isDesigner()" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
     <h2 class="text-center">My submitions ({{mySubmitions.length}})</h2>
@@ -59,7 +59,7 @@
         <div class="pad-left-60">SubmitionID: {{mySubmition.submitionId}}</div>
         <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
           <br>
-          <span class="pad-left-60">Author: {{mySubmition.submitionAuthor.nickName}} (debug only) </span>
+          <span class="pad-left-60">Author: {{mySubmition.submitionAuthor.nickName}} (debug) </span>
             <div>
               <star-rating class="star-rating" [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
             </div> 
@@ -68,7 +68,7 @@
     </div>
     <br>
   </div>  
-  <pagination-controls id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
+  <pagination-controls *ngIf="mySubmitions.length > 0 && isDesigner()" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
   <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas'">To participate, you must be logged in as a designer</div>
   <div *ngIf="isDesigner() && contest.status != 'Užbaigtas'">
     <h2>Participate:</h2>

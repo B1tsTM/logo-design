@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   status = "Aktyvus";
   firstTabActive = true;
   secondTabActive = false;
+  allActiveContests = [];
+  allFinishedContests = [];
   @ViewChild('search') searchElRef: ElementRef;
   public options = {
       position: ["top","right"]
@@ -36,8 +38,13 @@ export class HeaderComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.getAllContests()
     .subscribe(contests => {
-      this.contests = contests;
-      this.contestsService.contests = contests;
+      var unfilteredContests = contests;
+      var filteredActiveContests = unfilteredContests.filter((item: any) => item.status == this.status);
+      var filteredFinishedContests = unfilteredContests.filter((item: any) => item.status == "Užbaigtas");
+      this.contests = filteredActiveContests;
+      this.allActiveContests = filteredActiveContests;
+      this.allFinishedContests = filteredFinishedContests;
+      //this.contestsService.contests = contests;
       this.isLoading = false;
       console.log(this.contests);
     }, error => {
