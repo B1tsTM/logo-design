@@ -38,7 +38,8 @@ var schema = new Schema({
   },
   profile: {
     profileUrl: {type: String}
-  }
+  },
+  ip: {type: String}
 });
 
 schema.plugin(mongooseUniqueValidator);

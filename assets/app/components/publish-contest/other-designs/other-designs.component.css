@@ -8,7 +8,9 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    align-content: flex-start;
 }
 
 .textarea-label {
@@ -23,4 +25,62 @@ a {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 250px;
   flex: 0 1 250px;
+}
+
+.input-forms .submit:disabled {
+  background-color: dimgray;
+  transition: 0.5s;
+  cursor: not-allowed !important;
+}
+
+.input-forms .submit {
+  transition: 0.5s;
+}
+
+.input-small {
+  flex: 0 1 100px !important;
+}
+
+.input-error {
+  color: red;
+  font-weight: bold;
+  padding-left: 10px;
+  align-self: center;
+}
+
+.input-error-below {
+  color: red;
+  font-weight: bold;
+  margin-left: 250px;
+  padding: 5px 0;
+}
+
+.input-row {
+  align-items: inherit !important;
+  margin-top: 20px !important;
+  margin-bottom: 0 !important;
+}
+
+.asterisk {
+  color: red;
+  align-content: center;
+  padding-left: 5px;
+}
+
+textarea {
+  height: 90px;
+}
+
+.input-area-error {
+  border: 1px solid red !important;
+}
+
+.btn-back {
+  background-color: #d6fbfd;
+  padding: 7px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  align-self: center;
+  cursor: pointer;
+  margin-left: 4px;
 }

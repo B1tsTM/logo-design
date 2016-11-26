@@ -93,8 +93,9 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
-      return contest;
+      //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
+      //return contest;
+      return data;
     })
     .catch(error => Observable.throw(error.json()));
   }

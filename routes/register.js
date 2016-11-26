@@ -47,6 +47,7 @@ router.post('/', function(req, res, next) {
       });
       }
     });
+  var ip = req.headers['X-Forwarded-For'] || req.connection.remoteAddress;
   var user;
   if (req.body.userType == 'dizaineris') {
   user = new User({
@@ -57,7 +58,8 @@ router.post('/', function(req, res, next) {
     email: req.body.email,
     userType: req.body.userType,
     designsCreated: 0,
-    publicDesigns: req.body.publicDesigns
+    publicDesigns: req.body.publicDesigns,
+    ip: ip
   });
   } else { // client
   user = new User({
@@ -66,7 +68,8 @@ router.post('/', function(req, res, next) {
     nickName: req.body.nickName,
     password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email,
-    userType: req.body.userType
+    userType: req.body.userType,
+    ip: ip
     });
   };
   user.profile.profileUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName;

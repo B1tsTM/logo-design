@@ -30,7 +30,7 @@ var schema = new Schema({
   award: {
     type: Number
   },
-  daysRemaining: {
+  contestLength: {
     type: Number
   },
   submitionCount: {
@@ -63,6 +63,9 @@ var schema = new Schema({
   extraInfo: {      //extra info for designers
     type: String  
   },
+  organization: {type: String},
+  colors: {type: String},
+  style: {type: String},
   participants: [{
     type: Schema.Types.ObjectId,
     ref: 'User',

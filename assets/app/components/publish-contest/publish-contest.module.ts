@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { AppModule } from '../../app.module';
 
 import { InputTextModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';
@@ -30,6 +31,7 @@ import { CosmeticsProductsLabelOrPackagingDesignComponent, DrinkLabelDesignCompo
          FoodProductsLabelOrPackagingDesignComponent, OtherProductsLabelOrPackagingDesignComponent } from './packaging-and-label/index';
 import { BookCoverDesignComponent, EBookCoverDesignComponent, MagazineCoverDesignComponent } from './books-and-magazines/index';
 import { OtherDesignsComponent } from './other-designs/other-designs.component';
+import { TestLoaderComponent } from '../shared/test-loader.component';
 
 
 import { publishContestRouting } from './publish-contest.routing';
