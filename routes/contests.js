@@ -76,6 +76,7 @@ router.post('/', function(req, res, next) {
         publisher: doc._id,
         //======== optional ======= //
         extraInfo: req.body.extraInfo,
+        pagesCount: req.body.pagesCount,
         organization: req.body.organization,
         colors: req.body.colors,
         style: req.body.style

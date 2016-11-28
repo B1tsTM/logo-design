@@ -63,6 +63,7 @@ var schema = new Schema({
   extraInfo: {      //extra info for designers
     type: String  
   },
+  pagesCount: {type: Number},
   organization: {type: String},
   colors: {type: String},
   style: {type: String},

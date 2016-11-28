@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Contest } from '../../../../models/contest';
+import { ContestsService } from '../../../../services/contests.service';
+import { ErrorService } from '../../../../errors/index';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -7,25 +12,42 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['logo.component.css']
 })
 export class LogoComponent implements OnInit {
-  public myForm: FormGroup;
-  public submitted: boolean = false;
-  constructor(private fb: FormBuilder) { }
+  contest: Object = {};
+  isLoading = false;
+  public options = {
+      position: ["top","right"]
+    };
+
+  constructor(private router: Router,
+              private contestsService: ContestsService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
-    // this.myForm = new FormGroup({
-    //    firstName: new FormControl()
-    // });
-    this.myForm = this.fb.group({
-      firstName: ['', Validators.required]
-    });
+    window.scrollTo(0,0);
+    this.contest.category = "Logotipas";
   }
 
-  save(model, isValid: boolean) {
-        this.submitted = true; // set form submit to true
+  backToList() {
+    this.router.navigate(['/paskelbti-konkursa']);
+  }
 
-        // check if model is valid
-        // if valid, call API to save customer
-        console.log(model);
-        console.log(isValid);
-    }
+  logErrors(errors) {
+    console.log(errors);
+  }
+
+  addContest(value) {
+    this.isLoading = true;
+    console.log(value);
+    this.contestsService.addContest(value)
+      .subscribe(contest => {
+        console.log('contest added');
+        console.log(contest);
+        this.isLoading = false;
+        this.notificationsService.success('Paskelbta', 'Konkursas paskelbtas', {timeOut: 3000, showProgressBar: false})
+        this.router.navigate(['/']);
+      }, error => {
+        this.isLoading = false;
+        this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+      });
+  }
 }

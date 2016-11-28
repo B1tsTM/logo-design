@@ -43,6 +43,8 @@ export class OtherDesignsComponent implements OnInit {
         console.log('contest added');
         console.log(contest);
         this.isLoading = false;
+        this.notificationsService.success('Paskelbta', 'Konkursas paskelbtas', {timeOut: 3000, showProgressBar: false})
+        this.router.navigate(['/']);
       }, error => {
         this.isLoading = false;
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})

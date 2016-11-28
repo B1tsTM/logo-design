@@ -3,7 +3,7 @@
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
 					<a (click)="backToList()">Visos kategorijos</a>
-					<a href="#" class="current">Kitas dizainas</a>
+					<a class="current">Kitas dizainas</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
 		</div><!-- .row -->
@@ -14,7 +14,7 @@
 			<div class="columns small-12">
 				<div class="page-headline">
 					<h2 class="title">Užpildykite formą žemiau</h2><!-- .headline -->
-					<span class="subtitle">Page <strong>1</strong> of 3</span>
+					<!--<span class="subtitle">Page <strong>1</strong> of 3</span>-->
 					
 					<!-- This one is aligned to the right. -->
         <a (click)="backToList()" class="see-faq">Atgal į sąrašą</a>
@@ -111,9 +111,10 @@
 			<div class="input-row">
 				<div class="input-label textarea-label">
 					<span>Konkurso trukmė (dienomis)</span>
+					<small>Mažiausiai 7 dienos</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" max="100" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
+					<input type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="60" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
 				</div><!-- .input-field -->
 				<span *ngIf="contestLength.pristine" class="asterisk">*</span>
 				<div *ngIf="contestLength.errors && (contestLength.dirty || contestLength.touched)"
@@ -127,7 +128,7 @@
 			<div class="textarea-row">
 				<div class="input-label textarea-label">
 					<span>Konkurso kaina (&euro;)</span>
-					<small>Minimum 50 &euro;</small>
+					<small>Mažiausiai 50 &euro;</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
 					<input type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="50" max="1000" #award="ngModel" />
@@ -178,6 +179,10 @@
 			</div>-->
 
 			<hr class="sep" />
+
+			<div class="extra-info">Pagalbinius failus (iliustracijas, brėžinius) galėsite įkelti paskelbus konkursą, konkurso puslapyje</div>
+
+      <hr class="sep" />
 
 			<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
 		</div><!-- .input-forms -->

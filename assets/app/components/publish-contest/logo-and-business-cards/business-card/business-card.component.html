@@ -1,38 +1,176 @@
-<h1 class="text-center">Verslo korteles dizainas</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a (click)="backToList()">Visos kategorijos</a>
+					<a class="current">Vizitinė kortelė</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
 
-<div class="content-body">
-  <form class="form-horizontal well" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm, myForm.valid)">
-    <!-- We'll add our form controls here -->
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-          <p class="lead">Užpildykite anketą</p>
-          <div class="control-group">
-            <md-input formControlName="logoName" placeholder="Logotipo pavadinimas" dividerColor="primary" style="width: 66%"></md-input>
-            <span *ngIf="!myForm.controls.logoName.touched && myForm.controls.logoName.pristine" class="asterisk"> *</span>
-            <small class="error" *ngIf="myForm.controls.logoName.touched && myForm.controls.logoName.invalid">
-            Šis laukas privalomas
-            </small>
-          </div>
-          <div class="control-group">
-            <md-input formControlName="description" placeholder="Trumpas aprašymas" dividerColor="primary" style="width: 66%"></md-input>
-            <small class="error" *ngIf="myForm.controls.description.touched && myForm.controls.description.invalid">
-            Šis laukas privalomas
-            </small>
-          </div>
-           <div class="control-group">
-            <textarea formControlName="additionalInfo" rows="6" placeholder="Papildoma informacija" style="width: 66%; margin-top: 15px;"></textarea>
-            <small class="error" *ngIf="myForm.controls.additionalInfo.touched && myForm.controls.additionalInfo.invalid">
-            Šis laukas privalomas
-            </small>
-          </div>
-        </div>
-        <div class="span4">
-          <p>Pinigų gražinimo garantija</p>
-        </div>
-      </div>
-    </div>
-    <button md-raised-button color="primary" [disabled]="!myForm.valid">Paskelbti konkursą</button>
-  </form>
-</div>
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Užpildykite formą žemiau</h2><!-- .headline -->
+					<!--<span class="subtitle">Page <strong>1</strong> of 3</span>-->
+					
+					<!-- This one is aligned to the right. -->
+        <a (click)="backToList()" class="see-faq">Atgal į sąrašą</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
 
+		<form #f="ngForm" (ngSubmit)="addContest(f.value)">
+
+		<div class="input-forms">
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Konkurso kategorija</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" readonly name="category" [(ngModel)]="contest.category" #category="ngModel" />
+				</div><!-- .input-field -->
+				<span (click)="backToList()" class="btn-back">Pakeisti</span>
+			</div><!-- .input-row -->
+
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Konkurso (kortelės) pavadinimas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Konkurso pavadinimas" [ngClass]="{'input-area-error': name.errors && (name.dirty || name.touched)}" name="name" [(ngModel)]="contest.name" required #name="ngModel" />
+				</div><!-- .input-field -->
+				<span *ngIf="name.pristine" class="asterisk">*</span>
+			</div><!-- .input-row -->
+			<div *ngIf="name.errors && (name.dirty || name.touched)"
+				class="input-error-below">
+				<div [hidden]="!name.errors.required">
+					Įveskite kortelės pavadinimą
+				</div>
+			</div>
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Kortelės aprašymas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<textarea type="text" placeholder="Kortelės aprašymas" [ngClass]="{'input-area-error': description.errors && (description.dirty || description.touched)}" name="description" [(ngModel)]="contest.description" required #description="ngModel"></textarea>
+				</div><!-- .input-field -->
+				<span *ngIf="description.pristine" class="asterisk">*</span>
+			</div><!-- .input-row -->
+			<div *ngIf="description.errors && (description.dirty || description.touched)"
+				class="input-error-below">
+				<div [hidden]="!description.errors.required">
+					Įveskite kortelės aprašymą
+				</div>
+			</div>
+
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Informacija apie organizaciją</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<textarea type="text" placeholder="Organizacijos pavadinimas, veikla" name="organization" [(ngModel)]="contest.organization" #organization="ngModel"></textarea>
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="textarea-row">
+				<div class="input-label textarea-label">
+					<span>Papildoma informacija</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<textarea type="text" placeholder="Papildoma informacija" name="extraInfo" [(ngModel)]="contest.extraInfo" #extraInfo="ngModel"></textarea>
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label textarea-label">
+					<span>Konkurso trukmė (dienomis)</span>
+					<small>Mažiausiai 7 dienos</small>
+				</div><!-- .input-label -->
+				<div class="input-field input-small">
+					<input type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="60" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
+				</div><!-- .input-field -->
+				<span *ngIf="contestLength.pristine" class="asterisk">*</span>
+				<div *ngIf="contestLength.errors && (contestLength.dirty || contestLength.touched)"
+				class="input-error">
+				<div [hidden]="!contestLength.errors.required">
+					Įveskite konkurso trukmę
+				</div>
+				</div>
+			</div><!-- .input-row -->
+
+			<div class="textarea-row">
+				<div class="input-label textarea-label">
+					<span>Konkurso kaina (&euro;)</span>
+					<small>Mažiausiai 50 &euro;</small>
+				</div><!-- .input-label -->
+				<div class="input-field input-small">
+					<input type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="50" max="1000" #award="ngModel" />
+				</div><!-- .input-field --> 
+				<span *ngIf="award.pristine" class="asterisk">*</span>
+				<div *ngIf="award.errors && (award.dirty || award.touched)"
+				class="input-error">
+				<div [hidden]="!award.errors.required">
+					Įveskite kainą
+				</div>
+			</div>
+			</div><!-- .input-row -->
+			
+
+			<!--<div class="input-row">
+				<div class="input-label">
+					<span>Select a country:</span>
+				</div>
+				<div class="input-field">
+					<select name="" id="">
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+						<option value="Something">Something</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div>
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div>
+			</div>
+	
+			<hr class="sep" />
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Some other random input field:</span>
+					<small>And this is the description</small>
+				</div>
+				<div class="input-field">
+					<input type="text" placeholder="Enter your name" />
+				</div>
+			</div>-->
+
+			<hr class="sep" />
+
+      <div class="extra-info">Pagalbinius failus (iliustracijas, brėžinius) galėsite įkelti paskelbus konkursą, konkurso puslapyje</div>
+
+      <hr class="sep" />
+
+			<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+		</div><!-- .input-forms -->
+
+		</form>
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<!--<test-loader *ngIf="isLoading"></test-loader>-->

@@ -84,3 +84,16 @@ textarea {
   cursor: pointer;
   margin-left: 4px;
 }
+
+input:read-only {
+    background-color: #d6fbfd;
+    border-radius: 50px;
+    padding-left: 20px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.extra-info {
+  font-style: italic;
+}
