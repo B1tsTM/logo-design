@@ -11,6 +11,14 @@ export class ApiService {
   designers = [];
   constructor(private http: Http) { }
 
+  getContestAdditionalFiles(id: string) {
+    return this.http.get('http://localhost:3000/api/v1/contest/' + id)
+    .map(res => {
+      const data = res.json().obj.additionalFiles;
+      return data;
+    })
+  }
+
   getContestSubmitions(id: string) {
     return this.http.get('http://localhost:3000/api/v1/submitions/contest/'+id)
       .map(res => {

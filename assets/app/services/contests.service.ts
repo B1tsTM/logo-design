@@ -79,8 +79,9 @@ export class ContestsService {
       .map(res => {
         console.log(res.json());
         const data = res.json().obj;
-        let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
-        return contest;
+        //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
+        //return contest;
+        return data;
       })
       .catch(error => Observable.throw(error.json()));
   }

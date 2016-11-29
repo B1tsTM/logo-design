@@ -25,6 +25,7 @@ export class ContestDetailsComponent implements OnInit {
   percent: number;
   submitions: any[] = [];
   mySubmitions: any[] = [];
+  additionalFiles = [];
   winnerSubmition: any;
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
@@ -54,6 +55,7 @@ export class ContestDetailsComponent implements OnInit {
     this.contestsService.getIndividualContest(this.contestId)
       .subscribe(contest => {
         this.contest = contest;
+        this.additionalFiles = contest.additionalFiles;
         console.log('contest-details.component.ts this.contest');
         console.log(this.contest);
       }, 
@@ -175,13 +177,29 @@ export class ContestDetailsComponent implements OnInit {
     uploadAdditionalFiles() {
       this.isLoading = true;
         this.userId = sessionStorage.getItem('userId');
-        this.makeFileRequest('http://localhost:3000/api/v1/contests/' + this.contestId + '/files',this.filesToUpload, "submition").then((result) => {
+        this.makeFileRequest('http://localhost:3000/api/v1/contests/' + this.contestId + '/files',this.filesToUpload, "additionalfiles").then((result) => {
             console.log(result);
             this.isLoading = false;
+            this.apiService.getContestAdditionalFiles(this.contestId)
+            .subscribe(data => {
+                console.log(data);
+                this.additionalFiles = data;
+            }, error => {
+                this.isLoading = false;
+                this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            })
             //this.filesToUpload = [];
-        }, (error) => {
-            this.isLoading = false;
-            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        }, (error) => { // TODO find out why it always go into error state
+            this.apiService.getContestAdditionalFiles(this.contestId)
+            .subscribe(data => {
+                this.isLoading = false;
+                console.log(data);
+                this.additionalFiles = data;
+            }, error => {
+                this.isLoading = false;
+                this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            })
+            this.notificationsService.success('Įkelta','Failai įkelti', {timeOut: 3000, showProgressBar: false})
         });
     }
 
@@ -199,7 +217,7 @@ export class ContestDetailsComponent implements OnInit {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
             for(var i = 0; i < files.length; i++) {
-                formData.append("submition", files[i], files[i].name);
+                formData.append(fileType, files[i], files[i].name);
             }
             xhr.upload.addEventListener("progress", (evt) => this.calculateUploadProgress(evt), false); 
             xhr.onreadystatechange = function () {

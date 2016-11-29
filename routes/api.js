@@ -277,6 +277,28 @@ router.get('/konkursai/:id', function(req,res,next) {
     });
 });
 
+router.get('/contest/:id', function(req,res,next) {
+  var id = req.params.id;
+  //Contest.findById(id)
+  Contest.findOne({'idName': id})
+    .populate('publisher')
+    .exec(function(err, docs) {
+      console.log('/konkursai/:id contest');
+      console.log(docs);
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
 router.get('/dizaineriai', function (req,res,next) {
   User.find({'userType': 'dizaineris'}) 
   .sort({nickName : 1}) // TODO see if this works. Didn't seem to work.. Later should be filtered by contests won
@@ -986,7 +1008,7 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 });
 //End of submitions post req
 
-router.post('/contests/:contestId/files', submitionsUpload.array("submition", 12), function(req,res){
+router.post('/contests/:contestId/files', submitionsUpload.array("additionalfiles", 12), function(req,res){
 // console.log('hello');
 // return res.status(201).json({msg: 'heelllo'})
 

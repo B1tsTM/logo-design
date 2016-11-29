@@ -16,9 +16,14 @@
   <small>contest submition count: {{contest.submitionCount}}</small>
   <small>contest published by: {{contest.publisher.firstName}}</small>
   <small>MomentJS date test: {{momentDate}}</small>
-  <div *ngIf="isContestPublisher(contest.publisher._id)">
+
   <h3>Extra files:</h3>
-    <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+  <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
+    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
+  </div>
+  <pagination-controls *ngIf="additionalFiles.length > 0" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+    <div *ngIf="isContestPublisher(contest.publisher._id)">
+    <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
     <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
     {{percent}} %
   </div>
@@ -78,7 +83,7 @@
   <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas'">To participate, you must be logged in as a designer</div>
   <div *ngIf="isDesigner() && contest.status != 'Užbaigtas'">
     <h2>Participate:</h2>
-    <input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+    <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Upload</button>
   {{percent}} %
   </div>
