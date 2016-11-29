@@ -18,7 +18,6 @@ export class AuthService {
         let user = new User(data.nickName, data.password, data.userType ,data.firstName, data.lastName, data.email, 0, 0);
         console.log(user);
         return user;
-
       })
       .catch(error => Observable.throw(error.json()));
   }

@@ -8,7 +8,8 @@
     "typings": "typings",
     "vendor": "gulp vendor",
     "gulp": "gulp clean && gulp",
-    "build:production": "gulp clean && gulp build && node systemjs.builder.js"
+    "build:production": "gulp clean && gulp build && node systemjs.builder.js",
+    "reload": "gulp reload"
   },
   "dependencies": {
     "@angular/common": "^2.1.0",

@@ -1,4 +1,4 @@
-<div class="row spacing">
+<!--<div class="row spacing">
 
   <div class="col-md-8 col-md-offset-2 pad-10">
           <div *ngFor="let contest of contests">
@@ -15,7 +15,134 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a>Visi konkursai</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-innernav">
+		<div class="row">
+			<div class="column small-12">
+				<nav class="inner-navigation">
+					<ul>
+						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li> <!-- Dropdown -->
+						<li class="current"><a >Aktyvūs konkursai</a></li>
+						<li><a >Užbaigti konkursai</a></li>
+					</ul>
+				</nav><!-- .inner-navigation -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-innernav -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Konkursų sąrašas</h2><!-- .headline -->
+					<span class="subtitle">Peržvelkite naujausius konkursus žemiau</span>
+					
+					<!-- This one is aligned to the right. -->
+					<a href="#" class="see-faq">Kilus klausimams pažiūrėkite D.U.K. skiltį</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<!-- The component that switches tables, searches, has new request button -->
+				<div class="action-bar">
+					<div class="table-actions">
+						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
+							<i class="fa fa-rotate-left"></i>
+							<span>Aktyvūs</span>
+							<span class="label">{{allActiveContests.length}}</span>
+						</div><!-- .tab -->
+						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
+							<i class="fa fa-star"></i>
+							<span>Užbaigti</span>
+							<span class="label">{{allFinishedContests.length}}</span>
+						</div><!-- .tab -->
+
+						<div class="table-search">
+							<i class="fa fa-search"></i>
+							<input type="text" class="search" placeholder="Ieškoti konkurso" #search /> <!--(keyup)="filterContests(search.value)"-->
+							<input type="submit" value="Search" />
+						</div><!-- .search -->
+					</div><!-- .table-actions -->
+					<a routerLink="/paskelbti-konkursa" routerLinkActive="active" class="button new-request">Paskelbti konkursą</a><!-- .new-request button -->
+				</div><!-- .table-center -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<div class="table-primary">
+					<header class="table-header">
+						<strong class="status">Būsena</strong>
+						<strong class="name">Pavadinimas</strong>
+						<strong class="category">Kategorija</strong>
+						<strong class="price">Prizas</strong>
+						<strong class="submitions">Įkelta dizainų</strong>
+						<strong class="time-remaining">Konkurso pabaiga</strong>
+					</header><!-- .table-header -->
+
+					<!--<div class="table-row premium">
+						<div class="status">
+							<span class="active">Aktyvus</span>
+						</div>
+						<div class="category">
+							<span>Logotipas</span>
+						</div>
+						<div class="name">
+							<span>ACME Logotipas</span>
+						</div>
+						<div class="price">
+							<span>199 EUR</span>
+						</div>
+						<div class="submitions">
+							<span>15</span>
+						</div>
+						<div class="time-remaining">
+							<span>1 diena</span>
+						</div>
+					</div>-->
+						<div *ngIf="contests.length == 0" class="table-row">
+							<span class="no-contests-label">Konkurso nerasta</span>
+						</div>
+					
+						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
+							<div class="status">
+								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas'}">{{contest.status}}</span>
+							</div>
+							<div class="name">
+								<span>{{contest.name}}</span>
+							</div>
+							<div class="category">
+								<span>{{contest.category}}</span>
+							</div>
+							<div class="price">
+								<span>{{contest.award | currency:'EUR':true:'2.0-2'}}</span>
+							</div>
+							<div class="submitions">
+								<span>{{contest.submitions.length}}</span>
+							</div>
+							<div class="time-remaining">
+								<span>{{contest.endDate | localDateFromNow}}</span>
+							</div>
+						</div>
+					
+				</div><!-- .primary-table -->
+				<pagination-controls (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+</section><!-- .app-main -->
 
 <simple-notifications [options]="options"></simple-notifications>
 

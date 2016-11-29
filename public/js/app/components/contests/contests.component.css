@@ -1,22 +1,36 @@
-.spacing {
-  margin-bottom: 0;
+.no-contests-label {
+  margin: 0 auto;
   padding-top: 10px;
-}
-
-.author {
-  display: inline-block;
+  padding-bottom: 10px;
+  border: none;
   font-style: italic;
-  font-size: 12px;
-  width: 80%;
 }
 
-.config {
-  display: inline-block;
-  text-align: right;
-  font-size: 12px;
-  width: 19%;
+span.finished {
+  background-color: #b3130c;
+  color: white;
 }
 
-.pad-10 {
-  padding-top: 10px;
+pagination-controls /deep/ {
+  display: block;
+}
+
+pagination-controls /deep/ .ng2-pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+  font-size: 18px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+pagination-controls /deep/ .ng2-pagination li a:hover {
+  background-color: #a8d6f3 !important;
+  border-radius: 5px !important;
+}
+
+a {
+  cursor: pointer;
 }

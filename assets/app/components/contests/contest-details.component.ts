@@ -119,17 +119,17 @@ export class ContestDetailsComponent implements OnInit {
 
   //FILE UPLOAD STUFF
 
-  upload() {
+  uploadSubmitions() {
       this.isLoading = true;
         this.userId = sessionStorage.getItem('userId');
-        this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload).then((result) => {
+        this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload, "submition").then((result) => {
             console.log(result);
             //this.filesToUpload = [];
         }, (error) => {
             this.isLoading = false;
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
-        this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload).then((result) => {
+        this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload, "submition").then((result) => {
             console.log(result);
             this.filesToUpload = [];
             //reload submitions
@@ -170,6 +170,21 @@ export class ContestDetailsComponent implements OnInit {
         });
     }
 
+    // Upload additional files
+
+    uploadAdditionalFiles() {
+      this.isLoading = true;
+        this.userId = sessionStorage.getItem('userId');
+        this.makeFileRequest('http://localhost:3000/api/v1/contests/' + this.contestId + '/files',this.filesToUpload, "submition").then((result) => {
+            console.log(result);
+            this.isLoading = false;
+            //this.filesToUpload = [];
+        }, (error) => {
+            this.isLoading = false;
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        });
+    }
+
     fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>> fileInput.target.files;
         //this.filesToUpload.forEach((file, i) => this.filesToUpload.push(fileInput.target.files[i]));
@@ -179,7 +194,7 @@ export class ContestDetailsComponent implements OnInit {
         console.log(this.filesToUpload);
     }
  
-    makeFileRequest(url: string, files: Array<File>) {
+    makeFileRequest(url: string, files: Array<File>, fileType: string) {
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
@@ -190,8 +205,10 @@ export class ContestDetailsComponent implements OnInit {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
+                        console.log(xhr.response);
                         resolve(JSON.parse(xhr.response));
                     } else {
+                        console.log(xhr.response);
                         reject(xhr.response);
                     }
                 }

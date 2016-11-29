@@ -80,6 +80,30 @@ var storageForSubmitions = multer.diskStorage({
   }
 });
 
+var storageForAdditionalFiles = multer.diskStorage({
+    destination: function (req, file, cb) {
+        var newDestination = './public/uploads/contests/' + req.params.contestId + '/';
+        var stat = null;
+        try {
+            stat = fs.statSync(newDestination);
+        } catch (err) {
+            fs.mkdirSync(newDestination);
+        }
+        if (stat && !stat.isDirectory()) {
+            throw new Error('Directory cannot be created because a file of a different type exists');
+        }       
+        cb(null, newDestination);
+    },
+  filename: function (req, file, cb) {
+    //cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, raw.toString('hex') + Date.now() + '.jpg');
+      //cb(null, raw.toString('hex') + Date.now());
+    });
+  }
+});
+
 var storageForUserGallery = multer.diskStorage({
     destination: function (req, file, cb) {
         var newDestination = './public/uploads/gallery/' + req.params.userId + '/'; //consider adding + req.params.contestId
@@ -123,6 +147,17 @@ var submitionsUpload = multer(
             fileSize: 60000000
         },
         storage: storageForSubmitions
+    }
+);
+
+var submitionsUploadForAdditionalFiles = multer(
+    { 
+        dest: 'uploads/',
+        limits: {
+            fieldNameSize: 100,
+            fileSize: 60000000
+        },
+        storage: storageForAdditionalFiles
     }
 );
 
@@ -950,6 +985,106 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 
 });
 //End of submitions post req
+
+router.post('/contests/:contestId/files', submitionsUpload.array("submition", 12), function(req,res){
+// console.log('hello');
+// return res.status(201).json({msg: 'heelllo'})
+
+  var contestId = req.params.contestId;
+Contest.findOne({'idName': contestId}, function(err, contest) {
+  if (err) {
+    console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    console.log(contest);
+
+    var fileNames = [];
+    var additionalFiles = [];
+    console.log('req files');
+    console.log(req.files);
+    for (var i=0; i<req.files.length; i++) {
+      var fileId = contest.additionalFiles.length + 1;
+      fileNames.push(req.files[i].filename);
+      additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
+      contest.additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
+    }
+    console.log('filenames');
+    console.log(fileNames);
+
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Dizainai įkelti',
+        obj: result,
+        files: req.files,
+        filenames: fileNames,
+        additionalFiles: additionalFiles
+      });
+    });
+  });
+
+});
+
+
+
+
+router.post('/contests/:contestId/files/:userId', submitionsUploadForAdditionalFiles.array("files", 12), function(req,res){
+
+var contestId = req.params.contestId;
+var userId = req.params.userId;
+//User.findById(id, function(err, user) {
+Contest.findOneAndUpdate({'idName': contestId}, function(err, contest) {
+  if (err) {
+    console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    console.log(contest);
+
+    var fileNames = [];
+    var additionalFiles = [];
+    console.log(req.files);
+    for (let i=0; i<req.files.length; i++) {
+      var fileId = contest.additionalFiles.length + 1;
+      fileNames.push(req.files[i].filename);
+      additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
+      contest.additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
+      //fileNames.push(req.files[i]);
+    }
+    //console.log('submitions array:');
+    //console.log(submitions);
+    console.log(fileNames);
+
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Dizainai įkelti',
+        obj: result,
+        files: req.files,
+        filenames: fileNames,
+        additionalFiles: additionalFiles
+      });
+    });
+  });
+
+});
 
 //Submitions
 router.post('/submitions/gallery/:contestId/:userId', submitionsUploadForGallery.array("submition", 12), function(req,res){

@@ -36,6 +36,10 @@ var schema = new Schema({
   submitionCount: {
     type: Number
   },
+  additionalFiles: [{
+    fileId: {type: Number},
+    fileUrl: {type: String}
+  }],
   submitions: [{
     submitionUrl: {type: String},
     submitionRating: {type: Number},

@@ -86,4 +86,5 @@ gulp.task('ng2notifications:clean', function() {
 
 gulp.task('default', ['watch', 'build-ts', 'build-copy', 'vendor']);
 gulp.task('build', ['build-ts', 'build-copy', 'vendor']);
+gulp.task('reload', ['build-ts', 'build-copy', 'watch']);
 
