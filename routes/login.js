@@ -36,7 +36,8 @@ router.post('/', function(req, res, next) {
       message: 'Prisijungta sekmingai',
       token: token,
       userId: doc._id,
-      userType: doc.userType
+      userType: doc.userType,
+      nickname: doc.nickName
     });
   });
 });

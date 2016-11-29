@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contest } from '../../../../models/contest';
 import { ContestsService } from '../../../../services/contests.service';
+import { AuthService } from '../../../../services/auth.service';
 import { ErrorService } from '../../../../errors/index';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,7 +21,8 @@ export class WordpressThemeComponent implements OnInit {
 
   constructor(private router: Router,
               private contestsService: ContestsService,
-              private notificationsService: NotificationsService) { }
+              private notificationsService: NotificationsService,
+              private authService: AuthService) { }
 
   ngOnInit() { 
     window.scrollTo(0,0);
@@ -49,5 +51,12 @@ export class WordpressThemeComponent implements OnInit {
         this.isLoading = false;
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
+  }
+  isClient() {
+    return this.authService.isClient();
+  }
+
+  isDesigner() {
+    return this.authService.isDesigner();
   }
 }

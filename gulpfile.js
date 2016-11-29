@@ -77,6 +77,13 @@ gulp.task('watch', function() {
   gulp.watch(appDev + "**/*.{html,css}", ['build-copy']);
 });
 
+gulp.task('ng2notifications:clean', function() {
+  return del([
+        vendor + '/angular2-notifications/**/*.ts',
+        '!' +vendor + '/angular2-notifications/**/*.d.ts'
+    ], {force: true});
+});
+
 gulp.task('default', ['watch', 'build-ts', 'build-copy', 'vendor']);
 gulp.task('build', ['build-ts', 'build-copy', 'vendor']);
 

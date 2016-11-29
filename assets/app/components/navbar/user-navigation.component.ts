@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { User } from '../../models/user';
 import { ErrorService } from '../../errors/index';
@@ -16,7 +17,8 @@ import { NotificationsService } from 'angular2-notifications';
   //, encapsulation: ViewEncapsulation.None
 })
 export class UserNavigationComponent implements OnInit {
-
+    userId: string = '';
+    nickname: string = '';
   //@ViewChild('modal')
     //modal: ModalComponent;   //to support modal in modal (to implement: forgot password)
     model: User = new User('', '');
@@ -46,9 +48,22 @@ export class UserNavigationComponent implements OnInit {
               private authService: AuthService, 
               private fb: FormBuilder, 
               private errorService: ErrorService,
-              private notificationsService: NotificationsService) { }
+              private notificationsService: NotificationsService,
+              private apiService: ApiService) { }
 
   ngOnInit() { 
+    this.userId = sessionStorage.getItem('userId');
+    this.apiService.getUserInfo(this.userId)
+      .subscribe(user => {
+        console.log('comments-section comp user var');
+        console.log(user);
+        this.nickname = user.nickName;
+      },
+      error => {
+        this.isLoading = false;
+        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        //this.errorService.handleError(error);
+      });
     this.loginForm = this.fb.group({
       //email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       nickName: ['', Validators.required],
@@ -100,6 +115,7 @@ export class UserNavigationComponent implements OnInit {
          sessionStorage.setItem('token', data.token);
          sessionStorage.setItem('userId', data.userId);
          sessionStorage.setItem('userType', data.userType);
+         this.nickname = data.nickname;
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
          //this.router.navigateByUrl('/');

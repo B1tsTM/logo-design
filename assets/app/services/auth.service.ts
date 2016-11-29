@@ -35,7 +35,8 @@ export class AuthService {
         var token = res.json().token;
         var userId = res.json().userId;
         var userType = res.json().userType;
-        return {token: token, userId: userId, userType: userType};
+        var nickname = res.json().nickname;
+        return {token: token, userId: userId, userType: userType, nickname: nickname};
         
       })
       .catch(error => Observable.throw(error.json()));

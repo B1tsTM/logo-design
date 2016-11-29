@@ -3,7 +3,7 @@
 							<li *ngIf="!isLoggedIn()" class="register"><a (click)="registerModal.open()">Register</a></li>
                          
 							<li class="user" *ngIf="isLoggedIn()">
-								Sveiki, Irmantai
+								Sveiki, {{nickname}}
 								<i class="fa fa-caret-down"></i>
 
 								<ul class="dropdown">

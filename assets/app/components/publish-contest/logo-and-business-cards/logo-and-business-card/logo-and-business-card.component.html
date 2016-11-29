@@ -31,7 +31,7 @@
 					<span>Konkurso kategorija</span>
 				</div><!-- .input-label -->
 				<div class="input-field">
-					<input type="text" readonly name="category" [(ngModel)]="contest.category" #category="ngModel" />
+					<input class="readonly" type="text" readonly name="category" [(ngModel)]="contest.category" #category="ngModel" />
 				</div><!-- .input-field -->
 				<span (click)="backToList()" class="btn-back">Pakeisti</span>
 			</div><!-- .input-row -->
@@ -114,7 +114,7 @@
 					<small>Mažiausiai 7 dienos</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="60" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
+					<input class="input-center" type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="60" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
 				</div><!-- .input-field -->
 				<span *ngIf="contestLength.pristine" class="asterisk">*</span>
 				<div *ngIf="contestLength.errors && (contestLength.dirty || contestLength.touched)"
@@ -131,7 +131,7 @@
 					<small>Mažiausiai 80 &euro;</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="80" max="1000" #award="ngModel" />
+					<input class="input-center" type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="80" max="1000" #award="ngModel" />
 				</div><!-- .input-field --> 
 				<span *ngIf="award.pristine" class="asterisk">*</span>
 				<div *ngIf="award.errors && (award.dirty || award.touched)"
@@ -184,7 +184,19 @@
 
             <hr class="sep" />
 
-			<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+			<div *ngIf="isClient()" class="publish-contest-button">
+				<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+			</div>
+			<div *ngIf="isDesigner()">
+				<div class="info-disabled-button">
+					<h4>Skelbti konkursą gali tik užsakovai</h4>
+				</div>
+			</div>
+			<div *ngIf="!isDesigner() && !isClient()">
+				<div class="info-disabled-button">
+					<h4>Skelbti konkursą gali tik registruoti užsakovai. Prašome <span class="italic">prisijungti</span> ar <span class="italic">užsiregistruoti</span>.</h4>
+				</div>
+			</div>
 		</div><!-- .input-forms -->
 
 		</form>

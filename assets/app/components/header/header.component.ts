@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, ChangeDetectorRef } f
 import { Router } from '@angular/router';
 import { Contest } from '../../models/contest';
 import { ContestsService } from '../../services/contests.service';
+import { ApiService } from '../../services/api.service';
 import { ErrorService } from '../../errors/index';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Observable';
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
   
   constructor(private contestsService: ContestsService, 
               private errorService: ErrorService,
+              private apiService: ApiService,
               private notificationsService: NotificationsService,
               private ngzone: NgZone,
               private cdRef: ChangeDetectorRef,

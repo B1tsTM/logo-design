@@ -25,6 +25,7 @@ a {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 250px;
   flex: 0 1 250px;
+  align-self: center;
 }
 
 .input-forms .submit:disabled {
@@ -85,7 +86,16 @@ textarea {
   margin-left: 4px;
 }
 
-input:read-only {
+input.readonly:read-only {
+    background-color: #d6fbfd;
+    border-radius: 50px;
+    padding-left: 20px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+input.readonly:-moz-read-only {
     background-color: #d6fbfd;
     border-radius: 50px;
     padding-left: 20px;
@@ -96,4 +106,33 @@ input:read-only {
 
 .extra-info {
   font-style: italic;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.info-disabled-button {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+input:hover {
+  border: 2px solid cyan !important;
+}
+
+input:focus {
+  border: 2px solid cyan !important;
+}
+
+textarea:hover {
+  border: 2px solid cyan !important;
+}
+
+textarea:focus {
+  border: 2px solid cyan !important;
+}
+
+.input-center {
+  text-align: center;
 }
