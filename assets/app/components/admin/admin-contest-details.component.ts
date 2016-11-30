@@ -13,7 +13,8 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   moduleId: module.id,
   selector: 'admin-contest-details',
-  templateUrl: 'admin-contest-details.component.html'
+  templateUrl: 'admin-contest-details.component.html',
+  styleUrls: ['admin-contest-details.component.css']
 })
 export class AdminContestDetailsComponent implements OnInit {
   contestId: string = '';
@@ -104,6 +105,11 @@ export class AdminContestDetailsComponent implements OnInit {
   }
   isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  isContestPublisher(contestAuthorId: string) {
+    var userId = sessionStorage.getItem('userId');
+    return contestAuthorId == userId;
   }
 
    viewSubmitionDetails(contestId, contest, submition) {

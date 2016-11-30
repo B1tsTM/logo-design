@@ -1,0 +1,59 @@
+.mini-image {
+  width: 200px;
+  height: 200px;
+}
+
+.star-rating {
+  display: inline-block;
+  padding-left: 60px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.thumbnail-container {
+  padding: 48px;
+}
+
+.winner-container {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.comments-section {
+  text-align: center;
+}
+
+.thumbnail-row {
+  max-width: 100%;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.pad-left-60 {
+  padding-left: 60px;
+}
+
+pagination-controls /deep/ {
+  display: block;
+}
+
+pagination-controls /deep/ .ng2-pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+  font-size: 18px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+pagination-controls /deep/ .ng2-pagination li a:hover {
+  background-color: #a8d6f3 !important;
+  border-radius: 5px !important;
+}

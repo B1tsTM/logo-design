@@ -123,4 +123,8 @@ export class CommentsSectionComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
 }

@@ -17,11 +17,12 @@
   <small>contest published by: {{contest.publisher.firstName}}</small>
   <small>MomentJS date test: {{momentDate}}</small>
 
-  <h3>Extra files:</h3>
+  <h3>Papildomi priedai:</h3>
   <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
     <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
   </div>
   <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+  <div *ngIf="additionalFiles.length == 0">Priedų nėra</div>
   <br>
   <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
   <br>

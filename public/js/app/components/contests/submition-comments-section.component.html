@@ -1,7 +1,7 @@
 <h2>Comments</h2>
 <!--<div *ngIf="comments">-->
   <div *ngIf="comments.length == 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) && isLoggedIn()">Komentarų nėra</div>
-  <div *ngIf="comments.length > 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id))">
+  <div *ngIf="(comments.length > 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) || isAdmin())">
     <div *ngFor="let comment of comments">
       <em>{{comment?.comment}}</em>
       <br>
@@ -10,7 +10,7 @@
       <br>
     </div>
   </div>
-  <div *ngIf="isSubmitionAuthor() || isContestPublisher(contest.publisher._id)">   <!-- TODO to add ngIf checks -->
+  <div *ngIf="isSubmitionAuthor() || isContestPublisher(contest.publisher._id) || isAdmin()">   <!-- TODO to add ngIf checks -->
     <h2>Post a comment</h2>
     <form>
       <textarea name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>

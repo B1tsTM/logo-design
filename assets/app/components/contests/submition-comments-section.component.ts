@@ -129,4 +129,8 @@ export class SubmitionCommentsSectionComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
 }

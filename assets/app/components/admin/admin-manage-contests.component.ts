@@ -11,7 +11,8 @@ import 'rxjs/Rx';
 @Component({
   moduleId: module.id,
   selector: 'admin-contests',
-  templateUrl: 'admin-manage-contests.component.html'
+  templateUrl: 'admin-manage-contests.component.html',
+  styleUrls: ['admin-manage-contests.component.css']
 })
 export class AdminManageContestsComponent implements OnInit {
   contests: any = [];
