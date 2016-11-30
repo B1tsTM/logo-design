@@ -53,6 +53,10 @@ export class AuthService {
     return sessionStorage.getItem('userType') == 'dizaineris';
   }
 
+  isAdmin() {
+    return sessionStorage.getItem('userType') == 'Admin';
+  }
+
   getAvatar(id: string) {
     return this.http.get('http://localhost:3000/api/v1/avatars/'+id)
       .map(res => {

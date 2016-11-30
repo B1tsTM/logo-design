@@ -161,6 +161,10 @@ export class UserNavigationComponent implements OnInit {
       return this.authService.isDesigner();
     }
 
+    isAdmin() {
+      return this.authService.isAdmin();
+    }
+
     private isValidEmail(control: FormControl): {[s: string]: boolean} {
       let emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"); 
       return emailRegex.test(control.value) ? null : {invalidEmail: true}

@@ -28,3 +28,4 @@ export * from './shared/fading-spinner.component';
 export * from './shared/fading-circle.component';
 export * from './shared/test-spinner.component';
 export * from './shared/test-loader.component';
+export * from './admin/admin-dashboard.component';

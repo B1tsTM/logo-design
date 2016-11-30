@@ -19,7 +19,8 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
   ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent,
   ReadMessageComponent, SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent, SubmitionCommentsSectionComponent } from './components/index';
+  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent, SubmitionCommentsSectionComponent,
+  AdminDashboardComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -30,6 +31,7 @@ import { AuthService } from './services/auth.service';
 import { DesignersService } from './services/designers.service';
 import { ApiService } from './services/api.service';
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
+import { CanActivateAdminPageService } from './guards/can-activate-admin-page.service';
 
 import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
@@ -64,9 +66,9 @@ const WINDOW_PROVIDER: ValueProvider = {
                   MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent,
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
                   TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent,
-                  SubmitionCommentsSectionComponent],
+                  SubmitionCommentsSectionComponent, AdminDashboardComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
-               DesignersService, ApiService, CanActivateOnLoginService, WINDOW_PROVIDER ]
+               DesignersService, ApiService, CanActivateOnLoginService, CanActivateAdminPageService WINDOW_PROVIDER ]
 })
 export class AppModule { }

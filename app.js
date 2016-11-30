@@ -20,6 +20,7 @@ var upload = multer({dest: DIR});
 
 var User = require('./models/user');
 var passwordHash = require('password-hash');
+var bcrypt = require('bcryptjs');
 
 var app = express();
 
@@ -66,7 +67,7 @@ User.findOne({'nickName': 'Admin'}, function(err, admin) {
     firstName: 'Irmantas',
     lastName: 'Liepis',
     nickName: 'Admin',
-    password: passwordHash.generate('Admin'),
+    password: bcrypt.hashSync('Admin', 10),
     email: 'info@dizainokonkursai.lt',
     userType: 'Admin',
   });

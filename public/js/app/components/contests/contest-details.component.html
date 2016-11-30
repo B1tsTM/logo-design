@@ -21,7 +21,7 @@
   <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
     <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
   </div>
-  <pagination-controls *ngIf="additionalFiles.length > 0" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+  <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
     <div *ngIf="isContestPublisher(contest.publisher._id)">
     <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
     <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
