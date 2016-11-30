@@ -67,7 +67,7 @@ router.post('/', function(req, res, next) {
         category: req.body.category,
         description: req.body.description,
         award: req.body.award,
-        status: "Aktyvus",
+        status: "Nepatvirtintas",
         //submitionCount: req.body.submitionCount, //already calculated
         contestLength: req.body.contestLength, //not needed?
         startDate: dateNow,

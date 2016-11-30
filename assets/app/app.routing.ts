@@ -7,7 +7,8 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
          MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent,
-         SubmitionDetailsComponent, WinnerDetailsComponent, AdminDashboardComponent} from './components/index';
+         SubmitionDetailsComponent, WinnerDetailsComponent, AdminDashboardComponent, AdminManageContestsComponent,
+         AdminContestDetailsComponent} from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 import { CanActivateAdminPageService } from './guards/can-activate-admin-page.service';
@@ -25,7 +26,11 @@ const appRoutes: Routes = [
     ]}
   ] },
   { path: 'admin', canActivate: [CanActivateAdminPageService], children: [
-    { path: '', component: AdminDashboardComponent }
+    { path: '', component: AdminDashboardComponent },
+    { path: 'konkursai', children: [
+      { path: '', component: AdminManageContestsComponent },
+      { path: ':id', component: AdminContestDetailsComponent }
+    ]}
   ] },
   { path: 'mano-konkursai', children: [
     {path: '', component: MyContestsComponent}

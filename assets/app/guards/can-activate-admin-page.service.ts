@@ -11,7 +11,8 @@ export class CanActivateAdminPageService implements CanActivate {
   ngOnInit() { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (state.url == '/admin' && !this.authService.isAdmin()) {
+    //if (state.url == '/admin' && !this.authService.isAdmin()) {
+    if (!this.authService.isAdmin()) {
       this.router.navigate(['/']);
       return false;
     } else {

@@ -29,3 +29,5 @@ export * from './shared/fading-circle.component';
 export * from './shared/test-spinner.component';
 export * from './shared/test-loader.component';
 export * from './admin/admin-dashboard.component';
+export * from './admin/admin-manage-contests.component';
+export * from './admin/admin-contest-details.component';

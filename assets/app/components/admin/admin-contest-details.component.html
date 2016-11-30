@@ -1,0 +1,73 @@
+<h1 class="text-center">Contest details</h1>
+<br>
+
+<div *ngIf="!contest">Kraunama...</div>
+<div *ngIf="contest">  
+  <h2>ID: {{contestId}}</h2>
+  <small>ID Name: {{contest.idName}}</small>
+  <small>Generated unique ID: {{contest.uniqueId}}</small>
+  <small>contest name: {{contest.name}}</small>
+  <small>contest category: {{contest.category}}</small>
+  <small>contest description: {{contest.description}}</small>
+  <small>contest award: {{contest.award}}</small>
+  <small>contest status: {{contest.status}}</small>
+  <small>contest start date: {{contest.startDate | localDateStandart}}</small>
+  <small>contest end date: {{contest.endDate | localDateFromNow}} ({{contest.endDate | date: 'yyyy-MM-dd'}})</small>
+  <small>contest submition count: {{contest.submitionCount}}</small>
+  <small>contest published by: {{contest.publisher.firstName}}</small>
+  <small>MomentJS date test: {{momentDate}}</small>
+
+  <h3>Papildomi priedai:</h3>
+  <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
+    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
+  </div>
+  <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+  <div *ngIf="additionalFiles.length == 0">Priedų nėra</div>
+  <br>
+  <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
+  <br>
+  <div *ngIf="winnerSubmition">
+    <h2 class="text-center">Winner:</h2>
+    <div class="winner-container">
+      <div>SubmitionID: {{winnerSubmition?.submitionId}} </div>
+      <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
+        <br>
+        <span>Author: {{winnerSubmition?.submitionAuthor?.nickName}}</span>
+        <div>
+          <star-rating class="inline-block" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="true" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+          <star-rating class="inline-block" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+        </div>
+
+        <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
+    </div>
+  </div>
+  <h2 class="text-center">Submitions ({{submitions.length}})</h2>
+  <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
+  <div class="thumbnail-row" *ngIf="contestId">
+    <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+      <div class="pad-left-60">SubmitionID: {{submition.submitionId}}</div>
+      <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
+      <br>
+      <span class="pad-left-60">Author: {{submition.submitionAuthor.nickName}}</span>
+      <div>
+        <star-rating class="star-rating" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+        <star-rating class="star-rating" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
+      </div>
+      <span class="pad-left-60" *ngIf="submition.comments">{{submition.comments.length}} comments</span>
+      <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
+    </div>
+  </div>
+  <pagination-controls *ngIf="submitions.length > 0 && isDesigner()" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+  <br>
+  <div *ngIf="contest.status == 'Nepatvirtintas'">
+    <button type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
+    <button type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
+  </div>
+  <div class="comments-section">
+    <comments-section [contest]="contest"></comments-section>
+  </div>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<test-loader *ngIf="isLoading"></test-loader>

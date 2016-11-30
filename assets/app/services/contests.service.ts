@@ -134,5 +134,15 @@ export class ContestsService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  updateContestStatus(idName, status) {
+    const body = JSON.stringify({idName: idName, status: status});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
+
+    return this.http.patch("http://localhost:3000/api/v1/contests/update/status/" + idName + token, body, {headers: headers})
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
   
 }

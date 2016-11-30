@@ -804,6 +804,42 @@ router.patch('/submitions/:id', function(req,res,next) {
   });
 });
 
+router.patch('/contests/update/status/:contestId', function(req, res, next) {
+  var decoded = jwt.decode(req.query.token);
+  var contestId = req.params.contestId;
+  if (decoded.user.userType != "Admin") {
+    console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Neturite tam privilegijų'}
+      });
+  }
+  Contest.findOne({idName: contestId})
+  .exec(function(err, contest) {
+    if(err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    contest.status = req.body.status;
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Statusas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
 router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,next) {
   var contestIdName = req.params.contestIdName;
   var submitionId = req.params.submitionId;
