@@ -1,4 +1,4 @@
-<div>
+<!--<div>
   <h1>DESIGNERS</h1>
 </div>
 
@@ -8,5 +8,106 @@
     {{designer | json}}
   </div>
 </div>
+
+<test-loader *ngIf="isLoading"></test-loader>-->
+
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/kategorijos" routerLinkActive="active">Visos kategorijos</a>
+					<a class="current">Logotipo dizainas</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-innernav">
+		<div class="row">
+			<div class="column small-12">
+				<nav class="inner-navigation">
+					<ul>
+						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li> <!-- Dropdown -->
+						<li class="current"><a href="#">Aktyvūs konkursai</a></li>
+						<li><a href="#">Užbaigti konkursai</a></li>
+					</ul>
+				</nav><!-- .inner-navigation -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-innernav -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Konkursų sąrašas</h2><!-- .headline -->
+					<span class="subtitle">Peržvelkite naujausius konkursus žemiau</span>
+					
+					<!-- This one is aligned to the right. -->
+					<a href="#" class="see-faq">Kilus klausimams pažiūrėkite D.U.K. skiltį</a>
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<!-- The component that switches tables, searches, has new request button -->
+				<div class="action-bar">
+					<div class="table-actions">
+						<div class="tab tab-active">
+							<span>Dizaineriai</span>
+						</div><!-- .tab -->
+
+						<div class="table-search">
+							<i class="fa fa-search"></i>
+							<input type="text" class="search" placeholder="Ieškoti dizainerio" #search /> <!--(keyup)="filterContests(search.value)"-->
+							<input type="submit" value="Search" />
+						</div><!-- .search -->
+					</div><!-- .table-actions -->
+				</div><!-- .table-center -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<div class="table-primary">
+					<header class="table-header">
+						<strong class="status">Avataras</strong>
+						<strong class="name">Slapyvardis</strong>
+						<strong class="category">Galerija</strong>
+						<strong class="price">Laimėta konkursų</strong>
+						<strong class="submitions">Įkelta dizainų</strong>
+						<!--<strong class="time-remaining">Konkurso pabaiga</strong>-->
+					</header><!-- .table-header -->
+
+						<div *ngIf="designers.length == 0" class="table-row">
+							<span class="no-contests-label">Nėra dizainerių</span>
+						</div>
+					
+						<div *ngFor="let designer of designers | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row" (click)="goToDesignerDetails(designer.nickName)">
+							<div class="status">
+								<span>Avatar</span>
+							</div>
+							<div class="name">
+								<span>{{designer?.nickName}}</span>
+							</div>
+							<div class="category">
+								<span>Galerija</span>
+							</div>
+							<div class="price">
+								<span>Laimeta konkursu</span>
+							</div>
+							<div class="submitions">
+								<span>{{designer?.galleryUrls?.length}}</span>
+							</div>
+						</div>
+					
+				</div><!-- .primary-table -->
+				<pagination-controls *ngIf="designers.length > 5" (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+</section><!-- .app-main -->
+
+<simple-notifications [options]="options"></simple-notifications>
 
 <test-loader *ngIf="isLoading"></test-loader>

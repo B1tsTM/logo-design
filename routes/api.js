@@ -318,6 +318,46 @@ router.get('/dizaineriai', function (req,res,next) {
   });
 });
 
+router.get('/dizaineriai/:nickname', function (req,res,next) {
+  var nickname = req.params.nickname;
+  User.find({'nickName': nickname}) 
+ // .populate('contests')
+  .exec(function(err, docs) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+  });
+});
+
+router.get('/dizaineriai/filter/:searchString', function (req,res,next) {
+  var searchString = req.params.searchString;
+  User.find({nickName: new RegExp(searchString, 'i'), userType: 'dizaineris'})
+  //User.find({'userType': 'dizaineris'}) 
+  .sort({nickName : 1}) // TODO see if this works. Didn't seem to work.. Later should be filtered by contests won
+ // .populate('contests')
+  .exec(function(err, docs) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+  });
+});
+
 router.get('/avatars/:id', function(req, res, next) {
   var id = req.params.id;
   User.findById(id, function(err, user) {
@@ -1009,17 +1049,17 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 
     
 
-    User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
-      if(err){
-        console.log(err);
-        return res.status(404).json({
-          title: 'Klaida !',
-          error: {message: 'Įvyko klaida'}
-        });
-        }else{
-          console.log("Images uploaded !");
-        }
-    });
+      // User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
+      //   if(err){
+      //     console.log(err);
+      //     return res.status(404).json({
+      //       title: 'Klaida !',
+      //       error: {message: 'Įvyko klaida'}
+      //     });
+      //     }else{
+      //       console.log("Images uploaded !");
+      //     }
+      // });
 
     //contest.participants.push(userId); //doesn't enforce uniqueness, must use $addtoSet
 
@@ -1092,106 +1132,77 @@ Contest.findOne({'idName': contestId}, function(err, contest) {
 
 });
 
-
-
-
-router.post('/contests/:contestId/files/:userId', submitionsUploadForAdditionalFiles.array("files", 12), function(req,res){
-
-var contestId = req.params.contestId;
-var userId = req.params.userId;
-//User.findById(id, function(err, user) {
-Contest.findOneAndUpdate({'idName': contestId}, function(err, contest) {
-  if (err) {
-    console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    console.log(contest);
-
-    var fileNames = [];
-    var additionalFiles = [];
-    console.log(req.files);
-    for (let i=0; i<req.files.length; i++) {
-      var fileId = contest.additionalFiles.length + 1;
-      fileNames.push(req.files[i].filename);
-      additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
-      contest.additionalFiles.push({fileUrl: req.files[i].filename, fileId: fileId});
-      //fileNames.push(req.files[i]);
-    }
-    //console.log('submitions array:');
-    //console.log(submitions);
-    console.log(fileNames);
-
-    contest.save(function(err, result) {
-      if (err) {
-        console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(201).json({
-        message: 'Dizainai įkelti',
-        obj: result,
-        files: req.files,
-        filenames: fileNames,
-        additionalFiles: additionalFiles
-      });
-    });
-  });
-
-});
-
 //Submitions
 router.post('/submitions/gallery/:contestId/:userId', submitionsUploadForGallery.array("submition", 12), function(req,res){
 
 var contestId = req.params.contestId;
 var userId = req.params.userId;
-//User.findById(id, function(err, user) {
-Contest.findOneAndUpdate({'idName': contestId}, {new: true},  function(err, contest) {
-  if (err) {
-    console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-    }
-    console.log(contest);
-
-    var fileNames = [];
-    console.log(req.files);
-    for (let i=0; i<req.files.length; i++) {
-      fileNames.push(req.files[i].filename);
-      //fileNames.push(req.files[i]);
-    }
-
-    console.log(fileNames);
-
-
-  //  for(let i = 0; i< req.files.length; i++) {
-       //user.gallery.designUrl.push(req.files[i].filename);
-       //user.update({id: id}, {$push: {gallery: req.files[i].filename}});
-  //  }
-   // user.gallery.designUrl = req.files[0].filename;
-
-    contest.save(function(err, result) {
-      if (err) {
+  //User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err, user) {
+  User.findByIdAndUpdate(userId, function(err, user) {
+      if(err){
         console.log(err);
-      return res.status(404).json({
-        title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
-      });
-      }
-      res.status(200).json({
-        message: 'Dizainai įkelti',
-        obj: result,
-        files: req.files,
-        filenames: fileNames
-      });
+        return res.status(404).json({
+          title: 'Klaida !',
+          error: {message: 'Įvyko klaida'}
+        });
+        }
+        var fileNames = [];
+        console.log(req.files);
+        for (let i=0; i<req.files.length; i++) {
+          fileNames.push(req.files[i].filename);
+          user.galleryUrls.push(req.files[i].filename);
+        }
+        user.save(function(err, result) {
+          if(err){
+        console.log(err);
+        return res.status(404).json({
+          title: 'Klaida !',
+          error: {message: 'Įvyko klaida'}
+        });
+        }
+        console.log('gallery dizainai ikelti');
+        res.status(201).json({
+          message: 'Dizainai įkelti',
+          obj: result,
+          files: req.files,
+          filenames: fileNames
+        });
+      });       
     });
-  });
+// Contest.findOneAndUpdate({'idName': contestId}, {new: true},  function(err, contest) {
+//   if (err) {
+//     console.log(err);
+//       return res.status(404).json({
+//         title: 'Klaida !',
+//         error: {message: 'Įvyko klaida'}
+//       });
+//     }
+//     console.log(contest);
+
+//     var fileNames = [];
+//     console.log(req.files);
+//     for (let i=0; i<req.files.length; i++) {
+//       fileNames.push(req.files[i].filename);
+//     }
+
+//     console.log(fileNames);
+
+//     contest.save(function(err, result) {
+//       if (err) {
+//         console.log(err);
+//       return res.status(404).json({
+//         title: 'Klaida !',
+//         error: {message: 'Įvyko klaida'}
+//       });
+//       }
+//       res.status(200).json({
+//         message: 'Dizainai įkelti',
+//         obj: result,
+//         files: req.files,
+//         filenames: fileNames
+//       });
+//     });
+//   });
 
 });
 //End of submitions post req

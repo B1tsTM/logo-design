@@ -1,0 +1,17 @@
+<h1>Designer details</h1>
+
+<div *ngIf="designer">
+  <h3>Dalyvavo konkursų: {{designer?.contests?.length}}</h3>
+  <h3>Laimėta konkursų: {{designer?.contestsWon?.length}}</h3>
+  <h3>Sukurta dizainų: {{designer?.galleryUrls?.length}}</h3>
+  <h3>Vardas: {{designer.firstName}}</h3>
+  <h3>Pavardė: {{designer.lastName}}</h3>
+  <h3>Slapyvardis: {{designer.nickName}}</h3>
+  <div *ngIf="designer.avatar"><img src="http://localhost:3000/uploads/avatars/{{designer.avatar.avatarUrl}}" alt="Avataras"></div>
+  <div *ngIf="!designer.avatar"><img src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Avataras"></div>
+  <div *ngFor="let image of designer.galleryUrls">
+    <img src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{image}}" alt="image">
+  </div>
+  <h3></h3>
+  <h3></h3>
+</div>

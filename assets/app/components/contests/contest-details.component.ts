@@ -145,7 +145,6 @@ export class ContestDetailsComponent implements OnInit {
             this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
         },
         error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
@@ -168,7 +167,35 @@ export class ContestDetailsComponent implements OnInit {
         //end of reloading my submitions
         }, (error) => {
             this.isLoading = false;
-            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            window.scrollTo(0, 0);
+            //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
+        .subscribe(submitions => {
+            console.log('submitions from apiservice in contest-details');
+            console.log(submitions);
+            this.submitions = submitions;
+            this.isLoading = false;
+            console.log(this.submitions);
+            this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
+        },
+        error => {
+          this.isLoading = false;
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        });
+        this.apiService.getMySubmitions(this.contestId)
+        .subscribe(mySubmitions => {
+            console.log('MySubmitions from apiservice in contest-details');
+            console.log(mySubmitions);
+            this.mySubmitions = mySubmitions;
+            console.log('this.mySubmitions');
+            console.log(this.mySubmitions);
+        },
+        error => {
+          //this.errorService.handleError(error);
+          this.isLoading = false;
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+      });
+
         });
     }
 
