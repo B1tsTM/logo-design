@@ -40,6 +40,13 @@ router.post('/', function(req, res, next) {
         error: {message: 'Įvyko klaida'}
       });
     }
+    if (doc.contests.length > 10) { // contest count guard
+      console.log('Too many contests published');
+      return res.status(404).json({
+        title: 'Per daug konkursų !',
+        error: {message: 'Susisiekite su administratorium'}
+      });
+    }
     var idName = kebab(req.body.name);
     Contest.findOne({'idName': idName}, function(err, result){
       console.log('contests.js Contest.findOne result var');

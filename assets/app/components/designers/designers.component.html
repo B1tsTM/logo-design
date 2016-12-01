@@ -72,10 +72,10 @@
 			<div class="columns small-12">
 				<div class="table-primary">
 					<header class="table-header">
-						<strong class="status">Avataras</strong>
-						<strong class="name">Slapyvardis</strong>
-						<strong class="category">Galerija</strong>
-						<strong class="price">Laimėta konkursų</strong>
+						<strong class="avatar">Avataras</strong>
+						<strong class="nickname">Dizaineris</strong>
+						<strong class="gallery">Galerija</strong>
+						<strong class="contests-won">Laimėta konkursų</strong>
 						<strong class="submitions">Įkelta dizainų</strong>
 						<!--<strong class="time-remaining">Konkurso pabaiga</strong>-->
 					</header><!-- .table-header -->
@@ -84,18 +84,19 @@
 							<span class="no-contests-label">Nėra dizainerių</span>
 						</div>
 					
-						<div *ngFor="let designer of designers | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row" (click)="goToDesignerDetails(designer.nickName)">
-							<div class="status">
-								<span>Avatar</span>
+						<div *ngFor="let designer of designers | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row">
+							<div class="avatar">
+								<span class="avatar-container" *ngIf="designer.avatar"><img class="micro-avatar" src="http://localhost:3000/uploads/avatars/{{designer.avatar.avatarUrl}}" alt="Avataras"></span>
+								<span class="avatar-container" *ngIf="!designer.avatar"><img class="micro-avatar" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Avataras"></span>
 							</div>
-							<div class="name">
+							<div (click)="goToDesignerDetails(designer.nickName)" class="nickname">
 								<span>{{designer?.nickName}}</span>
 							</div>
-							<div class="category">
+							<div class="gallery">
 								<span>Galerija</span>
 							</div>
-							<div class="price">
-								<span>Laimeta konkursu</span>
+							<div class="contests-won">
+								<span>{{designer.contestsWon.length}}</span>
 							</div>
 							<div class="submitions">
 								<span>{{designer?.galleryUrls?.length}}</span>

@@ -30,3 +30,80 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   background-color: #a8d6f3 !important;
   border-radius: 5px !important;
 }
+
+.micro-avatar {
+  width:50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.table-primary .avatar {
+    -ms-flex-preferred-size: 50px;
+    flex-basis: 50px;
+}
+.table-primary .nickname {
+  flex-basis: 100px;
+}
+.table-primary .gallery {
+  flex-basis: 100px;
+}
+.table-primary .contests-won {
+  flex-basis: 50px;
+}
+.table-primary .submitions {
+  flex-basis: 50px;
+}
+
+.table-primary .contests-won span {
+    background: #1a1a1a;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.table-primary .avatar, .table-primary .nickname, .table-primary .gallery, .table-primary .contests-won, .table-primary .submitions {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    padding: 8px 14px;
+    align-self: center;
+    text-align: center;
+}
+
+.gallery {
+  margin-bottom: 0;
+}
+
+.table-row .nickname span {
+  color: #4072db;
+  font-weight: bold;
+}
+
+.table-row .submitions span {
+    background: #1a1a1a;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.table-primary .table-row:hover {
+  cursor: default;
+}
+
+.table-primary .table-row {
+  cursor: default;
+}
+
+.table-row .nickname {
+  cursor: pointer !important;
+}
+
+.table-row .nickname:hover {
+  background-color: #cad8e0;
+}
