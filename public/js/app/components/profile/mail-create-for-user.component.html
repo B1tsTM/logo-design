@@ -3,17 +3,17 @@
 
 <form>
   <div class="form-group">
-    <label>Gavėjas</label>
+    <label>Gavėjas (slapyvardis)</label>
     <!--<input type="text" class="form-control" name="nickname" [(ngModel)]="nickname">-->
     <p-autoComplete [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete>
   </div>
   <div>
     <label for="topic">Tema</label>
-    <input type="text" class="form-control" name="topic" [(ngModel)]="topic">
+    <input type="text" class="form-control" name="topic" [(ngModel)]="topic" required>
   </div>
   <div>
     <div><label for="message">Žinutė</label></div>
-    <textarea class="form-control" rows="5" cols="40" name="message" [(ngModel)]="message"></textarea>
+    <textarea class="form-control" rows="5" cols="40" name="message" [(ngModel)]="message" required></textarea>
   </div>
   <div>
     <button type="button" (click)="sendMessage()">Siųsti žinutę</button>

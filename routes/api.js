@@ -379,6 +379,13 @@ router.get('/avatars/:id', function(req, res, next) {
 
 router.get('/users/:id', function(req,res,next) {
   var id = req.params.id;
+      if (!id) { // how is this not working?!
+        console.log('null user');
+     return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Nerasta vartotojo'}
+      }); 
+    } else {
   User.findById(id, function(err, user) {
     if (err) {
       console.log(err);
@@ -394,6 +401,7 @@ router.get('/users/:id', function(req,res,next) {
       user: user
     });
   });
+  } //end of else
 });
 
 router.get('/gallery/:id', function(req, res, next) {

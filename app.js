@@ -19,6 +19,7 @@ var DIR = './uploads/';
 var upload = multer({dest: DIR});
 
 var User = require('./models/user');
+var Contest = require('./models/contests');
 var passwordHash = require('password-hash');
 var bcrypt = require('bcryptjs');
 
@@ -82,6 +83,19 @@ User.findOne({'nickName': 'Admin'}, function(err, admin) {
   }
   console.log('Admin already exists');
 });
+
+Contest.find()
+.exec(function(err, contests) {
+  for (var i=0; i<contests.length; i++) {
+    if (contests[i].status == "Aktyvus") {
+      if (contests[i].endDate.getTime() < new Date().getTime()) {
+        console.log('contest finished');
+        contests[i].status = "Laikas baigėsi";
+        contests[i].save();
+      }
+    }
+  }
+}); 
 
 // var dirAvatar = './public/uploads/avatars';
 // var dirContests = './public/uploads/contests';

@@ -26,8 +26,8 @@
 							</li>
 						</ul>
 
-<modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
-        (onOpen)="opened()" [cssClass]="cssClass" #loginModal>
+<modal [animation]="animation" [keyboard]="keyboard" [size]="sm" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
+        (onOpen)="opened()" cssClass=".modal-login" #loginModal>
         <form [formGroup]="loginForm" novalidate (ngSubmit)="login(loginF)" #loginF> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Prisijungimas</h4>
@@ -35,11 +35,11 @@
             <modal-body>
                 <div class="form-group">
                     <label for="nickName">Slapyvardis</label>
-                    <input autofocus type="text" class="form-control" formControlName="nickName" name="nickName" id="nickName" autofocus>
+                    <input autofocus type="text" class="form-control input-short" formControlName="nickName" name="nickName" id="nickName" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Slaptažodis</label>
-                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
+                    <input type="text" class="form-control input-short" formControlName="password" name="password" id="password">
                 </div>
             </modal-body>
             <modal-footer>
@@ -54,27 +54,29 @@
         <form [formGroup]="registerForm" novalidate (ngSubmit)="register(registerF)" #registerF> 
             <modal-header [show-close]="true">
                 <h4 class="modal-title text-center">Registracija</h4>
+                <br>
+                <h5 class="modal-title text-center red-text">Visi laukai privalomi !</h5>
             </modal-header>
             <modal-body>
               <div class="form-group">
                     <label for="firstName">Vardas</label>
-                    <input autofocus type="text" class="form-control" formControlName="firstName" name="firstName" id="firstName" autofocus>
+                    <input autofocus type="text" class="form-control input-short" formControlName="firstName" name="firstName" id="firstName" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="firstName">Pavardė</label>
-                    <input type="text" class="form-control" formControlName="lastName" name="lastName" id="lastName">
+                    <input type="text" class="form-control input-short" formControlName="lastName" name="lastName" id="lastName">
                 </div>
                 <div class="form-group">
                     <label for="firstName">El. Paštas</label>
-                    <input type="text" class="form-control" formControlName="email" name="email" id="email">
+                    <input type="text" class="form-control input-short" formControlName="email" name="email" id="email">
                 </div>
                 <div class="form-group">
                     <label for="firstName">Slapyvardis</label>
-                    <input type="text" class="form-control" formControlName="nickName" name="nickName" id="nickName">
+                    <input type="text" class="form-control input-short" formControlName="nickName" name="nickName" id="nickName">
                 </div>
                 <div class="form-group">
                     <label for="lastName">Slaptažodis</label>
-                    <input type="text" class="form-control" formControlName="password" name="password" id="password">
+                    <input type="text" class="form-control input-short" formControlName="password" name="password" id="password">
                 </div>
                 <div class="form-group">
                     <label style="display: block">Dizaineris ar užsakovas?</label>

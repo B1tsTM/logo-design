@@ -86,6 +86,9 @@ export class ApiService {
   }
 
   getUserInfo(userId: string) {
+    if(!userId) {
+      return Observable.empty();
+    }
     return this.http.get('http://localhost:3000/api/v1/users/'+userId)
     .map(res => {
       const user = res.json().user;
