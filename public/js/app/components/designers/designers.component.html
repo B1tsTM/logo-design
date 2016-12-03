@@ -93,7 +93,13 @@
 								<span>{{designer?.nickName}}</span>
 							</div>
 							<div class="gallery">
-								<span>Galerija</span>
+								<span *ngIf="designer.galleryUrls.length > 0">
+									<span *ngFor="let pic of designer.galleryUrls; let i = index">
+										<span *ngIf="i < 5">
+											<img class="micro-avatar" src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}" alt="Pic">
+										</span>
+									</span>
+								</span>
 							</div>
 							<div class="contests-won">
 								<span>{{designer.contestsWon.length}}</span>

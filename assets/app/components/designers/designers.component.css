@@ -38,6 +38,12 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   margin-top: 5px;
 }
 
+.micro-submition {
+  width:50px;
+  height: 50px;
+  margin-top: 5px;
+}
+
 .table-primary .avatar {
     -ms-flex-preferred-size: 50px;
     flex-basis: 50px;
@@ -46,7 +52,7 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   flex-basis: 100px;
 }
 .table-primary .gallery {
-  flex-basis: 100px;
+  flex-basis: 200px;
 }
 .table-primary .contests-won {
   flex-basis: 50px;
