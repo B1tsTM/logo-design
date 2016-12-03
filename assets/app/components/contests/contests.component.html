@@ -119,7 +119,7 @@
 					
 						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
 							<div class="status">
-								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas'}">{{contest.status}}</span>
+								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status ==  'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas'}">{{contest.status}}</span>
 							</div>
 							<div class="name">
 								<span>{{contest.name}}</span>

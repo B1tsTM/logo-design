@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit {
   //contest: Contest = null;
   contests: any = [];
   isLoading = false;
-  status = "Aktyvus";
+  status1 = "Aktyvus";
+  status2 = "Pratęstas";
   firstTabActive = true;
   secondTabActive = false;
   allActiveContests = [];
@@ -41,8 +42,8 @@ export class HeaderComponent implements OnInit {
     this.contestsService.getAllContests()
     .subscribe(contests => {
       var unfilteredContests = contests;
-      var filteredActiveContests = unfilteredContests.filter((item: any) => item.status == this.status);
-      var filteredFinishedContests = unfilteredContests.filter((item: any) => item.status == "Užbaigtas");
+      var filteredActiveContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
+      var filteredFinishedContests = unfilteredContests.filter((item: any) => item.status == "Užbaigtas" || item.status == "Laikas baigėsi"); //TODO change some logic now that timed-out contests are there
       this.contests = filteredActiveContests;
       this.allActiveContests = filteredActiveContests;
       this.allFinishedContests = filteredFinishedContests;
@@ -66,7 +67,7 @@ export class HeaderComponent implements OnInit {
           //console.log('Filter layer 1 contests');
           //console.log(contests);
           var unfilteredContests = contests;
-          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
+          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
           //console.log('Filter layer 2 contests');
           //console.log(filteredContests);
           this.contests = filteredContests;
@@ -81,10 +82,11 @@ export class HeaderComponent implements OnInit {
   selectFirstTab() {
     this.firstTabActive = true;
     this.secondTabActive = false;
-    if (this.status == "Aktyvus") {
+    if (this.status1 == "Aktyvus") {
       //do nothing
     } else {
-    this.status = "Aktyvus";
+    this.status1 = "Aktyvus";
+    this.status2 = "Pratęstas";
     this.isLoading = true;
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
@@ -92,7 +94,7 @@ export class HeaderComponent implements OnInit {
           //console.log('Filter layer 1 contests');
           //console.log(contests);
           var unfilteredContests = contests;
-          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
+          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
           //console.log('Filter layer 2 contests');
           //console.log(filteredContests);
           this.contests = filteredContests;
@@ -108,10 +110,11 @@ export class HeaderComponent implements OnInit {
   selectSecondTab() {
     this.firstTabActive = false;
     this.secondTabActive = true;
-    if (this.status == "Užbaigtas") {
+    if (this.status1 == "Užbaigtas") {
       //do nothing
     } else {
-    this.status = "Užbaigtas";
+    this.status1 = "Užbaigtas";
+    this.status2 = "Laikas baigėsi";
     this.isLoading = true;
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
@@ -119,7 +122,7 @@ export class HeaderComponent implements OnInit {
           //console.log('Filter layer 1 contests');
           //console.log(contests);
           var unfilteredContests = contests;
-          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
+          var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
           //console.log('Filter layer 2 contests');
           //console.log(filteredContests);
           this.contests = filteredContests;

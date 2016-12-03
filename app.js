@@ -86,6 +86,7 @@ User.findOne({'nickName': 'Admin'}, function(err, admin) {
 
 Contest.find()
 .exec(function(err, contests) {
+  if (err) console.log(err);
   for (var i=0; i<contests.length; i++) {
     if (contests[i].status == "Aktyvus") {
       if (contests[i].endDate.getTime() < new Date().getTime()) {

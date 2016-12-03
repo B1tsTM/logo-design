@@ -29,6 +29,7 @@
   </div>
   <br>
   <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
+  <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi</div>
   <br>
   <div *ngIf="winnerSubmition">
     <h2 class="text-center">Winner:</h2>
@@ -80,14 +81,14 @@
     <br>
   </div>  
   <pagination-controls *ngIf="mySubmitions.length > 0 && isDesigner()" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
-  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas'">To participate, you must be logged in as a designer</div>
-  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas'">
+  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">To participate, you must be logged in as a designer</div>
+  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">
     <h2>Participate:</h2>
     <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Upload</button>
   {{percent}} %
   </div>
-  <div *ngIf="isClient() && contest.status != 'Užbaigtas'">Must be signed in as designer to upload files</div>
+  <div *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Must be signed in as designer to upload files</div>
 
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>
