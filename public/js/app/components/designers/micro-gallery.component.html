@@ -1,0 +1,19 @@
+<span *ngIf="designer.galleryUrls.length > 0">
+  <span *ngFor="let pic of designer.galleryUrls; let i = index">
+    <span *ngIf="i < 5">
+      <img class="micro-submition" (click)="microSubmitionModal.open()" src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}" alt="Pic">
+    </span>
+      <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" [cssClass]="cssClass" #microSubmitionModal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title text-center">Galerija</h4>
+        </modal-header>
+        <modal-body>
+            <img class="micro-submition-large" src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}" alt="Galerija">
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="microSubmitionModal.dismiss()">Uždaryti</button>
+        </modal-footer>
+    </modal>
+  </span>
+</span>
+

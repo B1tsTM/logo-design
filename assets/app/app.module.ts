@@ -21,7 +21,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   ReadMessageComponent, SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
   TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent, SubmitionCommentsSectionComponent,
   AdminDashboardComponent, AdminManageContestsComponent, AdminContestDetailsComponent,
-  DesignerDetailsComponent } from './components/index';
+  DesignerDetailsComponent, MicroGalleryComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
 import { StarRatingComponent } from './components/contests/star-rating.component';
 import { SubmitionDetailsComponent } from './components/contests/submition-details.component';
@@ -68,7 +68,7 @@ const WINDOW_PROVIDER: ValueProvider = {
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
                   TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent,
                   SubmitionCommentsSectionComponent, AdminDashboardComponent, AdminManageContestsComponent,
-                  AdminContestDetailsComponent, DesignerDetailsComponent],
+                  AdminContestDetailsComponent, DesignerDetailsComponent, MicroGalleryComponent],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService, CanActivateAdminPageService, WINDOW_PROVIDER ]
