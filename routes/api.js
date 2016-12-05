@@ -11,6 +11,7 @@ var upload = multer({dest: DIR});
 var crypto = require('crypto');
 var mime = require('mime');
 var jwt = require('jsonwebtoken');
+var fsExtra = require('fs-extra')
 
 
 var storage = multer.diskStorage({
@@ -964,10 +965,24 @@ router.patch('/contest/winner/:contestIdName/:submitionId', function(req,res,nex
     //contest.winner = req.body.winnerId;
     contest.winnerSubmition = req.body.submition;
     contest.status = 'Užbaigtas';
+    //
+    // TO /uploads/winners/
+    // FROM /uploads/contests/contest.idName/submition.submitionUrl;
+      
+    //
     for(var i=0; i<contest.submitions.length; i++) {
       if (contest.submitions[i].submitionId == submitionId) {
         //winnerSubmition = contest.submitions[i];
         contest.submitions[i].status = 'Nugalėtojas';
+          fsExtra.copy('./public/uploads/contests/' + contest.idName + '/' + contest.submitions[i].submitionUrl, './public/uploads/winners/' + req.body.submition.submitionUrl, function(err) {
+          if (err) return console.error(err)
+          console.log('Failas nukopijuotas');
+          });
+          User.findOne({'nickName': 'Admin'})
+          .exec(function(err, admin) {
+            admin.winners.push(req.body.submition.submitionUrl);
+            admin.save();
+          });
       }
     }
     contest.save(function(err, result) {
@@ -1177,7 +1192,7 @@ router.post('/submitions/gallery/:contestId/:userId', submitionsUploadForGallery
 var contestId = req.params.contestId;
 var userId = req.params.userId;
   //User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err, user) {
-  User.findByIdAndUpdate(userId, function(err, user) {
+  User.findById(userId, function(err, user) {
       if(err){
         console.log(err);
         return res.status(404).json({
@@ -1200,7 +1215,7 @@ var userId = req.params.userId;
         });
         }
         console.log('gallery dizainai ikelti');
-        res.status(201).json({
+        return res.status(201).json({
           message: 'Dizainai įkelti',
           obj: result,
           files: req.files,

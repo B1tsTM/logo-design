@@ -13,7 +13,7 @@
 }
 
 .thumbnail-container {
-  padding: 48px;
+  padding: 40px;
 }
 
 .winner-container {
@@ -56,4 +56,17 @@ pagination-controls /deep/ .ng2-pagination li {
 pagination-controls /deep/ .ng2-pagination li a:hover {
   background-color: #a8d6f3 !important;
   border-radius: 5px !important;
+}
+
+.mini-image-container {
+  box-shadow: 0 10px 40px 0 rgba(0,0,0,.1);
+  padding: 5px;
+}
+
+.mini-image-container:hover {
+  border: 1px solid cyan;
+}
+
+img:hover {
+    cursor: pointer;
 }

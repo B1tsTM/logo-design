@@ -126,7 +126,7 @@ export class ContestDetailsComponent implements OnInit {
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload, "submition").then((result) => {
             console.log(result);
-            //this.filesToUpload = [];
+            this.isLoading = false;
         }, (error) => {
             this.isLoading = false;
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
@@ -134,70 +134,114 @@ export class ContestDetailsComponent implements OnInit {
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload, "submition").then((result) => {
             console.log(result);
             this.filesToUpload = [];
-            //reload submitions
-            this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
-        .subscribe(submitions => {
-            console.log('submitions from apiservice in contest-details');
-            console.log(submitions);
-            this.submitions = submitions;
-            this.isLoading = false;
-            console.log(this.submitions);
-            this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
-        },
-        error => {
-          this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-        });
-        //end of reloading submitions
-        // --------------------------
-        //reloading my submitions
-        this.apiService.getMySubmitions(this.contestId)
-        .subscribe(mySubmitions => {
-            console.log('MySubmitions from apiservice in contest-details');
-            console.log(mySubmitions);
-            this.mySubmitions = mySubmitions;
-            console.log('this.mySubmitions');
-            console.log(this.mySubmitions);
-        },
-        error => {
-          //this.errorService.handleError(error);
-          this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-      });
-        //end of reloading my submitions
         }, (error) => {
+            console.log('reached err');
             this.isLoading = false;
             window.scrollTo(0, 0);
-            //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-            this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
-        .subscribe(submitions => {
-            console.log('submitions from apiservice in contest-details');
-            console.log(submitions);
-            this.submitions = submitions;
+
+            this.apiService.getContestSubmitions(this.contestId) 
+            .subscribe(submitions => {
+                console.log('submitions from apiservice in contest-details');
+                console.log(submitions);
+                this.submitions = submitions;
+                this.isLoading = false;
+                console.log(this.submitions);
+                this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
+            },
+            error => {
             this.isLoading = false;
-            console.log(this.submitions);
-            this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
-        },
-        error => {
-          this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            });
+
+            this.apiService.getMySubmitions(this.contestId)
+            .subscribe(mySubmitions => {
+                console.log('MySubmitions from apiservice in contest-details');
+                console.log(mySubmitions);
+                this.mySubmitions = mySubmitions;
+                console.log('this.mySubmitions');
+                console.log(this.mySubmitions);
+            },
+            error => {
+            this.isLoading = false;
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
-        this.apiService.getMySubmitions(this.contestId)
-        .subscribe(mySubmitions => {
-            console.log('MySubmitions from apiservice in contest-details');
-            console.log(mySubmitions);
-            this.mySubmitions = mySubmitions;
-            console.log('this.mySubmitions');
-            console.log(this.mySubmitions);
-        },
-        error => {
-          //this.errorService.handleError(error);
-          this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-      });
 
         });
     }
+
+    // uploadSubmitions() { // SOMEHOW BUGGED... again
+    //   this.isLoading = true;
+    //     this.userId = sessionStorage.getItem('userId');
+    //     this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload, "submition").then((result) => {
+    //         console.log(result);
+    //         this.isLoading = false;
+    //     }, (error) => {
+    //         this.isLoading = false;
+    //         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    //     });
+    //     this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload, "submition").then((result) => {
+    //         console.log(result);
+    //         this.filesToUpload = [];
+
+    //         this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
+    //     .subscribe(submitions => {
+    //         console.log('submitions from apiservice in contest-details');
+    //         console.log(submitions);
+    //         this.submitions = submitions;
+    //         this.isLoading = false;
+    //         console.log(this.submitions);
+    //         this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
+    //     },
+    //     error => {
+    //       this.isLoading = false;
+    //       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    //     });
+
+    //     this.apiService.getMySubmitions(this.contestId)
+    //     .subscribe(mySubmitions => {
+    //         console.log('MySubmitions from apiservice in contest-details');
+    //         console.log(mySubmitions);
+    //         this.mySubmitions = mySubmitions;
+    //         console.log('this.mySubmitions');
+    //         console.log(this.mySubmitions);
+    //     },
+    //     error => {
+
+    //       this.isLoading = false;
+    //       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    //   });
+
+    //     }, (error) => {
+    //         this.isLoading = false;
+    //         window.scrollTo(0, 0);
+    //         this.apiService.getContestSubmitions(this.contestId) 
+    //     .subscribe(submitions => {
+    //         console.log('submitions from apiservice in contest-details');
+    //         console.log(submitions);
+    //         this.submitions = submitions;
+    //         this.isLoading = false;
+    //         console.log(this.submitions);
+    //         this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
+    //     },
+    //     error => {
+    //       this.isLoading = false;
+    //       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    //     });
+    //     this.apiService.getMySubmitions(this.contestId)
+    //     .subscribe(mySubmitions => {
+    //         console.log('MySubmitions from apiservice in contest-details');
+    //         console.log(mySubmitions);
+    //         this.mySubmitions = mySubmitions;
+    //         console.log('this.mySubmitions');
+    //         console.log(this.mySubmitions);
+    //     },
+    //     error => {
+    //       this.isLoading = false;
+    //       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    //   });
+
+    //     });
+    // }
 
     // Upload additional files
 

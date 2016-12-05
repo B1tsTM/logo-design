@@ -50,6 +50,7 @@
   <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
   <div class="thumbnail-row" *ngIf="contestId">
     <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+      <div class="mini-image-container">
       <div class="pad-left-60">SubmitionID: {{submition.submitionId}}</div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <br>
@@ -62,12 +63,14 @@
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
+  </div>
   <pagination-controls *ngIf="submitions.length > 0 && isDesigner()" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
     <h2 class="text-center">My submitions ({{mySubmitions.length}})</h2>
     <div class="thumbnail-row">
       <div class="inline-block thumbnail-container" *ngFor="let mySubmition of mySubmitions | paginate: {id: 'two', itemsPerPage: 10, currentPage: p2}">
+        <div class="mini-image-container">
         <div class="pad-left-60">SubmitionID: {{mySubmition.submitionId}}</div>
         <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
           <br>
@@ -76,6 +79,7 @@
               <star-rating class="star-rating" [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
             </div> 
           <span class="pad-left-60" *ngIf="mySubmition.comments">{{mySubmition.comments.length}} comments</span>
+        </div>
       </div>
     </div>
     <br>
