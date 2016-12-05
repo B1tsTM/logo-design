@@ -11,6 +11,16 @@ span.finished {
   color: white;
 }
 
+span.timed-out {
+  background-color: #72af90 ;
+  color: white !important;
+}
+
+span.resumed {
+  background-color: #9fbb2d !important;
+  color: white !important;
+}
+
 pagination-controls /deep/ {
   display: block;
 }

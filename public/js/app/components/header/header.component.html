@@ -45,25 +45,35 @@
 </div>
 -->
 
-<section class="app-headline">
+<!--<section class="app-headline">
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
 					<a routerLink="/kategorijos" routerLinkActive="active">Visos kategorijos</a>
 					<a class="current">Logotipo dizainas</a>
-				</div><!-- .breadcrumbs -->
-			</div><!-- .column small-12 -->
-		</div><!-- .row -->
-	</section><!-- .app-headline -->
+				</div>
+			</div>
+		</div>
+	</section>-->
+
+	<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a>Pagrindinis puslapis</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<section class="app-innernav">
 		<div class="row">
 			<div class="column small-12">
 				<nav class="inner-navigation">
 					<ul>
-						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li> <!-- Dropdown -->
-						<li class="current"><a href="#">Aktyvūs konkursai</a></li>
-						<li><a href="#">Užbaigti konkursai</a></li>
+						<li><a routerLink="/kategorijos" href="#">Visos Kategorijos</a></li> <!-- Dropdown -->
+						<!--<li class="current"><a href="#">Aktyvūs konkursai</a></li>
+						<li><a href="#">Užbaigti konkursai</a></li>-->
 					</ul>
 				</nav><!-- .inner-navigation -->
 			</div><!-- .column small-12 -->
@@ -148,7 +158,7 @@
 					
 						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
 							<div class="status">
-								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas'}">{{contest.status}}</span>
+								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas'}">{{contest.status}}</span>
 							</div>
 							<div class="name">
 								<span>{{contest.name}}</span>

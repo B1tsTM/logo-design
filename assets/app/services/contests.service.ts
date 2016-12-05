@@ -116,6 +116,14 @@ export class ContestsService {
     this.contestEdited.emit(contest);
   }
 
+  extendContest(contestId, days) {
+    const body = JSON.stringify({days: days});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.patch('http://localhost:3000/api/v1/contests/' + contestId + '/extend', body, {headers: headers})
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
   deleteContest(contest: any) {
     const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
     this.contests.splice(this.contests.indexOf(contest), 1);

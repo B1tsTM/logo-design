@@ -78,7 +78,7 @@
 					
 						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
 							<div class="status">
-								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas'}">{{contest.status}}</span>
+								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span>
 							</div>
 							<div class="name">
 								<span>{{contest.name}}</span>
@@ -102,6 +102,8 @@
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 </section><!-- .app-main -->
+
+<button type="button" (click)="goBackToAdminPanel()">Atgal</button>
 
 <simple-notifications [options]="options"></simple-notifications>
 

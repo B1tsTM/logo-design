@@ -26,6 +26,8 @@
   <br>
   <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
   <br>
+  <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi !</div>
+  <br>
   <div *ngIf="winnerSubmition">
     <h2 class="text-center">Winner:</h2>
     <div class="winner-container">
@@ -63,6 +65,13 @@
     <button type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
     <button type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
   </div>
+  <div *ngIf="contest.status == 'Laikas baigėsi'">
+    <div (click)="extendInputEnabled = true">Pratęsti</div>
+    <span *ngIf="extendInputEnabled">Pratęsti dienų: </span>
+    <input *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="endDate" min="1" max="30" required>
+    <button *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti konkursą</button>
+  </div>
+  <button type="button" (click)="goBackToAdminContests()">Atgal</button>
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>
   </div>

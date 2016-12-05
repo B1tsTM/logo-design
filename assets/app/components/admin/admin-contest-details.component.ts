@@ -26,6 +26,8 @@ export class AdminContestDetailsComponent implements OnInit {
   mySubmitions: any[] = [];
   additionalFiles = [];
   winnerSubmition: any;
+  extendInputEnabled = false;
+  endDate;
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
   momentDate: any;
@@ -119,23 +121,52 @@ export class AdminContestDetailsComponent implements OnInit {
    }
 
   validateContest(idName: string) {
+    this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Aktyvus")
     .subscribe(res => {
       console.log('statusas pakeistas į aktyvų');
       console.log(res);
+      this.notificationsService.success('Patvirtinta', 'Konkursas sėkmingai patvirtintas', {timeOut: 3000, showProgressBar: false});
+      this.isLoading = false;
+      this.router.navigate(['/admin', 'konkursai']);
     }, error => {
+      this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
     });
   }
 
   denyContest(idName: string) {
+    this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Atmestas")
     .subscribe(res => {
       console.log('statusas pakeistas į atmestą');
       console.log(res);
+      this.notificationsService.success('Atmesta', 'Konkursas sėkmingai atmestas', {timeOut: 3000, showProgressBar: false});
+      this.isLoading = false;
+      this.router.navigate(['/admin', 'konkursai']);
     }, error => {
+      this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
     });
+  }
+
+  extendContest() {
+    this.isLoading = true;
+    this.contestsService.extendContest(this.contestId, this.endDate)
+    .subscribe(res => {
+      console.log('Konkursas pratęstas');
+      console.log(res);
+      this.notificationsService.success('Pratęsta', 'Konkursas sėkmingai pratęstas', {timeOut: 3000, showProgressBar: false});
+      this.isLoading = false;
+      this.router.navigate(['/admin', 'konkursai']);
+    }, error => {
+      this.isLoading = false;
+      this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    });
+  }
+
+  goBackToAdminContests() {
+    this.router.navigate(['/admin', 'konkursai']);
   }
 
 }

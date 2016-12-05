@@ -167,4 +167,9 @@ export class AdminManageContestsComponent implements OnInit {
   belongsToUser(userId: string) {
     return sessionStorage.getItem('userId') == userId;
   }
+
+  goBackToAdminPanel() {
+    this.router.navigate(['/admin']);
+  }
+
 }

@@ -756,6 +756,37 @@ router.patch('/contest/:id', function(req,res,next) {
   });
 });
 
+router.patch('/contests/:contestId/extend', function(req,res,next) {
+  var contestId = req.params.contestId;
+  Contest.findOne({'idName': contestId})
+  .exec(function(err, contest){
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    var dateNow = new Date();
+    var endDate = new Date(dateNow.getTime() + (req.body.days * 24 * 60 * 60 * 1000));
+    contest.endDate = endDate;
+    contest.status = "Pratęstas";
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Konkursas pratęstas',
+        obj: result
+      });
+    });
+  });
+});
+
 router.patch('/contest/:contestId/submition/:submitionId/comment', function(req,res,next) {
   var contestId = req.params.contestId;
   var submitionId = req.params.submitionId;
