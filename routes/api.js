@@ -278,6 +278,23 @@ router.get('/konkursai/:id', function(req,res,next) {
     });
 });
 
+router.get('/contests/winners', function(req, res, next) {
+  User.findOne({'nickName': 'Admin'})
+  .exec(function(err, admin) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    res.status(200).json({
+      message: 'Success',
+      obj: admin.winners
+    });
+  });
+});
+
 router.get('/contest/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)

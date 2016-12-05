@@ -1,1 +1,43 @@
-<h1>Winners' gallery</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a>Nugalėtojų galerija</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="app-innernav">
+		<div class="row">
+			<div class="column small-12">
+				<nav class="inner-navigation">
+					<ul>
+						<!--<li class="current"><a href="#">Aktyvūs konkursai</a></li>
+						<li><a href="#">Užbaigti konkursai</a></li>-->
+					</ul>
+				</nav><!-- .inner-navigation -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-innernav -->
+
+<div *ngIf="winners.length == 0"><h4>Nugalėtojų dar nėra</h4></div>
+  <div class="thumbnail-row" *ngIf="winners.length > 0">
+    <div class="inline-block thumbnail-container" *ngFor="let winner of winners | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+      <div class="mini-image-container">
+      <img class="mini-image" (click)="winnerModal.open()" src="http://localhost:3000/uploads/winners/{{winner}}" alt="Submition">
+    </div>
+    <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" [cssClass]="cssClass" #winnerModal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title text-center">Galerija</h4>
+        </modal-header>
+        <modal-body>
+            <img class="micro-submition-large" src="http://localhost:3000/uploads/winners/{{winner}}" alt="Galerija">
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="winnerModal.dismiss()">Uždaryti</button>
+        </modal-footer>
+    </modal>
+  </div>
+  </div>
+  <pagination-controls *ngIf="winners.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>

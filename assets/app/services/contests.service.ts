@@ -152,5 +152,11 @@ export class ContestsService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  getWinnersGallery() {
+    return this.http.get('http://localhost:3000/api/v1/contests/winners')
+    .map(res => res.json().obj)
+    .catch(error => Observable.throw(error.json()));
+  }
+
   
 }
