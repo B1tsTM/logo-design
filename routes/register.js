@@ -49,6 +49,12 @@ router.post('/', function(req, res, next) {
     });
   var ip = req.headers['X-Forwarded-For'] || req.connection.remoteAddress;
   var user;
+  if (req.body.password != req.body.repeatPassword) {
+    return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Slaptažodžiai nesutampa !'}
+      });
+  }
   if (req.body.userType == 'dizaineris') {
   user = new User({
     firstName: req.body.firstName,

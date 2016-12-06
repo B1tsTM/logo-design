@@ -49,7 +49,9 @@ export class UserNavigationComponent implements OnInit {
               private fb: FormBuilder, 
               private errorService: ErrorService,
               private notificationsService: NotificationsService,
-              private apiService: ApiService) { }
+              private apiService: ApiService) {
+              //this.isMatchingPassword = this.isMatchingPassword.bind(this);
+               }
 
   ngOnInit() { 
     this.userId = sessionStorage.getItem('userId');
@@ -64,6 +66,7 @@ export class UserNavigationComponent implements OnInit {
         //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         //this.errorService.handleError(error);
       });
+
     this.loginForm = this.fb.group({
       //email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       nickName: ['', Validators.required],
@@ -75,9 +78,11 @@ export class UserNavigationComponent implements OnInit {
       lastName: ['', Validators.required],
       nickName: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
-      password: ['', Validators.required],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      repeatPassword: ['', Validators.required],
       userType: [this.userTypes[0].value, Validators.required]
     });
+
   }
 
   logout() {
@@ -130,9 +135,7 @@ export class UserNavigationComponent implements OnInit {
 
     register(form: any) {
       this.isLoading = true;
-      //const user = new User(this.registerForm.value.email, this.registerForm.value.password, this.registerForm.value.userType ,this.registerForm.value.firstName, this.registerForm.value.lastName, 0, 0, 0);
-      //const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0, 0);
-      const user = new User(form.nickName.value, form.password.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0);
+      const user = new User(form.nickName.value, form.password.value, form.repeatPassword.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0);
         this.authService.signup(user)
           .subscribe(data => {
             console.log(data);
@@ -141,6 +144,7 @@ export class UserNavigationComponent implements OnInit {
             form.nickName.value = null;
             form.email.value = null;
             form.password.value = null;
+            form.repeatPassword.value = null;
             this.isLoading = false;
             this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote', {timeOut: 3000, showProgressBar: false});
           },
@@ -169,6 +173,13 @@ export class UserNavigationComponent implements OnInit {
       let emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"); 
       return emailRegex.test(control.value) ? null : {invalidEmail: true}
       }
+
+    isMatchingPassword(control: FormGroup) {
+        // check if control is equal to the password1 control
+        console.log(control);
+        console.log(this.registerForm);
+        return control.value === this.registerForm.value.password ? null : {isEqual: true};
+    }
 
       created(ev) {
       console.log('notification created');
