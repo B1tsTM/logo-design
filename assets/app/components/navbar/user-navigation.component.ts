@@ -76,10 +76,10 @@ export class UserNavigationComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      nickName: ['', Validators.required],
+      nickName: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      repeatPassword: ['', Validators.required],
+      repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       userType: [this.userTypes[0].value, Validators.required]
     });
 
