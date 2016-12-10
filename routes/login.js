@@ -31,19 +31,20 @@ router.post('/', function(req, res, next) {
         error: {message: 'Neteisingas slaptažodis'} // TODO add generic message for production
       });
     }
-    if (doc.emailConfirmed == false) {
-      return res.status(401).json({
-        title: 'Negalima prisijungti !',
-        error: {message: 'El. paštas nepatvirtintas. Patikrinkite savo el. paštą su nuoroda aktyvuoti Jūsų paskyrą'} // TODO add generic message for production
-      });
-    }
+    // if (doc.emailConfirmed == false) {
+    //   return res.status(401).json({
+    //     title: 'Negalima prisijungti !',
+    //     error: {message: 'El. paštas nepatvirtintas. Patikrinkite savo el. paštą su nuoroda aktyvuoti Jūsų paskyrą'} // TODO add generic message for production
+    //   });
+    // }
     var token = jwt.sign({user: doc}, 'secret', {expiresIn: "2 days"});
     res.status(200).json({
       message: 'Prisijungta sekmingai',
       token: token,
       userId: doc._id,
       userType: doc.userType,
-      nickname: doc.nickName
+      nickname: doc.nickName,
+      emailConfirmed: doc.emailConfirmed
     });
   });
 });

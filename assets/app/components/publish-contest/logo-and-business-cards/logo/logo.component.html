@@ -184,8 +184,11 @@
 
       <hr class="sep" />
 
-			<div *ngIf="isClient()" class="publish-contest-button">
+			<div *ngIf="isClient() && isEmailConfirmed()" class="publish-contest-button">
 				<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+			</div>
+			<div *ngIf="isClient() && !isEmailConfirmed()">
+				<h4>Kad galėtumėt paskelbti konkursą, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h4>
 			</div>
 			<div *ngIf="isDesigner()">
 				<div class="info-disabled-button">

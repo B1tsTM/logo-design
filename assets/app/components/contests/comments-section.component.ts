@@ -127,4 +127,10 @@ export class CommentsSectionComponent implements OnInit {
     return this.authService.isAdmin();
   }
 
+  isEmailConfirmed () {
+    console.log(typeof sessionStorage.getItem('emailConfirmed'));
+    console.log(sessionStorage.getItem('emailConfirmed'));
+     return sessionStorage.getItem('emailConfirmed') == 'true';
+  }
+
 }

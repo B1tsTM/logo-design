@@ -22,7 +22,7 @@
     <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
   </div>
   <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
-    <div *ngIf="isContestPublisher(contest.publisher._id)">
+    <div *ngIf="isContestPublisher(contest.publisher._id) && isEmailConfirmed()">
     <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
     <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
     {{percent}} %
@@ -85,14 +85,15 @@
     <br>
   </div>  
   <pagination-controls *ngIf="mySubmitions.length > 0 && isDesigner()" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
-  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">To participate, you must be logged in as a designer</div>
-  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">
+  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div>
+  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><h2 class="text-center">Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h2></div>
+  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
     <h2>Participate:</h2>
-    <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+  <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Upload</button>
   {{percent}} %
   </div>
-  <div *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Must be signed in as designer to upload files</div>
+  <div *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti registruotas dizaineris</div>
 
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>

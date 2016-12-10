@@ -120,6 +120,7 @@ export class UserNavigationComponent implements OnInit {
          sessionStorage.setItem('token', data.token);
          sessionStorage.setItem('userId', data.userId);
          sessionStorage.setItem('userType', data.userType);
+         sessionStorage.setItem('emailConfirmed', data.emailConfirmed);
          this.nickname = data.nickname;
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
@@ -146,7 +147,7 @@ export class UserNavigationComponent implements OnInit {
             form.password.value = null;
             form.repeatPassword.value = null;
             this.isLoading = false;
-            this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote', {timeOut: 3000, showProgressBar: false});
+            this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote. Patikrinkite savo el. pašto paskyrą ir ją patvirtinkite', {timeOut: 7000, showProgressBar: false});
           },
           //error => this.errorService.handleError(error))
           

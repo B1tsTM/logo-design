@@ -9,8 +9,9 @@
     <br>
   </div>
 </div>
-<div *ngIf="isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()">   <!-- TODO to add ngIf checks -->
-  <h2>Post a comment</h2>
+<div *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && !isEmailConfirmed()">Kad galėtumėt komentuoti, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div>
+<div *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && isEmailConfirmed()">   <!-- TODO to add ngIf checks -->
+  <h2>Komentuoti: </h2>
   <form>
     <textarea name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
     <br>
@@ -18,7 +19,7 @@
   </form>
 </div>
 <div *ngIf="(isClient() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
-  <strong>Comments are only visible to designers and publisher</strong>
+  <strong>Komentarai rodomi tik konkurso paskelbėjui ir dizaineriui</strong>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

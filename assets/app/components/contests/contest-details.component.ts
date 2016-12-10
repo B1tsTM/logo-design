@@ -119,6 +119,10 @@ export class ContestDetailsComponent implements OnInit {
   return this.authService.isLoggedIn();
   }
 
+  isEmailConfirmed() {
+      return sessionStorage.getItem('emailConfirmed') == 'true';
+  }
+
   //FILE UPLOAD STUFF
 
   uploadSubmitions() {

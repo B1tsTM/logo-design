@@ -60,4 +60,8 @@ export class LogoComponent implements OnInit {
   isDesigner() {
     return this.authService.isDesigner();
   }
+
+  isEmailConfirmed() {
+    return sessionStorage.getItem('emailConfirmed') == 'true';
+  }
 }

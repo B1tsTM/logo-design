@@ -25,15 +25,16 @@ export class ConfirmUserComponent implements OnInit {
       if (data.message) {
         console.log(data);
         this.confirmedBlock = true;
-        // setTimeout(() => {
-        //   this.router.navigate(['/']);
-        // }, 3000)
+        sessionStorage.setItem('emailConfirmed', 'true');
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 4000)
       }
     }, error => {
       this.errorBlock = true;
       setTimeout(() => {
           this.router.navigate(['/']);
-        }, 3000)
+        }, 5000)
       })
   }
 
