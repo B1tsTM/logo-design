@@ -91,6 +91,20 @@ export class ProfilePageComponent implements OnInit {
         this.percent = Math.round(evt.loaded / evt.total * 100) + "%";
         console.log("PERCENT : ", this.percent);
     }
-}
+    }
+
+    emailConfirmed() {
+        return sessionStorage.getItem('emailConfirmed') == 'true';
+    }
+
+    sendConfirmationEmail() {
+        this.authService.sendConfirmationEmail(this.id)
+        .subscribe(data => {
+            console.log(data);
+            this.notificationsService.success('Išsiųsta', 'Patvirtinimo laiškas išsiųstas adresu ' + data.email, {timeOut: 3000, showProgressBar: false})
+        }, error => {
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        })
+    }
 
 }

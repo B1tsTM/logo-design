@@ -82,4 +82,10 @@ export class AuthService {
     .catch(error => Observable.throw(error.json()));
   }
 
+  sendConfirmationEmail(userId) {
+    return this.http.get('http://localhost:3000/api/v1/user/' + userId + '/confirmemail')
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
 }

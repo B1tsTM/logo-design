@@ -12,6 +12,8 @@ var crypto = require('crypto');
 var mime = require('mime');
 var jwt = require('jsonwebtoken');
 var fsExtra = require('fs-extra')
+var nodemailer = require('nodemailer');
+var smtpTransport = require("nodemailer-smtp-transport")
 
 
 var storage = multer.diskStorage({
@@ -316,6 +318,58 @@ router.get('/user/:code/validate', function(req, res, next) {
     user.save(function(err, result) {
       res.status(201).json({
       message: 'Success'
+      });
+    });
+  });
+});
+
+router.get('/user/:userId/confirmemail', function(req, res, next) {
+  var userId = req.params.userId;
+  User.findById(userId)
+  .exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    if (user == null) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Nerastas vartotojas'}
+      });
+    }
+    var transporter = nodemailer.createTransport(smtpTransport({
+          host: "smtp.gmail.com",
+          secureConnection: false,
+          port: 587,
+          auth: {
+              user: "bitsaz15@gmail.com", // service is detected from the username
+              pass: "kwdzgkkpzyvvbgkw"
+          }
+      }));
+
+      // setup e-mail data with unicode symbols
+      var mailOptions = {
+          from: 'bitsaz15@gmail.com', // sender address
+          to: user.email, //'b1ts@hotmail.lt', // list of receivers
+          subject: 'Dizaino konkursų el. pašto patvirtinimas', // Subject line
+          text: 'Sveikiname užsiregistravus Dizaino Konkursų sistemoje. Patvirtinkite savo el. pašto paskyrą nukopijavę šią nuorodą. http://localhost:3000/patvirtinti/' + user._id, // plaintext body
+          html: '<b>Sveikiname užsiregistravus Dizaino Konkursų sistemoje. Patvirtinkite savo el. pašto paskyrą nukopijavę šią nuorodą. <a>http://localhost:3000/patvirtinti/' + user._id + '</a></b>' // html body
+      };
+
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+              return console.log(error);
+          }
+          console.log('Message sent: ' + info.response);
+      });
+    user.save(function(err, result) {
+      res.status(200).json({
+      message: 'Success',
+      email: user.email
       });
     });
   });

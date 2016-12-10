@@ -11,6 +11,7 @@
 {{percent}}
 </div>
 <a routerLink="/profilis/pastas">Pastas</a>
+<a *ngIf="!emailConfirmed()" (click)="sendConfirmationEmail()">Išsiųsti el. pašto patvirtinimo laišką</a>
 
 <simple-notifications [options]="options"></simple-notifications>
 
