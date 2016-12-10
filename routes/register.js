@@ -64,8 +64,9 @@ router.post('/', function(req, res, next) {
     email: req.body.email,
     userType: req.body.userType,
     designsCreated: 0,
-    publicDesigns: req.body.publicDesigns,
-    ip: ip
+    //publicDesigns: 0,
+    ip: ip,
+    emailConfirmed: false
   });
   } else { // client
   user = new User({
@@ -75,40 +76,15 @@ router.post('/', function(req, res, next) {
     password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email,
     userType: req.body.userType,
-    ip: ip
+    ip: ip,
+    emailConfirmed: false
     });
   };
   user.profile.profileUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName;
   //user.avatar.avatarUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName + '/avatar';
   //sendMail(); //emailjs
 
-  //send email upon registration
-  var transporter = nodemailer.createTransport(smtpTransport({
-      host: "smtp.gmail.com",
-      secureConnection: false,
-      port: 587,
-      auth: {
-          user: "bitsaz15@gmail.com", // service is detected from the username
-          pass: "kwdzgkkpzyvvbgkw"
-      }
-  }));
 
-  // setup e-mail data with unicode symbols
-  var mailOptions = {
-      from: 'bitsaz15@gmail.com', // sender address
-      to: req.body.email, //'b1ts@hotmail.lt', // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world 🐴', // plaintext body
-      html: '<b>Hello world 🐴</b>' // html body
-  };
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-          return console.log(error);
-      }
-      console.log('Message sent: ' + info.response);
-  });
 
   user.save(function(err, result) {
     if (err) {
@@ -118,6 +94,35 @@ router.post('/', function(req, res, next) {
         error: {message: 'Įvyko klaida !'}
       });
       }
+      //-------------- Test mailer here
+        //send email upon registration
+      var transporter = nodemailer.createTransport(smtpTransport({
+          host: "smtp.gmail.com",
+          secureConnection: false,
+          port: 587,
+          auth: {
+              user: "bitsaz15@gmail.com", // service is detected from the username
+              pass: "kwdzgkkpzyvvbgkw"
+          }
+      }));
+
+      // setup e-mail data with unicode symbols
+      var mailOptions = {
+          from: 'bitsaz15@gmail.com', // sender address
+          to: req.body.email, //'b1ts@hotmail.lt', // list of receivers
+          subject: 'Dizaino konkursų el. pašto patvirtinimas', // Subject line
+          text: 'Sveikiname užsiregistravus Dizaino Konkursų sistemoje. Patvirtinkite savo el. pašto paskyrą paspaudę šią nuorodą. http://localhost:3000/patvirtinti/' + result._id, // plaintext body
+          html: '<b>Sveikiname užsiregistravus Dizaino Konkursų sistemoje. Patvirtinkite savo el. pašto paskyrą paspaudę šią nuorodą. <a>http://localhost:3000/patvirtinti/' + result._id + '</a></b>' // html body
+      };
+
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, function(error, info){
+          if(error){
+              return console.log(error);
+          }
+          console.log('Message sent: ' + info.response);
+      });
+      //--------------
       res.status(201).json({
         message: 'Pavyko prisijungti',
         obj: result

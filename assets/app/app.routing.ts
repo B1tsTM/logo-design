@@ -8,7 +8,7 @@ import { HeaderComponent, CategoriesComponent, DesignersComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
          MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent, SentMailComponent,
          SubmitionDetailsComponent, WinnerDetailsComponent, AdminDashboardComponent, AdminManageContestsComponent,
-         AdminContestDetailsComponent, DesignerDetailsComponent} from './components/index';
+         AdminContestDetailsComponent, DesignerDetailsComponent, ConfirmUserComponent} from './components/index';
       
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 import { CanActivateAdminPageService } from './guards/can-activate-admin-page.service';
@@ -45,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'kaip-tai-veikia', component: HowItWorksComponent },
   { path: 'prisijungti', component: LoginComponent },
   { path: 'registracija', component: RegisterComponent },
+  { path: 'patvirtinti/:id', component: ConfirmUserComponent },
   //{ path: 'profilis', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },
   { path: 'profilis', children: [
     {path: '', component: ProfilePageComponent, canActivate: [CanActivateOnLoginService] },

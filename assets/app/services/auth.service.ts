@@ -75,4 +75,10 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  validateUsersEmail(confirmationCode) {
+    return this.http.get('http://localhost:3000/api/v1/user/' + confirmationCode + '/validate')
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
 }

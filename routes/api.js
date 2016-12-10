@@ -295,6 +295,32 @@ router.get('/contests/winners', function(req, res, next) {
   });
 });
 
+router.get('/user/:code/validate', function(req, res, next) {
+  var code = req.params.code;
+  User.findById(code)
+  .exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    if (user == null) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Netinkamas patvirtinimo kodas'}
+      });
+    }
+    user.emailConfirmed = true;
+    user.save(function(err, result) {
+      res.status(201).json({
+      message: 'Success'
+      });
+    });
+  });
+});
+
 router.get('/contest/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)

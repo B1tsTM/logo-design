@@ -28,7 +28,13 @@ router.post('/', function(req, res, next) {
     if (!bcrypt.compareSync(req.body.password, doc.password)) {
       return res.status(401).json({
         title: 'Negalima prisijungti !',
-        error: {message: 'Neteisingas slaptazodis'} // TODO add generic message for production
+        error: {message: 'Neteisingas slaptažodis'} // TODO add generic message for production
+      });
+    }
+    if (doc.emailConfirmed == false) {
+      return res.status(401).json({
+        title: 'Negalima prisijungti !',
+        error: {message: 'El. paštas nepatvirtintas. Patikrinkite savo el. paštą su nuoroda aktyvuoti Jūsų paskyrą'} // TODO add generic message for production
       });
     }
     var token = jwt.sign({user: doc}, 'secret', {expiresIn: "2 days"});
