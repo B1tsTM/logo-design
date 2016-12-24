@@ -61,7 +61,7 @@ export class LogoComponent implements OnInit {
     return this.authService.isDesigner();
   }
 
-  isEmailConfirmed() {
+  isEmailConfirmed() { // TODO add these checks to every form
     return sessionStorage.getItem('emailConfirmed') == 'true';
   }
 }

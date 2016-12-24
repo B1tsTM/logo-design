@@ -9,16 +9,14 @@ var schema = new Schema({
   email: {type: String, required: true}, //, unique: true 
   nickName: {type: String, required: true, unique: true},
   userType: {type: String, required: true},
-  //contestsWon: {type: Number},
   contestsWon: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
   designsCreated: {type: Number},
-  publicDesigns: {type: Number},
+  //publicDesigns: {type: Number}, // implement this?
   contests: [{type: Schema.Types.ObjectId, ref: 'Contests'}],
   messages: [{
     messageId: {type: Number},
     topic: {type: String},
     message: {type: String},
-    //sender: {type: Schema.Types.ObjectId, ref: 'User'},
     sender: {type: String},
     recipient: {type: String},
     timeSent: {type: Date, default: Date.now()},
@@ -30,10 +28,6 @@ var schema = new Schema({
   }],
   galleryUrls: [{type: String}],
   winners: [{type: String}],
-  // galleryUrls: [{
-  //     submitionUrl: {type: String},
-  //     submitionAuthor: {type: Schema.Types.ObjectId}
-  // }],
   avatar: {
     avatarUrl: {type: String}
   },
@@ -41,7 +35,8 @@ var schema = new Schema({
     profileUrl: {type: String}
   },
   ip: {type: String},
-  emailConfirmed: {type: Boolean}
+  emailConfirmed: {type: Boolean},
+  userBlocked: {type: Boolean, default: false} //TODO implement this
 });
 
 schema.plugin(mongooseUniqueValidator);

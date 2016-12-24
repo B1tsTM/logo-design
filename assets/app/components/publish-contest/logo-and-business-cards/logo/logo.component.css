@@ -112,27 +112,37 @@ input.readonly:-moz-read-only {
   font-style: italic;
 }
 
-.info-disabled-button {
+/*.info-disabled-button {
+  font-weight: bold;
+  text-decoration: underline;
+}*/
+
+.span-bold {
   font-weight: bold;
   text-decoration: underline;
 }
 
 input:hover {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 input:focus {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 textarea:hover {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 textarea:focus {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 .input-center {
   text-align: center;
+}
+
+.normal-text {
+  font-weight: normal;
+  text-decoration: none;
 }

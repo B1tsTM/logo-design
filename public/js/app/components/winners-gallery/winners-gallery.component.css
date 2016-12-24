@@ -106,9 +106,15 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
 }
 
 .mini-image-container:hover {
-  border: 1px solid cyan;
+  /*border: 1px solid cyan;*/
+  box-shadow: 0 10px 40px 10px rgba(30,35,68,.1);
 }
 
 img:hover {
     cursor: pointer;
+}
+
+.no-winners {
+    padding: 30px 0 0 250px;
+    font-style: italic;
 }

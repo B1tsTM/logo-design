@@ -21,7 +21,7 @@
 		</div><!-- .row -->
 	</section><!-- .app-innernav -->
 
-<div *ngIf="winners.length == 0"><h4>Nugalėtojų dar nėra</h4></div>
+<div class="no-winners" *ngIf="winners.length == 0"><h4>Nugalėtojų dar nėra</h4></div>
   <div class="thumbnail-row" *ngIf="winners.length > 0">
     <div class="inline-block thumbnail-container" *ngFor="let winner of winners | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">

@@ -114,4 +114,5 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
 
 .table-row .nickname:hover {
   background-color: #cad8e0;
+  border-radius: 10px;
 }

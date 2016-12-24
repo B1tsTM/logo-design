@@ -18,13 +18,10 @@ var schema = new Schema({
   category: {
     type: String
   },
-  designer: {     //to be changed instead of user
-    type: String
-  },
   description: {
     type: String
   },
-  designCount: {
+  designCount: { //not used?
     type: Number
   },
   award: {
@@ -80,13 +77,9 @@ var schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  uniqueId: {
+  uniqueId: { //not needed?
     type: Number
   },
-  // winnerSubmition: {
-  //   //type: Schema.Types.ObjectId, ref: 'User'
-  //   type: Schema.Types.Mixed
-  // }
   winnerSubmition: {
     submitionUrl: {type: String},
     submitionRating: {type: Number},
@@ -98,6 +91,9 @@ var schema = new Schema({
       commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
     }]
   }
+  // designer: {     //to be changed instead of user
+  //   type: String
+  // },
 });
 
 // TODO gotta rethink this...
