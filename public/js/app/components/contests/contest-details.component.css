@@ -20,6 +20,14 @@
   text-align: center;
 }
 
+.winner-container-image {
+  box-shadow: 0 10px 40px 0 rgba(0,0,0,.1);
+  padding: 5px;
+  width: 214px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -64,9 +72,81 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
 }
 
 .mini-image-container:hover {
-  border: 1px solid cyan;
+  /*border: 1px solid cyan;*/
+  box-shadow: 0 10px 40px 0 rgba(0,0,0,.1);
 }
 
 img:hover {
     cursor: pointer;
+}
+
+.app-breadcrumbs a {
+  cursor: pointer;
+}
+
+.section-name {
+  padding-top: 20px;
+  font-size: 100%;
+}
+
+.section-status {
+  margin-top: 15px;
+}
+
+.section-status-span {
+    background: #ddd;
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+span.finished {
+  background-color: #b3130c;
+  color: white;
+}
+
+span.cancelled {
+  background-color: black;
+  color: white;
+}
+
+span.timed-out {
+  background-color: #72af90 ;
+  color: white !important;
+}
+
+span.resumed {
+  background-color: #9fbb2d !important;
+  color: white !important;
+}
+
+span.active {
+  background-color: #5ea54d !important;
+  color: white !important;
+}
+
+.winner-extra-info {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.extra-info-text {
+    font-size: 115%;
+    line-height: 1.5em;
+    font-weight: normal;
+}
+
+.winner-submition-sub-label {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.winner-container-image:hover {
+  box-shadow: 0 10px 40px 10px rgba(30,35,68,.1);
+}
+
+.italic {
+  font-style: italic;
 }

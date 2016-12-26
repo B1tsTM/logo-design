@@ -1,21 +1,26 @@
-<h1 class="text-center">Contest details</h1>
-<br>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/konkursai">Konkursai</a>
+					<a>Konk1</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 <div *ngIf="!contest">Kraunama...</div>
 <div *ngIf="contest">  
-  <h2>ID: {{contestId}}</h2>
-  <small>ID Name: {{contest.idName}}</small>
-  <small>Generated unique ID: {{contest.uniqueId}}</small>
-  <small>contest name: {{contest.name}}</small>
-  <small>contest category: {{contest.category}}</small>
-  <small>contest description: {{contest.description}}</small>
-  <small>contest award: {{contest.award}}</small>
-  <small>contest status: {{contest.status}}</small>
-  <small>contest start date: {{contest.startDate | localDateStandart}}</small>
-  <small>contest end date: {{contest.endDate | localDateFromNow}} ({{contest.endDate | date: 'yyyy-MM-dd'}})</small>
-  <small>contest submition count: {{contest.submitionCount}}</small>
-  <small>contest published by: {{contest.publisher.firstName}}</small>
-  <small>MomentJS date test: {{momentDate}}</small>
+
+  <div class="section-name">
+  <h1 class="text-center">Konkurso detalės</h1>
+</div>
+
+<div class="section-status">
+  <h2 class="text-center">Statusas: <span class="section-status-span" [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span></h2>
+</div>
 
   <h3>Extra files:</h3>
   <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
@@ -32,18 +37,24 @@
   <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi</div>
   <br>
   <div *ngIf="winnerSubmition">
-    <h2 class="text-center">Winner:</h2>
+    <div class="winner-submition-label">
+      <h2 class="text-center">Nugalėtojas</h2>
+    </div>
     <div class="winner-container">
-      <div>SubmitionID: {{winnerSubmition?.submitionId}} </div>
+      <div class="winner-container-image">
+      <div class="winner-submition-sub-label">Dizainas: #{{winnerSubmition?.submitionId}} </div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, winnerSubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{winnerSubmition.submitionUrl}}" alt="Submition">
         <br>
-        <span>Author: {{winnerSubmition?.submitionAuthor?.nickName}}</span>
-        <div>
-          <star-rating class="inline-block" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="true" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
-          <star-rating class="inline-block" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="winnerSubmition.submitionRating" [readonly]="false" [submitionId]="winnerSubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
-        </div>
-
-        <span *ngIf="winnerSubmition.comments">{{winnerSubmition.comments.length}} comments</span>
+        <span class="italic">Autorius: {{winnerSubmition?.submitionAuthor?.nickName}}</span>
+      </div>
+    </div>
+    <div class="winner-extra-info">
+      <div class="extra-info-col-one">
+        <h2 class="extra-info-text">Nugalėtojas buvo išrinktas iš {{contest.submitions.length}} dizainų.</h2>
+      </div>
+      <div class="extra-info-col-two">
+        <h2 class="extra-info-text">Konkurse dalyvavo {{contest.participants.length}} {{contest.participants.length < 10 ? 'dizaineriai' : 'dizainerių'}}</h2>
+      </div>
     </div>
   </div>
   <h2 class="text-center">Submitions ({{submitions.length}})</h2>

@@ -118,3 +118,7 @@ img:hover {
     padding: 30px 0 0 250px;
     font-style: italic;
 }
+
+.app-breadcrumbs a {
+  cursor: pointer;
+}
