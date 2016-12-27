@@ -58,7 +58,7 @@ export class ApiService {
             //console.log('submition author');
             //console.log(data[i].submitionAuthor);
             if (data[i].submitionAuthor._id == userId) {
-            let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, sumbitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
+            let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
             //console.log('MySubmition in loop');
             //console.log(mySubmition);
             mySubmitions.push(mySubmition);

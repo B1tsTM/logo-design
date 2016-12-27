@@ -25,7 +25,9 @@
   <div class="thumbnail-row" *ngIf="winners.length > 0">
     <div class="inline-block thumbnail-container" *ngFor="let winner of winners | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">
-      <img class="mini-image" (click)="winnerModal.open()" src="http://localhost:3000/uploads/winners/{{winner}}" alt="Submition">
+		<a class="fancybox" rel="winner" href="http://localhost:3000/uploads/winners/{{winner}}">
+			<img class="mini-image" src="http://localhost:3000/uploads/winners/{{winner}}" alt="Submition"> <!-- (click)="winnerModal.open()" -->
+		</a>
     </div>
     <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" [cssClass]="cssClass" #winnerModal>
         <modal-header [show-close]="true">

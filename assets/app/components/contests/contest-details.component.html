@@ -14,27 +14,34 @@
 <div *ngIf="!contest">Kraunama...</div>
 <div *ngIf="contest">  
 
-  <div class="section-name">
+<div class="section-name">
   <h1 class="text-center">Konkurso detalės</h1>
 </div>
 
 <div class="section-status">
   <h2 class="text-center">Statusas: <span class="section-status-span" [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span></h2>
 </div>
-
-  <h3>Extra files:</h3>
-  <div class="inline-block thumbnail-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
-    <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
-  </div>
-  <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
-    <div *ngIf="isContestPublisher(contest.publisher._id) && isEmailConfirmed()">
-    <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-    <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
-    {{percent}} %
+  <div *ngIf="additionalFiles.length > 0">
+    <div class="section-extra">
+      <h2 class="text-center">Papildomi failai</h2>
+    </div>
+    <div class="thumbnail-row">
+      <div class="inline-block extra-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
+        <a class="fancybox" rel="extra" href="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}">
+          <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
+        </a>
+      </div>
+    </div>
+    <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+      <div *ngIf="isContestPublisher(contest.publisher._id) && isEmailConfirmed()">
+      <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+      <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
+      {{percent}} %
+    </div>
   </div>
   <br>
-  <div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
-  <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi</div>
+  <!--<div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
+  <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi</div>-->
   <br>
   <div *ngIf="winnerSubmition">
     <div class="winner-submition-label">
@@ -57,20 +64,20 @@
       </div>
     </div>
   </div>
-  <h2 class="text-center">Submitions ({{submitions.length}})</h2>
-  <div *ngIf="submitions.length == 0"><h4>No submitions uploaded</h4></div>
+  <h2 class="text-center designs-label">Dizainai ({{submitions.length}})</h2>
+  <div class="no-designs-info" *ngIf="submitions.length == 0"><h4>Įkeltų dizainų nėra</h4></div>
   <div class="thumbnail-row" *ngIf="contestId">
     <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">
-      <div class="pad-left-60">SubmitionID: {{submition.submitionId}}</div>
+      <div class="pad-left-60">Dizainas: #{{submition.submitionId}}</div>
       <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
       <br>
-      <span class="pad-left-60">Author: {{submition.submitionAuthor.nickName}}</span>
+      <span class="pad-left-60">Autorius: {{submition.submitionAuthor.nickName}}</span>
       <div>
         <star-rating class="star-rating" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
         <star-rating class="star-rating" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
       </div>
-      <span class="pad-left-60" *ngIf="submition.comments">{{submition.comments.length}} comments</span>
+      <span class="pad-left-60" *ngIf="submition.comments">{{submition.comments.length}} {{submition.comments.length == 0 ? 'komentarų' : submition.comments.length == 1 ? 'komentaras' : submition.comments.length < 10 ? 'komentarai' : 'komentarų'}}</span>
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
     </div>
   </div>
@@ -78,28 +85,28 @@
   <pagination-controls *ngIf="submitions.length > 0 && isDesigner()" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
-    <h2 class="text-center">My submitions ({{mySubmitions.length}})</h2>
+    <h2 class="text-center designs-label">Mano dizainai ({{mySubmitions.length}})</h2>
     <div class="thumbnail-row">
       <div class="inline-block thumbnail-container" *ngFor="let mySubmition of mySubmitions | paginate: {id: 'two', itemsPerPage: 10, currentPage: p2}">
         <div class="mini-image-container">
-        <div class="pad-left-60">SubmitionID: {{mySubmition.submitionId}}</div>
-        <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
+        <div class="pad-left-60">Dizainas: #{{mySubmition.submitionId}}</div>
+        <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, mySubmition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{mySubmition.submitionUrl}}" alt="Submition">
           <br>
-          <span class="pad-left-60">Author: {{mySubmition.submitionAuthor.nickName}} (debug) </span>
+          <span class="pad-left-60">Autorius: {{mySubmition.submitionAuthor.nickName}}</span>
             <div>
               <star-rating class="star-rating" [rating]="mySubmition.submitionRating" [readonly]="true" [submitionId]="mySubmition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
             </div> 
-          <span class="pad-left-60" *ngIf="mySubmition.comments">{{mySubmition.comments.length}} comments</span>
+        <span class="pad-left-60" *ngIf="mySubmition.comments">{{mySubmition.comments.length}} {{mySubmition.comments.length == 0 ? 'komentarų' : mySubmition.comments.length == 1 ? 'komentaras' : mySubmition.comments.length < 10 ? 'komentarai' : 'komentarų'}}</span>
         </div>
       </div>
     </div>
     <br>
   </div>  
   <pagination-controls *ngIf="mySubmitions.length > 0 && isDesigner()" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
-  <div *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div>
-  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><h2 class="text-center">Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h2></div>
-  <div *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
-    <h2>Participate:</h2>
+  <div class="italic" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div>
+  <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><h2 class="text-center">Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h2></div>
+  <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
+    <h2>Įkelti dizainus:</h2>
   <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Upload</button>
   {{percent}} %

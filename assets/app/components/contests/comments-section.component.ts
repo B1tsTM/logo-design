@@ -11,7 +11,8 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   moduleId: module.id,
   selector: 'comments-section',
-  templateUrl: 'comments-section.component.html'
+  templateUrl: 'comments-section.component.html',
+  styleUrls: ['comments-section.component.css']
 })
 export class CommentsSectionComponent implements OnInit {
    //public commentsForm: FormGroup;
@@ -88,6 +89,9 @@ export class CommentsSectionComponent implements OnInit {
   addComment(comment: string) {
     this.isLoading = true;
     console.log(comment);
+    if (comment == ' ' || comment == '') {
+      this.notificationsService.info('Tuščias komentaras', 'Komentaro laukas negali būti tuščias', {timeOut: 3000, showProgressBar: true})
+    } else {
     this.comments.push({comment: comment, commentAuthor: this.user});
     this.apiService.addComment({comment: comment, commentAuthor: this.user}, this.contestId)
       .subscribe(comments => {
@@ -104,6 +108,7 @@ export class CommentsSectionComponent implements OnInit {
       });
     this.commentField = '';
     console.log(this.comments);
+    }
   }
 
   isDesigner() {
@@ -128,8 +133,6 @@ export class CommentsSectionComponent implements OnInit {
   }
 
   isEmailConfirmed () {
-    console.log(typeof sessionStorage.getItem('emailConfirmed'));
-    console.log(sessionStorage.getItem('emailConfirmed'));
      return sessionStorage.getItem('emailConfirmed') == 'true';
   }
 

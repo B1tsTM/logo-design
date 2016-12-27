@@ -1,26 +1,42 @@
-<h2>Comments</h2>
-<div *ngIf="comments.length == 0 && isLoggedIn()">Komentarų nėra</div>
-<div *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >
-  <div *ngFor="let comment of comments">
-    <em>{{comment.comment}}</em>
-    <br>
-    <small>- {{comment.commentAuthor.nickName}}</small>
-    <br>
-    <br>
+<div class="comments-label pad-top-100">
+  <!--<h2>{{comments.length}} {{comments.length == 0 ? 'komentarų' : comments.length == 1 ? 'komentaras' : comments.length < 9 ? 'komentarai' : 'komentarų'}}</h2>-->
+  <h2>Komentarai ({{comments.length}})</h2>
+</div>
+<div *ngIf="comments.length == 0 && isLoggedIn()" class="comments-label">
+  <div class="no-comments-label">Komentarų nėra</div>
+</div>
+<div class="comments-wrapper" *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >
+  <div class="comment-wrapper" *ngFor="let comment of comments">
+    <div class="comment-header">
+      <div class="avatar-wrapper">
+        <img class="avatar" *ngIf="comment.commentAuthor.avatar" src="http://localhost:3000/uploads/avatars/{{comment.commentAuthor.avatar.avatarUrl}}" alt="">
+        <img class="avatar" *ngIf="!comment.commentAuthor.avatar" src="http://1.gravatar.com/avatar/75a4b9a9a72a0e950c37bb1851a68d1e?s=60&d=mm&r=g" alt="">
+      </div>
+      <div class="publisher-wrapper">
+        <div class="publisher">{{comment.commentAuthor.nickName}}</div>
+      </div>
+      <div class="date-wrapper">
+        <div class="date">Paskelbta: Dec 8, 2016 at 2:19 am</div>
+      </div>
+    </div>
+    <div class="comment-body">
+      <pre>{{comment.comment}}</pre>
+    </div>
   </div>
 </div>
-<div *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && !isEmailConfirmed()">Kad galėtumėt komentuoti, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div>
-<div *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && isEmailConfirmed()">   <!-- TODO to add ngIf checks -->
+<div class="italic" *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && !isEmailConfirmed()">Kad galėtumėt komentuoti, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div>
+<div class="comment-box-wrapper" *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && isEmailConfirmed()">   <!-- TODO to add ngIf checks -->
+<div class="comments-label spacing">
   <h2>Komentuoti: </h2>
+</div>
   <form>
-    <textarea name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
-    <br>
-    <button type="button" class="btn btn-primary" (click)="addComment(commentField)">Pridėti komentarą</button>
+    <textarea class="comment-input" name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
+    <button type="button" class="btn btn-primary pad-top-20" (click)="addComment(commentField)">Pridėti komentarą</button>
   </form>
 </div>
-<div *ngIf="(isClient() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
+<!--<div *ngIf="(isClient() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
   <strong>Komentarai rodomi tik konkurso paskelbėjui ir dizaineriui</strong>
-</div>
+</div>-->
 
 <simple-notifications [options]="options"></simple-notifications>
 

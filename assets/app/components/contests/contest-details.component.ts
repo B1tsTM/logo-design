@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import 'moment/min/locales';
 import { NotificationsService } from 'angular2-notifications';
 
+declare var jQuery: any;
 
 @Component({
   moduleId: module.id,
@@ -106,6 +107,14 @@ export class ContestDetailsComponent implements OnInit {
         })
 
   } //End of ngOnInit
+
+  ngAfterViewInit() {
+      jQuery(document).ready(function() {
+        jQuery(".fancybox").fancybox({
+        
+        });
+    });
+  }
 
   isClient() {
       return this.authService.isClient();

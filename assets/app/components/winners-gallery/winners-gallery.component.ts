@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ContestsService } from '../../services/contests.service';
 
+declare var jQuery: any;
+
 @Component({
   moduleId: module.id,
   selector: 'winners-gallery',
@@ -23,4 +25,13 @@ export class WinnersGalleryComponent implements OnInit {
       console.log('Klaida gaunant laimėtojus');
     })
   }
+
+  ngAfterViewInit() {
+    jQuery(document).ready(function() {
+      jQuery(".fancybox").fancybox({
+        
+      });
+    });
+  }
+
 }
