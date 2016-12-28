@@ -5,7 +5,7 @@ import { ErrorService } from '../../errors/index';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -33,7 +33,8 @@ export class CommentsSectionComponent implements OnInit {
               private apiService: ApiService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
-              private notificationsService: NotificationsService) { 
+              private notificationsService: NotificationsService,
+              private router: Router) { 
                 
               }
               
@@ -134,6 +135,10 @@ export class CommentsSectionComponent implements OnInit {
 
   isEmailConfirmed () {
      return sessionStorage.getItem('emailConfirmed') == 'true';
+  }
+
+  goBack() {
+    this.router.navigate(['/konkursai']);
   }
 
 }

@@ -21,7 +21,7 @@
 }
 
 .extra-container {
-  padding: 30px;
+  padding: 40px;
 }
 
 .winner-container-image {
@@ -167,5 +167,39 @@ span.active {
 .no-designs-info {
   font-style: italic;
   font-weight: normal;
-  margin: 20px;
+  margin-top: 60px;
 }
+
+.shadow {
+  box-shadow: 0 10px 40px 0 rgba(0,0,0,.1);
+  transition: all 0.25s ease-in 0s;
+}
+
+.shadow:hover {
+  box-shadow: 0 10px 40px 10px rgba(30,35,68,.1);
+}
+
+.description-wrapper {
+  margin: 30px 359px;
+  border: 1px solid #888;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #efefef;
+}
+
+.description-block {
+  display: flex; 
+}
+
+.project-name {
+  flex: 1;
+}
+
+.project-name-text {
+  flex: 3;
+}
+
+hr {
+  padding: 5px;
+}
+

@@ -4,14 +4,14 @@
 				<div class="app-breadcrumbs">
 					<a routerLink="/">Pagrindinis puslapis</a>
 					<a routerLink="/konkursai">Konkursai</a>
-					<a>Konk1</a>
+          <a>{{contest?.name}}</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
 
-<div *ngIf="!contest">Kraunama...</div>
+<div class="text-center italic" *ngIf="!contest"><div>Kraunama...</div></div>
 <div *ngIf="contest">  
 
 <div class="section-name">
@@ -21,6 +21,108 @@
 <div class="section-status">
   <h2 class="text-center">Statusas: <span class="section-status-span" [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span></h2>
 </div>
+
+<div class="description-wrapper">
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Logotipo pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Logotipo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Spalvos</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.colors}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.colors" >
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Spalvos</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.colors}}</p>
+    </div>
+  </div>
+  <hr>
+</div>
+  <div *ngIf="contest.style">
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Logotipo stilius</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.style}}</p>
+    </div>
+  </div>
+  <hr>
+  </div>
+  <div *ngIf="contest.organization">
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Organizacijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.organization}}</p>
+    </div>
+  </div>
+  <hr>
+</div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div>
+
+
   <div *ngIf="additionalFiles.length > 0">
     <div class="section-extra">
       <h2 class="text-center">Papildomi failai</h2>
@@ -28,7 +130,7 @@
     <div class="thumbnail-row">
       <div class="inline-block extra-container" *ngFor="let file of additionalFiles | paginate: {id: 'three', itemsPerPage: 5, currentPage: p3}" >
         <a class="fancybox" rel="extra" href="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}">
-          <img class="mini-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
+          <img class="mini-image shadow" src="http://localhost:3000/uploads/contests/{{contestId}}/{{file.fileUrl}}" alt="Failas">
         </a>
       </div>
     </div>
@@ -39,10 +141,10 @@
       {{percent}} %
     </div>
   </div>
-  <br>
+
   <!--<div *ngIf="contest.status == 'Užbaigtas'">Konkursas užbaigtas !</div>
   <div *ngIf="contest.status == 'Laikas baigėsi'">Konkurso laikas baigėsi</div>-->
-  <br>
+
   <div *ngIf="winnerSubmition">
     <div class="winner-submition-label">
       <h2 class="text-center">Nugalėtojas</h2>
@@ -65,7 +167,7 @@
     </div>
   </div>
   <h2 class="text-center designs-label">Dizainai ({{submitions.length}})</h2>
-  <div class="no-designs-info" *ngIf="submitions.length == 0"><h4>Įkeltų dizainų nėra</h4></div>
+  <div class="no-designs-info" *ngIf="submitions.length == 0"><div class="italic text-center">Įkeltų dizainų nėra</div></div>
   <div class="thumbnail-row" *ngIf="contestId">
     <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">
@@ -82,7 +184,7 @@
     </div>
   </div>
   </div>
-  <pagination-controls *ngIf="submitions.length > 0 && isDesigner()" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+  <pagination-controls *ngIf="submitions.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
   <div *ngIf="mySubmitions.length > 0 && isDesigner()">
     <h2 class="text-center designs-label">Mano dizainai ({{mySubmitions.length}})</h2>
@@ -102,7 +204,7 @@
     </div>
     <br>
   </div>  
-  <pagination-controls *ngIf="mySubmitions.length > 0 && isDesigner()" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
+  <pagination-controls *ngIf="mySubmitions.length > 10" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
   <div class="italic" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div>
   <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><h2 class="text-center">Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h2></div>
   <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">

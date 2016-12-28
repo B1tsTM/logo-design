@@ -833,11 +833,13 @@ router.patch('/contest/:id', function(req,res,next) {
         error: {message: 'Įvyko klaida'}
       });
     }
+    var commentDate = Date.now();
+    var comment = {comment: req.body.comment, commentAuthor: req.body.commentAuthor, commentDate: commentDate};
     //console.log('/contest/:id req body');
     //console.log(req.body);
-    contest.comments.push(req.body);
+    contest.comments.push(comment);
     //console.log('/contest/:id comments');
-    //console.log(contest.comments);
+    console.log(contest.comments);
     contest.save(function(err, result) {
       if (err) {
         console.log(err);

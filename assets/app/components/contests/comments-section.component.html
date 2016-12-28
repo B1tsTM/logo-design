@@ -5,7 +5,8 @@
 <div *ngIf="comments.length == 0 && isLoggedIn()" class="comments-label">
   <div class="no-comments-label">Komentarų nėra</div>
 </div>
-<div class="comments-wrapper" *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >
+<!--<div class="comments-wrapper" *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >-->
+<div class="comments-wrapper">
   <div class="comment-wrapper" *ngFor="let comment of comments">
     <div class="comment-header">
       <div class="avatar-wrapper">
@@ -16,7 +17,7 @@
         <div class="publisher">{{comment.commentAuthor.nickName}}</div>
       </div>
       <div class="date-wrapper">
-        <div class="date">Paskelbta: Dec 8, 2016 at 2:19 am</div>
+        <div class="date italic">{{comment?.commentDate | date:'short'}}</div>
       </div>
     </div>
     <div class="comment-body">
@@ -24,8 +25,9 @@
     </div>
   </div>
 </div>
-<div class="italic" *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && !isEmailConfirmed()">Kad galėtumėt komentuoti, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div>
-<div class="comment-box-wrapper" *ngIf="(isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin()) && isEmailConfirmed()">   <!-- TODO to add ngIf checks -->
+<div class="italic text-center" *ngIf="isLoggedIn() && !isEmailConfirmed()">Kad galėtumėt komentuoti, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div>
+<div class="italic text-center" *ngIf="!isLoggedIn()">Komentuoti gali tik registruoti vartotojai</div>
+<div class="comment-box-wrapper" *ngIf="isLoggedIn() && isEmailConfirmed()">   <!-- TODO to add ngIf checks -->
 <div class="comments-label spacing">
   <h2>Komentuoti: </h2>
 </div>
@@ -34,9 +36,11 @@
     <button type="button" class="btn btn-primary pad-top-20" (click)="addComment(commentField)">Pridėti komentarą</button>
   </form>
 </div>
-<!--<div *ngIf="(isClient() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
-  <strong>Komentarai rodomi tik konkurso paskelbėjui ir dizaineriui</strong>
-</div>-->
+<div class="btn-back-wrapper">
+  <button type="button" class="btn btn-primary pad-top-20" (click)="goBack()">Atgal į sąrašą</button>
+</div>
+
+
 
 <simple-notifications [options]="options"></simple-notifications>
 

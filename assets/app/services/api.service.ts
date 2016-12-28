@@ -101,6 +101,8 @@ export class ApiService {
 
   addComment(obj:any, contestId: string) {
     const body = JSON.stringify(obj);
+    console.log('OOBBJJ');
+    console.log(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/api/v1/contest/' + contestId, body, {headers: headers})
     .map(res => {

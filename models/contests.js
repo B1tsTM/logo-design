@@ -45,12 +45,14 @@ var schema = new Schema({
     status: {type: String}, // active/deleted
     comments: [{
       comment: {type: String},
-      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
+      commentDate: {type: String}
     }]
   }],
   comments: [{
     comment: {type: String},
-    commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+    commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
+    commentDate: {type: String}
   }],
   startDate: {
     type: Date, default: Date.now()
@@ -88,7 +90,8 @@ var schema = new Schema({
     status: {type: String}, // active/deleted
     comments: [{
       comment: {type: String},
-      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'}
+      commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
+      commentDate: {type: String}
     }]
   }
   // designer: {     //to be changed instead of user
