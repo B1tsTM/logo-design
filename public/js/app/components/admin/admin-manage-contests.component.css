@@ -82,3 +82,7 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   background-color: #a8d6f3 !important;
   border-radius: 5px !important;
 }
+
+.back-button-container {
+  text-align: center;
+}

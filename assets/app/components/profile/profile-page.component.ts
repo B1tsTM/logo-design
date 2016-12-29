@@ -5,7 +5,8 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   moduleId: module.id,
   selector: 'profile-page',
-  templateUrl: 'profile-page.component.html'
+  templateUrl: 'profile-page.component.html',
+  styleUrls: ['profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
   avatarUrl: string = '';

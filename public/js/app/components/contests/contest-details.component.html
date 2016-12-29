@@ -22,7 +22,7 @@
   <h2 class="text-center">Statusas: <span class="section-status-span" [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span></h2>
 </div>
 
-<div class="description-wrapper">
+<div class="description-wrapper"> <!-- start of description block -->
   <div class="description-block">
     <div class="project-name">
       <h3>Konkurso kategorija</h3>
@@ -50,48 +50,39 @@
     </div>
   </div>
   <hr>
-  <div class="description-block">
-    <div class="project-name">
-      <h3>Spalvos</h3>
+  <div *ngIf="contest.colors">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Spalvos</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.colors}}</p>
+      </div>
     </div>
-    <div class="project-name-text">
-      <p>{{contest?.colors}}</p>
-    </div>
+    <hr>
   </div>
-  <hr>
-  <div *ngIf="contest.colors" >
-  <div class="description-block">
-    <div class="project-name">
-      <h3>Spalvos</h3>
-    </div>
-    <div class="project-name-text">
-      <p>{{contest?.colors}}</p>
-    </div>
-  </div>
-  <hr>
-</div>
   <div *ngIf="contest.style">
-  <div class="description-block">
-    <div class="project-name">
-      <h3>Logotipo stilius</h3>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Logotipo stilius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.style}}</p>
+      </div>
     </div>
-    <div class="project-name-text">
-      <p>{{contest?.style}}</p>
-    </div>
-  </div>
-  <hr>
+    <hr>
   </div>
   <div *ngIf="contest.organization">
-  <div class="description-block">
-    <div class="project-name">
-      <h3>Organizacijos aprašymas</h3>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
     </div>
-    <div class="project-name-text">
-      <p>{{contest?.organization}}</p>
-    </div>
+    <hr>
   </div>
-  <hr>
-</div>
   <div *ngIf="contest.extraInfo">
     <div class="description-block">
       <div class="project-name">
@@ -120,10 +111,10 @@
       <p>{{contest?.endDate | date:'short'}}</p>
     </div>
   </div>
-</div>
+</div> <!-- end of description block -->
 
 
-  <div *ngIf="additionalFiles.length > 0">
+  <div *ngIf="additionalFiles.length > 0 || isContestPublisher(contest.publisher._id)">
     <div class="section-extra">
       <h2 class="text-center">Papildomi failai</h2>
     </div>
@@ -135,10 +126,15 @@
       </div>
     </div>
     <pagination-controls *ngIf="additionalFiles.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
-      <div *ngIf="isContestPublisher(contest.publisher._id) && isEmailConfirmed()">
-      <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-      <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Upload</button>
-      {{percent}} %
+      <div class="text-center" *ngIf="isContestPublisher(contest.publisher._id) && isEmailConfirmed()">
+        <div class="submit-designs-label">
+          <h3>Įkelti papildomus failus</h3>
+        </div>
+          <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+          <div class="button-wrapper">
+        <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Įkelti failus</button>
+        <span class="percent"> {{percent}} %</span>
+      </div>
     </div>
   </div>
 
@@ -205,15 +201,19 @@
     <br>
   </div>  
   <pagination-controls *ngIf="mySubmitions.length > 10" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
-  <div class="italic" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div>
-  <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><h2 class="text-center">Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h2></div>
-  <div class="italic" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
-    <h2>Įkelti dizainus:</h2>
+  <div class="italic text-center" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div></div>
+  <div class="italic text-center" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><div>Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div></div>
+  <div class="text-center" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
+    <div class="submit-designs-label">
+      <h2>Dalyvauti konkurse</h2>
+    </div>
   <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-  <button type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Upload</button>
-  {{percent}} %
+  <div class="button-wrapper">
+    <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Įkelti dizainus</button>
+     <span class="percent"> {{percent}} %</span>
   </div>
-  <div *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'">Kad galėtumėte dalyvauti konkurse, turite būti registruotas dizaineris</div>
+  </div>
+  <div class="italic text-center" *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite būti registruotas dizaineris</div></div>
 
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>

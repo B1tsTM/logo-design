@@ -9,7 +9,15 @@
 <div>
 <button type="button" [disabled]="filesToUpload.length == 0" (click)="upload()">Upload</button>
 {{percent}}
+
 </div>
+  <div class="file-upload-wrapper">
+  <label for="file-upload" class="custom-file-upload">
+    <i class="fa fa-cloud-upload"></i> Pasirinkti avatarą
+  </label>
+  <input id="file-upload" type="file"/>
+</div>
+
 <a routerLink="/profilis/pastas">Pastas</a>
 <a style="cursor: pointer;" *ngIf="!emailConfirmed()" (click)="sendConfirmationEmail()">Išsiųsti el. pašto patvirtinimo laišką</a>
 
