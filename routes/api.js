@@ -674,7 +674,7 @@ router.get('/contest/:contestId/winner', function(req,res,next) {
 // ------------------- END OF GETs --------------------
 
 router.patch('/contest/winner/add/:contestId/:winnerId', function(req, res, next) {
-  var contestId = req.params.contestIdName;
+  var contestId = req.params.contestId;
   var winnerId = req.params.winnerId;
   Contest.findById(contestId)
   .exec(function(err, contest) {

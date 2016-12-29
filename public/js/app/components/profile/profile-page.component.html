@@ -1,25 +1,110 @@
-<h1>Profile page</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a>Profilis</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<!--<img src="http://localhost:3000/uploads/avatar/avatar.jpg" alt="Image"> -->
-<img *ngIf="avatarUrl" src="http://localhost:3000/uploads/avatars/{{avatarUrl}}" alt="Avatar">
-<img *ngIf="!avatarUrl" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Nėra avataro">
-<div>
-<input type="file" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
-</div>
-<div>
-<button type="button" [disabled]="filesToUpload.length == 0" (click)="upload()">Upload</button>
-{{percent}}
+  <div class="section-label">
+    <h1>Vartotojo informacija</h1>
+  </div>
 
-</div>
+<div *ngIf="user" class="body-wrapper">
+  <div class="avatar-block">
+    <div class="avatar-container">
+      <img class="mini-avatar" *ngIf="avatarUrl" src="http://localhost:3000/uploads/avatars/{{avatarUrl}}" alt="Avataras">
+      <img class="mini-avatar" *ngIf="!avatarUrl" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Nėra avataro">
+      <div class="avatar-text">
+        <div class="avatar-nickname">
+          <h2>{{user?.nickName}}</h2>
+        </div>
+        <div class="avatar-message">
+          <!--<i class="fa fa-envelope" (click)="sendPrivateMessage(user.nickName)"></i>-->
+          <i class="fa fa-envelope" (click)="goToMail()"></i>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="file-upload-wrapper">
-  <label for="file-upload" class="custom-file-upload">
-    <i class="fa fa-cloud-upload"></i> Pasirinkti avatarą
-  </label>
-  <input id="file-upload" type="file"/>
+    <label for="file-upload" class="custom-file-upload">
+      <i class="fa fa-cloud-upload"></i> Pasirinkti avatarą
+    </label>
+    <input type="file" id="file-upload" (change)="fileChangeEvent($event)"/>
+    <div *ngIf="filesToUpload.length > 0" class="confirm-avatar-wrapper">
+      <button (click)="upload()" class="confirm-avatar-button" type="button">Įkelti avatarą</button>
+    </div>
+  </div>   
+<hr class="divider">
+
+<div class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Dizaineris</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.firstName}} {{user?.lastName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Būsena</h3>
+    </div>
+    <div class="project-name-text">
+      <p *ngIf="emailConfirmed()">Patvirtintas</p>
+      <div *ngIf="!emailConfirmed()">
+        <p>Nepatvirtintas!</p>
+        <span class="resend-email">
+          <button (click)="sendConfirmationEmail()" class="resend-email-button">Nusiųsti patvirtinimo laišką</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Laimėjo konkurų</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.contestsWon.length}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Įkėlė dizainų</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.galleryUrls.length}}</p>
+    </div>
+  </div>
+  </div> <!-- end of description block -->
 </div>
 
-<a routerLink="/profilis/pastas">Pastas</a>
-<a style="cursor: pointer;" *ngIf="!emailConfirmed()" (click)="sendConfirmationEmail()">Išsiųsti el. pašto patvirtinimo laišką</a>
+
+<div class="gallery-label-wrapper">
+  <div class="gallery-label">
+    <h2>Galerija</h2>
+  </div>
+</div>
+
+<div *ngIf="user" class="gallery-block">
+  <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><h4>Dizainų nėra</h4></div>
+<div class="thumbnail-row" *ngIf="user.galleryUrls.length > 0">
+  <div class="inline-block thumbnail-container" *ngFor="let image of user.galleryUrls | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+    <div class="mini-image-container">
+  <a class="fancybox" rel="personalgallery" href="http://localhost:3000/uploads/gallery/{{id}}/{{image}}">
+    <img class="mini-image" src="http://localhost:3000/uploads/gallery/{{id}}/{{image}}" alt="Submition"> <!-- (click)="winnerModal.open()" -->
+  </a>
+  </div>
+</div>
+</div>
+<pagination-controls *ngIf="user.galleryUrls.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+</div>
 
 <simple-notifications [options]="options"></simple-notifications>
 

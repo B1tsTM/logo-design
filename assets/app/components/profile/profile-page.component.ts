@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+
+declare var jQuery: any;
 
 @Component({
   moduleId: module.id,
@@ -13,11 +17,15 @@ export class ProfilePageComponent implements OnInit {
   filesToUpload: File[];
   percent = "0";
   id = '';
+  user: any;
   isLoading = false;
   public options = {
       position: ["top","right"]
     };
-  constructor(private authService: AuthService, private notificationsService: NotificationsService) {
+  constructor(private authService: AuthService, 
+              private notificationsService: NotificationsService,
+              private apiService: ApiService,
+              private router: Router) {
     this.filesToUpload = [];
    }
 
@@ -32,6 +40,25 @@ export class ProfilePageComponent implements OnInit {
       }, error => {
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
+      this.apiService.getUserInfo(this.id)
+      .subscribe(user => {
+        console.log('comments-section comp user var');
+        console.log(user);
+        this.user = user;
+      },
+      error => {
+        this.isLoading = false;
+        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+          //this.errorService.handleError(error);
+      });
+  }
+
+  ngAfterViewInit() {
+    jQuery(document).ready(function() {
+      jQuery(".fancybox").fancybox({
+        
+      });
+    });
   }
 
   upload() {
@@ -43,6 +70,7 @@ export class ProfilePageComponent implements OnInit {
               console.log(data);
               this.avatarUrl = data.avatarUrl;
               this.isLoading = false;
+              this.notificationsService.success('Pakeista','Avataras pakeistas', {timeOut: 3000, showProgressBar: false})
             }, error => {
                 this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             });
@@ -106,6 +134,14 @@ export class ProfilePageComponent implements OnInit {
         }, error => {
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         })
+    }
+
+    sendPrivateMessage(nickname) {
+        this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska', nickname]);
+    }
+
+    goToMail() {
+        this.router.navigate(['/profilis', 'pastas']);
     }
 
 }
