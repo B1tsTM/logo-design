@@ -52,4 +52,13 @@ export class MailListComponent implements OnInit {
       });
     this.router.navigate(['zinutes', messageId], {relativeTo: this.route})
   }
+
+  goToSentMessages() {
+    this.router.navigate(['/profilis', 'pastas', 'issiusta']);
+  }
+
+  goToNewMessage() {
+    this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska']);
+  }
+
 }

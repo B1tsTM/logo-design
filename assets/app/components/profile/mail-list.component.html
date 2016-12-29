@@ -1,16 +1,67 @@
-<h1>Paštas</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/profilis">Profilis</a>
+					<a routerLink="/profilis/pastas">Paštas</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<span class="mail-tab"><a routerLink="/profilis/pastas/rasyti-laiska">Rasyti laiska</a></span>
-<span class="mail-tab"><a routerLink="/profilis/pastas/rasyti-laiska/user">Rasyti laiska vartotojui 'user'</a></span>
-<span class="mail-tab"><a routerLink="/profilis/pastas/issiusta">Issiusti laiskai</a></span>
+<div class="row">
+<div class="columns small-12">
+<div class="action-bar">
 
+<div class="table-actions">
+  <div (click)="goToNewMessage()" class="tab tab-active">
+    <i class="fa fa-envelope-o"></i>
+    <span>Nauja žinutė</span>
+  </div><!-- .tab -->
+  <div class="tab tab-finished current">
+    <i class="fa fa-envelope"></i>
+    <span>Gauta</span>
+    <span class="label">({{messages.length}})</span>
+  </div><!-- .tab -->
+  <div (click)="goToSentMessages()" class="tab tab-finished">
+    <i class="fa envelope-open"></i>
+    <span>Išsiųsta</span>
+  </div><!-- .tab -->
+</div>
 
-<h2>Žinutės:</h2>
-<div *ngIf="messages.length == 0">Žinučių nėra</div>
-<div *ngIf="messages.length > 0">
-  <div *ngFor="let message of messages">
-    <div (click)="viewMessage(message.messageId)">
-      {{message?.topic}} - {{message?.sender}}
+</div></div></div>
+
+<div class="section-label">
+  <h1>Gautos žinutės</h1>
+</div>
+
+<div class="messages-wrapper">
+  <div class="messages-header">
+    <div class="message-sender-label">
+      <strong>Siuntėjas</strong>
+    </div>
+    <div class="message-body-label">
+      <strong>Žinutė</strong>
+    </div>
+  </div>
+  <br>
+  <div *ngIf="messages.length == 0" class="no-messages">
+    <div>Žinučių nėra</div>
+  </div>
+  <div *ngIf="messages.length > 0">
+    <div *ngFor="let message of messages" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
+      <div class="message-sender">
+        <span class="sender" [ngClass]="{'unread-sender': message.status == 'Neperžiūrėta'}">{{message?.sender}}</span>
+      </div>
+      <div class="message-body">
+        <span class="topic">
+          {{message?.topic}} 
+        </span>
+        <span class="message">
+          - {{message?.message | truncate: 50}}
+        </span>
+      </div>
     </div>
   </div>
 </div>

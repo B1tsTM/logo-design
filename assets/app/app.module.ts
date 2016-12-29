@@ -43,7 +43,7 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { LocalDateFromNowPipe } from './pipes/local-date-from-now-pipe';
 import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
-
+import { TruncateStringPipe } from './pipes/truncate-string-pipe';
 const WINDOW_PROVIDER: ValueProvider = {
     provide: Window,
     useValue: window
@@ -68,7 +68,8 @@ const WINDOW_PROVIDER: ValueProvider = {
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
                   TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent,
                   SubmitionCommentsSectionComponent, AdminDashboardComponent, AdminManageContestsComponent,
-                  AdminContestDetailsComponent, DesignerDetailsComponent, MicroGalleryComponent, ConfirmUserComponent],
+                  AdminContestDetailsComponent, DesignerDetailsComponent, MicroGalleryComponent, ConfirmUserComponent,
+                  TruncateStringPipe],
   bootstrap: [ AppComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "lt-LT"}, appRoutingProviders, ContestsService, AuthService, ErrorService, 
                DesignersService, ApiService, CanActivateOnLoginService, CanActivateAdminPageService, WINDOW_PROVIDER ]
