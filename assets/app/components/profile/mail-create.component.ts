@@ -39,7 +39,13 @@ export class MailCreateComponent implements OnInit {
 
   sendMessage() {
     this.isLoading = true;
-    this.apiService.sendMessage(this.nickname.nickName, this.topic, this.message, this.sender.nickName)
+    var recipient;
+    if (typeof this.nickname === 'string') {
+      recipient = this.nickname;
+    } else {
+      recipient = this.nickname.nickName;
+    }
+    this.apiService.sendMessage(recipient, this.topic, this.message, this.sender.nickName)
       .subscribe(res => {
         console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})

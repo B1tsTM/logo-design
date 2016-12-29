@@ -199,6 +199,7 @@ img:hover {
 
 .app-breadcrumbs a {
   cursor: pointer;
+  padding-left: 0 !important;
 }
 
 .gallery-label-wrapper {

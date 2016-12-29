@@ -65,7 +65,7 @@
       </div>
     </div>
   </div>
-  <pagination-controls *ngIf="messages.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
+  <pagination-controls *ngIf="messages.length > 15" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>
