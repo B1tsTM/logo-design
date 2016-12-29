@@ -3,3 +3,97 @@
   background-color: lightgray;
   padding: 2px;
 }
+
+.messages-wrapper {
+  max-width: 1200px;
+  margin: 30px auto;
+  /*display: flex;*/
+}
+
+.messages-header {
+  display: flex;
+  padding-left: 7px;
+}
+
+.message-sender-label {
+  flex: 1;
+}
+
+.message-body-label {
+  flex: 3;
+}
+
+.messages-list {
+  display: flex;
+  border: 1px solid #ddd;
+  border-bottom: 1px transparent;
+  padding: 5px 8px;
+}
+
+.messages-list:hover {
+  cursor: pointer;
+  background-color: #ffebc6;
+}
+
+.messages-list:last-child {
+    border: 1px solid #ddd;
+}
+
+.message-sender {
+  flex: 1;
+}
+
+.message-body {
+  flex: 3;
+}
+
+.section-label {
+  margin: 50px auto;
+  text-align: center;
+}
+
+br {
+  padding: 10px;
+}
+
+.topic {
+  font-weight: bold;
+}
+
+span.unread-sender {
+  font-weight: bold;
+}
+
+.unread {
+  background-color: #e6e6e6;
+}
+
+span.sender {
+  padding-left: 5px;
+}
+
+.no-messages {
+  text-align: center;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+pagination-controls /deep/ {
+  display: block;
+}
+
+pagination-controls /deep/ .ng2-pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+  font-size: 18px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+pagination-controls /deep/ .ng2-pagination li a:hover {
+  background-color: #a8d6f3 !important;
+  border-radius: 5px !important;
+}

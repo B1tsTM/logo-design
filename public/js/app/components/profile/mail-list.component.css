@@ -78,3 +78,22 @@ span.sender {
   margin: 30px auto;
 }
 
+pagination-controls /deep/ {
+  display: block;
+}
+
+pagination-controls /deep/ .ng2-pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+  font-size: 18px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+pagination-controls /deep/ .ng2-pagination li a:hover {
+  background-color: #a8d6f3 !important;
+  border-radius: 5px !important;
+}

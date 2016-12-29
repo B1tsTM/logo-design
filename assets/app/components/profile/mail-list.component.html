@@ -27,6 +27,7 @@
   <div (click)="goToSentMessages()" class="tab tab-finished">
     <i class="fa envelope-open"></i>
     <span>Išsiųsta</span>
+    <span class="label">({{sentMessages.length}})</span>
   </div><!-- .tab -->
 </div>
 
@@ -50,7 +51,7 @@
     <div>Žinučių nėra</div>
   </div>
   <div *ngIf="messages.length > 0">
-    <div *ngFor="let message of messages" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
+    <div *ngFor="let message of messages | paginate: {id: 'three', itemsPerPage: 15, currentPage: p3}" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
       <div class="message-sender">
         <span class="sender" [ngClass]="{'unread-sender': message.status == 'Neperžiūrėta'}">{{message?.sender}}</span>
       </div>
@@ -64,6 +65,7 @@
       </div>
     </div>
   </div>
+  <pagination-controls *ngIf="messages.length > 15" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

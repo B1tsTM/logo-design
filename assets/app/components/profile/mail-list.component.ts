@@ -11,6 +11,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class MailListComponent implements OnInit {
   messages = [];
+  sentMessages = [];
   userId: string;
   isLoading: boolean = false;
   public options = {
@@ -28,12 +29,17 @@ export class MailListComponent implements OnInit {
       .subscribe(messages => {
         
         let filteredMessages = [];
+        let filteredSentMessages = [];
         for (let i=0; i<messages.length; i++) {
           if(messages[i].status == 'Neperžiūrėta' || messages[i].status == 'Peržiūrėta') {
             filteredMessages.push(messages[i]);
           }
+          if(messages[i].status == 'Išsiųsta') {
+            filteredSentMessages.push(messages[i]);
+          }
         }
         this.messages = filteredMessages;
+        this.sentMessages = filteredSentMessages;
         this.isLoading = false;
         console.log('THIS.MESSAGES');
         console.log(this.messages);

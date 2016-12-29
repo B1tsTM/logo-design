@@ -25,8 +25,9 @@
     <span class="label">({{messages.length}})</span>
   </div><!-- .tab -->
   <div (click)="goToSentMessages()" class="tab tab-finished">
-    <i class="fa fa-envelope-open"></i>
+    <i class="fa envelope-open"></i>
     <span>Išsiųsta</span>
+    <span class="label">({{sentMessages.length}})</span>
   </div><!-- .tab -->
 </div>
 
@@ -50,7 +51,7 @@
     <div>Žinučių nėra</div>
   </div>
   <div *ngIf="messages.length > 0">
-    <div *ngFor="let message of messages" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
+    <div *ngFor="let message of messages | paginate: {id: 'three', itemsPerPage: 15, currentPage: p3}" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
       <div class="message-sender">
         <span class="sender" [ngClass]="{'unread-sender': message.status == 'Neperžiūrėta'}">{{message?.sender}}</span>
       </div>
@@ -64,21 +65,7 @@
       </div>
     </div>
   </div>
-</div>
-
-<span class="mail-tab"><a routerLink="/profilis/pastas/rasyti-laiska">Rasyti laiska</a></span>
-<span class="mail-tab"><a routerLink="/profilis/pastas/rasyti-laiska/user">Rasyti laiska vartotojui 'user'</a></span>
-<span class="mail-tab"><a routerLink="/profilis/pastas/issiusta">Issiusti laiskai</a></span>
-
-
-<h2>Žinutės:</h2>
-<div *ngIf="messages.length == 0">Žinučių nėra</div>
-<div *ngIf="messages.length > 0">
-  <div *ngFor="let message of messages">
-    <div (click)="viewMessage(message.messageId)">
-      {{message?.topic}} - {{message?.sender}}
-    </div>
-  </div>
+  <pagination-controls *ngIf="messages.length > 5" id="three" (pageChange)="p3 = $event" directionLinks="false" #api3></pagination-controls>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

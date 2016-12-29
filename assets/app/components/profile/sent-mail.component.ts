@@ -12,6 +12,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class SentMailComponent implements OnInit {
   messages = [];
+  receivedMessages = [];
   userId: string;
   isLoading: boolean = false;
   public options = {
@@ -19,7 +20,7 @@ export class SentMailComponent implements OnInit {
     };
   constructor(private apiService: ApiService, 
               private router: Router, 
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
               private notificationsService: NotificationsService) { }
 
   ngOnInit() { 
@@ -28,12 +29,17 @@ export class SentMailComponent implements OnInit {
     this.apiService.getMessages(this.userId)
       .subscribe(messages => {
         let filteredMessages = [];
+        let filteredReceivedMessages = [];
         for (let i=0; i<messages.length; i++) {
           if(messages[i].status == 'Išsiųsta') {
             filteredMessages.push(messages[i]);
           }
+          if(messages[i].status == 'Neperžiūrėta' || messages[i].status == 'Peržiūrėta') {
+            filteredReceivedMessages.push(messages[i]);
+          }
         }
         this.messages = filteredMessages;
+        this.receivedMessages = filteredReceivedMessages;
         this.isLoading = false;
         console.log('THIS.MESSAGES');
         console.log(this.messages);
@@ -50,4 +56,9 @@ export class SentMailComponent implements OnInit {
   goBack() {
     this.router.navigate(['/profilis', 'pastas']);
   }
+
+  goToNewMessage() {
+    this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska']);
+  }
+
 }
