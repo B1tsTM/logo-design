@@ -144,4 +144,16 @@ export class ProfilePageComponent implements OnInit {
         this.router.navigate(['/profilis', 'pastas']);
     }
 
+    isClient() {
+        return this.authService.isClient();
+    }
+
+    isDesigner() {
+        return this.authService.isDesigner();
+    }
+
+    isAdmin() {
+        return this.authService.isAdmin();
+    }
+
 }

@@ -31,22 +31,40 @@
   </div>
   <div class="file-upload-wrapper">
     <label for="file-upload" class="custom-file-upload">
-      <i class="fa fa-cloud-upload"></i> Pasirinkti avatarą
+      <i class="fa fa-cloud-upload"></i> Pakeisti avatarą
     </label>
     <input type="file" id="file-upload" (change)="fileChangeEvent($event)"/>
     <div *ngIf="filesToUpload.length > 0" class="confirm-avatar-wrapper">
-      <button (click)="upload()" class="confirm-avatar-button" type="button">Įkelti avatarą</button>
+      <button (click)="upload()" class="confirm-avatar-button" type="button">Įkelti</button>
     </div>
   </div>   
 <hr class="divider">
 
-<div class="description-wrapper"> <!-- start of description block -->
+<div *ngIf="isDesigner()" class="description-wrapper"> <!-- start of description block -->
   <div class="description-block">
     <div class="project-name">
       <h3>Dizaineris</h3>
     </div>
     <div class="project-name-text">
       <p>{{user?.firstName}} {{user?.lastName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Prisijungimo vardas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>El. paštas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.email}}</p>
     </div>
   </div>
   <hr>
@@ -83,27 +101,115 @@
     </div>
   </div>
   </div> <!-- end of description block -->
-</div>
-
-
-<div class="gallery-label-wrapper">
-  <div class="gallery-label">
-    <h2>Galerija</h2>
+  <!-- -->
+  <div *ngIf="isClient()" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Užsakovas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.firstName}} {{user?.lastName}}</p>
+    </div>
   </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Prisijungimo vardas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>El. paštas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.email}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Būsena</h3>
+    </div>
+    <div class="project-name-text">
+      <p *ngIf="emailConfirmed()">Patvirtintas</p>
+      <div *ngIf="!emailConfirmed()">
+        <p>Nepatvirtintas!</p>
+        <span class="resend-email">
+          <button (click)="sendConfirmationEmail()" class="resend-email-button">Nusiųsti patvirtinimo laišką</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  </div> <!-- end of description block -->
+  <div *ngIf="isAdmin()" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Administratorius</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.firstName}} {{user?.lastName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Prisijungimo vardas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>El. paštas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{user?.email}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Būsena</h3>
+    </div>
+    <div class="project-name-text">
+      <p *ngIf="emailConfirmed()">Patvirtintas</p>
+      <div *ngIf="!emailConfirmed()">
+        <p>Nepatvirtintas!</p>
+        <span class="resend-email">
+          <button (click)="sendConfirmationEmail()" class="resend-email-button">Nusiųsti patvirtinimo laišką</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  </div> <!-- end of description block -->
 </div>
 
-<div *ngIf="user" class="gallery-block">
-  <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><h4>Dizainų nėra</h4></div>
-<div class="thumbnail-row" *ngIf="user.galleryUrls.length > 0">
-  <div class="inline-block thumbnail-container" *ngFor="let image of user.galleryUrls | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
-    <div class="mini-image-container">
-  <a class="fancybox" rel="personalgallery" href="http://localhost:3000/uploads/gallery/{{id}}/{{image}}">
-    <img class="mini-image" src="http://localhost:3000/uploads/gallery/{{id}}/{{image}}" alt="Submition"> <!-- (click)="winnerModal.open()" -->
-  </a>
+<div *ngIf="isDesigner()">
+  <div class="gallery-label-wrapper">
+    <div class="gallery-label">
+      <h2>Galerija</h2>
+    </div>
   </div>
-</div>
-</div>
-<pagination-controls *ngIf="user.galleryUrls.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+
+  <div *ngIf="user" class="gallery-block">
+    <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><h4>Dizainų nėra</h4></div>
+  <div class="thumbnail-row" *ngIf="user.galleryUrls.length > 0">
+    <div class="inline-block thumbnail-container" *ngFor="let image of user.galleryUrls | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+      <div class="mini-image-container">
+    <a class="fancybox" rel="personalgallery" href="http://localhost:3000/uploads/gallery/{{id}}/{{image}}">
+      <img class="mini-image" src="http://localhost:3000/uploads/gallery/{{id}}/{{image}}" alt="Submition"> <!-- (click)="winnerModal.open()" -->
+    </a>
+    </div>
+  </div>
+  </div>
+  <pagination-controls *ngIf="user.galleryUrls.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+  </div>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

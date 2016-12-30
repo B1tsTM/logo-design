@@ -39,6 +39,10 @@ export class MailCreateComponent implements OnInit {
 
   sendMessage() {
     this.isLoading = true;
+    if (!this.topic || !this.message) {
+      this.isLoading = false;
+      this.notificationsService.error('Klaida !', 'Įveskite temą ir žinutę', {timeOut: 3000, showProgressBar: false})
+    } else {
     var recipient;
     if (typeof this.nickname === 'string') {
       recipient = this.nickname;
@@ -55,6 +59,7 @@ export class MailCreateComponent implements OnInit {
         this.isLoading = false;
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
+    }
   }
 
   search(event) {
