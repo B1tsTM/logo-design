@@ -1,16 +1,68 @@
-<h1>Read message</h1>
-<div *ngIf="!message">No message loaded / Message deleted</div>
-<div *ngIf="message">
-  <div>Sent by: {{message?.sender}}</div>
-  <div>Message: {{message?.message}}</div>
-  <div>Received at: {{message?.timeSent}}</div>
+<section class="app-headline">
+  <div class="row">
+    <div class="column small-12">
+      <div class="app-breadcrumbs">
+        <a routerLink="/">Pagrindinis puslapis</a>
+        <a routerLink="/profilis">Profilis</a>
+        <a routerLink="/profilis/pastas">Paštas</a>
+        <a>{{messageId}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+<div class="columns small-12">
+<div class="action-bar">
+
+<div class="table-actions">
+  <div (click)="reply()" class="tab tab-active">
+    <i class="fa fa-mail-reply"></i>
+    <span>Atrašyti</span>
+  </div><!-- .tab -->
+  <div (click)="deleteMessage()" class="tab tab-finished">
+    <i class="fa fa-trash"></i>
+    <span>Ištrinti žinutę</span>
+  </div><!-- .tab -->
 </div>
 
-<button type="button" (click)="reply()">Reply</button>
-<button type="button" (click)="deleteMessage()">Delete</button>
+</div></div></div>
 
-<div>
-  <button type="button" (click)="goBack()">Grįžti atgal</button>
+<!--<div class="label-wrapper">
+  <h1>Skaityti žinutę</h1>
+</div>-->
+
+<div class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Siuntėjas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{message?.sender}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Tema</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{message?.topic}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Žinutė</h3>
+    </div>
+    <div class="project-name-text">
+      <pre class="message-body">{{message?.message}}</pre>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<div class="button-back-wrapper">
+  <button class="btn-back" type="button" (click)="goBack()">Grįžti atgal</button>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

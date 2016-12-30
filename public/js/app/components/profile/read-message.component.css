@@ -1,0 +1,58 @@
+div.tab:hover {
+  background-color: #f2ffff;
+  box-shadow: inset 0 0 0 1px #ccc;
+  transition: all 0.25s ease-in 0s;
+}
+
+.description-wrapper {
+  margin: 30px 359px;
+  border: 1px solid #888;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #efefef;
+}
+
+.description-block {
+  display: flex; 
+}
+
+.project-name {
+  flex: 1;
+}
+
+.project-name-text {
+  flex: 3;
+}
+
+hr {
+  padding: 5px;
+}
+
+.label-wrapper {
+  text-align: center;
+}
+
+pre.message-body {
+    padding: 0;
+    font-family: sans-serif; /* TODO change this */
+}
+
+.button-back-wrapper {
+  text-align: center;
+}
+
+.btn-back {
+  display: block;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px transparent;
+  transition: all 0.2s ease-in 0s;
+}
+
+.btn-back:hover {
+  background-color: #2b3542;
+  color: #fff;
+  border: 1px solid #2b3542;
+}
+

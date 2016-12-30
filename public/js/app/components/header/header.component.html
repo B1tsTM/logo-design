@@ -156,7 +156,7 @@
 							<span class="no-contests-label">Konkurso nerasta</span>
 						</div>
 					
-						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
+						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
 							<div class="status">
 								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas'}">{{contest.status}}</span>
 							</div>
@@ -178,7 +178,7 @@
 						</div>
 					
 				</div><!-- .primary-table -->
-				<pagination-controls (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+				<pagination-controls *ngIf="contests.length > 10" (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
 </section><!-- .app-main -->

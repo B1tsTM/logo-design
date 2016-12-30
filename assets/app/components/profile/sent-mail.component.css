@@ -97,3 +97,9 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   background-color: #a8d6f3 !important;
   border-radius: 5px !important;
 }
+
+div.tab:hover {
+  background-color: #f2ffff;
+  box-shadow: inset 0 0 0 1px #ccc;
+  transition: all 0.25s ease-in 0s;
+}

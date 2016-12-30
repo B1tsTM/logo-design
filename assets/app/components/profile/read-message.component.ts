@@ -43,7 +43,7 @@ export class ReadMessageComponent implements OnInit {
   }
 
   reply() {
-    this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska', this.message.sender.nickName]);
+    this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska', this.message.sender]);
   }
 
   deleteMessage() {
