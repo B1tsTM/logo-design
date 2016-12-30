@@ -79,4 +79,12 @@ export class MailCreateComponent implements OnInit {
     this.router.navigate(['/profilis', 'pastas']);
   }
 
+  goToReceivedMessages() {
+    this.router.navigate(['/profilis', 'pastas']);
+  }
+
+  goToSentMessages() {
+    this.router.navigate(['/profilis', 'pastas', 'issiusta']);
+  }
+
 }

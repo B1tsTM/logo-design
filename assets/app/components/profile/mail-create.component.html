@@ -1,27 +1,60 @@
-<h1>Siųsti žinutę</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/profilis">Profilis</a>
+					<a routerLink="/profilis/pastas">Paštas</a>
+					<a>Siųsti žinutę</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<form>
-  <div class="form-group">
-    <label>Gavėjas</label>
-      <!--<input type="text" class="form-control" name="nickname" [(ngModel)]="nickname">-->
-      <p-autoComplete [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete>
-    </div>
-    <div>
-      <label for="topic">Tema</label>
-      <input type="text" class="form-control" name="topic" [(ngModel)]="topic">
-    </div>
-    <div>
-      <div><label for="message">Žinutė</label></div>
-      <textarea class="form-control" rows="5" cols="40" name="message" [(ngModel)]="message"></textarea>
-    </div>
-    <div>
-      <button type="button" (click)="sendMessage()">Siųsti žinutę</button>
-    </div>
-</form>
+<div class="row">
+<div class="columns small-12">
+<div class="action-bar">
 
-<div>
-  <button type="button" (click)="goBack()">Grįžti atgal</button>
+<div class="table-actions">
+  <div class="tab tab-active current">
+    <i class="fa fa-envelope-o"></i>
+    <span>Nauja žinutė</span>
+  </div><!-- .tab -->
+  <div (click)="goToReceivedMessages()" class="tab tab-finished">
+    <i class="fa fa-envelope"></i>
+    <span>Gauta</span>
+  </div><!-- .tab -->
+  <div (click)="goToSentMessages()" class="tab tab-finished">
+    <i class="fa fa-mail-forward"></i>
+    <span>Išsiųsta</span>
+  </div><!-- .tab -->
 </div>
+
+</div></div></div>
+
+<div class="form-container">
+<form>
+  <div class="form-block">
+  <label for="nickname" class="input-label">Gavėjas</label>
+    <div class="form-input-autofocus"><p-autoComplete class="autocomplete-input" [(ngModel)]="nickname" name="nickname" field="nickName" [suggestions]="results" (completeMethod)="search($event)" (onSelect)="onSelect($event)"></p-autoComplete></div>
+  </div>
+  <div class="form-block">
+    <label for="topic" class="input-label" for="topic">Tema</label>
+    <input type="text" class="form-input" name="topic" [(ngModel)]="topic">
+  </div>
+  <div class="form-block">
+    <label for="message" class="input-label" for="message">Žinutė</label>
+    <textarea class="form-input form-textarea" rows="5" cols="40" name="message" [(ngModel)]="message"></textarea>
+  </div>
+</form>
+</div>
+
+<div class="btn-wrapper">
+  <button class="btn-back" type="button" (click)="sendMessage()">Siųsti žinutę</button>
+  <button class="btn-back btn-second" type="button" (click)="goBack()">Grįžti atgal</button>
+</div>
+
+
 
 <test-loader *ngIf="isLoading"></test-loader>
 

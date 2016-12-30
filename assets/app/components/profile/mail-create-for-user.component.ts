@@ -100,5 +100,13 @@ export class MailCreateForUserComponent implements OnInit {
   goBack() {
     this.router.navigate(['/profilis', 'pastas']);
   }
+
+  goToReceivedMessages() {
+    this.router.navigate(['/profilis', 'pastas']);
+  }
+
+  goToSentMessages() {
+    this.router.navigate(['/profilis', 'pastas', 'issiusta']);
+  }
   
 }

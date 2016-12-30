@@ -35,13 +35,13 @@
 </div></div></div>
 
 <div class="section-label">
-  <h1>Gautos žinutės</h1>
+  <h1>Išsiųstos žinutės</h1>
 </div>
 
 <div class="messages-wrapper">
   <div class="messages-header">
     <div class="message-sender-label">
-      <strong>Siuntėjas</strong>
+      <strong>Gavėjas</strong>
     </div>
     <div class="message-body-label">
       <strong>Žinutė</strong>
@@ -54,7 +54,7 @@
   <div *ngIf="messages.length > 0">
     <div *ngFor="let message of messages | paginate: {id: 'three', itemsPerPage: 15, currentPage: p3}" class="messages-list" [ngClass]="{'unread': message.status == 'Neperžiūrėta'}" (click)="viewMessage(message.messageId)">
       <div class="message-sender">
-        <span class="sender" [ngClass]="{'unread-sender': message.status == 'Neperžiūrėta'}">{{message?.sender}}</span>
+        <span class="sender" [ngClass]="{'unread-sender': message.status == 'Neperžiūrėta'}">{{message?.recipient}}</span>
       </div>
       <div class="message-body">
         <span class="topic">
