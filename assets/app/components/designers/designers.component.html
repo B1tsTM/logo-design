@@ -15,39 +15,23 @@
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
-					<a routerLink="/kategorijos" routerLinkActive="active">Visos kategorijos</a>
-					<a class="current">Logotipo dizainas</a>
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/dizaineriai" class="current">Dizaineriai</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
 		</div><!-- .row -->
 	</section><!-- .app-headline -->
 
-	<section class="app-innernav">
-		<div class="row">
-			<div class="column small-12">
-				<nav class="inner-navigation">
-					<ul>
-						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li> <!-- Dropdown -->
-						<li class="current"><a href="#">Aktyvūs konkursai</a></li>
-						<li><a href="#">Užbaigti konkursai</a></li>
-					</ul>
-				</nav><!-- .inner-navigation -->
-			</div><!-- .column small-12 -->
-		</div><!-- .row -->
-	</section><!-- .app-innernav -->
-
-	<section class="app-main">
+	<!--<section class="app-main">
 		<div class="row">
 			<div class="columns small-12">
 				<div class="page-headline">
-					<h2 class="title">Konkursų sąrašas</h2><!-- .headline -->
+					<h2 class="title">Konkursų sąrašas</h2>
 					<span class="subtitle">Peržvelkite naujausius konkursus žemiau</span>
-					
-					<!-- This one is aligned to the right. -->
 					<a class="see-faq">Kilus klausimams pažiūrėkite D.U.K. skiltį</a>
-				</div><!-- .page-headline -->
-			</div><!-- .columns small-12 -->
-		</div><!-- .row -->
+				</div>
+			</div>
+		</div>-->
 
 		<div class="row">
 			<div class="columns small-12">
@@ -55,7 +39,7 @@
 				<div class="action-bar">
 					<div class="table-actions">
 						<div class="tab tab-active">
-							<span>Dizaineriai</span>
+							<span>Dizainerių sąrašas</span>
 						</div><!-- .tab -->
 
 						<div class="table-search">
@@ -84,7 +68,7 @@
 							<span class="no-contests-label">Nėra dizainerių</span>
 						</div>
 					
-						<div *ngFor="let designer of designers | paginate: {itemsPerPage: 5, currentPage: p}" class="table-row">
+						<div *ngFor="let designer of designers | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row">
 							<div class="avatar">
 								<span class="avatar-container" *ngIf="designer.avatar"><img class="micro-avatar" src="http://localhost:3000/uploads/avatars/{{designer.avatar.avatarUrl}}" alt="Avataras"></span>
 								<span class="avatar-container" *ngIf="!designer.avatar"><img class="micro-avatar" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Avataras"></span>
@@ -104,10 +88,9 @@
 						</div>
 					
 				</div><!-- .primary-table -->
-				<pagination-controls *ngIf="designers.length > 5" (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+				<pagination-controls *ngIf="designers.length > 10" (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
-</section><!-- .app-main -->
 
 <simple-notifications [options]="options"></simple-notifications>
 

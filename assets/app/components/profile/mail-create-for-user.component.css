@@ -35,17 +35,26 @@ div.tab:hover {
 
 .form-block {
   display: flex;
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex;
   margin-bottom: 10px;
 }
 
 .input-label {
   flex: 1;
+  -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 1;           /* IE 10 */
   padding-left: 10px;
   font-weight: bold;
 }
 
 .form-input {
   flex: 3;
+  -webkit-box-flex: 3;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -webkit-flex: 3;       /* Safari 6.1+. iOS 7.1+, BB10 */
+  -ms-flex: 3;           /* IE 10 */
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #d0d0d0;

@@ -1,7 +1,9 @@
 <span *ngIf="designer.galleryUrls.length > 0">
   <span *ngFor="let pic of designer.galleryUrls; let i = index">
     <span *ngIf="i < 5">
-      <img class="micro-submition" (click)="microSubmitionModal.open()" src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}" alt="Pic">
+      <a class="fancybox" rel="microgallery" href="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}">
+        <img class="micro-submition" src="http://localhost:3000/uploads/gallery/{{designer._id}}/{{pic}}" alt="Pic">
+      </a>
     </span>
       <modal [animation]="animation" [keyboard]="keyboard" [backdrop]="backdrop" [cssClass]="cssClass" #microSubmitionModal>
         <modal-header [show-close]="true">

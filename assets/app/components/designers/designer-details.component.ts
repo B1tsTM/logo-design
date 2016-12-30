@@ -11,10 +11,13 @@ import * as moment from 'moment';
 import 'moment/min/locales';
 import { NotificationsService } from 'angular2-notifications';
 
+declare var jQuery: any;
+
 @Component({
   moduleId: module.id,
   selector: 'designer-details',
-  templateUrl: 'designer-details.component.html'
+  templateUrl: 'designer-details.component.html',
+  styleUrls: ['designer-details.component.css']
 })
 export class DesignerDetailsComponent implements OnInit {
   isLoading = false;
@@ -46,7 +49,19 @@ export class DesignerDetailsComponent implements OnInit {
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
+
+  ngAfterViewInit() {
+      jQuery(document).ready(function() {
+        jQuery(".fancybox").fancybox({
+        
+        });
+    });
+  }
   // TODO fix getting gallery Urls (wrong name published to mongo?)
+
+  sendPrivateMessage(nickname) {
+        this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska', nickname]);
+    }
 
 
 }

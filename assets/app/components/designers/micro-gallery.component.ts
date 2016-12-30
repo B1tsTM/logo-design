@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+declare var jQuery: any;
+
 @Component({
   moduleId: module.id,
   selector: 'micro-gallery',
@@ -16,4 +18,13 @@ export class MicroGalleryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
+  ngAfterViewInit() {
+        jQuery(document).ready(function() {
+          jQuery(".fancybox").fancybox({
+          
+          });
+      });
+    }
+
 }
