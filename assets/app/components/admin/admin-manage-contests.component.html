@@ -2,26 +2,13 @@
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
 					<a routerLink="/admin">Valdymo pultas</a>
 					<a class="current">Konkursai</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
 		</div><!-- .row -->
 	</section><!-- .app-headline -->
-
-	<section class="app-innernav">
-		<div class="row">
-			<div class="column small-12">
-				<nav class="inner-navigation">
-					<ul>
-						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li> <!-- Dropdown -->
-						<li class="current"><a >Aktyvūs konkursai</a></li>
-						<li><a >Užbaigti konkursai</a></li>
-					</ul>
-				</nav><!-- .inner-navigation -->
-			</div><!-- .column small-12 -->
-		</div><!-- .row -->
-	</section><!-- .app-innernav -->
 
 	<section class="app-main">
 		<div class="row">
@@ -55,7 +42,6 @@
 							<input type="submit" value="Search" />
 						</div><!-- .search -->
 					</div><!-- .table-actions -->
-					<a routerLink="/paskelbti-konkursa" routerLinkActive="active" class="button new-request">Paskelbti konkursą</a><!-- .new-request button -->
 				</div><!-- .table-center -->
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
@@ -103,8 +89,8 @@
 		</div><!-- .row -->
 </section><!-- .app-main -->
 
-<div class="back-button-container">
-	<button type="button" (click)="goBackToAdminPanel()">Atgal</button>
+<div class="btn-back-wrapper">
+    <button class="btn" type="button" (click)="goBackToAdminPanel()">Grįžti atgal</button>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

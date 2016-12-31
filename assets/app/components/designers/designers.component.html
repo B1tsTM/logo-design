@@ -16,7 +16,7 @@
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
 					<a routerLink="/">Pagrindinis puslapis</a>
-					<a routerLink="/dizaineriai" class="current">Dizaineriai</a>
+					<a class="current">Dizaineriai</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
 		</div><!-- .row -->
@@ -38,10 +38,10 @@
 				<!-- The component that switches tables, searches, has new request button -->
 				<div class="action-bar">
 					<div class="table-actions">
-						<div class="tab tab-active">
-							<span>Dizainerių sąrašas</span>
-						</div><!-- .tab -->
-
+						<div class="page-headline">
+						<h2 class="title">Dizainerių sąrašas</h2><!-- .headline -->
+						<span class="subtitle">Peržvelkite geriausius dizainerius žemiau</span>
+					</div><!-- .page-headline -->
 						<div class="table-search">
 							<i class="fa fa-search"></i>
 							<input type="text" class="search" placeholder="Ieškoti dizainerio" #search /> <!--(keyup)="filterContests(search.value)"-->

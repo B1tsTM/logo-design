@@ -116,3 +116,22 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   background-color: #cad8e0;
   border-radius: 10px;
 }
+
+.table-search {
+  justify-content: center;
+}
+
+.table-actions {
+  background: transparent;
+  box-shadow: 0 0 0 0 white;
+}
+
+.page-headline .title {
+  font-size: 22px;
+  display: inline-block;
+  font-weight: normal;
+  margin-right: 10px; }
+.page-headline .subtitle {
+  font-size: 14px;
+  opacity: 0.5;
+  display: inline-block; }

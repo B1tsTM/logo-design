@@ -55,10 +55,6 @@
   transition: all 0.2s ease-in 0s;
 }
 
-.pad-top-20 {
-  
-}
-
 .btn:hover {
   background-color: #2b3542;
   color: #fff;

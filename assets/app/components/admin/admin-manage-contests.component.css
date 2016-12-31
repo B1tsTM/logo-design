@@ -86,3 +86,26 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
 .back-button-container {
   text-align: center;
 }
+
+.btn-back-wrapper {
+  text-align: center;
+}
+
+.pad-20 {
+  padding-left: 20px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px transparent;
+  transition: all 0.2s ease-in 0s;
+}
+
+.btn:hover {
+  background-color: #2b3542;
+  color: #fff;
+  border: 1px solid #2b3542;
+}
