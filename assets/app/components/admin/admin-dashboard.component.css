@@ -1,0 +1,25 @@
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.action-item {
+  font-weight: bold;
+  padding: 10px;
+  transition: all 0.25s ease-in 0s;
+}
+
+.action-item:hover {
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+
+.selection:hover {
+  color: #4072db;
+}
+
+a {
+  cursor: pointer;
+}
+

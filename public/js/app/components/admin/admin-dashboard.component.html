@@ -1,3 +1,19 @@
-<h1>Admin page</h1>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a class="current">Valdymo pultas</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
 
-<a routerLink="/admin/konkursai" routerLinkActive="active">Tvarkyti konkursus</a>
+<div class="main-wrapper">
+  <div class="action-item">
+    <a class="selection" routerLink="/admin/konkursai" routerLinkActive="active">Tvarkyti konkursus</a>
+  </div>
+  <div class="action-item">
+    <a class="selection" routerLink="/admin/konkursai" routerLinkActive="active">Tvarkyti vartotojus</a>
+  </div>
+</div>
