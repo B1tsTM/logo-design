@@ -90,7 +90,8 @@ export class CommentsSectionComponent implements OnInit {
   addComment(comment: string) {
     this.isLoading = true;
     console.log(comment);
-    if (comment == ' ' || comment == '') {
+    if (!comment) {
+      this.isLoading = false;
       this.notificationsService.info('Tuščias komentaras', 'Komentaro laukas negali būti tuščias', {timeOut: 3000, showProgressBar: true})
     } else {
     this.comments.push({comment: comment, commentAuthor: this.user});

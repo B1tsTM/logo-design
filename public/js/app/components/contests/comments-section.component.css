@@ -101,3 +101,10 @@
 .btn-back-wrapper {
   text-align: center;
 }
+
+pre.comment-text {
+  font-family: "Source Sans Pro", sans-serif, monospace;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+  white-space: pre-line;
+}

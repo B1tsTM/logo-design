@@ -24,6 +24,7 @@ div.tab:hover {
   -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
   -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 1;           /* IE 10 */
+  align-self: center;
 }
 
 .project-name-text {
@@ -31,6 +32,8 @@ div.tab:hover {
   -webkit-box-flex: 3;   /* OLD - iOS 6-, Safari 3.1-6 */
   -webkit-flex: 3;       /* Safari 6.1+. iOS 7.1+, BB10 */
   -ms-flex: 3;           /* IE 10 */
+  font-family: "Source Sans Pro", sans-serif, monospace;
+  font-size: 1rem;
 }
 
 hr {
@@ -42,8 +45,13 @@ hr {
 }
 
 pre.message-body {
-    padding: 0;
-    font-family: sans-serif; /* TODO change this */
+  font-family: "Source Sans Pro", sans-serif, monospace;
+  font-size: 1rem;
+  word-wrap: break-word;
+  white-space: pre-line;
+  padding: 0;
+  margin: 0;
+  line-height: 1em;
 }
 
 .button-back-wrapper {
