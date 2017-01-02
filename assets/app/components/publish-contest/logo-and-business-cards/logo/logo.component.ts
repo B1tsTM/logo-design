@@ -6,6 +6,7 @@ import { ContestsService } from '../../../../services/contests.service';
 import { AuthService } from '../../../../services/auth.service';
 import { ErrorService } from '../../../../errors/index';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   moduleId: module.id,
@@ -62,6 +63,6 @@ export class LogoComponent implements OnInit {
   }
 
   isEmailConfirmed() { // TODO add these checks to every form
-    return sessionStorage.getItem('emailConfirmed') == 'true';
+    return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
   }
 }

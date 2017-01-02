@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ErrorService } from '../../errors/index';
+import * as CryptoJS from 'crypto-js';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
          console.log(data);
          sessionStorage.setItem('token', data.token);
          sessionStorage.setItem('userId', data.userId);
-         sessionStorage.setItem('userType', data.userType);
+         sessionStorage.setItem('userType', CryptoJS.SHA3(data.userType).toString());
          this.router.navigateByUrl('/');
        },
        error => this.errorService.handleError(error))

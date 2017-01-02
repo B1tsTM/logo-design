@@ -7,6 +7,7 @@ import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { User } from '../../models/user';
 import { ErrorService } from '../../errors/index';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 
 @Component({
@@ -119,8 +120,8 @@ export class UserNavigationComponent implements OnInit {
          console.log('Sekmingai prisijungta');
          sessionStorage.setItem('token', data.token);
          sessionStorage.setItem('userId', data.userId);
-         sessionStorage.setItem('userType', data.userType);
-         sessionStorage.setItem('emailConfirmed', data.emailConfirmed);
+         sessionStorage.setItem('userType', CryptoJS.SHA3(data.userType).toString());
+         sessionStorage.setItem('emailConfirmed', CryptoJS.SHA3(data.emailConfirmed.toString()).toString());
          this.nickname = data.nickname;
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});

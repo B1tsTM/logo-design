@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 declare var jQuery: any;
 
@@ -123,7 +124,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     emailConfirmed() {
-        return sessionStorage.getItem('emailConfirmed') == 'true';
+        return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
     }
 
     sendConfirmationEmail() {

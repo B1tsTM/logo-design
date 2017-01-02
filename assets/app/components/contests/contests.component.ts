@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { ErrorService } from '../../errors/index';
 import { NotificationsService } from 'angular2-notifications';
 import { Observable } from 'rxjs/Observable';
+import * as CryptoJS from 'crypto-js';
 import 'rxjs/Rx';
 
 @Component({

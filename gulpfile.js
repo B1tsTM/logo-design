@@ -61,6 +61,9 @@ gulp.task('vendor', function() {
   gulp.src('node_modules/angular2-fontawesome/**')
   .pipe(gulp.dest(vendor + "/angular2-fontawesome/"));
 
+   gulp.src('node_modules/crypto-js/**')
+  .pipe(gulp.dest(vendor + "/crypto-js/"));
+
   gulp.src('node_modules/angular2-notifications/**')
   .pipe(gulp.dest(vendor + "/angular2-notifications/"));
 

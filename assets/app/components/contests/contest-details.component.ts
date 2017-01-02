@@ -9,6 +9,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import * as moment from 'moment';
 import 'moment/min/locales';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 declare var jQuery: any;
 
@@ -129,7 +130,7 @@ export class ContestDetailsComponent implements OnInit {
   }
 
   isEmailConfirmed() {
-      return sessionStorage.getItem('emailConfirmed') == 'true';
+      return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();;
   }
 
   //FILE UPLOAD STUFF

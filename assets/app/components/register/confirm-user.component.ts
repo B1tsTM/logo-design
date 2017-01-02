@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +26,7 @@ export class ConfirmUserComponent implements OnInit {
       if (data.message) {
         console.log(data);
         this.confirmedBlock = true;
-        sessionStorage.setItem('emailConfirmed', 'true');
+        sessionStorage.setItem('emailConfirmed', CryptoJS.SHA3('true').toString());
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 4000)

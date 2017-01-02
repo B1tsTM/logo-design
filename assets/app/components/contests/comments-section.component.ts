@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   moduleId: module.id,
@@ -135,7 +136,7 @@ export class CommentsSectionComponent implements OnInit {
   }
 
   isEmailConfirmed () {
-     return sessionStorage.getItem('emailConfirmed') == 'true';
+     return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
   }
 
   goBack() {

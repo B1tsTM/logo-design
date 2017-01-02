@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { User } from '../models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class AuthService {
@@ -47,15 +48,15 @@ export class AuthService {
   }
 
   isClient() {
-    return sessionStorage.getItem('userType') == 'uzsakovas';
+    return sessionStorage.getItem('userType') == CryptoJS.SHA3('uzsakovas').toString();
   }
 
   isDesigner() {
-    return sessionStorage.getItem('userType') == 'dizaineris';
+    return sessionStorage.getItem('userType') == CryptoJS.SHA3('dizaineris').toString();
   }
 
   isAdmin() {
-    return sessionStorage.getItem('userType') == 'Admin';
+    return sessionStorage.getItem('userType') == CryptoJS.SHA3('Admin').toString();
   }
 
   getAvatar(id: string) {
