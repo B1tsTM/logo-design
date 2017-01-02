@@ -571,6 +571,32 @@ router.get('/submitions/contest/:id', function(req, res, next) {
   });
 });
 
+// router.get('/contest/:contestId/submition/:submitionId/comments', function(req,res,next) {
+//   var contestId = req.params.contestId;
+//   var submitionId = req.params.submitionId;
+//   Contest.findOne({'idName': contestId})
+//   .populate('submitions.comments.commentAuthor')
+//   .exec(function(err, contest) {
+//     if (err) {
+//        console.log(err);
+//       return res.status(404).json({
+//         title: 'Klaida !',
+//         error: {message: 'Įvyko klaida'}
+//       });
+//     }
+//     var submition;
+//     for(let i=0; i<contest.submitions.length; i++) {
+//       if (contest.submitions[i].submitionId == submitionId) {
+//         submition = contest.submitions[i];
+//       }
+//     }
+//     res.status(200).json({
+//       title: 'Success',
+//       obj: submition.comments
+//     });
+//   });
+// });
+
 router.get('/contest/:contestId/submition/:submitionId/comments', function(req,res,next) {
   var contestId = req.params.contestId;
   var submitionId = req.params.submitionId;
@@ -904,11 +930,15 @@ router.patch('/contest/:contestId/submition/:submitionId/comment', function(req,
     }
     //console.log('/contest/:id req body');
     //console.log(req.body);
+    var commentDate = Date.now();
+    var comment = {comment: req.body.comment, commentAuthor: req.body.commentAuthor, commentDate: commentDate};
     for (let i=0; i<contest.submitions.length; i++) {
       if (contest.submitions[i].submitionId == submitionId) {
-        contest.submitions[i].comments.push(req.body);
+        contest.submitions[i].comments.push(comment);
+        console.log('comment added');
+        console.log(comment);
         if (contest.submitions[i].status == 'Nugalėtojas') {
-          contest.winnerSubmition.comments.push(req.body);
+          contest.winnerSubmition.comments.push(comment);
         }
       }
     }

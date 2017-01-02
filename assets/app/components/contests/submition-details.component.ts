@@ -31,19 +31,21 @@ export class SubmitionDetailsComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() {  // TODO add comments to users's comments array
+  if (!this.contestsService.submitionDetails) {
+      return this.route.params.subscribe(params => {
+          this.router.navigate(['/konkursai', params['id']]);
+      });
+      //return this.router.navigate(['/konkursai']);
+  }
       this.isLoading = true;
       console.log(this.contestsService.submitionDetails);
       this.contestId = this.contestsService.submitionDetails.contestId;
       this.contest = this.contestsService.submitionDetails.contest;
       this.submition = this.contestsService.submitionDetails.submition;
       console.log('DEBUG THis.submition');
-                console.log(this.submition.submitionAuthor._id);
-    // this.route.params.subscribe((params: Params) => {
-    //   this.contestId = params['id'];
-    //   console.log('ngOnInit params id (contestId)');
-    //   console.log(this.contestId);
-    // });
-    this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
+      console.log(this.submition.submitionAuthor._id);
+
+      this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
             console.log('submitions from apiservice in submition-details');
             console.log(submitions);
@@ -56,17 +58,6 @@ export class SubmitionDetailsComponent implements OnInit {
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
-    //   console.log('ngOnInit submition details this.submitionS');
-    //   console.log(this.submitions);
-    //   this.submition = this.submitions.filter((sub) => {
-    //     console.log('sub.submitionUrl');
-    //     console.log(sub.submitionUrl);
-    //     console.log('this.submitionUrl');
-    //     console.log(this.submitionUrl);
-    //     return sub.submitionUrl == this.submitionUrl
-    //   });
-    //   console.log('ngOnInit submition details this.submition');
-    //   console.log(this.submition);
   }
 
     closed() {

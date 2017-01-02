@@ -14,18 +14,19 @@ router.get('/', function (req,res,next) {
   res.render('index');
 });
 
-router.use('/', function(req, res, next) {
-  jwt.verify(req.query.token, 'secret', function(err, decoded) {
-    if (err) {
-      console.log(err);
-      return res.status(401).json({
-        title: 'Klaida prisijungiant',
-        error: {message: 'Klaida prisijungiant'}
-      });
-    }
-    next();
-  });
-});
+// router.use('/', function(req, res, next) {
+//   jwt.verify(req.query.token, 'secret', function(err, decoded) {
+//     if (err) {
+//       console.log(err);
+//       return res.status(401).json({
+//         title: 'Klaida prisijungiant',
+//         error: {message: 'Klaida prisijungiant'}
+//       });
+//     }
+//     next();
+//   });
+// });
+//TODO use this everywhere somehow...
 
 
 

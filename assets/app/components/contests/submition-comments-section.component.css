@@ -86,12 +86,17 @@
 
 }
 
+.pad-top-30 {
+  padding-top: 30px;
+}
+
 .pad-top-100 {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .comment-wrapper {
   margin-bottom: 50px;
+  text-align: left;
 }
 
 .btn-back-wrapper {

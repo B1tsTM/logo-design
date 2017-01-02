@@ -1,27 +1,47 @@
-<h2>Comments</h2>
-<!--<div *ngIf="comments">-->
-  <div *ngIf="comments.length == 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) && isLoggedIn()">Komentarų nėra</div>
-  <div *ngIf="(comments.length > 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) || isAdmin())">
-    <div *ngFor="let comment of comments">
-      <em>{{comment?.comment}}</em>
-      <br>
-      <small> - {{comment?.commentAuthor?.nickName}}</small>
-      <br>
-      <br>
+<div class="comments-label pad-top-100">
+  <!--<h2>{{comments.length}} {{comments.length == 0 ? 'komentarų' : comments.length == 1 ? 'komentaras' : comments.length < 9 ? 'komentarai' : 'komentarų'}}</h2>-->
+  <h2>Komentarai ({{comments.length}})</h2>
+</div>
+<div *ngIf="comments.length == 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) && isLoggedIn()" class="comments-label">
+  <div class="no-comments-label">Komentarų nėra</div>
+</div>
+<!--<div class="comments-wrapper" *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >-->
+<div *ngIf="(comments.length > 0 && (isSubmitionAuthor() || isContestPublisher(contest.publisher._id)) || isAdmin())" class="comments-wrapper">
+  <div class="comment-wrapper" *ngFor="let comment of comments">
+    <div class="comment-header">
+      <div class="avatar-wrapper">
+        <img class="avatar" *ngIf="comment.commentAuthor.avatar" src="http://localhost:3000/uploads/avatars/{{comment.commentAuthor.avatar.avatarUrl}}" alt="">
+        <img class="avatar" *ngIf="!comment.commentAuthor.avatar" src="http://1.gravatar.com/avatar/75a4b9a9a72a0e950c37bb1851a68d1e?s=60&d=mm&r=g" alt="">
+      </div>
+      <div class="publisher-wrapper">
+        <div class="publisher">{{comment.commentAuthor.nickName}}</div>
+      </div>
+      <div class="date-wrapper">
+        <div class="date italic">{{comment?.commentDate | date:'short'}}</div>
+      </div>
+    </div>
+    <div class="comment-body">
+      <!--<div class="comment-text">{{comment.comment}}</div>-->
+      <pre class="comment-text">{{comment.comment}}</pre>
     </div>
   </div>
-  <div *ngIf="isSubmitionAuthor() || isContestPublisher(contest.publisher._id) || isAdmin()">   <!-- TODO to add ngIf checks -->
-    <h2>Post a comment</h2>
-    <form>
-      <textarea name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
-      <br>
-      <button type="button" class="btn btn-primary" (click)="addComment(commentField)">Pridėti komentarą</button>
-    </form>
-  </div>
-  <div *ngIf="(!isSubmitionAuthor() && !isContestPublisher(contest.publisher._id)) || !isLoggedIn()">
-    <strong>Comments are only visible to the designer and publisher</strong>
-  </div>
-<!--</div>-->
+</div>
+<div class="italic text-center pad-top-30" *ngIf="!isLoggedIn()">Komentuoti gali tik registruoti vartotojai</div>
+<div class="italic text-center pad-top-30" *ngIf="isLoggedIn() && !isContestPublisher(contest.publisher._id) && !isSubmitionAuthor() && !isAdmin()">Komentarus mato tik dizaino autorius ir konkurso savininkas</div>
+<div class="comment-box-wrapper" *ngIf="isSubmitionAuthor() || isContestPublisher(contest.publisher._id) || isAdmin()">   <!-- TODO to add ngIf checks -->
+<div class="comments-label spacing">
+  <h2>Komentuoti: </h2>
+</div>
+  <form>
+    <textarea class="comment-input" name="comment" cols="50" rows="5" [(ngModel)]="commentField"></textarea>
+    <button type="button" class="btn btn-primary pad-top-20" (click)="addComment(commentField)">Pridėti komentarą</button>
+  </form>
+</div>
+<div class="btn-back-wrapper">
+  <button type="button" class="btn btn-primary pad-top-20" (click)="goBack()">Grįžti atgal</button>
+</div>
+
+
 <simple-notifications [options]="options"></simple-notifications>
 
 <test-loader *ngIf="isLoading"></test-loader>

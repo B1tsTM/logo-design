@@ -5,13 +5,14 @@ import { ErrorService } from '../../errors/index';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
   selector: 'submition-comments-section',
-  templateUrl: 'submition-comments-section.component.html'
+  templateUrl: 'submition-comments-section.component.html',
+  styleUrls: ['submition-comments-section.component.css']
 })
 export class SubmitionCommentsSectionComponent implements OnInit {
    //public commentsForm: FormGroup;
@@ -33,6 +34,7 @@ export class SubmitionCommentsSectionComponent implements OnInit {
               private apiService: ApiService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
+              private router: Router,
               private notificationsService: NotificationsService) { 
                 
               }
@@ -90,12 +92,17 @@ export class SubmitionCommentsSectionComponent implements OnInit {
   addComment(comment: string) {
     this.isLoading = true;
     console.log(comment);
-    this.comments.push({comment: comment, commentAuthor: this.user});
+    if (!comment) {
+      this.isLoading = false;
+      this.notificationsService.info('Tuščias komentaras', 'Komentaro laukas negali būti tuščias', {timeOut: 3000, showProgressBar: true})
+    } else {
+    this.comments.push({comment: comment, commentAuthor: this.user, commentDate: Date.now()});
     this.apiService.addSubmitionComment({comment: comment, commentAuthor: this.user}, this.contestId, this.submition.submitionId)
       .subscribe(contest => {
         console.log('comments-section addComment contest var');
         console.log(contest);
-        //this.comments = comments;
+        //this.comments = contest.comments;
+        console.log(this.comments);
         this.isLoading = false;
         this.notificationsService.success('Įkelta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
       }, 
@@ -106,6 +113,7 @@ export class SubmitionCommentsSectionComponent implements OnInit {
       });
     this.commentField = '';
     console.log(this.comments);
+    }
   }
 
   isDesigner() {
@@ -131,6 +139,10 @@ export class SubmitionCommentsSectionComponent implements OnInit {
 
   isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  goBack() {
+    this.router.navigate(['/konkursai', this.contest.idName]);
   }
 
 }

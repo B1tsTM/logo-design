@@ -1,21 +1,42 @@
+<div *ngIf="contest">
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/konkursai">Konkursai</a>
+                    <a routerLink="/konkursai/{{contest.idName}}">{{contest?.idName}}</a>
+                    <a class="current">{{submition?.submitionId}}</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
 <div>
-    <h4 class="modal-title text-center">Dizaino info</h4>
-    <h3 class="text-center">Submition ID: {{submition?.submitionId}}</h3>
-    <div class="img-container">
-        <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+    <div class="label-wrapper">
+        <h2 class="text-center">Dizainas #{{submition?.submitionId}}</h2>
     </div>
-    <h3 class="text-center">Author: {{submition?.submitionAuthor?.firstName}}</h3>
+    <div class="img-container">
+        <a class="fancybox" rel="onesubmition" href="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}">
+            <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+        </a>   
+    </div>
+    <div class="label-wrapper no-margin">
+        <h3 class="text-center">Autorius - {{submition?.submitionAuthor?.nickName}}</h3>
+    </div>
     <div class="text-center">
         <star-rating class="star-rating" *ngIf="!isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="true" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
         <star-rating class="star-rating" *ngIf="isContestPublisher(contest.publisher._id)" [rating]="submition.submitionRating" [readonly]="false" [submitionId]="submition.submitionId" [contestId]="contest.idName" (ratingClicked)="onRating($event)"></star-rating>
     </div>
-    <div class="text-center" *ngIf="contest.status != 'Užbaigtas'">
-        <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn btn-info" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
-        <button *ngIf="confirmationVisible" type="button" class="btn btn-danger" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
-        <button *ngIf="confirmationVisible" type="button" class="btn btn-info" (click)="confirmationVisible = false">Atšaukti</button>
+    <div class="text-center btn-block" *ngIf="contest.status == 'Laikas baigėsi'">
+        <button *ngIf="isContestPublisher(contest.publisher._id)" type="button" class="btn-back" (click)="confirmationVisible = true">Paskelbti nugalėtoju</button>
+        <button *ngIf="confirmationVisible" type="button" class="btn-confirm" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
+        <button *ngIf="confirmationVisible" type="button" class="btn-cancel" (click)="confirmationVisible = false">Atšaukti</button>
     </div>
-    <button *ngIf="contest" type="button" class="btn btn-default" (click)="goBack()">Grįžti atgal</button>
-    <br>
+    <!--<div class="button-wrapper">
+        <button *ngIf="contest" type="button" class="btn-back" (click)="goBack()">Grįžti atgal</button>
+    </div>
+    <br>-->
     <!--<h3>Comments:</h3>
     <div *ngIf="submition.comments.length == 0">Nėra komentarų</div>
     <div *ngIf="submition.comments.length > 0">
@@ -28,6 +49,7 @@
     <div class="comments-section" *ngIf="submition">
         <submition-comments-section [contest]="contest" [submition]="submition"></submition-comments-section>
     </div>
+</div>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

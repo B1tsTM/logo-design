@@ -19,7 +19,7 @@ div.tab:hover {
 .btn-back:hover {
   background-color: #2b3542;
   color: #fff;
-  border: 1px solid #2b3542;
+  /*border: 1px solid #2b3542;*/
 }
 
 .btn-wrapper {
