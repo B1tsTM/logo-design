@@ -52,6 +52,7 @@ pre.message-body {
   padding: 0;
   margin: 0;
   line-height: 1em;
+  overflow-y: hidden;
 }
 
 .button-back-wrapper {

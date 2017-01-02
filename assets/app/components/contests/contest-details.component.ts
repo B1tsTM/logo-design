@@ -60,13 +60,8 @@ export class ContestDetailsComponent implements OnInit {
         this.additionalFiles = contest.additionalFiles;
         console.log('contest-details.component.ts this.contest');
         console.log(this.contest);
-      }, 
-      error => {
-          //this.errorService.handleError(error);
-          this.isLoading = false;
-          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-      });
-    this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
+        //START
+        this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
             console.log('submitions from apiservice in contest-details');
             console.log(submitions);
@@ -106,6 +101,15 @@ export class ContestDetailsComponent implements OnInit {
            this.isLoading = false;
           this.notificationsService.info(error.title, error.error.message, {timeOut: 3000, showProgressBar: false}) 
         })
+        //END
+      }, 
+      error => {
+          //this.errorService.handleError(error);
+          this.isLoading = false;
+          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+          this.router.navigate(['/konkursai']);
+      });
+    
 
   } //End of ngOnInit
 

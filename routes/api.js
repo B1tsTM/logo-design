@@ -264,13 +264,19 @@ router.get('/konkursai/:id', function(req,res,next) {
   Contest.findOne({'idName': id})
     .populate('publisher')
     .exec(function(err, docs) {
+      if (!docs) {
+        return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Tokio konkurso nėra'}
+        }); 
+      }
       console.log('/konkursai/:id contest');
       console.log(docs);
       if (err) {
         console.log(err);
       return res.status(404).json({
         title: 'Klaida !',
-        error: {message: 'Įvyko klaida'}
+        error: {message: 'Tokio konkurso nėra'}
       });
       }
       res.status(200).json({
