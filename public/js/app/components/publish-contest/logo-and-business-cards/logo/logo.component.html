@@ -2,7 +2,8 @@
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
-					<a (click)="backToList()">Visos kategorijos</a>
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a (click)="backToList()">Kategorijos</a>
 					<a class="current">Logotipas</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
@@ -195,7 +196,7 @@
       <hr class="sep" />
 
 			<div *ngIf="isClient() && isEmailConfirmed()" class="publish-contest-button">
-				<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+				<button type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą">Paskelbti konkursą</button>
 			</div>
 			<div *ngIf="isClient() && !isEmailConfirmed()">
 				<h4>Kad galėtumėt paskelbti konkursą, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h4>

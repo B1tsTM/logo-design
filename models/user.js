@@ -36,6 +36,7 @@ var schema = new Schema({
   },
   ip: {type: String},
   emailConfirmed: {type: Boolean},
+  dateRegistered: {type: Date},
   userBlocked: {type: Boolean, default: false} //TODO implement this
 });
 

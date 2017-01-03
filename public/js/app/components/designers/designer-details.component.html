@@ -89,6 +89,15 @@
         <p>{{designer?.galleryUrls.length}}</p>
       </div>
     </div> 
+    <hr>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Užsiregistravo</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{designer?.dateRegistered | date: 'shortDate'}}</p>
+      </div>
+    </div> 
     </div>
   </div> <!-- end of content-wrapper -->
     <div *ngIf="designer.userType == 'dizaineris'" class="gallery-label-wrapper">

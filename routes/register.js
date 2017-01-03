@@ -66,7 +66,8 @@ router.post('/', function(req, res, next) {
     designsCreated: 0,
     //publicDesigns: 0,
     ip: ip,
-    emailConfirmed: false
+    emailConfirmed: false,
+    dateRegistered: Date.now()
   });
   } else { // client
   user = new User({
@@ -77,7 +78,8 @@ router.post('/', function(req, res, next) {
     email: req.body.email,
     userType: req.body.userType,
     ip: ip,
-    emailConfirmed: false
+    emailConfirmed: false,
+    dateRegistered: Date.now()
     });
   };
   user.profile.profileUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName;
