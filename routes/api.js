@@ -903,6 +903,7 @@ router.patch('/contests/:contestId/extend', function(req,res,next) {
     var endDate = new Date(dateNow.getTime() + (req.body.days * 24 * 60 * 60 * 1000));
     contest.endDate = endDate;
     contest.status = "Pratęstas";
+    contest.award += 10;
     contest.save(function(err, result) {
       if (err) {
         console.log(err);

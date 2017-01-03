@@ -1,61 +1,3 @@
-<!--
-<div class="header">
-  <div class="container">
-    <div class="steps-title">
-      <h2>Dizainų konkursai</h2>
-    </div>
-    <div class="steps">
-      <div class="step-1">
-        <strong>1</strong>
-        <div style="font-size: 20px">Užsiregistruokite</div>
-      </div>
-      <div class="arrow">
-        →
-      </div>
-      <div class="step-2">
-        <strong>2</strong>
-        <div style="font-size: 20px">Pateikite dizaino aprašymą</div>
-      </div>
-      <div class="arrow">
-        →
-      </div>
-      <div class="step-3">
-        <strong>3</strong>
-        <div style="font-size: 20px">Išsirinkite geriausią dizainą</div>
-      </div>
-    </div> 
-
-    <ul>
-      <li><a routerLink="/profilis" routerLinkActive="active">Profilis</a></li> 
-    </ul>
-
-    <div class="gallery">
-      <h2>Darbų galerija</h2>
-      <div class="logo-gallery">
-        <ul>
-          <li class="logo-img"><a class="thumbnail" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcL94wvQMzk0lsb208Jskly47DDcEzhxr5Wyv_0KKBDMAh9n-l4A" alt="img"></a></li>
-          <li class="logo-img"><a class="thumbnail" href="#"><img src="https://s-media-cache-ak0.pinimg.com/236x/cb/36/cf/cb36cf757d259d106960795c587f5b27.jpg" alt="img"></a></li>
-          <li class="logo-img"><a class="thumbnail" href="#"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSWOPVjP9EjNuOFjqJ2C721UuGsOv9TPaeVb61CpKZqvh1CJPOg" alt="img"></a></li>
-          <li class="logo-img"><a class="thumbnail" href="#"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSYdon9K46TgARnnVu85ZbGRFHjBiHACOd4pRHT2-HyAEjARZUL" alt="img"></a></li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</div>
--->
-
-<!--<section class="app-headline">
-		<div class="row">
-			<div class="column small-12">
-				<div class="app-breadcrumbs">
-					<a routerLink="/kategorijos" routerLinkActive="active">Visos kategorijos</a>
-					<a class="current">Logotipo dizainas</a>
-				</div>
-			</div>
-		</div>
-	</section>-->
-
 	<section class="app-headline">
 		<div class="row">
 			<div class="column small-12">
@@ -85,12 +27,12 @@
 				<div class="action-bar">
 					<div class="table-actions">
 						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
-							<i class="fa fa-rotate-left"></i>
+							<i class="fa fa-star"></i>
 							<span>Aktyvūs</span>
 							<span class="label">{{allActiveContests.length}}</span>
 						</div><!-- .tab -->
 						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
-							<i class="fa fa-star"></i>
+							<i class="fa fa-check"></i>
 							<span>Užbaigti</span>
 							<span class="label">{{allFinishedContests.length}}</span>
 						</div><!-- .tab -->

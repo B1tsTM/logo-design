@@ -1,46 +1,13 @@
-<!--<div class="row spacing">
-
-  <div class="col-md-8 col-md-offset-2 pad-10">
-          <div *ngFor="let contest of contests">
-    <div class="panel panel-default">
-
-        <div class="panel-body">
-            {{ contest.name }}
-        </div>
-        <div class="panel-footer">   
-          <div class="author">         
-            {{ contest.category }} - {{ contest.publisher.firstName }} - <a [routerLink]="['/konkursai', contest.idName]">Info</a>
-          </div>
-        </div>    
-      </div>
-    </div>
-  </div>
-</div>-->
-
 <section class="app-headline">
-		<div class="row">
-			<div class="column small-12">
-				<div class="app-breadcrumbs">
-					<a routerLink="/">Pagrindinis puslapis</a>
-					<a class="current">Konkursai</a>
-				</div><!-- .breadcrumbs -->
-			</div><!-- .column small-12 -->
-		</div><!-- .row -->
-	</section><!-- .app-headline -->
-
-	<!--<section class="app-innernav">
-		<div class="row">
-			<div class="column small-12">
-				<nav class="inner-navigation">
-					<ul>
-						<li><a routerLink="/kategorijos" href="#">Kategorijos</a></li>
-						<li class="current"><a >Aktyvūs konkursai</a></li>
-						<li><a >Užbaigti konkursai</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</section>-->
+	<div class="row">
+		<div class="column small-12">
+			<div class="app-breadcrumbs">
+				<a routerLink="/">Pagrindinis puslapis</a>
+				<a class="current">Konkursai</a>
+			</div><!-- .breadcrumbs -->
+		</div><!-- .column small-12 -->
+	</div><!-- .row -->
+</section><!-- .app-headline -->
 
 	<section class="app-main">
 		<div class="row">
@@ -50,7 +17,7 @@
 					<span class="subtitle">Peržvelkite naujausius konkursus žemiau</span>
 					
 					<!-- This one is aligned to the right. -->
-					<a class="see-faq">Kilus klausimams pažiūrėkite D.U.K. skiltį</a>
+					<a routerLink="/kaip-tai-veikia" class="see-faq">Kilus klausimams pažiūrėkite D.U.K. skiltį</a>
 				</div><!-- .page-headline -->
 			</div><!-- .columns small-12 -->
 		</div><!-- .row -->
@@ -61,12 +28,12 @@
 				<div class="action-bar">
 					<div class="table-actions">
 						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
-							<i class="fa fa-rotate-left"></i>
+							<i class="fa fa-star"></i>
 							<span>Aktyvūs</span>
 							<span class="label">{{allActiveContests.length}}</span>
 						</div><!-- .tab -->
 						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
-							<i class="fa fa-star"></i>
+							<i class="fa fa-check"></i>
 							<span>Užbaigti</span>
 							<span class="label">{{allFinishedContests.length}}</span>
 						</div><!-- .tab -->
@@ -94,26 +61,6 @@
 						<strong class="time-remaining">Konkurso pabaiga</strong>
 					</header><!-- .table-header -->
 
-					<!--<div class="table-row premium">
-						<div class="status">
-							<span class="active">Aktyvus</span>
-						</div>
-						<div class="category">
-							<span>Logotipas</span>
-						</div>
-						<div class="name">
-							<span>ACME Logotipas</span>
-						</div>
-						<div class="price">
-							<span>199 EUR</span>
-						</div>
-						<div class="submitions">
-							<span>15</span>
-						</div>
-						<div class="time-remaining">
-							<span>1 diena</span>
-						</div>
-					</div>-->
 						<div *ngIf="contests.length == 0" class="table-row">
 							<span class="no-contests-label">Konkurso nerasta</span>
 						</div>

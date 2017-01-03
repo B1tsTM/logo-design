@@ -1,4 +1,68 @@
-<h1>My contests</h1>
+<section class="app-headline">
+  <div class="row">
+    <div class="column small-12">
+      <div class="app-breadcrumbs">
+        <a routerLink="/">Pagrindinis puslapis</a>
+        <a class="current">Mano konkursai</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Mano konkursų sąrašas</h2><!-- .headline -->
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<div class="table-primary">
+					<header class="table-header">
+						<strong class="status">Būsena</strong>
+						<strong class="name">Pavadinimas</strong>
+						<strong class="category">Kategorija</strong>
+						<strong class="price">Prizas</strong>
+						<strong class="submitions">Įkelta dizainų</strong>
+						<strong class="time-remaining">Konkurso pabaiga</strong>
+					</header><!-- .table-header -->
+
+						<div *ngIf="contests.length == 0" class="table-row">
+							<span class="no-contests-label">Konkursų nerasta</span>
+						</div>
+					
+						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
+							<div class="status">
+								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status ==  'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas'}">{{contest.status}}</span>
+							</div>
+							<div class="name">
+								<span>{{contest.name}}</span>
+							</div>
+							<div class="category">
+								<span>{{contest.category}}</span>
+							</div>
+							<div class="price">
+								<span>{{contest.award | currency:'EUR':true:'2.0-2'}}</span>
+							</div>
+							<div class="submitions">
+								<span>{{contest.submitions.length}}</span>
+							</div>
+							<div class="time-remaining">
+								<span>{{contest.endDate | localDateFromNow}}</span>
+							</div>
+						</div>
+					
+				</div><!-- .primary-table -->
+				<pagination-controls (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+</section><!-- .app-main -->
+
+
+<!--<h1>My contests</h1>
 
 <div class="col-md-8 col-md-offset-2 pad-10">
   <div class="container" *ngIf="contests.length == 0">No contests published</div>
@@ -14,13 +78,12 @@
             Description: {{contest.description}} Award: {{contest.award}} Publisher: {{contest.publisher.firstName}} View Contest: <a [routerLink]="['/konkursai', contest.idName]">Details</a>
           </div>
           <div class="config" *ngIf="belongsToUser(contest.publisher._id)">
-          <!-- <a (click)="editContest(contest)">Edit</a> -->
           <a (click)="deleteContest(contest)">Delete</a>
         </div>
         </div>    
       </div>
     </div>
-  </div>
+  </div>-->
 
   <simple-notifications [options]="options"></simple-notifications>
 

@@ -1,33 +1,30 @@
-						<ul>
-							<li *ngIf="!isLoggedIn()" class="login"><a (click)="loginModal.open()">Login</a></li>
-							<li *ngIf="!isLoggedIn()" class="register"><a (click)="registerModal.open()">Register</a></li>
-                         
-							<li class="user" *ngIf="isLoggedIn()">
-								Sveiki, {{nickname}}
-								<i class="fa fa-caret-down"></i>
+<ul>
+    <li *ngIf="!isLoggedIn()" class="login"><a (click)="loginModal.open()">Login</a></li>
+    <li *ngIf="!isLoggedIn()" class="register"><a (click)="registerModal.open()">Register</a></li>
+    
+    <li class="user" *ngIf="isLoggedIn()">
+        Sveiki, {{nickname}}
+        <i class="fa fa-caret-down"></i>
 
-								<ul class="dropdown">
-									<li class="settings">
-										<a routerLink="/profilis" routerLinkActive="active">Profilis<i class="fa fa-user"></i></a>
-									</li>
-                                    <li class="settings">
-										<a routerLink="/profilis/pastas" routerLinkActive="active">Žinutės<i class="fa fa-envelope"></i></a>
-									</li>
-                                    <li class="settings" *ngIf="isClient()">
-										<a routerLink="/mano-konkursai" routerLinkActive="active">Mano Konkursai(client)<i class="fa fa-bars"></i></a>
-									</li>
-                                    <li class="settings" *ngIf="isDesigner()">
-										<a routerLink="/mano-konkursai" routerLinkActive="active">Mano Konkursai(designer)<i class="fa fa-bars"></i></a>
-									</li>
-                                    <li class="settings" *ngIf="isAdmin()">
-										<a routerLink="/admin" routerLinkActive="active">Admin valdymo pultas<i class="fa fa-bars"></i></a>
-									</li>
-									<li class="logout">
-										<a (click)="logout()" href="#">Atsijungti <i class="fa fa-sign-out"></i></a>
-									</li>
-								</ul>
-							</li>
-						</ul>
+        <ul class="dropdown">
+            <li class="settings">
+                <a routerLink="/profilis" routerLinkActive="active">Profilis<i class="fa fa-user"></i></a>
+            </li>
+            <li class="settings">
+                <a routerLink="/profilis/pastas" routerLinkActive="active">Žinutės<i class="fa fa-envelope"></i></a>
+            </li>
+            <li class="settings" *ngIf="isClient()">
+                <a routerLink="/mano-konkursai" routerLinkActive="active">Mano konkursai<i class="fa fa-bars"></i></a>
+            </li>
+            <li class="settings" *ngIf="isAdmin()">
+                <a routerLink="/admin" routerLinkActive="active">Admin valdymo pultas<i class="fa fa-bars"></i></a>
+            </li>
+            <li class="logout">
+                <a (click)="logout()" href="#">Atsijungti <i class="fa fa-sign-out"></i></a>
+            </li>
+        </ul>
+    </li>
+</ul>
 
 <modal [animation]="animation" [keyboard]="keyboard" [size]="sm" [backdrop]="backdrop" (onClose)="closed()" (onDismiss)="dismissed()"
         (onOpen)="opened()" cssClass=".modal-login" #loginModal>

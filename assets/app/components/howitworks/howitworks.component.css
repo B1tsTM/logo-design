@@ -1,0 +1,21 @@
+.body-wrapper {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.warning-wrapper {
+  font-style: italic;
+}
+
+li {
+  list-style-type: decimal;
+}
+
+.label-wrapper {
+  margin: 30px 0;
+}
+
+.description {
+  line-height: 1.9em;
+}
+
