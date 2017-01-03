@@ -19,7 +19,7 @@ import { NavbarComponent, HeaderComponent, FooterComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
   ContestDetailsComponent, MailListComponent, MailCreateComponent, MailCreateForUserComponent,
   ReadMessageComponent, SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent, SubmitionCommentsSectionComponent,
+  TestSpinnerComponent, WinnerDetailsComponent, SubmitionCommentsSectionComponent,
   AdminDashboardComponent, AdminManageContestsComponent, AdminContestDetailsComponent,
   DesignerDetailsComponent, MicroGalleryComponent, ConfirmUserComponent } from './components/index';
 import { UserNavigationComponent } from './components/navbar/user-navigation.component';
@@ -40,6 +40,7 @@ import { PublishContestModule } from './components/publish-contest/publish-conte
 import { ErrorComponent, ErrorService } from './errors/index';
 
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { SharedModule } from './components/shared/shared.module';
 
 import { LocalDateFromNowPipe } from './pipes/local-date-from-now-pipe';
 import { LocalDateStandartPipe } from './pipes/local-date-standart-pipe';
@@ -52,7 +53,7 @@ const WINDOW_PROVIDER: ValueProvider = {
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
-             routing, MaterialModule.forRoot(), 
+             routing, MaterialModule.forRoot(), SharedModule, 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
              TabViewModule, CategoriesModule, Ng2Bs3ModalModule,
              SimpleNotificationsModule, AutoCompleteModule, Ng2PaginationModule ],
@@ -66,7 +67,7 @@ const WINDOW_PROVIDER: ValueProvider = {
                   SubmitionDetailsComponent, CommentsSectionComponent, MailListComponent,
                   MailCreateComponent, MailCreateForUserComponent, ReadMessageComponent,
                   SentMailComponent, FadingSpinnerComponent, FadingCircleComponent,
-                  TestSpinnerComponent, TestLoaderComponent, WinnerDetailsComponent,
+                  TestSpinnerComponent, WinnerDetailsComponent,
                   SubmitionCommentsSectionComponent, AdminDashboardComponent, AdminManageContestsComponent,
                   AdminContestDetailsComponent, DesignerDetailsComponent, MicroGalleryComponent, ConfirmUserComponent,
                   TruncateStringPipe],

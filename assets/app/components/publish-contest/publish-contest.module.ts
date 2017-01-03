@@ -31,7 +31,7 @@ import { CosmeticsProductsLabelOrPackagingDesignComponent, DrinkLabelDesignCompo
          FoodProductsLabelOrPackagingDesignComponent, OtherProductsLabelOrPackagingDesignComponent } from './packaging-and-label/index';
 import { BookCoverDesignComponent, EBookCoverDesignComponent, MagazineCoverDesignComponent } from './books-and-magazines/index';
 import { OtherDesignsComponent } from './other-designs/other-designs.component';
-import { TestLoaderComponent } from '../shared/test-loader.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 import { publishContestRouting } from './publish-contest.routing';
@@ -39,7 +39,8 @@ import { publishContestRouting } from './publish-contest.routing';
 @NgModule({
   imports: [
     CommonModule, InputTextModule, ReactiveFormsModule, FormsModule,
-    publishContestRouting, SimpleNotificationsModule, MaterialModule.forRoot()
+    publishContestRouting, SimpleNotificationsModule, MaterialModule.forRoot(),
+    SharedModule
   ],
   declarations: [
     PublishContestDashboardComponent, BusinessCardComponent, LogoComponent, LogoAndBusinessCardComponent,
