@@ -35,7 +35,8 @@ const appRoutes: Routes = [
   { path: 'mano-konkursai', children: [
     {path: '', component: MyContestsComponent}
   ] },
-  { path: 'paskelbti-konkursa', component: PublishContestComponent },
+  //{ path: 'paskelbti-konkursa', component: PublishContestComponent },
+  { path: 'paskelbti-konkursa', loadChildren: 'js/app/components/publish-contest/publish-contest.module#PublishContestModule' },
   { path: 'kategorijos', component: CategoriesComponent },
   { path: 'nugaletoju-galerija', component: WinnersGalleryComponent },
   { path: 'dizaineriai', children: [

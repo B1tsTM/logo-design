@@ -28,8 +28,7 @@ import { OtherDesignsComponent } from './other-designs/other-designs.component';
 
 const publishContestRoutes: Routes = [
   {
-    path: 'paskelbti-konkursa',
-    component: PublishContestComponent,
+    path: '',
     children: [
       // Logotipai, Verslo korteles
       { path: 'verslo-korteles-dizainas', component: BusinessCardComponent },

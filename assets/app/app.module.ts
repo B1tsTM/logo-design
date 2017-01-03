@@ -54,7 +54,7 @@ const WINDOW_PROVIDER: ValueProvider = {
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
              routing, MaterialModule.forRoot(), 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
-             TabViewModule, CategoriesModule, PublishContestModule, Ng2Bs3ModalModule,
+             TabViewModule, CategoriesModule, Ng2Bs3ModalModule,
              SimpleNotificationsModule, AutoCompleteModule, Ng2PaginationModule ],
   declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
                   FooterComponent, CategoriesComponent, DesignersComponent, 
