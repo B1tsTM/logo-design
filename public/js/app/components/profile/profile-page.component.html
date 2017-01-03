@@ -198,7 +198,7 @@
   </div>
 
   <div *ngIf="user" class="gallery-block">
-    <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><h4>Dizainų nėra</h4></div>
+    <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><div>Dizainų nėra</div></div>
   <div class="thumbnail-row" *ngIf="user.galleryUrls.length > 0">
     <div class="inline-block thumbnail-container" *ngFor="let image of user.galleryUrls | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">

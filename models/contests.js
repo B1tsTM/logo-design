@@ -54,6 +54,7 @@ var schema = new Schema({
     commentAuthor: {type: Schema.Types.ObjectId, ref: 'User'},
     commentDate: {type: String}
   }],
+  isPrivate: {type: Boolean},
   startDate: {
     type: Date, default: Date.now()
   },

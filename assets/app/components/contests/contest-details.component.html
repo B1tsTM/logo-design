@@ -11,7 +11,7 @@
 	</section>
 
 
-<div class="text-center italic" *ngIf="!contest"><div>Kraunama...</div></div>
+<div class="text-center italic pad-top-50" *ngIf="!contest"><div>Kraunama...</div></div>
 <div *ngIf="contest">  
 
 <div class="section-name">
@@ -22,6 +22,12 @@
   <h2 class="text-center">Statusas: <span class="section-status-span" [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status == 'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas', 'cancelled': contest.status == 'Atšauktas', 'unconfirmed': contest.status == 'Nepatvirtintas'}">{{contest.status}}</span></h2>
 </div>
 
+<div class="text-center pad-top-50" *ngIf="contest.isPrivate && !isDesigner() && !isContestPublisher(contest.publisher._id) && !isAdmin()">
+  <h3>Šis konkursas privatus !</h3>
+</div>
+
+<div *ngIf="!contest.isPrivate || (isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin())"> <!-- private check -->
+
 <div class="description-wrapper"> <!-- start of description block -->
   <div class="description-block">
     <div class="project-name">
@@ -29,6 +35,15 @@
     </div>
     <div class="project-name-text">
       <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
     </div>
   </div>
   <hr>
@@ -186,7 +201,8 @@
     <div class="inline-block thumbnail-container" *ngFor="let submition of submitions | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
       <div class="mini-image-container">
       <div class="pad-left-60">Dizainas: #{{submition.submitionId}}</div>
-      <img class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
+      <img *ngIf="contest.status == 'Užbaigtas' || contest.status == 'Laikas baigėsi' || isAdmin() || isContestPublisher(contest.publisher._id) || isDesignAuthor(submition.submitionAuthor._id)" class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
+      <img *ngIf="contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isAdmin() && !isContestPublisher(contest.publisher._id) && !isDesignAuthor(submition.submitionAuthor._id)" class="mini-image" src="http://localhost:3000/uploads/common/lock.png" alt="Submition">
       <br>
       <span class="pad-left-60">Autorius: {{submition.submitionAuthor.nickName}}</span>
       <div>
@@ -195,8 +211,8 @@
       </div>
       <span class="pad-left-60" *ngIf="submition.comments">{{submition.comments.length}} {{submition.comments.length == 0 ? 'komentarų' : submition.comments.length == 1 ? 'komentaras' : submition.comments.length < 10 ? 'komentarai' : 'komentarų'}}</span>
       <!--<submition-details [contestId]="contestId" [contest]="contest" [submition]="submition"></submition-details>-->
+      </div>
     </div>
-  </div>
   </div>
   <pagination-controls *ngIf="submitions.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
   <br>
@@ -236,6 +252,8 @@
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>
   </div>
+
+</div> <!-- end of private check -->
   
 </div>
 

@@ -146,3 +146,28 @@ textarea:focus {
   font-weight: normal;
   text-decoration: none;
 }
+
+.checkbox-input {
+  padding-right: 80px;
+  padding-top: 16px;
+}
+
+/* FF fix to remove auto-applying red border on required inputs */
+input:-moz-placeholder,
+input:focus {
+    box-shadow:none !important;
+}
+
+input:invalid {
+    box-shadow:0 0 2px 1px transparent;
+}
+
+textarea:-moz-placeholder,
+textarea:focus {
+    box-shadow:none !important;
+}
+
+textarea:invalid {
+    box-shadow:0 0 2px 1px transparent;
+}
+/* end of FF fix */

@@ -136,6 +136,14 @@ export class ContestDetailsComponent implements OnInit {
   isEmailConfirmed() {
       return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();;
   }
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
+  isDesignAuthor(designerId) {
+      var userId = sessionStorage.getItem('userId');
+        return designerId == userId;
+  }
 
   //FILE UPLOAD STUFF
 

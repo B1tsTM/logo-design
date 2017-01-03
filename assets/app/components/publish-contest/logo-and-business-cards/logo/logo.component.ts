@@ -20,6 +20,11 @@ export class LogoComponent implements OnInit {
       position: ["top","right"]
     };
 
+  // public toggles = [
+  //   { value: 'toggled', display: 'Toggled' },
+  //   { value: 'untoggled', display: 'UnToggled' },
+  // ];
+
   constructor(private router: Router,
               private contestsService: ContestsService,
               private notificationsService: NotificationsService,
