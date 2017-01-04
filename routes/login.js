@@ -31,6 +31,12 @@ router.post('/', function(req, res, next) {
         error: {message: 'Neteisingas slaptažodis'} // TODO add generic message for production
       });
     }
+    if (doc.userBlocked) {
+      return res.status(401).json({
+        title: 'Jūs esate užblokuotas !',
+        error: {message: 'Prašome susisiekti su administracija'} // TODO add generic message for production
+      });
+    }
     // if (doc.emailConfirmed == false) {
     //   return res.status(401).json({
     //     title: 'Negalima prisijungti !',

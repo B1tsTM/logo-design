@@ -1,0 +1,111 @@
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/admin">Valdymo pultas</a>
+					<a routerLink="/admin/konkursai">Vartotojai</a>
+          <a class="current">{{user?.nickName}}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<div class="text-center italic" *ngIf="!user"><div>Kraunama...</div></div>
+
+<div *ngIf="user" class="body-wrapper">
+    <div class="content-wrapper">
+    <div class="avatar-block">
+      <div class="avatar-container">
+        <img class="mini-avatar" *ngIf="user.avatar" src="http://localhost:3000/uploads/avatars/{{user.avatar.avatarUrl}}" alt="Avataras">
+        <img class="mini-avatar" *ngIf="!user.avatar" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Nėra avataro">
+        <div class="avatar-text">
+          <div class="avatar-nickname">
+            <h2>{{user?.nickName}}</h2>
+          </div>
+          <div class="avatar-message">
+            <i class="fa fa-envelope" (click)="sendPrivateMessage(user.nickName)"></i>
+            <!--<i class="fa fa-envelope" (click)="goToMail()"></i>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="file-upload-wrapper">
+      <label for="file-upload" class="custom-file-upload">
+        <i class="fa fa-cloud-upload"></i> Pakeisti avatarą
+      </label>
+      <input type="file" id="file-upload" (change)="fileChangeEvent($event)"/>
+      <div *ngIf="filesToUpload.length > 0" class="confirm-avatar-wrapper">
+        <button (click)="upload()" class="confirm-avatar-button" type="button">Patvirtinti</button>
+      </div>
+    </div>   -->
+  <hr class="divider">
+
+  <div class="description-wrapper"> <!-- start of description block -->
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Vartotojas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{user?.firstName}} {{user?.lastName}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Slapyvardis</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{user?.nickName}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Statusas</h3>
+      </div>
+      <div class="project-name-text">
+
+          <span class="section-status-span" [ngClass]="{'active': !user.userBlocked, 'finished': user.userBlocked}">{{user.userBlocked ? 'Užblokuotas' : 'Aktyvus'}}</span>
+          <div *ngIf="!user.userBlocked" class="block-button-wrapper"><button (click)="blockUser(user.nickName)" class="block-button">Užblokuoti vartotoją</button></div>
+        <div *ngIf="user.userBlocked" class="unblock-button-wrapper"><button (click)="unblockUser(user.nickName)" class="unblock-button">Atblokuoti vartotoją</button></div>
+
+      </div>
+    </div>
+    <hr>
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Užsiregistravo</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{user?.dateRegistered | date: 'shortDate'}}</p>
+      </div>
+    </div> 
+    </div>
+  </div> <!-- end of content-wrapper -->
+    <div *ngIf="user.userType == 'dizaineris'" class="gallery-label-wrapper">
+      <div class="gallery-label">
+        <h2>Galerija</h2>
+      </div>
+    </div>
+
+    <div *ngIf="user && user.userType == 'dizaineris'" class="gallery-block">
+      <div class="no-winners" *ngIf="user.galleryUrls.length == 0"><div>Dizainų nėra</div></div>
+    <div class="thumbnail-row" *ngIf="user.galleryUrls.length > 0">
+      <div class="inline-block thumbnail-container" *ngFor="let image of user.galleryUrls | paginate: {id: 'one', itemsPerPage: 10, currentPage: p1}">
+        <div class="mini-image-container">
+      <a class="fancybox" rel="personalgallery" href="http://localhost:3000/uploads/gallery/{{user._id}}/{{image}}">
+        <img class="mini-image" src="http://localhost:3000/uploads/gallery/{{user._id}}/{{image}}" alt="Submition"> <!-- (click)="winnerModal.open()" -->
+      </a>
+      </div>
+    </div>
+    </div>
+    <pagination-controls *ngIf="user.galleryUrls.length > 10" id="one" (pageChange)="p1 = $event" directionLinks="false" #api1></pagination-controls>
+    </div>
+  </div> <!-- end of description block -->
+
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<test-loader *ngIf="isLoading"></test-loader>

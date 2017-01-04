@@ -109,10 +109,6 @@ img:hover {
     font-weight: bold;
 }
 
-span.finished {
-  background-color: #b3130c;
-  color: white;
-}
 
 span.cancelled {
   background-color: black;
@@ -132,6 +128,11 @@ span.resumed {
 span.active {
   background-color: #5ea54d !important;
   color: white !important;
+}
+
+span.finished {
+  background-color: #b3130c;
+  color: white;
 }
 
 .winner-extra-info {

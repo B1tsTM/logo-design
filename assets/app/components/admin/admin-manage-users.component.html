@@ -1,0 +1,87 @@
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a routerLink="/admin">Valdymo pultas</a>
+					<a class="current">Vartotojai</a>
+				</div><!-- .breadcrumbs -->
+			</div><!-- .column small-12 -->
+		</div><!-- .row -->
+	</section><!-- .app-headline -->
+
+	<section class="app-main">
+		<div class="row">
+			<div class="columns small-12">
+				<div class="page-headline">
+					<h2 class="title">Vartotojų sąrašas</h2><!-- .headline -->
+				</div><!-- .page-headline -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<!-- The component that switches tables, searches, has new request button -->
+				<div class="action-bar">
+					<div class="table-actions">
+						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
+							<i class="fa fa-rotate-left"></i>
+							<span>Aktyvūs</span>
+              <span class="label">({{allActiveUsers.length}})</span>
+						</div><!-- .tab -->
+						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
+							<i class="fa fa-star"></i>
+							<span>Užblokuoti</span>
+              <span class="label">({{allBannedUsers.length}})</span>
+						</div><!-- .tab -->
+
+						<div class="table-search">
+							<i class="fa fa-search"></i>
+							<input [hidden]="secondTabActive" type="text" class="search" placeholder="Ieškoti vartotojo" #search /> <!--(keyup)="filterContests(search.value)"-->
+							<input [hidden]="firstTabActive" type="text" class="search" placeholder="Ieškoti vartotojo" #searchfilter /> <!--(keyup)="filterContests(search.value)"-->
+							<input type="submit" value="Search" />
+						</div><!-- .search -->
+					</div><!-- .table-actions -->
+				</div><!-- .table-center -->
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+
+		<div class="row">
+			<div class="columns small-12">
+				<div class="table-primary">
+					<header class="table-header">
+						<strong class="name">Avataras</strong>
+						<strong class="status">Statusas</strong>
+						<strong class="category">Vartotojas</strong>
+					</header><!-- .table-header -->
+
+						<div *ngIf="users.length == 0" class="table-row">
+							<span class="no-contests-label">Vartotojų nerasta</span>
+						</div>
+					
+						<div *ngFor="let user of users | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToUserDetails(user.nickName)">
+              <div class="name">
+                <span class="avatar-container" *ngIf="user.avatar"><img class="micro-avatar" src="http://localhost:3000/uploads/avatars/{{user.avatar.avatarUrl}}" alt="Avataras"></span>
+								<span class="avatar-container" *ngIf="!user.avatar"><img class="micro-avatar" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Avataras"></span>
+							</div>
+							<div class="status">
+								<span [ngClass]="{'active': !user.userBlocked, 'finished': user.userBlocked}">{{user.userBlocked ? 'Užblokuotas' : 'Aktyvus'}}</span>
+							</div>
+							<div class="category">
+								<span>{{user.nickName}}</span>
+							</div>
+						</div>
+					
+				</div><!-- .primary-table -->
+				<pagination-controls (pageChange)="p = $event" directionLinks="false" #api></pagination-controls>
+			</div><!-- .columns small-12 -->
+		</div><!-- .row -->
+</section><!-- .app-main -->
+
+<div class="btn-back-wrapper">
+    <button class="btn" type="button" (click)="goBackToAdminPanel()">Grįžti atgal</button>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
+
+<test-loader *ngIf="isLoading"></test-loader>

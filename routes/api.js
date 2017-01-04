@@ -258,6 +258,80 @@ router.get('/konkursai/filter/:searchString', function(req,res,next) {
     });
 });
 
+router.get('/users/filter/:searchString', function(req,res,next) {
+  var searchString = req.params.searchString;
+  User.find({nickName: new RegExp(searchString, 'i')})
+    //.populate('publisher')
+    .sort({nickName : 1})
+    .exec(function(err, docs) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      //console.log('Filtered contests:');
+      //console.log(docs);
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
+router.get('/users/all', function(req,res,next) {
+  var searchString = req.params.searchString;
+  User.find()
+    //.populate('publisher')
+    .sort({nickName : 1})
+    .exec(function(err, docs) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      //console.log('Filtered contests:');
+      //console.log(docs);
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
+router.get('/users/single/:nickname', function(req,res,next) {
+  var nickname = req.params.nickname;
+  //Contest.findById(id)
+  User.findOne({'nickName': nickname})
+    //.populate('publisher')
+    .exec(function(err, docs) {
+      if (!docs) {
+        return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Tokio vartotojo nėra'}
+        }); 
+      }
+      console.log('/users/single/:nickname users');
+      console.log(docs);
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Tokio vartotojo nėra'}
+      });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: docs
+      });
+    });
+});
+
+
+
 router.get('/konkursai/:id', function(req,res,next) {
   var id = req.params.id;
   //Contest.findById(id)
@@ -1041,6 +1115,42 @@ router.patch('/contests/update/status/:contestId', function(req, res, next) {
     }
     contest.status = req.body.status;
     contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(201).json({
+        message: 'Statusas pakeistas',
+        obj: result
+      });
+    });
+  });
+});
+
+router.patch('/users/update/status/:nickname', function(req, res, next) {
+  var decoded = jwt.decode(req.query.token);
+  var nickname = req.params.nickname;
+  if (decoded.user.userType != "Admin") {
+    console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Neturite tam privilegijų'}
+      });
+  }
+  User.findOne({nickName: nickname})
+  .exec(function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+    user.userBlocked = req.body.status;
+    user.save(function(err, result) {
       if (err) {
         console.log(err);
       return res.status(404).json({

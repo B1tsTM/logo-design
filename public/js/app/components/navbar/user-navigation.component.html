@@ -1,6 +1,6 @@
 <ul>
-    <li *ngIf="!isLoggedIn()" class="login"><a (click)="loginModal.open()">Login</a></li>
-    <li *ngIf="!isLoggedIn()" class="register"><a (click)="registerModal.open()">Register</a></li>
+    <li *ngIf="!isLoggedIn()" class="login"><a (click)="loginModal.open()">Prisijungti</a></li>
+    <li *ngIf="!isLoggedIn()" class="register"><a (click)="registerModal.open()">Registruotis</a></li>
     
     <li class="user" *ngIf="isLoggedIn()">
         Sveiki, {{nickname}}

@@ -1,0 +1,143 @@
+.mini-image {
+  width: 200px;
+  height: 200px;
+}
+
+.star-rating {
+  display: inline-block;
+  padding-left: 60px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.thumbnail-container {
+  padding: 48px;
+}
+
+.winner-container {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.comments-section {
+  text-align: center;
+}
+
+.thumbnail-row {
+  max-width: 100%;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.pad-left-60 {
+  padding-left: 60px;
+}
+
+span.finished {
+  background-color: #b3130c;
+  color: white;
+}
+
+span.cancelled {
+  background-color: black;
+  color: white;
+}
+
+span.timed-out {
+  background-color: #72af90 ;
+  color: white !important;
+}
+
+span.resumed {
+  background-color: #9fbb2d !important;
+  color: white !important;
+}
+
+span.unconfirmed {
+  background-color: #3bb3a2 !important;
+  color: white !important;
+}
+
+pagination-controls /deep/ {
+  display: block;
+}
+
+pagination-controls /deep/ .ng2-pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+  font-size: 18px !important;
+  cursor: pointer;
+  border-radius: 5px !important;
+}
+
+pagination-controls /deep/ .ng2-pagination li a:hover {
+  background-color: #a8d6f3 !important;
+  border-radius: 5px !important;
+}
+
+.back-button-container {
+  text-align: center;
+}
+
+.btn-back-wrapper {
+  text-align: center;
+}
+
+.pad-20 {
+  padding-left: 20px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px transparent;
+  transition: all 0.2s ease-in 0s;
+}
+
+.btn:hover {
+  background-color: #2b3542;
+  color: #fff;
+  /*border: 1px solid #2b3542;*/
+}
+
+.table-primary .name {
+  flex-basis: 50px;
+}
+
+.table-primary .status {
+  flex-basis: 50px;
+  align-self: center;
+}
+
+.table-primary .category {
+  flex-basis: 700px;
+  align-self: center;
+}
+
+span.no-contests-label {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.category > span {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.micro-avatar {
+  width:50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-top: 5px;
+}
+

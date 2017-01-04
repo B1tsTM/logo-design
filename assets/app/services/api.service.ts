@@ -208,6 +208,69 @@ export class ApiService {
       .catch(error => Observable.throw(error.json()));
   }
 
+
+  getAllUsers() {
+    return this.http.get('http://localhost:3000/api/v1/users/all')
+      .map(res => {
+        console.log(res.json());
+//        const data = res.json().obj;
+        const data = res.json().obj;
+        // let objs: any[] = [];
+        // for(let i=0; i< data.length; i++) {
+        //   let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+        //   objs.push(contest);
+        // };
+        return data;
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  getFilteredUsers(searchString: string) {
+    if(searchString.match(/^\s+$/) || !searchString) { // If all whitespace or empty string
+      return this.http.get('http://localhost:3000/api/v1/users/all')
+      .map(res => {
+        const data = res.json().obj;
+        // let objs: any[] = [];
+        // for(let i=0; i< data.length; i++) {
+        //   let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+        //   objs.push(contest);
+        // };
+        return data;
+      })
+      .catch(error => Observable.throw(error.json()));
+    } else {
+    return this.http.get('http://localhost:3000/api/v1/users/filter/' + searchString)
+      .map(res => {
+        console.log(res.json());
+        return res.json().obj;
+      })
+      .catch(error => Observable.throw(error.json()));
+      }
+  }
+
+  getIndividualUser(nickname: any) {
+    return this.http.get('http://localhost:3000/api/v1/users/single/' + nickname)
+      .map(res => {
+        console.log(res.json());
+        const data = res.json().obj;
+        //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
+        //return contest;
+        return data;
+      })
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  updateUserStatus(nickname, status) {
+    const body = JSON.stringify({nickname: nickname, status: status});
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const token = sessionStorage.getItem('token') ? '?token=' + sessionStorage.getItem('token') : '';
+
+    return this.http.patch("http://localhost:3000/api/v1/users/update/status/" + nickname + token, body, {headers: headers})
+    .map(res => res.json())
+    .catch(error => Observable.throw(error.json()));
+  }
+
+
   // addWinningContest(contestId, winnerId) {
   //   console.log('DEBUG apiservice params');
   //   console.log('contestId: ' + contestId);

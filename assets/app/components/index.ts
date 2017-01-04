@@ -34,3 +34,5 @@ export * from './shared/test-loader.component';
 export * from './admin/admin-dashboard.component';
 export * from './admin/admin-manage-contests.component';
 export * from './admin/admin-contest-details.component';
+export * from './admin/admin-user-details.component';
+export * from './admin/admin-manage-users.component';
