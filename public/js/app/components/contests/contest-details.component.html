@@ -235,7 +235,7 @@
     <br>
   </div>  
   <pagination-controls *ngIf="mySubmitions.length > 10" id="two" (pageChange)="p2 = $event" directionLinks="false" #api2></pagination-controls>
-  <div class="italic text-center" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip registruotas dizaineris</div></div>
+  <div class="italic text-center" *ngIf="!isLoggedIn() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite būti prisijungęs kaip patvirtintas dizaineris</div></div>
   <div class="italic text-center" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isEmailConfirmed()"><div>Kad galėtumėte dalyvauti konkurse, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</div></div>
   <div class="text-center" *ngIf="isDesigner() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && isEmailConfirmed()">
     <div class="submit-designs-label">

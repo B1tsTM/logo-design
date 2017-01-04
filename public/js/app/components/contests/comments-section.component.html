@@ -2,7 +2,7 @@
   <!--<h2>{{comments.length}} {{comments.length == 0 ? 'komentarų' : comments.length == 1 ? 'komentaras' : comments.length < 9 ? 'komentarai' : 'komentarų'}}</h2>-->
   <h2>Komentarai ({{comments.length}})</h2>
 </div>
-<div *ngIf="comments.length == 0 && isLoggedIn()" class="comments-label">
+<div *ngIf="comments.length == 0" class="comments-label">
   <div class="no-comments-label">Komentarų nėra</div>
 </div>
 <!--<div class="comments-wrapper" *ngIf="(comments.length > 0 && (isDesigner() || isContestPublisher(contest.publisher._id)) || isAdmin())" >-->

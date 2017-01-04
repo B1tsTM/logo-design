@@ -13,7 +13,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { NavbarComponent, HeaderComponent, FooterComponent, 
-  CategoriesComponent, DesignersComponent, HowItWorksComponent, 
+  DesignersComponent, HowItWorksComponent, 
   PageNotFoundComponent, BSAlertComponent, DateTimeComponent,
   ContestsComponent, RegisterComponent, LoginComponent, WinnersGalleryComponent,
   PublishContestComponent, ProfilePageComponent, MyContestsComponent,
@@ -34,7 +34,7 @@ import { ApiService } from './services/api.service';
 import { CanActivateOnLoginService } from './guards/can-activate-on-login.service';
 import { CanActivateAdminPageService } from './guards/can-activate-admin-page.service';
 
-import { CategoriesModule } from './components/categories/categories.module';
+//import { CategoriesModule } from './components/categories/categories.module';
 import { PublishContestModule } from './components/publish-contest/publish-contest.module';
 
 import { ErrorComponent, ErrorService } from './errors/index';
@@ -55,10 +55,10 @@ const WINDOW_PROVIDER: ValueProvider = {
   imports: [ BrowserModule, FormsModule, ReactiveFormsModule, 
              routing, MaterialModule.forRoot(), SharedModule, 
              AlertModule, InputTextModule, DatepickerModule, HttpModule, 
-             TabViewModule, CategoriesModule, Ng2Bs3ModalModule,
+             TabViewModule, Ng2Bs3ModalModule,
              SimpleNotificationsModule, AutoCompleteModule, Ng2PaginationModule ],
   declarations: [ AppComponent, UserNavigationComponent, NavbarComponent, HeaderComponent, 
-                  FooterComponent, CategoriesComponent, DesignersComponent, 
+                  FooterComponent, DesignersComponent, 
                   HowItWorksComponent, PageNotFoundComponent, DateTimeComponent,
                   BSAlertComponent, ContestsComponent, LoginComponent, RegisterComponent,
                   ErrorComponent, WinnersGalleryComponent, PublishContestComponent,

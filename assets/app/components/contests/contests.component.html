@@ -30,12 +30,12 @@
 						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
 							<i class="fa fa-star"></i>
 							<span>Aktyvūs</span>
-							<span class="label">{{allActiveContests.length}}</span>
+							<span class="label">({{allActiveContests.length}})</span>
 						</div><!-- .tab -->
 						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
 							<i class="fa fa-check"></i>
 							<span>Užbaigti</span>
-							<span class="label">{{allFinishedContests.length}}</span>
+							<span class="label">({{allFinishedContests.length}})</span>
 						</div><!-- .tab -->
 
 						<div class="table-search">

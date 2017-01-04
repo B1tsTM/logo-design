@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 
-import { HeaderComponent, CategoriesComponent, DesignersComponent,
+import { HeaderComponent, DesignersComponent,
          HowItWorksComponent, PageNotFoundComponent, ContestsComponent,
          LoginComponent, RegisterComponent, WinnersGalleryComponent, PublishContestComponent,
          ProfilePageComponent, MyContestsComponent, ContestDetailsComponent, MailListComponent,
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
   ] },
   //{ path: 'paskelbti-konkursa', component: PublishContestComponent },
   { path: 'paskelbti-konkursa', loadChildren: 'js/app/components/publish-contest/publish-contest.module#PublishContestModule' },
-  { path: 'kategorijos', component: CategoriesComponent },
+  //{ path: 'kategorijos', component: CategoriesComponent },
   { path: 'nugaletoju-galerija', component: WinnersGalleryComponent },
   { path: 'dizaineriai', children: [
     {path: '', component: DesignersComponent},
