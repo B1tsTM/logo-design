@@ -74,6 +74,19 @@
     </div>
   </div>
   <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <a target="_blank" [attr.href]="contest.website">{{contest.website}}</a>
+        <a target="_blank" href="{{contest.website}}">{{contest.website}}</a>
+        <a (click)="goToLink()">{{contest.website}}</a>
+      </div>
+    </div>
+    <hr>
+  </div>
   <div *ngIf="contest.colors">
     <div class="description-block">
       <div class="project-name">

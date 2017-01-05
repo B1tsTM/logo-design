@@ -83,6 +83,8 @@ var schema = new Schema({
   uniqueId: { //not needed?
     type: Number
   },
+  website: {type: String},
+  logoText: {type: String},
   winnerSubmition: {
     submitionUrl: {type: String},
     submitionRating: {type: Number},

@@ -109,3 +109,8 @@ pagination-controls /deep/ .ng2-pagination li a:hover {
   color: #fff;
   /*border: 1px solid #2b3542;*/
 }
+
+span.no-contests-label {
+    padding: 5px;
+    margin: 0 auto;
+}

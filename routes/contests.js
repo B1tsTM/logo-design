@@ -67,6 +67,14 @@ router.post('/', function(req, res, next) {
     } else {
         var dateNow = new Date();
         var endDate = new Date(dateNow.getTime() + (req.body.contestLength * 24 * 60 * 60 * 1000)); // ms equal to 1 day
+        var website;
+        if (req.body.website) {
+          if (!/^https?:\/\//i.test(req.body.website)) {
+          website = 'http://' + req.body.website;
+          } else {
+          website = req.body.website;
+          }
+        }
         var contest = new Contest({
         //contestId: req.body.contestId,
         //uniqueId: result.uniqueId,
@@ -88,7 +96,9 @@ router.post('/', function(req, res, next) {
         pagesCount: req.body.pagesCount,
         organization: req.body.organization,
         colors: req.body.colors,
-        style: req.body.style
+        style: req.body.style,
+        website: website,
+        logoText: req.body.logoText
 
       });
       console.log('POST /konkursai contest var');
