@@ -2,7 +2,8 @@
 		<div class="row">
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
-					<a (click)="backToList()">Visos kategorijos</a>
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a (click)="backToList()">Kategorijos</a>
 					<a class="current">Reklaminė juosta</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
@@ -43,32 +44,41 @@
 					<span>Konkurso pavadinimas</span>
 				</div><!-- .input-label -->
 				<div class="input-field">
-					<input type="text" placeholder="Konkurso pavadinimas" [ngClass]="{'input-area-error': name.errors && (name.dirty || name.touched)}" name="name" [(ngModel)]="contest.name" required #name="ngModel" />
+					<input type="text" placeholder="Pvz. svetainės pavadinimas" [ngClass]="{'input-area-error': name.errors && (name.dirty || name.touched)}" name="name" [(ngModel)]="contest.name" required #name="ngModel" />
 				</div><!-- .input-field -->
 				<span *ngIf="name.pristine" class="asterisk">*</span>
 			</div><!-- .input-row -->
 			<div *ngIf="name.errors && (name.dirty || name.touched)"
 				class="input-error-below">
 				<div [hidden]="!name.errors.required">
-					Įveskite unikalų konkurso pavadinimą
+					Įveskite konkurso pavadinimą
 				</div>
 			</div>
 
 			<div class="input-row">
 				<div class="input-label">
-					<span>Konkurso aprašymas</span>
+					<span>Reklaminės juostos aprašymas</span>
 				</div><!-- .input-label -->
 				<div class="input-field">
-					<textarea type="text" placeholder="Aprašymas" [ngClass]="{'input-area-error': description.errors && (description.dirty || description.touched)}" name="description" [(ngModel)]="contest.description" required #description="ngModel"></textarea>
+					<textarea type="text" placeholder="Konkurso aprašymas" [ngClass]="{'input-area-error': description.errors && (description.dirty || description.touched)}" name="description" [(ngModel)]="contest.description" required #description="ngModel"></textarea>
 				</div><!-- .input-field -->
 				<span *ngIf="description.pristine" class="asterisk">*</span>
 			</div><!-- .input-row -->
 			<div *ngIf="description.errors && (description.dirty || description.touched)"
 				class="input-error-below">
 				<div [hidden]="!description.errors.required">
-					Įveskite konkurso aprašymą
+					Įveskite reklaminės juostos aprašymą
 				</div>
 			</div>
+
+			<div class="input-row">
+				<div class="input-label">
+					<span>Svetainė</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Pvz. www.manologo.lt" name="website" [(ngModel)]="contest.website" #website="ngModel" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
 
 			<hr class="sep" />
 
@@ -110,10 +120,10 @@
 			<div class="textarea-row">
 				<div class="input-label textarea-label">
 					<span>Konkurso kaina (&euro;)</span>
-					<small>Mažiausiai 50 &euro;</small>
+					<small>Mažiausiai 40 &euro;</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input class="input-center" type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="50" max="1000" #award="ngModel" />
+					<input class="input-center" type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="40" max="1000" #award="ngModel" />
 				</div><!-- .input-field --> 
 				<span *ngIf="award.pristine" class="asterisk">*</span>
 				<div *ngIf="award.errors && (award.dirty || award.touched)"
@@ -123,51 +133,28 @@
 				</div>
 			</div>
 			</div><!-- .input-row -->
-			
-
-			<!--<div class="input-row">
-				<div class="input-label">
-					<span>Select a country:</span>
-				</div>
-				<div class="input-field">
-					<select name="" id="">
-						<option value="Something">Something</option>
-						<option value="Something">Something</option>
-						<option value="Something">Something</option>
-					</select>
-				</div>
-			</div>
 
 			<div class="input-row">
-				<div class="input-label">
-					<span>Some other random input field:</span>
-					<small>And this is the description</small>
-				</div>
-				<div class="input-field">
-					<input type="text" placeholder="Enter your name" />
-				</div>
-			</div>
-	
-			<hr class="sep" />
-
-			<div class="input-row">
-				<div class="input-label">
-					<span>Some other random input field:</span>
-					<small>And this is the description</small>
-				</div>
-				<div class="input-field">
-					<input type="text" placeholder="Enter your name" />
-				</div>
-			</div>-->
+				<div class="input-label textarea-label">
+					<span>Privatus konkursas?</span>
+					<small>+5 &euro; administracijai</small>
+				</div><!-- .input-label -->
+				<div class="input-field input-small checkbox-input">
+					<input type="checkbox" name="isPrivate"  [(ngModel)]="contest.isPrivate">
+				</div><!-- .input-field --> 
+			</div><!-- .input-row -->
 
 			<hr class="sep" />
 
-      <div class="extra-info">Pagalbinius failus (iliustracijas, brėžinius) galėsite įkelti paskelbus konkursą, konkurso puslapyje</div>
+      <div class="extra-info">Pagalbinius failus (logotipą, iliustracijas, brėžinius) galėsite įkelti paskelbus konkursą, konkurso puslapyje</div>
 
       <hr class="sep" />
 
-			<div *ngIf="isClient()" class="publish-contest-button">
-				<input type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą" />
+			<div *ngIf="isClient() && isEmailConfirmed()" class="publish-contest-button">
+				<button type="submit" class="submit" [disabled]="!f.valid" value="Paskelbti konkursą">Paskelbti konkursą</button>
+			</div>
+			<div *ngIf="isClient() && !isEmailConfirmed()">
+				<h4>Kad galėtumėt paskelbti konkursą, patvirtinkite savo el. pašto paskyrą profilio nustatymuose</h4>
 			</div>
 			<div *ngIf="isDesigner()">
 				<div class="info-disabled-button">
@@ -176,7 +163,7 @@
 			</div>
 			<div *ngIf="!isDesigner() && !isClient()">
 				<div class="info-disabled-button">
-					<h4>Skelbti konkursą gali tik registruoti užsakovai. Prašome <span class="italic">prisijungti</span> ar <span class="italic">užsiregistruoti</span>.</h4>
+					<h4><span class="span-bold">Skelbti konkursą gali tik registruoti užsakovai.</span> <span class="normal-text">Prašome <span class="italic">prisijungti</span> ar <span class="italic">užsiregistruoti</span></span>.</h4>
 				</div>
 			</div>
 		</div><!-- .input-forms -->
@@ -185,4 +172,4 @@
 
 <simple-notifications [options]="options"></simple-notifications>
 
-<!--<test-loader *ngIf="isLoading"></test-loader>-->
+<test-loader *ngIf="isLoading"></test-loader>

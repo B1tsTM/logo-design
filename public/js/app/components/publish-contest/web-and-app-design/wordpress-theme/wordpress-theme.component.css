@@ -112,27 +112,62 @@ input.readonly:-moz-read-only {
   font-style: italic;
 }
 
-.info-disabled-button {
+/*.info-disabled-button {
+  font-weight: bold;
+  text-decoration: underline;
+}*/
+
+.span-bold {
   font-weight: bold;
   text-decoration: underline;
 }
 
 input:hover {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 input:focus {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 textarea:hover {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 textarea:focus {
-  border: 2px solid cyan !important;
+  border: 1px solid cyan !important;
 }
 
 .input-center {
   text-align: center;
 }
+
+.normal-text {
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.checkbox-input {
+  padding-right: 80px;
+  padding-top: 16px;
+}
+
+/* FF fix to remove auto-applying red border on required inputs */
+input:-moz-placeholder,
+input:focus {
+    box-shadow:none !important;
+}
+
+input:invalid {
+    box-shadow:0 0 2px 1px transparent;
+}
+
+textarea:-moz-placeholder,
+textarea:focus {
+    box-shadow:none !important;
+}
+
+textarea:invalid {
+    box-shadow:0 0 2px 1px transparent;
+}
+/* end of FF fix */

@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth.service';
 import { ErrorService } from '../../../errors/index';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   moduleId: module.id,
@@ -59,6 +60,10 @@ export class OtherDesignsComponent implements OnInit {
 
   isDesigner() {
     return this.authService.isDesigner();
+  }
+
+  isEmailConfirmed() { // TODO add these checks to every form
+    return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
   }
 
 }

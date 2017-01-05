@@ -98,7 +98,9 @@ router.post('/', function(req, res, next) {
         colors: req.body.colors,
         style: req.body.style,
         website: website,
-        logoText: req.body.logoText
+        logoText: req.body.logoText,
+        size: req.body.size,
+        usage: req.body.usage
 
       });
       console.log('POST /konkursai contest var');

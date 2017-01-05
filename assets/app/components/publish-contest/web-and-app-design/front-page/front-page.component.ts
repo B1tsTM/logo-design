@@ -6,6 +6,7 @@ import { ErrorService } from '../../../../errors/index';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +27,7 @@ export class FrontPageComponent implements OnInit {
 
   ngOnInit() { 
     window.scrollTo(0,0);
-    this.contest.category = "Pagrindinis puslapis";
+    this.contest.category = "Pradinis puslapis";
   }
 
   backToList() {
@@ -59,5 +60,9 @@ export class FrontPageComponent implements OnInit {
 
   isDesigner() {
     return this.authService.isDesigner();
+  }
+
+  isEmailConfirmed() { // TODO add these checks to every form
+    return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
   }
 }

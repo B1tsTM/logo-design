@@ -57,6 +57,15 @@
 
 			<div class="input-row">
 				<div class="input-label">
+					<span>Logotipo tekstas</span>
+				</div><!-- .input-label -->
+				<div class="input-field">
+					<input type="text" placeholder="Inkorporuoti frazę:" name="logoText" [(ngModel)]="contest.logoText" #logoText="ngModel" />
+				</div><!-- .input-field -->
+			</div><!-- .input-row -->
+
+			<div class="input-row">
+				<div class="input-label">
 					<span>Logotipo aprašymas</span>
 				</div><!-- .input-label -->
 				<div class="input-field">
@@ -138,10 +147,10 @@
 			<div class="textarea-row">
 				<div class="input-label textarea-label">
 					<span>Konkurso kaina (&euro;)</span>
-					<small>Mažiausiai 50 &euro;</small>
+					<small>Mažiausiai 60 &euro;</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input class="input-center" type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="50" max="1000" #award="ngModel" />
+					<input class="input-center" type="number" [ngClass]="{'input-area-error': award.errors && (award.dirty || award.touched)}" name="award" [(ngModel)]="contest.award" required min="60" max="1000" #award="ngModel" />
 				</div><!-- .input-field --> 
 				<span *ngIf="award.pristine" class="asterisk">*</span>
 				<div *ngIf="award.errors && (award.dirty || award.touched)"

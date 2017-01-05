@@ -85,6 +85,8 @@ var schema = new Schema({
   },
   website: {type: String},
   logoText: {type: String},
+  size: {type: String},
+  usage: {type: String},
   winnerSubmition: {
     submitionUrl: {type: String},
     submitionRating: {type: Number},
