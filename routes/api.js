@@ -1341,27 +1341,6 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
       contest.submitions.push({submitionUrl: req.files[i].filename, submitionAuthor: userId, submitionRating: 0, submitionId: submitionId, status: "active"});
       //fileNames.push(req.files[i]);
     }
-    //console.log('submitions array:');
-    //console.log(submitions);
-    //console.log(fileNames);
-
-    //Contest.findOneAndUpdate({'idName': contestId}, {$push: {submitions: {$each:submitions}}});
-
-    
-
-      // User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err) {
-      //   if(err){
-      //     console.log(err);
-      //     return res.status(404).json({
-      //       title: 'Klaida !',
-      //       error: {message: 'Įvyko klaida'}
-      //     });
-      //     }else{
-      //       console.log("Images uploaded !");
-      //     }
-      // });
-
-    //contest.participants.push(userId); //doesn't enforce uniqueness, must use $addtoSet
 
     contest.save(function(err, result) {
       if (err) {
@@ -1383,6 +1362,47 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 
 });
 //End of submitions post req
+
+router.post('/submitions/change/:contestId/:userId/:submitionId', submitionsUpload.array("submition", 12), function(req,res){
+
+var contestId = req.params.contestId;
+var userId = req.params.userId;
+var submitionId = req.params.submitionId;
+//User.findById(id, function(err, user) {
+Contest.findOne({'idName': contestId}, function(err, contest) {
+  if (err) {
+    console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+    }
+
+    console.log(req.files);
+    for (let i=0; i<contest.submitions.length; i++) {
+      if (submitionId == contest.submitions[i].submitionId) {
+        contest.submitions[i].submitionUrl = req.files[0].filename;  
+        console.log('NEW SUB ADDED');
+      }
+    }
+
+    contest.save(function(err, result) {
+      if (err) {
+        console.log(err);
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Įvyko klaida'}
+      });
+      }
+      res.status(200).json({
+        message: 'Dizainai įkelti',
+        obj: result,
+        files: req.files
+      });
+    });
+  });
+
+});
 
 router.post('/contests/:contestId/files', submitionsUpload.array("additionalfiles", 12), function(req,res){
 // console.log('hello');

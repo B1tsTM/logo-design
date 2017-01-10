@@ -33,6 +33,21 @@
         <button *ngIf="confirmationVisible" type="button" class="btn-confirm" (click)="selectWinner(contest.idName, submition.submitionId, contest, submition)">Patvirtinti</button>
         <button *ngIf="confirmationVisible" type="button" class="btn-cancel" (click)="confirmationVisible = false">Atšaukti</button>
     </div>
+
+    <div class="btn-block text-center container" *ngIf="isDesignAuthor(submition.submitionAuthor._id)">
+        <h2 class="title-label">Pakeisti dizainą: </h2>
+        <input class="file-input" type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+        <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="changeSubmition()">Pakeisti</button>
+        <span *ngIf="percent" class="percent"> {{percent}} %</span>
+        
+    </div>
+
+    <!--<input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
+  <div class="button-wrapper">
+    <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Įkelti dizainus</button>
+     <span *ngIf="percent" class="percent"> {{percent}} %</span>
+  </div>-->
+
     <!--<div class="button-wrapper">
         <button *ngIf="contest" type="button" class="btn-back" (click)="goBack()">Grįžti atgal</button>
     </div>

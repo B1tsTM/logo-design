@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { AppModule } from '../../app.module';
 
 import { InputTextModule } from 'primeng/primeng';
 import { MaterialModule } from '@angular/material';

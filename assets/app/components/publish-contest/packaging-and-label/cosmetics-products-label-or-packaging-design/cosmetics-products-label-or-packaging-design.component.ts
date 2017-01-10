@@ -27,7 +27,7 @@ export class CosmeticsProductsLabelOrPackagingDesignComponent implements OnInit 
 
   ngOnInit() { 
     window.scrollTo(0,0);
-    this.contest.category = "Kosmetikos priemonės";
+    this.contest.category = "Kosmetikos priemonių pakuotės";
   }
 
   backToList() {

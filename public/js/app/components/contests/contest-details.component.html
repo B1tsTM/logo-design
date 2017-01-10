@@ -28,7 +28,7 @@
 
 <div *ngIf="!contest.isPrivate || (isDesigner() || isContestPublisher(contest.publisher._id) || isAdmin())"> <!-- private check -->
 
-<div class="description-wrapper"> <!-- start of description block -->
+<div *ngIf="contest.category == 'Logotipas'" class="description-wrapper"> <!-- start of description block -->
   <div class="description-block">
     <div class="project-name">
       <h3>Konkurso kategorija</h3>
@@ -70,7 +70,7 @@
   <div *ngIf="contest.website">
     <div class="description-block">
       <div class="project-name">
-        <h3>Logotipo svetainė</h3>
+        <h3>Svetainė</h3>
       </div>
       <div class="project-name-text">
         <a target="_blank" [attr.href]="contest.website">{{contest.website}}</a>
@@ -78,15 +78,6 @@
     </div>
     <hr>
   </div>
-  <div class="description-block">
-    <div class="project-name">
-      <h3>Konkursą paskelbė</h3>
-    </div>
-    <div class="project-name-text">
-      <p>{{contest?.publisher.nickName}}</p>
-    </div>
-  </div>
-  <hr>
   <div class="description-block">
     <div class="project-name">
       <h3>Logotipo aprašymas</h3>
@@ -167,6 +158,4495 @@
     </div>
   </div>
 </div> <!-- end of description block -->
+
+<!--LOGO N B.C. -->
+
+<div *ngIf="contest.category == 'Verslo kortelė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <a target="_blank" [attr.href]="contest.website">{{contest.website}}</a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Kortelės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Logo and b.c. -->
+
+<div *ngIf="contest.category == 'Logotipas ir verslo kortelė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.logoText">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Logotipo tekstas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest.logoText}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <a target="_blank" [attr.href]="contest.website">{{contest.website}}</a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Logotipo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.colors">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Spalvos</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.colors}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.style">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Logotipo stilius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.style}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- reklamine juosta -->
+
+<div *ngIf="contest.category == 'Reklaminė juosta'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <a target="_blank" [attr.href]="contest.website">{{contest.website}}</a>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reklaminės juostos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Android app -->
+
+<div *ngIf="contest.category == 'Android aplikacija'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Aplikacijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- antrate -->
+
+<div *ngIf="contest.category == 'Antraštė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Antraštės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Mobile app -->
+
+<div *ngIf="contest.category == 'Mobili aplikacija'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Aplikacijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- blog  -->
+
+<div *ngIf="contest.category == 'Tinklaraštis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Tinklaraščio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.pagesCount">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Puslapių skaičius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.pagesCount}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Ikonos -->
+
+<div *ngIf="contest.category == 'Ikonos'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Ikonos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- redesign -->
+
+<div *ngIf="contest.category == 'Svetainės naujinimas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Svetainės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.pagesCount">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Puslapių skaičius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.pagesCount}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Pradinis psl -->
+
+<div *ngIf="contest.category == 'Pradinis puslapis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Puslapio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Youtube -->
+
+<div *ngIf="contest.category == 'YouTube kanalas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>YouTube kanalo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Facebook -->
+
+<div *ngIf="contest.category == 'FaceBook viršelis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Facebook viršelio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Twitter -->
+
+<div *ngIf="contest.category == 'Twitter paskyra'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Twitter paskyoros aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Flash -->
+
+<div *ngIf="contest.category == 'Flash reklama'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reklamos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Wordpress -->
+
+<div *ngIf="contest.category == 'WordPress tema'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>WordPress temos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.pagesCount">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Puslapių skaičius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.pagesCount}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- iOS app -->
+
+<div *ngIf="contest.category == 'iOS aplikacija'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Aplikacijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Verslas, reklama -->
+
+<!-- reklama -->
+
+<div *ngIf="contest.category == 'Reklama'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reklamos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- el.paštas  -->
+
+<div *ngIf="contest.category == 'El. laiškai'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reklamos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- brosiura -->
+
+<div *ngIf="contest.category == 'Brošiūra'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Brošiūros aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- meniu -->
+
+<div *ngIf="contest.category == 'Meniu'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Meniu aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- skelbimu lenta -->
+
+<div *ngIf="contest.category == 'Skelbimų lenta'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reklamos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- Powerpoint -->
+
+<div *ngIf="contest.category == 'PowerPoint prezentacija'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Prezentacijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- Reziumė -->
+
+<div *ngIf="contest.category == 'Reziumė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Reziumė aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!--  skrajute  -->
+
+<div *ngIf="contest.category == 'Skrajutė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Skrajutės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  MS word  -->
+
+<div *ngIf="contest.category == 'MS Word dokumentai'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Dokumento aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  Atvirute  -->
+
+<div *ngIf="contest.category == 'Atvirutė'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Atvirutės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- drabužiai   -->
+
+<!-- kepures -->
+
+<div *ngIf="contest.category == 'Kepurės'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Kepurės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.colors">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Spalvos</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.colors}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- marskineliai   -->
+
+<div *ngIf="contest.category == 'Marškinėliai'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Marškinėlių aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.size">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Marškinėlių dydis</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.size}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.usage">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Kam jie skirti?</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.usage}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.colors">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Spalvos</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.colors}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  megztiniai  -->
+
+<div *ngIf="contest.category == 'Megztiniai'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Megztinio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.size">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Megztinio dydis</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.size}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.usage">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Kam jie skirti?</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.usage}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.colors">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Spalvos</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.colors}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  Menas, iliustracijos  -->
+
+<!-- 3D dizainas -->
+
+<div *ngIf="contest.category == '3D dizainas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Dizaino aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  tatuiruotes  -->
+
+<div *ngIf="contest.category == 'Tatuiruotės'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Tatuiruotės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  CD virselis  -->
+
+<div *ngIf="contest.category == 'CD viršelis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Viršelio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  Lipdukai  -->
+
+<div *ngIf="contest.category == 'Lipdukai'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Lipduko aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  vaikiskos iliustracijos  -->
+
+<div *ngIf="contest.category == 'Vaikiškos iliustracijos'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Iliustracijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!--  iliustracijos  -->
+
+<div *ngIf="contest.category == 'Iliustracijos'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Iliustracijos aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+
+<!--  Pakvietimai  -->
+
+<!-- Vestuviu pakvietimas  -->
+
+<div *ngIf="contest.category == 'Vestuvių pakvietimas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakvietimo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Jubiliejaus pakvietimas -->
+
+<div *ngIf="contest.category == 'Jubiliejaus pakvietimas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakvietimo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Vaiko krikstynu pakvietimas -->
+
+<div *ngIf="contest.category == 'Vaiko krikštynų pakvietimas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakvietimo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Gimtadienio pakvietimas -->
+
+<div *ngIf="contest.category == 'Gimtadienio pakvietimas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakvietimo aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- Etiketes, pakuotes -->
+
+<!-- Gerimai -->
+
+<div *ngIf="contest.category == 'Gėrimų pakuotės'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakuotės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Maisto produktai -->
+
+<div *ngIf="contest.category == 'Maisto produktų pakuotės'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakuotės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Kosmetikos priemones -->
+
+<div *ngIf="contest.category == 'Kosmetikos priemonių pakuotės'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Pakuotės aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- Knygos, zurnalai -->
+
+<!-- knygos virselis -->
+
+<div *ngIf="contest.category == 'Knygos viršelis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Viršelio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- E-knygos virselis -->
+
+<div *ngIf="contest.category == 'E-knygos viršelis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Viršelio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+<!-- Zurnalo virselis -->
+
+<div *ngIf="contest.category == 'Žurnalo viršelis'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Viršelio aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+<!-- Kitas dizainas -->
+
+<!-- Kitas dizainas -->
+
+<div *ngIf="contest.category == 'Kitas dizainas'" class="description-wrapper"> <!-- start of description block -->
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso kategorija</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.category}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.name}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Dizaino aprašymas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.description}}</p>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="contest.organization">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Organizacijos aprašymas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.organization}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.extraInfo">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Papildoma informacija</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.extraInfo}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkursą paskelbė</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.publisher.nickName}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso prizas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.award}} &euro;</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pabaiga</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest?.endDate | date:'short'}}</p>
+    </div>
+  </div>
+</div> <!-- end of description block -->
+
+
+
+
+
+
+
+
 
 
   <div *ngIf="additionalFiles.length > 0 || isContestPublisher(contest.publisher._id)">

@@ -41,10 +41,10 @@
 
 			<div class="input-row">
 				<div class="input-label">
-					<span>Konkurso (kortelės) pavadinimas</span>
+					<span>Konkurso pavadinimas</span>
 				</div><!-- .input-label -->
 				<div class="input-field">
-					<input type="text" placeholder="Konkurso pavadinimas" [ngClass]="{'input-area-error': name.errors && (name.dirty || name.touched)}" name="name" [(ngModel)]="contest.name" required #name="ngModel" />
+					<input type="text" placeholder="Kortelės pavadinimas" [ngClass]="{'input-area-error': name.errors && (name.dirty || name.touched)}" name="name" [(ngModel)]="contest.name" required #name="ngModel" />
 				</div><!-- .input-field -->
 				<span *ngIf="name.pristine" class="asterisk">*</span>
 			</div><!-- .input-row -->

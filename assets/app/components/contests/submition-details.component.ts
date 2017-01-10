@@ -18,6 +18,9 @@ export class SubmitionDetailsComponent implements OnInit {
     submition: any;
     submitions: any[] = [];
     confirmationVisible: boolean = false;
+    percent: number = 0;
+    filesToUpload = [];
+    userId: string;
     isLoading = false;
     public options = {
       position: ["top","right"]
@@ -147,6 +150,68 @@ export class SubmitionDetailsComponent implements OnInit {
     goBack() {
         window.scrollTo(0,0);
         this.router.navigate(['/konkursai', this.contestId]);
+    }
+
+
+    isDesignAuthor(designerId) {
+      var userId = sessionStorage.getItem('userId');
+        return designerId == userId;
+    }
+
+
+    changeSubmition() {
+      this.isLoading = true;
+        this.userId = sessionStorage.getItem('userId');
+        this.makeFileRequest('http://localhost:3000/api/v1/submitions/change/' + this.contestId + '/' +this.userId + '/' + this.submition.submitionId,this.filesToUpload, "submition").then((result) => {
+            console.log(result);
+            this.submition.submitionUrl = result.files[0].filename;
+            this.isLoading = false;
+        }, (error) => {
+            //this.submition.submitionUrl = result.files[0].filename;
+            this.isLoading = false;
+            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+        });
+    }
+
+    fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>> fileInput.target.files;
+        console.log(fileInput.target.files);
+        console.log(this.filesToUpload);
+    }
+
+    makeFileRequest(url: string, files: Array<File>, fileType: string) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for(var i = 0; i < files.length; i++) {
+                formData.append(fileType, files[i], files[i].name);
+            }
+            xhr.upload.addEventListener("progress", (evt) => this.calculateUploadProgress(evt), false); 
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.response);
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        console.log(xhr.response);
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.onerror = function(e) {
+                console.log('Klaida įkeliant failus');
+                console.log(e);
+            };
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
+    }
+
+    calculateUploadProgress(evt) {
+    if (evt.lengthComputable) {
+        this.percent = Math.round(evt.loaded / evt.total * 100);
+        console.log("PERCENT : ", this.percent + "%");
+        }
     }
 
 }

@@ -78,6 +78,31 @@ img {
   transition: all 0.25s ease-in 0s;
 }
 
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.upload-button {
+  background-color: #2b2b88;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 150px;
+  transition: all 0.25s ease-in 0s;
+}
+
+.upload-button:hover {
+  cursor: pointer;
+}
+
+.upload-button:disabled {
+  cursor: not-allowed;
+  background-color: #e0e0e0;
+  color: black;
+}
+
 /*i:first {
   display: block;
   margin: 0 auto;
