@@ -35,7 +35,7 @@
     </div>
 
     <div class="btn-block text-center container" *ngIf="isDesignAuthor(submition.submitionAuthor._id)">
-        <h2 class="title-label">Pakeisti dizainą</h2>
+        <h2 class="title-label">Pakeisti šį dizainą</h2>
         <input class="file-input" type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
         <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="changeSubmition()">Pakeisti</button>
         <span *ngIf="percent" class="percent"> {{percent}} %</span>

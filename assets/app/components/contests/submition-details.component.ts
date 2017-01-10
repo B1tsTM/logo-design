@@ -161,11 +161,17 @@ export class SubmitionDetailsComponent implements OnInit {
 
     changeSubmition() {
       this.isLoading = true;
+      if (this.filesToUpload.length > 1) {
+        this.isLoading = false;
+        return this.notificationsService.error('Klaida', 'Pasirinkite tik vieną failą', {timeOut: 3000});
+      }
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/change/' + this.contestId + '/' +this.userId + '/' + this.submition.submitionId,this.filesToUpload, "submition").then((result) => {
             console.log(result);
             this.submition.submitionUrl = result.files[0].filename;
             this.isLoading = false;
+            this.filesToUpload = [];
+            this.notificationsService.success('Pakeista', 'Dizainas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false});
         }, (error) => {
             //this.submition.submitionUrl = result.files[0].filename;
             this.isLoading = false;

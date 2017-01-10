@@ -91,6 +91,8 @@ img {
   border: 1px solid black;
   width: 150px;
   transition: all 0.25s ease-in 0s;
+  display: block;
+  margin: 30px auto;
 }
 
 .upload-button:hover {

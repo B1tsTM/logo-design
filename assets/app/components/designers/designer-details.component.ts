@@ -23,6 +23,9 @@ export class DesignerDetailsComponent implements OnInit {
   isLoading = false;
   designerId: string;
   designer: any;
+  public options = {
+      position: ["top","right"]
+    };
   constructor(private route: ActivatedRoute,
               private router: Router,
               private contestsService: ContestsService,

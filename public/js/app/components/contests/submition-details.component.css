@@ -79,7 +79,7 @@ img {
 }
 
 .container {
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 
@@ -91,6 +91,8 @@ img {
   border: 1px solid black;
   width: 150px;
   transition: all 0.25s ease-in 0s;
+  display: block;
+  margin: 30px auto;
 }
 
 .upload-button:hover {
@@ -101,6 +103,10 @@ img {
   cursor: not-allowed;
   background-color: #e0e0e0;
   color: black;
+}
+
+.title-label {
+  margin-bottom: 20px;
 }
 
 /*i:first {
