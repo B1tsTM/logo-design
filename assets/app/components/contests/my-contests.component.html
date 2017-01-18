@@ -23,6 +23,7 @@
 				<div class="table-primary">
 					<header class="table-header">
 						<strong class="status">Būsena</strong>
+						<strong class="status">Tipas</strong>
 						<strong class="name">Pavadinimas</strong>
 						<strong class="category">Kategorija</strong>
 						<strong class="price">Prizas</strong>
@@ -37,6 +38,9 @@
 						<div *ngFor="let contest of contests | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToContestDetails(contest.idName)">
 							<div class="status">
 								<span [ngClass]="{'active': contest.status == 'Aktyvus', 'finished': contest.status == 'Užbaigtas', 'timed-out': contest.status ==  'Laikas baigėsi', 'resumed': contest.status == 'Pratęstas'}">{{contest.status}}</span>
+							</div>
+							<div class="status">
+								<span [ngClass]="{'active': !contest.isPrivate, 'finished': contest.isPrivate}">{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</span>
 							</div>
 							<div class="name">
 								<span>{{contest.name}}</span>

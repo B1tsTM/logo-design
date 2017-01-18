@@ -7,6 +7,7 @@ export class Contest {
               public description?: string, 
               public award?: number, 
               public status?: string, 
+              public isPrivate?: boolean,
               public submitionCount?: number, 
               public daysRemaining?: number, 
               public startDate?: number, 

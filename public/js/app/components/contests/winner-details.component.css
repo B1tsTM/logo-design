@@ -1,0 +1,18 @@
+.wrapper {
+  text-align: center;
+}
+
+.padding {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pad-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.winner-image {
+  max-width: 1000px;
+  max-height: 1000px;
+}

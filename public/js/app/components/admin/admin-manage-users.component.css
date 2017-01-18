@@ -141,3 +141,38 @@ span.no-contests-label {
   margin-top: 5px;
 }
 
+.fa-user-times:hover {
+    transition: 0.25s all ease-in 0s;
+    transform: scale(1.5,1.5);
+    cursor: pointer;
+}
+
+.fa-unlock:hover {
+    transition: 0.25s all ease-in 0s;
+    transform: scale(1.5,1.5);
+    cursor: pointer;
+}
+
+/* */
+
+.table-row .nickname span {
+  color: #4072db;
+  font-weight: bold;
+}
+
+.table-primary .table-row:hover {
+  cursor: default;
+}
+
+.table-primary .table-row {
+  cursor: default;
+}
+
+.table-row .nickname {
+  cursor: pointer !important;
+}
+
+.table-row .nickname:hover {
+  background-color: #cad8e0;
+  border-radius: 10px;
+}

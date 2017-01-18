@@ -25,12 +25,12 @@
 				<div class="action-bar">
 					<div class="table-actions">
 						<div (click)="selectFirstTab()" class="tab tab-active" [ngClass]="{'current': firstTabActive}">
-							<i class="fa fa-rotate-left"></i>
+							<i class="fa fa-star"></i>
 							<span>Aktyvūs</span>
               <span class="label">({{allActiveUsers.length}})</span>
 						</div><!-- .tab -->
 						<div (click)="selectSecondTab()" class="tab tab-finished" [ngClass]="{'current': secondTabActive}">
-							<i class="fa fa-star"></i>
+							<i class="fa fa-ban"></i>
 							<span>Užblokuoti</span>
               <span class="label">({{allBannedUsers.length}})</span>
 						</div><!-- .tab -->
@@ -53,13 +53,14 @@
 						<strong class="name">Avataras</strong>
 						<strong class="status">Statusas</strong>
 						<strong class="category">Vartotojas</strong>
+						<strong class="status">Veiksmai</strong>
 					</header><!-- .table-header -->
 
 						<div *ngIf="users.length == 0" class="table-row">
 							<span class="no-contests-label">Vartotojų nerasta</span>
 						</div>
 					
-						<div *ngFor="let user of users | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row" (click)="goToUserDetails(user.nickName)">
+						<div *ngFor="let user of users | paginate: {itemsPerPage: 10, currentPage: p}" class="table-row">
               <div class="name">
                 <span class="avatar-container" *ngIf="user.avatar"><img class="micro-avatar" src="http://localhost:3000/uploads/avatars/{{user.avatar.avatarUrl}}" alt="Avataras"></span>
 								<span class="avatar-container" *ngIf="!user.avatar"><img class="micro-avatar" src="http://live.warthunder.com/style/img/no_avatar.jpg" alt="Avataras"></span>
@@ -67,8 +68,11 @@
 							<div class="status">
 								<span [ngClass]="{'active': !user.userBlocked, 'finished': user.userBlocked}">{{user.userBlocked ? 'Užblokuotas' : 'Aktyvus'}}</span>
 							</div>
-							<div class="category">
+							<div (click)="goToUserDetails(user.nickName)" class="category nickname">
 								<span>{{user.nickName}}</span>
+							</div>
+							<div class="status">
+								<span><i (click)="blockUser(user.nickName)" *ngIf="!user.userBlocked" class="fa fa-user-times"></i><i (click)="unblockUser(user.nickName)" *ngIf="user.userBlocked" class="fa fa-unlock"></i></span>
 							</div>
 						</div>
 					

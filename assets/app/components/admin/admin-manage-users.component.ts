@@ -143,4 +143,32 @@ export class AdminManageUsersComponent implements OnInit {
   goBackToAdminPanel() {
     this.router.navigate(['/admin']);
   }
+
+  blockUser(nickname: string) {
+    this.isLoading = true;
+    this.apiService.updateUserStatus(nickname, true)
+    .subscribe(res => {
+      this.notificationsService.info('Užblokuota', 'Vartotojas sėkmingai užblokuotas', {timeOut: 3000, showProgressBar: false});
+      this.isLoading = false;
+      this.router.navigate(['/admin', 'vartotojai', nickname]);
+    }, error => {
+      this.isLoading = false;
+      this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    });
+  }
+
+  unblockUser(nickname: string) {
+    this.isLoading = true;
+    this.apiService.updateUserStatus(nickname, false)
+    .subscribe(res => {
+      this.notificationsService.info('Atblokuota', 'Vartotojas sėkmingai atblokuotas', {timeOut: 3000, showProgressBar: false});
+      this.isLoading = false;
+      this.router.navigate(['/admin', 'vartotojai', nickname]);
+    }, error => {
+      this.isLoading = false;
+      this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+    });
+  }
+
+
 }

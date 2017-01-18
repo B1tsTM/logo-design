@@ -58,8 +58,6 @@ export class UserNavigationComponent implements OnInit {
     this.userId = sessionStorage.getItem('userId');
     this.apiService.getUserInfo(this.userId)
       .subscribe(user => {
-        console.log('comments-section comp user var');
-        console.log(user);
         this.nickname = user.nickName;
       },
       error => {

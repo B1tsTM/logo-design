@@ -35,7 +35,16 @@
   <hr>
   <div class="description-block">
     <div class="project-name">
-      <h3>Logotipo pavadinimas</h3>
+      <h3>Konkurso tipas</h3>
+    </div>
+    <div class="project-name-text">
+      <p>{{contest.isPrivate ? 'Privatus' : 'Viešas'}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="description-block">
+    <div class="project-name">
+      <h3>Konkurso pavadinimas</h3>
     </div>
     <div class="project-name-text">
       <p>{{contest?.name}}</p>
@@ -44,7 +53,7 @@
   <hr>
   <div class="description-block">
     <div class="project-name">
-      <h3>Logotipo aprašymas</h3>
+      <h3>Konkurso aprašymas</h3>
     </div>
     <div class="project-name-text">
       <p>{{contest?.description}}</p>
@@ -65,10 +74,65 @@
   <div *ngIf="contest.style">
     <div class="description-block">
       <div class="project-name">
-        <h3>Logotipo stilius</h3>
+        <h3>Stilius</h3>
       </div>
       <div class="project-name-text">
         <p>{{contest?.style}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.pagesCount">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Puslapių skaičius</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.pagesCount}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.website">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Svetainė</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.website}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.logoText">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Logotipo tekstas</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.logoText}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.size">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Dydis</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.size}}</p>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="contest.usage">
+    <div class="description-block">
+      <div class="project-name">
+        <h3>Produkto naudotojai</h3>
+      </div>
+      <div class="project-name-text">
+        <p>{{contest?.usage}}</p>
       </div>
     </div>
     <hr>
@@ -115,14 +179,14 @@
 </div> <!-- end of description block -->
 
 <div class="btn-back-wrapper" *ngIf="contest.status == 'Nepatvirtintas'">
-    <button class="btn" type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
-    <button class="btn pad-20" type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
+    <button class="btn btn-accept" type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
+    <button class="btn btn-deny pad-20" type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
 </div>
   <div class="btn-back-wrapper" *ngIf="contest.status == 'Laikas baigėsi'">
     <button class="btn" (click)="extendInputEnabled = true">Pratęsti konkursą</button>
     <span *ngIf="extendInputEnabled">Pratęsti dienų: </span>
     <input *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="endDate" min="1" max="30" required>
-    <button class="btn btn-primary pad-20" *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti</button>
+    <button class="btn btn-primary pad-20 btn-accept" *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti</button>
   </div>
 
   <div *ngIf="additionalFiles.length > 0 || isContestPublisher(contest.publisher._id)">

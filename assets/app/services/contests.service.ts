@@ -3,6 +3,7 @@ import { Contest } from '../models/contest';
 import { User } from '../models/user';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -13,7 +14,7 @@ export class ContestsService {
   submitionDetails: any;
   contestWinner: any;
   mailTopic: string;
-  constructor(private http: Http) { }
+  constructor(private http: Http, private notificationsService: NotificationsService) { }
 
   getAllContests() {
     return this.http.get('http://localhost:3000/api/v1/konkursai')
@@ -21,7 +22,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].isPrivate, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
           objs.push(contest);
         };
         return objs;
@@ -36,7 +37,7 @@ export class ContestsService {
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
-          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].isPrivate, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
           objs.push(contest);
         };
         return objs;
@@ -58,7 +59,7 @@ export class ContestsService {
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
           if (data[i].publisher._id == id) {
-          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
+          let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].isPrivate, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
           objs.push(contest);
           }
         };
@@ -84,6 +85,7 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
+      this.notificationsService.success('Konkursas užregistruotas','Palaukite kol jį patvirtins administratorius. Tai neturėtų užtrukti ilgiau kaip 24 val.', {timeOut: 10000});
       return data;
     })
     .catch(error => Observable.throw(error.json()));

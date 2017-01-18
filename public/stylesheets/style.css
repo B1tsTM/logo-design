@@ -3444,8 +3444,8 @@ hr.clear {
   padding: 8px 14px; }
 
 .table-primary .status {
-  -ms-flex-preferred-size: 50px;
-      flex-basis: 50px; }
+  -ms-flex-preferred-size: 60px;
+      flex-basis: 60px; }
   .table-primary .status span {
     background: #ddd;
     padding: 3px 10px;
@@ -3461,8 +3461,8 @@ hr.clear {
       flex-basis: 100px; }
 
 .table-primary .name {
-  -ms-flex-preferred-size: 100px;
-      flex-basis: 100px; }
+  -ms-flex-preferred-size: 200px;
+      flex-basis: 200px; }
 
 .table-primary .price {
   -ms-flex-preferred-size: 50px;

@@ -329,5 +329,15 @@ hr {
   /*border: 1px solid #2b3542;*/
 }
 
+.btn-accept:hover {
+  background-color: #5bb962;
+  color: #fff;
+}
+
+.btn-deny:hover {
+  background-color: #f3463e;
+  color: #fff;
+}
+
 
 

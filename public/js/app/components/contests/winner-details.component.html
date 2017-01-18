@@ -1,17 +1,31 @@
-<h1>Sveikiname išsirinkus nugalėtoją !</h1>
+<section class="app-headline">
+  <div class="row">
+    <div class="column small-12">
+      <div class="app-breadcrumbs">
+        <a routerLink="/">Pagrindinis puslapis</a>
+        <a routerLink="/konkursai">Konkursai</a>
+        <a class="current">Konkurso nugalėtojas</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div>
-    <h4>Dizaino info</h4>
-    <h3>Dizaino numeris: {{submition.submitionId}}</h3>
-    <img src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
-    <h3>Dizaineris: {{submition.submitionAuthor.firstName}}</h3>
-    <br>
-    <h4>Kad konkursas būtų laikomas įvykusiu, jį patvirtint turės išrinkto dizaino autorius ({{submition?.submitionAuthor?.nickName}}):</h4>
-    <h5>1. Susisiekite su juo paspaudę mygtuką žemiau</h5>
-    <h5>2. Kai Jūs gausite reikiamus failus ir susimokėsite, {{submition?.submitionAuthor?.nickName}} turės tai patvirtinti administracijai ir konkursas bus laikomas įvykusiu</h5>
 
-    <button type="button" (click)="contactWinner(submition.submitionAuthor.nickName)">Susisiekti</button>
-    <button type="button" (click)="goBack()">Grįžti atgal</button>
+<div class="wrapper">
+<h1 class="padding">Sveikiname išsirinkus nugalėtoją !</h1>
+
+    <div>
+        <h3 class="padding">Dizaino numeris: {{submition.submitionId}}</h3>
+        <img class="winner-image" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Dizainas">
+        <h3 class="padding">Dizaineris: {{submition.submitionAuthor.firstName}}</h3>
+        <br>
+        <h4 class="pad-10">Kad konkursas būtų laikomas įvykusiu, jį patvirtint turės išrinkto dizaino autorius ({{submition?.submitionAuthor?.nickName}}):</h4>
+        <h5 class="pad-10">1. Susisiekite su juo paspaudę mygtuką žemiau</h5>
+        <h5 class="pad-10">2. Kai Jūs gausite reikiamus failus ir susimokėsite, {{submition?.submitionAuthor?.nickName}} turės tai patvirtinti administracijai ir konkursas bus laikomas įvykusiu</h5>
+
+        <button type="button" (click)="contactWinner(submition.submitionAuthor.nickName)">Susisiekti</button>
+        <button type="button" (click)="goBack()">Grįžti atgal</button>
+    </div>
 </div>
 
 <simple-notifications [options]="options"></simple-notifications>

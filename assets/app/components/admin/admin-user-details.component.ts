@@ -119,7 +119,7 @@ export class AdminUserDetailsComponent implements OnInit {
     this.isLoading = true;
     this.apiService.updateUserStatus(nickname, false)
     .subscribe(res => {
-      this.notificationsService.info('Užblokuota', 'Vartotojas sėkmingai atblokuotas', {timeOut: 3000, showProgressBar: false});
+      this.notificationsService.info('Atblokuota', 'Vartotojas sėkmingai atblokuotas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'vartotojai']);
     }, error => {

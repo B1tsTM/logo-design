@@ -111,7 +111,7 @@ router.post('/', function(req, res, next) {
         }
         doc.contests.push(result);
         doc.save();
-        res.status(201).json({
+        return res.status(201).json({
           contest: 'Konkursas įkeltas',
           obj: result
         });
