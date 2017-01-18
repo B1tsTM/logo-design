@@ -36,18 +36,10 @@ export class WinnerDetailsComponent implements OnInit {
       this.contest = this.contestsService.contestWinner.contest;
       this.submition = this.contestsService.contestWinner.submition;
       this.submitionId = this.contestsService.contestWinner.submitionId;
-    // this.route.params.subscribe((params: Params) => {
-    //   this.contestId = params['id'];
-    //   console.log('ngOnInit params id (contestId)');
-    //   console.log(this.contestId);
-    // });
     this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
-            console.log('submitions from apiservice in submition-details');
-            console.log(submitions);
             this.submitions = submitions;
             this.isLoading = false;
-            console.log(this.submitions);
         },
         error => {
           this.isLoading = false;

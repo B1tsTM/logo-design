@@ -41,8 +41,6 @@ export class SentMailComponent implements OnInit {
         this.messages = filteredMessages;
         this.receivedMessages = filteredReceivedMessages;
         this.isLoading = false;
-        console.log('THIS.MESSAGES');
-        console.log(this.messages);
       }, error => {
         this.isLoading = false;
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})

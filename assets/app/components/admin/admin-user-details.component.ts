@@ -43,8 +43,6 @@ export class AdminUserDetailsComponent implements OnInit {
     this.apiService.getIndividualUser(this.nickname)
       .subscribe(user => {
         this.user = user;
-        console.log('admin-user-details.component.ts this.contest');
-        console.log(this.user);
         this.isLoading = false;
       }, 
       error => {
@@ -74,8 +72,6 @@ export class AdminUserDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Aktyvus")
     .subscribe(res => {
-      console.log('statusas pakeistas į aktyvų');
-      console.log(res);
       this.notificationsService.success('Patvirtinta', 'Konkursas sėkmingai patvirtintas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'konkursai']);
@@ -89,8 +85,6 @@ export class AdminUserDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Atmestas")
     .subscribe(res => {
-      console.log('statusas pakeistas į atmestą');
-      console.log(res);
       this.notificationsService.success('Atmesta', 'Konkursas sėkmingai atmestas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'konkursai']);
@@ -112,8 +106,6 @@ export class AdminUserDetailsComponent implements OnInit {
     this.isLoading = true;
     this.apiService.updateUserStatus(nickname, true)
     .subscribe(res => {
-      console.log('statusas pakeistas į užblokuotą');
-      console.log(res);
       this.notificationsService.info('Užblokuota', 'Vartotojas sėkmingai užblokuotas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'vartotojai']);
@@ -127,8 +119,6 @@ export class AdminUserDetailsComponent implements OnInit {
     this.isLoading = true;
     this.apiService.updateUserStatus(nickname, false)
     .subscribe(res => {
-      console.log('statusas pakeistas į užblokuotą');
-      console.log(res);
       this.notificationsService.info('Užblokuota', 'Vartotojas sėkmingai atblokuotas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'vartotojai']);

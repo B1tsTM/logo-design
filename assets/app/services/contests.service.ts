@@ -18,8 +18,6 @@ export class ContestsService {
   getAllContests() {
     return this.http.get('http://localhost:3000/api/v1/konkursai')
       .map(res => {
-        console.log(res.json());
-//        const data = res.json().obj;
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
@@ -47,7 +45,6 @@ export class ContestsService {
     } else {
     return this.http.get('http://localhost:3000/api/v1/konkursai/filter/' + searchString)
       .map(res => {
-        console.log(res.json());
         return res.json().obj;
       })
       .catch(error => Observable.throw(error.json()));
@@ -57,8 +54,6 @@ export class ContestsService {
   getIndividualContests(id: any) {
     return this.http.get('http://localhost:3000/api/v1/konkursai')
       .map(res => {
-        console.log(res.json());
-//        const data = res.json().obj;
         const data = res.json().obj;
         let objs: any[] = [];
         for(let i=0; i< data.length; i++) {
@@ -67,8 +62,6 @@ export class ContestsService {
           objs.push(contest);
           }
         };
-        console.log('getIndividualContests objs after loop');
-        console.log(objs);
         return objs;
       })
       .catch(error => Observable.throw(error.json()));
@@ -77,10 +70,7 @@ export class ContestsService {
   getIndividualContest(id: any) {
     return this.http.get('http://localhost:3000/api/v1/konkursai/' + id)
       .map(res => {
-        console.log(res.json());
         const data = res.json().obj;
-        //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
-        //return contest;
         return data;
       })
       .catch(error => Observable.throw(error.json()));
@@ -94,8 +84,6 @@ export class ContestsService {
     return this.http.post("http://localhost:3000/konkursai" + token, body, {headers: headers})
     .map(res => {
       const data = res.json().obj;
-      //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
-      //return contest;
       return data;
     })
     .catch(error => Observable.throw(error.json()));

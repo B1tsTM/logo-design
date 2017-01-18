@@ -40,11 +40,11 @@ export class CarAdComponent implements OnInit {
 
   addContest(value) {
     this.isLoading = true;
-    console.log(value);
+    //console.log(value);
     this.contestsService.addContest(value)
       .subscribe(contest => {
-        console.log('contest added');
-        console.log(contest);
+        //console.log('contest added');
+        //console.log(contest);
         this.isLoading = false;
         this.notificationsService.success('Paskelbta', 'Konkursas paskelbtas', {timeOut: 3000, showProgressBar: false})
         this.router.navigate(['/']);

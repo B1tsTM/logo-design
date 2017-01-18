@@ -41,8 +41,6 @@ export class MailListComponent implements OnInit {
         this.messages = filteredMessages;
         this.sentMessages = filteredSentMessages;
         this.isLoading = false;
-        console.log('THIS.MESSAGES');
-        console.log(this.messages);
       }, error => {
         this.isLoading = false;
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
@@ -52,9 +50,7 @@ export class MailListComponent implements OnInit {
   viewMessage(messageId: number) {
     this.apiService.changeMessageStatus(this.userId, messageId)
       .subscribe(res => {
-        console.log(res);
       }, error => {
-        console.error(error);
       });
     this.router.navigate(['zinutes', messageId], {relativeTo: this.route})
   }

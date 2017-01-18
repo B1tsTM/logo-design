@@ -47,9 +47,6 @@ export class ContestDetailsComponent implements OnInit {
   ngOnInit() { 
     this.isLoading = true;
    moment.locale('lt-lt');
-    //   console.log('LOCALE');
-    //   console.log(locale);
-      //this.momentDate = moment().format('YYYY MMMM Do');
       this.momentDate = moment().add(3, 'days').calendar();
     this.route.params.subscribe((params: Params) => {
       this.contestId = params['id'];
@@ -58,45 +55,30 @@ export class ContestDetailsComponent implements OnInit {
       .subscribe(contest => {
         this.contest = contest;
         this.additionalFiles = contest.additionalFiles;
-        console.log('contest-details.component.ts this.contest');
-        console.log(this.contest);
         //START
         this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
-            console.log('submitions from apiservice in contest-details');
-            console.log(submitions);
             this.submitions = submitions;
             this.isLoading = false;
-            console.log(this.submitions);
         },
         error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
       if (this.isLoggedIn()) {
         this.apiService.getMySubmitions(this.contestId)
           .subscribe(mySubmitions => {
-            console.log('MySubmitions from apiservice in contest-details');
-            console.log(mySubmitions);
             this.mySubmitions = mySubmitions;
-            console.log('this.mySubmitions');
-            console.log(this.mySubmitions);
         },
         error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
-          //this.notificationsService.error('Įvyko klaida', 'Nepavyko gauti konkurso dizainų', {timeOut: 3000, showProgressBar: false})
       });
     }
     this.apiService.getWinnerSubmition(this.contestId)
         .subscribe(data => {
-            console.log(data);
             if (data.submitionUrl) {
                 this.winnerSubmition = data;
             }
-              console.log('WINNNNNNNNNNER');
-              console.log(this.winnerSubmition);
         }, error => {
            this.isLoading = false;
           this.notificationsService.info(error.title, error.error.message, {timeOut: 3000, showProgressBar: false}) 
@@ -104,7 +86,6 @@ export class ContestDetailsComponent implements OnInit {
         //END
       }, 
       error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
           this.router.navigate(['/konkursai']);
@@ -151,27 +132,21 @@ export class ContestDetailsComponent implements OnInit {
       this.isLoading = true;
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload, "submition").then((result) => {
-            console.log(result);
             this.isLoading = false;
         }, (error) => {
             this.isLoading = false;
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload, "submition").then((result) => {
-            console.log(result);
             this.filesToUpload = [];
         }, (error) => {
-            console.log('reached err');
             this.isLoading = false;
             window.scrollTo(0, 0);
 
             this.apiService.getContestSubmitions(this.contestId) 
             .subscribe(submitions => {
-                console.log('submitions from apiservice in contest-details');
-                console.log(submitions);
                 this.submitions = submitions;
                 this.isLoading = false;
-                console.log(this.submitions);
                 this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
             },
             error => {
@@ -181,11 +156,7 @@ export class ContestDetailsComponent implements OnInit {
 
             this.apiService.getMySubmitions(this.contestId)
             .subscribe(mySubmitions => {
-                console.log('MySubmitions from apiservice in contest-details');
-                console.log(mySubmitions);
                 this.mySubmitions = mySubmitions;
-                console.log('this.mySubmitions');
-                console.log(this.mySubmitions);
             },
             error => {
             this.isLoading = false;
@@ -201,22 +172,18 @@ export class ContestDetailsComponent implements OnInit {
       this.isLoading = true;
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/contests/' + this.contestId + '/files',this.filesToUpload, "additionalfiles").then((result) => {
-            console.log(result);
             this.isLoading = false;
             this.apiService.getContestAdditionalFiles(this.contestId)
             .subscribe(data => {
-                console.log(data);
                 this.additionalFiles = data;
             }, error => {
                 this.isLoading = false;
                 this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             })
-            //this.filesToUpload = [];
         }, (error) => { // TODO find out why it always go into error state
             this.apiService.getContestAdditionalFiles(this.contestId)
             .subscribe(data => {
                 this.isLoading = false;
-                console.log(data);
                 this.additionalFiles = data;
             }, error => {
                 this.isLoading = false;
@@ -228,11 +195,6 @@ export class ContestDetailsComponent implements OnInit {
 
     fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>> fileInput.target.files;
-        //this.filesToUpload.forEach((file, i) => this.filesToUpload.push(fileInput.target.files[i]));
-        console.log(fileInput.target.files);
-        //let arr = Array.from(fileInput.target.files); //convert File Object to Array to push it
-        //this.filesToUpload.push(arr[0]); //use this if you use multiple single file inputs
-        console.log(this.filesToUpload);
     }
  
     makeFileRequest(url: string, files: Array<File>, fileType: string) {
@@ -246,17 +208,13 @@ export class ContestDetailsComponent implements OnInit {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        console.log(xhr.response);
                         resolve(JSON.parse(xhr.response));
                     } else {
-                        console.log(xhr.response);
                         reject(xhr.response);
                     }
                 }
             }
             xhr.onerror = function(e) {
-                console.log('Klaida įkeliant failus');
-                console.log(e);
             };
             xhr.open("POST", url, true);
             xhr.send(formData);
@@ -266,7 +224,6 @@ export class ContestDetailsComponent implements OnInit {
     calculateUploadProgress(evt) {
     if (evt.lengthComputable) {
         this.percent = Math.round(evt.loaded / evt.total * 100);
-        console.log("PERCENT : ", this.percent + "%");
     }
     //END OF FILE UPLOAD STUFF
 
@@ -275,16 +232,10 @@ export class ContestDetailsComponent implements OnInit {
     onRating(obj: any) {
         this.isLoading = true;
         var submition = this.submitions.filter((item: any) => item.submitionId == obj.submitionId);
-        console.log('onRating() submition after filter');
-        console.log(submition);
         if (!!submition && submition.length == 1) {
-            //this.submitions[0].submitionRating = obj.rating;
-
             submition[0].submitionRating = obj.rating;
             this.contestsService.updateSubmitionRating(this.contest, submition[0])
                 .subscribe(data => {
-                    console.log('Rating changed');
-                    console.log(data);
                     if (submition[0].status == 'Nugalėtojas') { 
                         this.winnerSubmition.submitionRating = data.obj.submitions[obj.submitionId - 1].submitionRating;
                     }
@@ -304,7 +255,6 @@ export class ContestDetailsComponent implements OnInit {
 
    viewSubmitionDetails(contestId, contest, submition) {
        this.contestsService.submitionDetails = {contestId: contestId, contest: contest, submition: submition};
-       console.log(this.contestsService.submitionDetails);
        this.router.navigate([submition.submitionId], {relativeTo: this.route});
    }
    goToLink() {

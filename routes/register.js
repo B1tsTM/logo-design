@@ -8,29 +8,6 @@ var smtpTransport = require("nodemailer-smtp-transport")
 
 var User = require('../models/user');
 
-// var sendMail = function() { //emailjs implementation
-//   var server  = email.server.connect({
-//     user:    "bitsaz15@gmail.com", 
-//     password:"M-30", 
-//     host:    "smtp.gmail.com", 
-//     ssl:     false,
-//     port: 587
-//   });
-
-//   var message = {
-//     text:    "i hope this works", 
-//     from:    "bitsaz15@gmail.com", 
-//     to:      "b1ts@hotmail.lt",
-//     subject: "testing emailjs",
-//   };
-
-//   // send the message and get a callback with an error or details of the message that was sent
-//   server.send(message, function(err, message) { console.log(err || message); });
-
-//   if(err) {console.log(err);}
-//   console.log('mail sent');
-// };
-
 router.post('/', function(req, res, next) {
   User.findOne({'nickName': {$regex: new RegExp(req.body.nickName, "i")}}, function(err, dupe) {
     if(err) {
@@ -82,9 +59,8 @@ router.post('/', function(req, res, next) {
     dateRegistered: Date.now()
     });
   };
-  user.profile.profileUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName;
-  //user.avatar.avatarUrl = 'http://localhost:3000/users/' + req.body.firstName + req.body.lastName + '/avatar';
-  //sendMail(); //emailjs
+  user.profile.profileUrl = 'http://localhost:3000/dizaineriai/' + req.body.nickName;
+
 
 
 

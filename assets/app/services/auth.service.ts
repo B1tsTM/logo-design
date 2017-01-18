@@ -17,18 +17,13 @@ export class AuthService {
       .map(res => {
         const data = res.json().obj;
         let user = new User(data.nickName, data.password, data.userType ,data.firstName, data.lastName, data.email, 0, 0);
-        console.log(user);
         return user;
       })
       .catch(error => Observable.throw(error.json()));
   }
 
   signin(user: User) {
-    console.log('auth service incoming user');
-    console.log(user);
     const body = JSON.stringify(user);
-    console.log('auth service stringified user')
-    console.log(body);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post('http://localhost:3000/prisijungti', body, {headers:headers})
       .map(res => {

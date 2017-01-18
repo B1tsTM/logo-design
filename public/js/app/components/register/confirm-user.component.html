@@ -1,9 +1,16 @@
-<br>
-<h1 class="text-center">Patvirtinti vartotoją</h1>
-<br>
-<br>
+<section class="app-headline">
+		<div class="row">
+			<div class="column small-12">
+				<div class="app-breadcrumbs">
+					<a routerLink="/">Pagrindinis puslapis</a>
+					<a class="active">Paskyros patvirtinimas</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<div class="wrapper">
+
+<div class="wrapper text-center">
   <h2 class="text-center" *ngIf="confirmedBlock">Paskyra patvirtinta. Dabar galite prisijungti.</h2>
   <h2 class="text-center" *ngIf="errorBlock">Patvirtinimo kodas neteisingas !</h2>
   <br>

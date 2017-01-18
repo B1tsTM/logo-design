@@ -89,7 +89,7 @@ Contest.find()
 .exec(function(err, contests) {
   if (err) console.log(err);
   for (var i=0; i<contests.length; i++) {
-    if (contests[i].status == "Aktyvus") {
+    if (contests[i].status == "Aktyvus" || contests[i].status == "Pratęstas") {
       if (contests[i].endDate.getTime() < new Date().getTime()) {
         console.log('contest finished');
         contests[i].status = "Laikas baigėsi";
@@ -147,8 +147,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    //error: {}
-    error: err
+    error: {}
+    // error: err
   });
 });
 

@@ -75,12 +75,6 @@ export class DesignersComponent implements OnInit {
       .subscribe(event => {
         this.designersService.getFilteredDesigners(event.target.value) //searchString
         .subscribe(designers => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
-          //var unfilteredContests = contests;
-          //var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           console.log(designers);
           this.designers = designers;
           console.log(this.designers);

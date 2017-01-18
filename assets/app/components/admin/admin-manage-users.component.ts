@@ -17,7 +17,6 @@ import 'rxjs/Rx';
 export class AdminManageUsersComponent implements OnInit {
   contests: any = [];
   isLoading = false;
-  //status = "Nepatvirtintas";
   firstTabActive = true;
   secondTabActive = false;
   allActiveUsers = [];
@@ -42,14 +41,10 @@ export class AdminManageUsersComponent implements OnInit {
     this.isLoading = true;
     this.apiService.getAllUsers()
     .subscribe(users => {
-      //var unfilteredContests = contests;
-      // var filteredActiveContests = unfilteredContests.filter((item: any) => item.status == this.status);
-      // var filteredFinishedContests = unfilteredContests.filter((item: any) => item.status == "Užbaigtas");
       this.allActiveUsers = users.filter((item: any) => item.userBlocked == this.userBlocked);
       this.allBannedUsers = users.filter((item: any) => item.userBlocked == !this.userBlocked);
       this.users = this.allActiveUsers;
       this.isLoading = false;
-      console.log(this.users);
     }, error => {
       this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
@@ -79,12 +74,8 @@ export class AdminManageUsersComponent implements OnInit {
       .subscribe(event => {
         this.apiService.getFilteredUsers(event.target.value) //searchString
         .subscribe(users => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredUsers = users;
           var filteredUsers = unfilteredUsers.filter((item: any) => item.userBlocked == this.userBlocked);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.users = filteredUsers;
           this.cdRef.detectChanges();
         }, error => {
@@ -100,17 +91,13 @@ export class AdminManageUsersComponent implements OnInit {
     if (this.userBlocked == false) {
       //do nothing
     } else {
-    //this.status = "Aktyvus";
     this.userBlocked = false;
     this.isLoading = true;
     this.searchElRef.nativeElement.value = '';
     this.apiService.getFilteredUsers("") // = get all
         .subscribe(users => {
-          console.log(users);
           var unfilteredUsers = users;
           var filteredUsers = unfilteredUsers.filter((item: any) => item.userBlocked == this.userBlocked);
-          console.log('Filter layer 2 contests');
-          console.log(filteredUsers);
           this.users = filteredUsers;
           this.cdRef.detectChanges();
           this.isLoading = false;
@@ -133,12 +120,8 @@ export class AdminManageUsersComponent implements OnInit {
     this.searchElRef.nativeElement.value = '';
     this.apiService.getFilteredUsers("") // = get all
         .subscribe(users => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredUsers = users;
           var filteredUsers = unfilteredUsers.filter((item: any) => item.userBlocked == this.userBlocked);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.users = filteredUsers;
           this.cdRef.detectChanges();
           this.isLoading = false;

@@ -64,12 +64,9 @@ export class UserNavigationComponent implements OnInit {
       },
       error => {
         this.isLoading = false;
-        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-        //this.errorService.handleError(error);
       });
 
     this.loginForm = this.fb.group({
-      //email: ['', Validators.compose([Validators.required, this.isValidEmail])],
       nickName: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -88,7 +85,6 @@ export class UserNavigationComponent implements OnInit {
 
   logout() {
     sessionStorage.clear();
-    console.log('sessionStorage cleared, logging out...');
     this.notificationsService.info('Atsijungiama...', 'Sėkmingai atsijungėte', {timeOut: 3000, showProgressBar: false});
     this.router.navigate(['/']);
   }
@@ -98,26 +94,19 @@ export class UserNavigationComponent implements OnInit {
   }
 
     closed() {
-        console.log('Modal closed');
     }
 
     dismissed() {
-        console.log('Modal dismissed');
     }
 
     opened() {
-        console.log('Modal opened');
     }
 
     login(form: any) {
       this.isLoading = true;
        const user = new User(form.nickName.value, form.password.value);
-       console.log('user-navigation login user const');
-       console.log(user);
        this.authService.signin(user)
        .subscribe(data => {
-         console.log(data);
-         console.log('Sekmingai prisijungta');
          sessionStorage.setItem('token', data.token);
          sessionStorage.setItem('userId', data.userId);
          sessionStorage.setItem('userType', CryptoJS.SHA3(data.userType).toString());
@@ -125,12 +114,9 @@ export class UserNavigationComponent implements OnInit {
          this.nickname = data.nickname;
          this.isLoading = false;
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
-         //this.router.navigateByUrl('/');
        },
-       //error => this.errorService.handleError(error))
        error => {
          this.isLoading = false; 
-         //this.notificationsService.error('Klaida', 'Įvyko klaida prisijungiant', {timeOut: 3000, showProgressBar: false}) 
          this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       })
     }
@@ -140,7 +126,6 @@ export class UserNavigationComponent implements OnInit {
       const user = new User(form.nickName.value, form.password.value, form.repeatPassword.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0);
         this.authService.signup(user)
           .subscribe(data => {
-            console.log(data);
             form.firstName.value = null;
             form.lastName.value = null;
             form.nickName.value = null;
@@ -150,11 +135,8 @@ export class UserNavigationComponent implements OnInit {
             this.isLoading = false;
             this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote. Patikrinkite savo el. pašto paskyrą ir ją patvirtinkite', {timeOut: 7000, showProgressBar: false});
           },
-          //error => this.errorService.handleError(error))
-          
           error => { 
             this.isLoading = false;
-            //this.notificationsService.error('Klaida registruojantis', 'Tinkamai užpildykite visus laukus. Pasirinkite unikalų slapyvardį', {timeOut: 3000, showProgressBar: false})
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         }) 
     }
@@ -177,18 +159,14 @@ export class UserNavigationComponent implements OnInit {
       }
 
     isMatchingPassword(control: FormGroup) {
-        // check if control is equal to the password1 control
-        console.log(control);
-        console.log(this.registerForm);
+        // check if control is equal to the password1 control //for some reason not working properly
         return control.value === this.registerForm.value.password ? null : {isEqual: true};
     }
 
       created(ev) {
-      console.log('notification created');
     }
 
     destroyed(ev) {
-      console.log('notification destroyed');
     }
 
 }

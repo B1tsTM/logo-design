@@ -22,24 +22,13 @@ export class ApiService {
   getContestSubmitions(id: string) {
     return this.http.get('http://localhost:3000/api/v1/submitions/contest/'+id)
       .map(res => {
-        //console.log('submitions from apiservice');
-        //console.log(res.json());
         const data = res.json().submitions;
-        //console.log('apiService data variable');
-        //console.log(data);
           let submitions: any[] = [];
           for(let i=0; i< data.length; i++) {
-            //let designer = new User(data[i].email, data[i].password, data[i].userType, data[i].firstName, data[i].lastName, data[i].contestsWon, data[i].designsCreated, data[i].publicDesigns);
             let submition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
             submitions.push(submition);
           };
-          console.log('submitions after loop');
-          console.log(submitions);
           return submitions;
-
-        // var submitions = res.json().submitions;
-        // console.log(submitions);
-        // return submitions;
       })
       .catch(error => Observable.throw(error.json()));
   }
@@ -47,30 +36,17 @@ export class ApiService {
   getMySubmitions(contestId: string) {
     return this.http.get('http://localhost:3000/api/v1/submitions/contest/'+contestId)
       .map(res => {
-        //console.log('MySubmitions from apiservice');
-        //console.log(res.json());
         const data = res.json().submitions;
-        //console.log('apiService data variable for MySubmitions');
-        //console.log(data);
           let userId = sessionStorage.getItem('userId') ? sessionStorage.getItem('userId') : '';
           let mySubmitions: any[] = [];
           for(let i=0; i< data.length; i++) {
-            //console.log('submition author');
-            //console.log(data[i].submitionAuthor);
             if (data[i].submitionAuthor._id == userId) {
             let mySubmition = {submitionUrl: data[i].submitionUrl, submitionAuthor: data[i].submitionAuthor, submitionRating: data[i].submitionRating, submitionId: data[i].submitionId, status: data[i].status, comments: data[i].comments};
-            //console.log('MySubmition in loop');
-            //console.log(mySubmition);
             mySubmitions.push(mySubmition);
             }
           };
-          console.log('MySubmitions after loop');
-          console.log(mySubmitions);
           return mySubmitions;
 
-        // var submitions = res.json().submitions;
-        // console.log(submitions);
-        // return submitions;
       })
       .catch(error => Observable.throw(error.json()));
   }
@@ -78,8 +54,6 @@ export class ApiService {
   getWinnerSubmition(contestId) {
     return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/winner')
       .map(res => {
-        console.log('DEBUG service res.json()');
-        console.log(res.json());
         return res.json().obj;
       })
       .catch(error => Observable.throw(error.json())); 
@@ -92,8 +66,6 @@ export class ApiService {
     return this.http.get('http://localhost:3000/api/v1/users/'+userId)
     .map(res => {
       const user = res.json().user;
-      console.log('getUserInfo user var');
-      console.log(user);
       return user;
     })
     .catch(error => Observable.throw(error.json()));
@@ -101,14 +73,10 @@ export class ApiService {
 
   addComment(obj:any, contestId: string) {
     const body = JSON.stringify(obj);
-    console.log('OOBBJJ');
-    console.log(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/api/v1/contest/' + contestId, body, {headers: headers})
     .map(res => {
       const comments = res.json().obj.comments;
-      console.log('api service addComment comments var');
-      console.log(comments);
       return comments;
     })
     .catch(error => Observable.throw(error.json()));
@@ -116,14 +84,10 @@ export class ApiService {
 
   addSubmitionComment(obj:any, contestId: string, submitionId: number) {
     const body = JSON.stringify(obj);
-    console.log('OOBBJJ');
-    console.log(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/api/v1/contest/' + contestId + '/submition/' + submitionId + '/comment', body, {headers: headers})
     .map(res => {
       const contest = res.json().obj;
-      console.log('api service addComment contest var');
-      console.log(contest);
       return contest;
     })
     .catch(error => Observable.throw(error.json()));
@@ -133,8 +97,6 @@ export class ApiService {
     return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/comments')
     .map(res => {
       const comments = res.json().obj.comments;
-      console.log('api service getComments comments var');
-      console.log(comments);
       return comments;
     })
     .catch(error => Observable.throw(error.json()));
@@ -143,11 +105,7 @@ export class ApiService {
   getSubmitionComments(contestId: string, submitionId: number) {
     return this.http.get('http://localhost:3000/api/v1/contest/' + contestId + '/submition/'+ submitionId + '/comments')
     .map(res => {
-      console.log('RES JSON');
-      console.log(res.json());
       const comments = res.json().obj;
-      console.log('api service getComments comments var');
-      console.log(comments);
       return comments;
     })
     .catch(error => Observable.throw(error.json()));
@@ -160,7 +118,6 @@ export class ApiService {
   }
 
   sendMessage(recipient, topic, message, sender) {
-    //var sender = sessionStorage.getItem('userId');
     var obj = {message: message, recipient: recipient, topic: topic, sender: sender};
     const body = JSON.stringify(obj);
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -212,14 +169,7 @@ export class ApiService {
   getAllUsers() {
     return this.http.get('http://localhost:3000/api/v1/users/all')
       .map(res => {
-        console.log(res.json());
-//        const data = res.json().obj;
         const data = res.json().obj;
-        // let objs: any[] = [];
-        // for(let i=0; i< data.length; i++) {
-        //   let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
-        //   objs.push(contest);
-        // };
         return data;
       })
       .catch(error => Observable.throw(error.json()));
@@ -230,18 +180,14 @@ export class ApiService {
       return this.http.get('http://localhost:3000/api/v1/users/all')
       .map(res => {
         const data = res.json().obj;
-        // let objs: any[] = [];
-        // for(let i=0; i< data.length; i++) {
-        //   let contest = new Contest(data[i].name, data[i].uniqueId, data[i].idName, data[i]._id, data[i].category, data[i].description, data[i].award, data[i].status, data[i].submitionCount, data[i].daysRemaining, data[i].startDate, data[i].endDate, data[i].submitions, data[i].publisher);
-        //   objs.push(contest);
-        // };
+
         return data;
       })
       .catch(error => Observable.throw(error.json()));
     } else {
     return this.http.get('http://localhost:3000/api/v1/users/filter/' + searchString)
       .map(res => {
-        console.log(res.json());
+
         return res.json().obj;
       })
       .catch(error => Observable.throw(error.json()));
@@ -251,10 +197,7 @@ export class ApiService {
   getIndividualUser(nickname: any) {
     return this.http.get('http://localhost:3000/api/v1/users/single/' + nickname)
       .map(res => {
-        console.log(res.json());
         const data = res.json().obj;
-        //let contest = new Contest(data.name, data.uniqueId, data.idName, data._id, data.category, data.description, data.award, data.status, data.submitionCount, data.daysRemaining, data.startDate, data.endDate, data.submitions, data.publisher);
-        //return contest;
         return data;
       })
       .catch(error => Observable.throw(error.json()));
@@ -269,19 +212,5 @@ export class ApiService {
     .map(res => res.json())
     .catch(error => Observable.throw(error.json()));
   }
-
-
-  // addWinningContest(contestId, winnerId) {
-  //   console.log('DEBUG apiservice params');
-  //   console.log('contestId: ' + contestId);
-  //   console.log('winnerId: ' + winnerId);
-  //   const body = JSON.stringify({winnerId: winnerId, contestId: contestId});
-  //   const headers = new Headers({'Content-Type': 'application/json'});
-  //   return this.http.patch('http://localhost:3000/api/v1/contest/winner/add/' + contestId + "/" + winnerId, body, {headers: headers})
-  //     .map(res => {
-  //       return res.json();
-  //     })
-  //     .catch(error => Observable.throw(error.json()));
-  // }
 
 }

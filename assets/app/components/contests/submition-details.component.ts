@@ -38,42 +38,31 @@ export class SubmitionDetailsComponent implements OnInit {
       return this.route.params.subscribe(params => {
           this.router.navigate(['/konkursai', params['id']]);
       });
-      //return this.router.navigate(['/konkursai']);
   }
       this.isLoading = true;
-      console.log(this.contestsService.submitionDetails);
       this.contestId = this.contestsService.submitionDetails.contestId;
       this.contest = this.contestsService.submitionDetails.contest;
       this.submition = this.contestsService.submitionDetails.submition;
-      console.log('DEBUG THis.submition');
-      console.log(this.submition.submitionAuthor._id);
 
       this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
-            console.log('submitions from apiservice in submition-details');
-            console.log(submitions);
             this.submitions = submitions;
             this.isLoading = false;
-            console.log(this.submitions);
         },
         error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
   }
 
     closed() {
-        console.log('Modal closed');
     }
 
     dismissed() {
-        console.log('Modal dismissed');
         this.confirmationVisible = false;
     }
 
     opened() {
-        console.log('Modal opened');
     }
 
     isContestPublisher(contestAuthorId: string) {
@@ -84,17 +73,10 @@ export class SubmitionDetailsComponent implements OnInit {
     onRating(obj: any) {
         this.isLoading = true;
         var submition = this.submitions.filter((item: any) => item.submitionId == obj.submitionId);
-        console.log('onRating() submition after filter');
-        console.log(submition);
         if (!!submition && submition.length == 1) {
-            //this.submitions[0].submitionRating = obj.rating;
             submition[0].submitionRating = obj.rating;
             this.contestsService.updateSubmitionRating(this.contest, submition[0])
                 .subscribe(data => {
-                    console.log('Rating changed');
-                    console.log(data);
-                    //this.contestsService.submitionDetails.submition = data.obj.submitions[obj.submitionId - 1];
-                    console.log(this.contestsService.submitionDetails.submition); 
                     this.isLoading = false;
                     this.notificationsService.success('Pakeista', 'Dizaino reitingas pakeistas', {timeOut: 3000, showProgressBar: false})
                 }, error => {
@@ -107,19 +89,14 @@ export class SubmitionDetailsComponent implements OnInit {
     selectWinner(contestIdName, submitionId, contest, submition) {
         this.isLoading = true;
         const topic = "Pergalė konkurse " + contest.name;
-        const message = "Sveikiname laimėjus konkursą '" + contest.name + "'! Su jumis artimiausiu metu susisieks konkurso autorius " + contest.publisher.nickName + ". Kai Jūs išsiųsite atitinkamus dizaino failus ir gausite už tai pinigus, Jums reikės tai patvirtinti atrašant į ši laišką, įtraukiant konkurso pavadinimą (bei paminėti iškilusias problemas, jei tokių buvo) arba susisiekti el. pašto adresu info@dizainokonkursai.lt . Tai padarius konkursas bus laikomas užbaigtu. Sveikiname ir linkime Jums geros dienos!";
-        console.log('you win ' + contestIdName +', '+ submitionId);
+        const message = "Sveikiname laimėjus konkursą '" + contest.name + "'! Su jumis artimiausiu metu susisieks konkurso autorius " + contest.publisher.nickName + ". Kai Jūs išsiųsite atitinkamus dizaino failus ir gausite už tai pinigus, Jums reikės tai patvirtinti atrašant į ši laišką, įtraukiant konkurso pavadinimą (bei paminėti iškilusias problemas, jei tokių buvo) arba susisiekti el. pašto adresu irmantas.liepis@inbox.lt . Tai padarius konkursas bus laikomas užbaigtu. Sveikiname ir linkime Jums geros dienos!";
         const messageForAdmin = "Konkursą " + contest.name + "laimėjo " + this.submition.submitionAuthor.nickName + " laiku " + Date.now(); // TODO proper date format
         this.apiService.selectWinner(contestIdName, submitionId, contest.id, this.submition.submitionAuthor._id, submition)
             .subscribe(data => {
-                console.log(data);
-                console.log('DEBUG THis.submition');
-                console.log(this.submition);
                 this.isLoading = false;
                 this.contestsService.contestWinner = {contestId: contestIdName, submitionId: submitionId, submition: this.submition, contest: contest};
                 this.apiService.sendMessage(this.submition.submitionAuthor.nickName, topic, message, "Admin") //.add sender param, figure out how to change it in api.service
                     .subscribe(res => {
-                        console.log('Zinute laimetojui issiusta');
                         this.notificationsService.success('Sveikiname', 'Laimėtoją informavome apie pergalę', {timeOut: 5000, showProgressBar: false})
                     }, error => {
                         this.isLoading = false;
@@ -127,18 +104,10 @@ export class SubmitionDetailsComponent implements OnInit {
                     });
                 this.apiService.sendMessage('Admin', topic, messageForAdmin, 'Admin')
                     .subscribe(res => {
-                        console.log('Zinute administatoriui issiusta');
                     }, error => {
                         this.isLoading = false;
                         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
                     });
-                    // this.apiService.addWinningContest(contest._id, this.submition.submitionAuthor._id)
-                    // .subscribe(data => {
-                    //     console.log(data);
-                    // }, error => {
-                    //     this.isLoading = false;
-                    //     this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-                    // });
                 window.scrollTo(0,0);
                 this.router.navigate(['nugaletojas'], {relativeTo: this.route});
             }, error => {
@@ -167,13 +136,11 @@ export class SubmitionDetailsComponent implements OnInit {
       }
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/change/' + this.contestId + '/' +this.userId + '/' + this.submition.submitionId,this.filesToUpload, "submition").then((result) => {
-            console.log(result);
             this.submition.submitionUrl = result.files[0].filename;
             this.isLoading = false;
             this.filesToUpload = [];
             this.notificationsService.success('Pakeista', 'Dizainas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false});
         }, (error) => {
-            //this.submition.submitionUrl = result.files[0].filename;
             this.isLoading = false;
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
@@ -181,8 +148,6 @@ export class SubmitionDetailsComponent implements OnInit {
 
     fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>> fileInput.target.files;
-        console.log(fileInput.target.files);
-        console.log(this.filesToUpload);
     }
 
     makeFileRequest(url: string, files: Array<File>, fileType: string) {
@@ -196,17 +161,13 @@ export class SubmitionDetailsComponent implements OnInit {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        console.log(xhr.response);
                         resolve(JSON.parse(xhr.response));
                     } else {
-                        console.log(xhr.response);
                         reject(xhr.response);
                     }
                 }
             }
             xhr.onerror = function(e) {
-                console.log('Klaida įkeliant failus');
-                console.log(e);
             };
             xhr.open("POST", url, true);
             xhr.send(formData);
@@ -216,7 +177,6 @@ export class SubmitionDetailsComponent implements OnInit {
     calculateUploadProgress(evt) {
     if (evt.lengthComputable) {
         this.percent = Math.round(evt.loaded / evt.total * 100);
-        console.log("PERCENT : ", this.percent + "%");
         }
     }
 

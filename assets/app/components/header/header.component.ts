@@ -15,7 +15,6 @@ import 'rxjs/Rx';
   styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  //contest: Contest = null;
   contests: any = [];
   isLoading = false;
   status1 = "Aktyvus";
@@ -47,9 +46,7 @@ export class HeaderComponent implements OnInit {
       this.contests = filteredActiveContests;
       this.allActiveContests = filteredActiveContests;
       this.allFinishedContests = filteredFinishedContests;
-      //this.contestsService.contests = contests;
       this.isLoading = false;
-      console.log(this.contests);
     }, error => {
       this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
@@ -64,12 +61,8 @@ export class HeaderComponent implements OnInit {
       .subscribe(event => {
         this.contestsService.getFilteredContests(event.target.value) //searchString
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
         }, error => {
@@ -91,12 +84,8 @@ export class HeaderComponent implements OnInit {
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
           this.isLoading = false;
@@ -119,12 +108,8 @@ export class HeaderComponent implements OnInit {
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status1 || item.status == this.status2);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
           this.isLoading = false;

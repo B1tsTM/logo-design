@@ -20,8 +20,6 @@ export class AdminManageContestsComponent implements OnInit {
   status = "Nepatvirtintas";
   firstTabActive = true;
   secondTabActive = false;
-  //allActiveContests = [];
-  //allFinishedContests = [];
   allUnconfirmedContests = [];
   allContests = [];
   @ViewChild('search') searchElRef: ElementRef;
@@ -42,18 +40,11 @@ export class AdminManageContestsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.getAllContests()
     .subscribe(contests => {
-      //var unfilteredContests = contests;
-      // var filteredActiveContests = unfilteredContests.filter((item: any) => item.status == this.status);
-      // var filteredFinishedContests = unfilteredContests.filter((item: any) => item.status == "Užbaigtas");
       this.allContests = contests;
       this.contests = contests;
       var unconfirmedContets = contests.filter((item: any) => item.status == this.status);
       this.allUnconfirmedContests = unconfirmedContets;
-      //this.allActiveContests = filteredActiveContests;
-      //this.allFinishedContests = filteredFinishedContests;
-      //this.contestsService.contests = contests;
       this.isLoading = false;
-      console.log(this.contests);
     }, error => {
       this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
@@ -68,14 +59,6 @@ export class AdminManageContestsComponent implements OnInit {
       .subscribe(event => {
         this.contestsService.getFilteredContests(event.target.value) //searchString
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
-          //var unfilteredContests = contests;
-          //var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
-          //this.contests = filteredContests;
-          //this.allContests = contests;
           this.contests = contests;
           this.cdRef.detectChanges();
         }, error => {
@@ -87,16 +70,12 @@ export class AdminManageContestsComponent implements OnInit {
     this.ngzone.runOutsideAngular(() => {
       Observable.fromEvent(this.searchFilterRef.nativeElement, 'keyup')
       .debounceTime(1000)
-      .distinctUntilChanged() // TODO Update: not working. Needs a custom callback to check for whitespace differences
+      .distinctUntilChanged() // TODO fix this. Update: not working, Needs a custom callback to check for whitespace differences
       .subscribe(event => {
         this.contestsService.getFilteredContests(event.target.value) //searchString
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
         }, error => {
@@ -112,17 +91,10 @@ export class AdminManageContestsComponent implements OnInit {
     if (this.status == "Aktyvus") {
       //do nothing
     } else {
-    //this.status = "Aktyvus";
     this.isLoading = true;
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
-          //var unfilteredContests = contests;
-          //var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = contests;
           this.cdRef.detectChanges();
           this.isLoading = false;
@@ -139,17 +111,12 @@ export class AdminManageContestsComponent implements OnInit {
     if (this.status == "Užbaigtas") {
       //do nothing
     } else {
-    //this.status = "Užbaigtas";
     this.isLoading = true;
     this.searchElRef.nativeElement.value = '';
     this.contestsService.getFilteredContests("") // = get all
         .subscribe(contests => {
-          //console.log('Filter layer 1 contests');
-          //console.log(contests);
           var unfilteredContests = contests;
           var filteredContests = unfilteredContests.filter((item: any) => item.status == this.status);
-          //console.log('Filter layer 2 contests');
-          //console.log(filteredContests);
           this.contests = filteredContests;
           this.cdRef.detectChanges();
           this.isLoading = false;

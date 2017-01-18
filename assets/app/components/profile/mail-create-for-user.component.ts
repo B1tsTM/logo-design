@@ -39,8 +39,6 @@ export class MailCreateForUserComponent implements OnInit {
     this.apiService.getUserInfo(this.userId)
       .subscribe(res => {
         this.sender = res;
-        console.log('THIS.SENDER');
-        console.log(this.sender);
       }, error => {
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
@@ -60,7 +58,6 @@ export class MailCreateForUserComponent implements OnInit {
     }
     this.apiService.sendMessage(recipient, this.topic, this.message, this.sender.nickName)
       .subscribe(res => {
-        console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
         this.isLoading = false;
         this.router.navigate(['/profilis', 'pastas']);
@@ -71,19 +68,6 @@ export class MailCreateForUserComponent implements OnInit {
     }
   }
 
-  // searchUsers() {
-  //   this.apiService.searchUsers(this.nickname)
-  //     .subscribe(res => {
-  //       this.searchedUsers = res;
-  //       console.log('SEARCH RESULTS');
-  //       console.log(res);
-  //       console.log('THIS.searchedUsers');
-  //       console.log(this.searchedUsers);
-  //     }, error => {
-  //       this.notificationsService.error('Įvyko klaida', 'Nepavyko rasti vartotojo', {timeOut: 3000, showProgressBar: false})
-  //     });
-  // }
-
   search(event) {
     this.apiService.searchUsers(event.query)
       .subscribe(res => {
@@ -93,7 +77,6 @@ export class MailCreateForUserComponent implements OnInit {
       });
   }
   onSelect(obj) {
-    console.log(event);
     //this.nickname = obj.nickName;
   }
 

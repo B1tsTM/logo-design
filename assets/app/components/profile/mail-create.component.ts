@@ -30,8 +30,6 @@ export class MailCreateComponent implements OnInit {
     this.apiService.getUserInfo(this.userId)
       .subscribe(res => {
         this.sender = res;
-        console.log('THIS.SENDER');
-        console.log(this.sender);
       }, error => {
         this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
@@ -51,7 +49,6 @@ export class MailCreateComponent implements OnInit {
     }
     this.apiService.sendMessage(recipient, this.topic, this.message, this.sender.nickName)
       .subscribe(res => {
-        console.log(res);
         this.notificationsService.success('Išsiųsta', 'Žinutė išsiųsta sėkmingai', {timeOut: 3000, showProgressBar: false})
         this.router.navigate(['/profilis', 'pastas']);
         this.isLoading = false;
@@ -71,7 +68,6 @@ export class MailCreateComponent implements OnInit {
       });
   }
   onSelect(obj) {
-    console.log(event);
     //this.nickname = obj.nickName;
   }
 

@@ -50,8 +50,6 @@ router.post('/', function(req, res, next) {
     }
     var idName = kebab(req.body.name);
     Contest.findOne({'idName': idName}, function(err, result){
-      console.log('contests.js Contest.findOne result var');
-      console.log(result);
       if(err) { //should never execute this
         console.log(err);
         return res.status(404).json({
@@ -103,8 +101,6 @@ router.post('/', function(req, res, next) {
         usage: req.body.usage
 
       });
-      console.log('POST /konkursai contest var');
-      console.log(contest);
       contest.save(function(err, result) {
         if (err) {
           console.log(err);
@@ -115,8 +111,6 @@ router.post('/', function(req, res, next) {
         }
         doc.contests.push(result);
         doc.save();
-        console.log('contests.js Contest.findOne result var AFTER save()');
-        console.log(result);
         res.status(201).json({
           contest: 'Konkursas įkeltas',
           obj: result

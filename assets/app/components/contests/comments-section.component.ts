@@ -16,8 +16,6 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['comments-section.component.css']
 })
 export class CommentsSectionComponent implements OnInit {
-   //public commentsForm: FormGroup;
-   //@ViewChild('comment') comment;
    @Input() contest;
    comments: any[] = [];
    commentField: string;
@@ -48,49 +46,24 @@ export class CommentsSectionComponent implements OnInit {
     this.userId = sessionStorage.getItem('userId');
     this.apiService.getUserInfo(this.userId)
       .subscribe(user => {
-        console.log('comments-section comp user var');
-        console.log(user);
         this.user = user;
       },
       error => {
         this.isLoading = false;
-        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-          //this.errorService.handleError(error);
+
       });
     this.apiService.getComments(this.contestId)
       .subscribe(comments => {
-        console.log('comments-section getComments comments var');
-        console.log(comments);
         this.comments = comments;
         this.isLoading = false;
-        console.log('this.comments');
-        console.log(this.comments);
       },
       error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
-          // if(this.user) {
-          //   this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-          // } else {
-          //   this.user = null;
-          // }
-          
-          //this.comments = [];
       });
-      // this.commentsForm = this.fb.group({
-      //   comment: ['']
-      // });
    }
 
-//  addComment(form: any) {
-//         //console.log(comment.value);
-//         console.log(form);
-//         console.log(form.comment.value);
-//         //this.comment.value = '';
-//     }
   addComment(comment: string) {
     this.isLoading = true;
-    console.log(comment);
     if (!comment) {
       this.isLoading = false;
       this.notificationsService.info('Tuščias komentaras', 'Komentaro laukas negali būti tuščias', {timeOut: 3000, showProgressBar: true})
@@ -98,8 +71,6 @@ export class CommentsSectionComponent implements OnInit {
     this.comments.push({comment: comment, commentAuthor: this.user});
     this.apiService.addComment({comment: comment, commentAuthor: this.user}, this.contestId)
       .subscribe(comments => {
-        console.log('comments-section addComment comments var');
-        console.log(comments);
         this.comments = comments;
         this.isLoading = false;
         this.notificationsService.success('Įkelta', 'Komentaras įkeltas', {timeOut: 3000, showProgressBar: false});
@@ -110,7 +81,6 @@ export class CommentsSectionComponent implements OnInit {
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
     this.commentField = '';
-    console.log(this.comments);
     }
   }
 

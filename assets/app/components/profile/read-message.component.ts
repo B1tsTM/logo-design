@@ -50,8 +50,6 @@ export class ReadMessageComponent implements OnInit {
     this.isLoading = true;
     this.apiService.deleteMessage(this.messageId)
       .subscribe(res => {
-        console.log(res);
-        //this.message = null;
         this.isLoading = false;
         this.notificationsService.info('Ištrinta', 'Žinutė ištrinta', {timeOut: 3000, showProgressBar: false})
         this.router.navigate(['/profilis', 'pastas']);

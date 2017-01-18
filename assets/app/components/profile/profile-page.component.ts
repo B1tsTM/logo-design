@@ -35,7 +35,6 @@ export class ProfilePageComponent implements OnInit {
     this.id = sessionStorage.getItem('userId');
     this.authService.getAvatar(this.id)
       .subscribe(data => {
-        console.log(data);
         this.avatarUrl = data.avatarUrl;
         this.isLoading = false;
       }, error => {
@@ -43,14 +42,10 @@ export class ProfilePageComponent implements OnInit {
       });
       this.apiService.getUserInfo(this.id)
       .subscribe(user => {
-        console.log('comments-section comp user var');
-        console.log(user);
         this.user = user;
       },
       error => {
         this.isLoading = false;
-        //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
-          //this.errorService.handleError(error);
       });
   }
 
@@ -65,10 +60,8 @@ export class ProfilePageComponent implements OnInit {
   upload() {
       this.isLoading = true;
         this.makeFileRequest("http://localhost:3000/api/v1/avatars/"+this.id, this.filesToUpload).then((result) => {
-            console.log(result);
             this.authService.getAvatar(this.id)
               .subscribe(data => {
-              console.log(data);
               this.avatarUrl = data.avatarUrl;
               this.isLoading = false;
               this.notificationsService.success('Pakeista','Avataras pakeistas', {timeOut: 3000, showProgressBar: false})
@@ -77,17 +70,11 @@ export class ProfilePageComponent implements OnInit {
             });
             this.filesToUpload = [];
         }, (error) => {
-            console.error(error);
         });
     }
 
     fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>> fileInput.target.files;
-        //this.filesToUpload.forEach((file, i) => this.filesToUpload.push(fileInput.target.files[i]));
-        console.log(fileInput.target.files);
-        //let arr = Array.from(fileInput.target.files); //convert File Object to Array to push it
-        //this.filesToUpload.push(arr[0]); //use this if you use multiple single file inputs
-        console.log(this.filesToUpload);
     }
  
     makeFileRequest(url: string, files: Array<File>) {
@@ -108,8 +95,6 @@ export class ProfilePageComponent implements OnInit {
                 }
             }
             xhr.onerror = function(e) {
-                console.log('Klaida įkeliant failus');
-                console.log(e);
             };
             xhr.open("POST", url, true);
             xhr.send(formData);
@@ -119,7 +104,6 @@ export class ProfilePageComponent implements OnInit {
     calculateUploadProgress(evt) {
     if (evt.lengthComputable) {
         this.percent = Math.round(evt.loaded / evt.total * 100) + "%";
-        console.log("PERCENT : ", this.percent);
     }
     }
 
@@ -130,7 +114,6 @@ export class ProfilePageComponent implements OnInit {
     sendConfirmationEmail() {
         this.authService.sendConfirmationEmail(this.id)
         .subscribe(data => {
-            console.log(data);
             this.notificationsService.success('Išsiųsta', 'Patvirtinimo laiškas išsiųstas adresu ' + data.email, {timeOut: 3000, showProgressBar: false})
         }, error => {
             this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})

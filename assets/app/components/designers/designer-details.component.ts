@@ -43,11 +43,9 @@ export class DesignerDetailsComponent implements OnInit {
     this.designersService.getIndividualDesigner(this.designerId)
       .subscribe(designer => {
         this.designer = designer[0];
-        console.log(this.designer);
         this.isLoading = false;
       }, 
       error => {
-          //this.errorService.handleError(error);
           this.isLoading = false;
           this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
       });
@@ -60,7 +58,6 @@ export class DesignerDetailsComponent implements OnInit {
         });
     });
   }
-  // TODO fix getting gallery Urls (wrong name published to mongo?)
 
   sendPrivateMessage(nickname) {
         this.router.navigate(['/profilis', 'pastas', 'rasyti-laiska', nickname]);

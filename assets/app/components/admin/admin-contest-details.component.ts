@@ -45,20 +45,15 @@ export class AdminContestDetailsComponent implements OnInit {
 
   ngOnInit() { 
     this.isLoading = true;
-   moment.locale('lt-lt');
-    //   console.log('LOCALE');
-    //   console.log(locale);
-      //this.momentDate = moment().format('YYYY MMMM Do');
-      this.momentDate = moment().add(3, 'days').calendar();
+    moment.locale('lt-lt');
+    this.momentDate = moment().add(3, 'days').calendar();
     this.route.params.subscribe((params: Params) => {
-      this.contestId = params['id'];
+    this.contestId = params['id'];
     });
     this.contestsService.getIndividualContest(this.contestId)
       .subscribe(contest => {
         this.contest = contest;
         this.additionalFiles = contest.additionalFiles;
-        console.log('contest-details.component.ts this.contest');
-        console.log(this.contest);
       }, 
       error => {
           //this.errorService.handleError(error);
@@ -67,11 +62,8 @@ export class AdminContestDetailsComponent implements OnInit {
       });
     this.apiService.getContestSubmitions(this.contestId) //CURRENT FOCUS
         .subscribe(submitions => {
-            console.log('submitions from apiservice in contest-details');
-            console.log(submitions);
             this.submitions = submitions;
             this.isLoading = false;
-            console.log(this.submitions);
         },
         error => {
           //this.errorService.handleError(error);
@@ -81,12 +73,9 @@ export class AdminContestDetailsComponent implements OnInit {
 
     this.apiService.getWinnerSubmition(this.contestId)
         .subscribe(data => {
-            console.log(data);
             if (data.submitionUrl) {
                 this.winnerSubmition = data;
             }
-              console.log('WINNNNNNNNNNER');
-              console.log(this.winnerSubmition);
         }, error => {
            this.isLoading = false;
           this.notificationsService.info(error.title, error.error.message, {timeOut: 3000, showProgressBar: false}) 
@@ -116,7 +105,6 @@ export class AdminContestDetailsComponent implements OnInit {
 
    viewSubmitionDetails(contestId, contest, submition) {
        this.contestsService.submitionDetails = {contestId: contestId, contest: contest, submition: submition};
-       console.log(this.contestsService.submitionDetails);
        this.router.navigate([submition.submitionId], {relativeTo: this.route});
    }
 
@@ -124,8 +112,6 @@ export class AdminContestDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Aktyvus")
     .subscribe(res => {
-      console.log('statusas pakeistas į aktyvų');
-      console.log(res);
       this.notificationsService.success('Patvirtinta', 'Konkursas sėkmingai patvirtintas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'konkursai']);
@@ -139,8 +125,6 @@ export class AdminContestDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.updateContestStatus(idName, "Atmestas")
     .subscribe(res => {
-      console.log('statusas pakeistas į atmestą');
-      console.log(res);
       this.notificationsService.success('Atmesta', 'Konkursas sėkmingai atmestas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'konkursai']);
@@ -154,8 +138,6 @@ export class AdminContestDetailsComponent implements OnInit {
     this.isLoading = true;
     this.contestsService.extendContest(this.contestId, this.endDate)
     .subscribe(res => {
-      console.log('Konkursas pratęstas');
-      console.log(res);
       this.notificationsService.success('Pratęsta', 'Konkursas sėkmingai pratęstas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
       this.router.navigate(['/admin', 'konkursai']);
