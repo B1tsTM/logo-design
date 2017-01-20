@@ -17,7 +17,7 @@
                 <a routerLink="/mano-konkursai" routerLinkActive="active">Mano konkursai<i class="fa fa-bars"></i></a>
             </li>
             <li class="settings" *ngIf="isAdmin()">
-                <a routerLink="/admin" routerLinkActive="active">Admin valdymo pultas<i class="fa fa-bars"></i></a>
+                <a routerLink="/admin" routerLinkActive="active">Valdymo panelė<i class="fa fa-bars"></i></a>
             </li>
             <li class="logout">
                 <a (click)="logout()" href="#">Atsijungti <i class="fa fa-sign-out"></i></a>
@@ -44,7 +44,7 @@
             </modal-body>
             <modal-footer>
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="loginModal.dismiss()">Atšaukti</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="loginModal.close()">Prisijungti</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Prisijungti</button>
             </modal-footer>
         </form>
 </modal>
@@ -60,27 +60,77 @@
             <modal-body>
               <div class="form-group">
                     <label for="firstName">Vardas</label>
-                    <input autofocus type="text" class="form-control input-short" formControlName="firstName" name="firstName" id="firstName" autofocus>
+                    <input (click)="log(registerForm)" type="text" class="form-control input-short" formControlName="firstName" name="firstName" id="firstName">
+                    <div *ngIf="(registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched) && !registerForm.controls.firstName.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.firstName.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName">Pavardė</label>
                     <input type="text" class="form-control input-short" formControlName="lastName" name="lastName" id="lastName">
+                    <div *ngIf="(registerForm.controls.lastName.dirty || registerForm.controls.lastName.touched) && !registerForm.controls.lastName.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.lastName.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName">El. Paštas</label>
                     <input type="text" class="form-control input-short" formControlName="email" name="email" id="email">
+                    <div *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && !registerForm.controls.email.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.email.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
+                    <div *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && !registerForm.controls.email.valid && !registerForm.controls.email.errors?.required">
+                        <p class="haserror" *ngIf="registerForm.controls.email.errors?.invalidEmail">
+                            Netinkamas el. pašto formatas
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="firstName">Slapyvardis</label>
-                    <input type="text" class="form-control input-short" formControlName="nickName" name="nickName" id="nickName">
+                    <input type="text" class="form-control input-short" formControlName="nickNameReg" name="nickNameReg" id="nickNameReg">
+                    <div *ngIf="(registerForm.controls.nickNameReg.dirty || registerForm.controls.nickNameReg.touched) && !registerForm.controls.nickNameReg.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.nickNameReg.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
+                    <div *ngIf="(registerForm.controls.nickNameReg.dirty || registerForm.controls.nickNameReg.touched) && !registerForm.controls.nickNameReg.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.nickNameReg.errors?.minlength">
+                            Slapyvardis turi būti bent 4 simbolių ilgio
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Slaptažodis</label>
-                    <input type="password" class="form-control input-short" formControlName="password" name="password" id="password">
+                    <input type="password" class="form-control input-short" formControlName="passwordReg" name="passwordReg" id="passwordReg">
+                    <div *ngIf="(registerForm.controls.passwordReg.dirty || registerForm.controls.passwordReg.touched) && !registerForm.controls.passwordReg.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.passwordReg.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
+                    <div *ngIf="(registerForm.controls.passwordReg.dirty || registerForm.controls.passwordReg.touched) && !registerForm.controls.passwordReg.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.passwordReg.errors?.minlength">
+                            Slaptažodis turi būti ne trumpesnis kaip 6 simboliai
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Pakartoti slaptažodį</label>
                     <input type="password" class="form-control input-short" formControlName="repeatPassword" name="repeatPassword" id="repeatPassword">
+                    <div *ngIf="(registerForm.controls.repeatPassword.dirty || registerForm.controls.repeatPassword.touched) && !registerForm.controls.repeatPassword.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.repeatPassword.errors?.required">
+                            Šis laukas privalomas
+                        </p>
+                    </div>
+                    <div *ngIf="(registerForm.controls.repeatPassword.dirty || registerForm.controls.repeatPassword.touched) && !registerForm.controls.repeatPassword.valid">
+                        <p class="haserror" *ngIf="registerForm.controls.repeatPassword.errors?.minlength">
+                            Slaptažodis turi būti ne trumpesnis kaip 6 simboliai
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label style="display: block">Dizaineris ar užsakovas?</label>
@@ -94,7 +144,7 @@
             </modal-body>
             <modal-footer>
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="registerModal.dismiss()">Atšaukti</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="registerModal.close()">Registruotis</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registruotis</button> <!--  (click)="registerModal.close()" -->
             </modal-footer>
         </form>
 </modal>

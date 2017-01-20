@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
     }
 
     var token = jwt.sign({user: doc}, 'secret', {expiresIn: "2 days"});
-    res.status(200).json({
+    return res.status(200).json({
       message: 'Prisijungta sekmingai',
       token: token,
       userId: doc._id,

@@ -18,5 +18,15 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
     margin: 0 auto;
     width: 400px !important;
 }
+
+p.haserror {
+    color: red;
+    padding-top: 5px;
+}
+
+.simple-notification-wrapper {
+     z-index:10000 !important; 
+}
+
 }
  

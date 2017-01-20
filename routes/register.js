@@ -101,7 +101,7 @@ router.post('/', function(req, res, next) {
           console.log('Message sent: ' + info.response);
       });
       //--------------
-      res.status(201).json({
+      return res.status(201).json({
         message: 'Pavyko prisijungti',
         obj: result
       });

@@ -144,26 +144,35 @@ export class AdminManageUsersComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
-  blockUser(nickname: string) {
+  blockUser(user: string) {
     this.isLoading = true;
-    this.apiService.updateUserStatus(nickname, true)
+    this.apiService.updateUserStatus(user.nickName, true)
     .subscribe(res => {
+      this.allActiveUsers.splice(0, 1);
+      this.allBannedUsers.push({'test': 'test'});
+      var indexOfUser = this.users.indexOf(user);
+      this.users.splice(indexOfUser, 1);
+      //console.log(indexOfUser);
       this.notificationsService.info('Užblokuota', 'Vartotojas sėkmingai užblokuotas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
-      this.router.navigate(['/admin', 'vartotojai', nickname]);
+      //this.router.navigate(['/admin', 'vartotojai', nickname]);
     }, error => {
       this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
     });
   }
 
-  unblockUser(nickname: string) {
+  unblockUser(user: string) {
     this.isLoading = true;
-    this.apiService.updateUserStatus(nickname, false)
+    this.apiService.updateUserStatus(user.nickName, false)
     .subscribe(res => {
+      this.allBannedUsers.splice(0, 1);
+      this.allActiveUsers.push({'test': 'test'});
+      var indexOfUser = this.users.indexOf(user);
+      this.users.splice(indexOfUser, 1);
       this.notificationsService.info('Atblokuota', 'Vartotojas sėkmingai atblokuotas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;
-      this.router.navigate(['/admin', 'vartotojai', nickname]);
+      //this.router.navigate(['/admin', 'vartotojai', nickname]);
     }, error => {
       this.isLoading = false;
       this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})

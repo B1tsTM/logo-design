@@ -3,7 +3,7 @@
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
 					<a routerLink="/">Pagrindinis puslapis</a>
-					<a routerLink="/admin">Valdymo pultas</a>
+					<a routerLink="/admin">Valdymo panelė</a>
 					<a routerLink="/admin/konkursai">Konkursai</a>
           <a class="current">{{contest?.name}}</a>
 				</div>
@@ -179,14 +179,14 @@
 </div> <!-- end of description block -->
 
 <div class="btn-back-wrapper" *ngIf="contest.status == 'Nepatvirtintas'">
-    <button class="btn" type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
-    <button class="btn pad-20" type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
+    <button class="btn btn-accept" type="button" (click)="validateContest(contest.idName)">Patvirtinti konkursą</button>
+    <button class="btn btn-deny pad-20" type="button" (click)="denyContest(contest.idName)">Atmesti konkursą</button>
 </div>
   <div class="btn-back-wrapper" *ngIf="contest.status == 'Laikas baigėsi'">
     <button class="btn" (click)="extendInputEnabled = true">Pratęsti konkursą</button>
     <span *ngIf="extendInputEnabled">Pratęsti dienų: </span>
     <input *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="endDate" min="1" max="30" required>
-    <button class="btn btn-primary pad-20" *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti</button>
+    <button class="btn btn-primary pad-20 btn-accept" *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti</button>
   </div>
 
   <div *ngIf="additionalFiles.length > 0 || isContestPublisher(contest.publisher._id)">

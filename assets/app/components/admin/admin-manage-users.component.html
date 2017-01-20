@@ -3,7 +3,7 @@
 			<div class="column small-12">
 				<div class="app-breadcrumbs">
 					<a routerLink="/">Pagrindinis puslapis</a>
-					<a routerLink="/admin">Valdymo pultas</a>
+					<a routerLink="/admin">Valdymo panelė</a>
 					<a class="current">Vartotojai</a>
 				</div><!-- .breadcrumbs -->
 			</div><!-- .column small-12 -->
@@ -53,7 +53,8 @@
 						<strong class="name">Avataras</strong>
 						<strong class="status">Statusas</strong>
 						<strong class="category">Vartotojas</strong>
-						<strong class="status">Veiksmai</strong>
+						<strong *ngIf="firstTabActive" class="status">Užblokuoti</strong>
+						<strong *ngIf="secondTabActive" class="status">Atblokuoti</strong>
 					</header><!-- .table-header -->
 
 						<div *ngIf="users.length == 0" class="table-row">
@@ -72,7 +73,7 @@
 								<span>{{user.nickName}}</span>
 							</div>
 							<div class="status">
-								<span><i (click)="blockUser(user.nickName)" *ngIf="!user.userBlocked" class="fa fa-user-times"></i><i (click)="unblockUser(user.nickName)" *ngIf="user.userBlocked" class="fa fa-unlock"></i></span>
+								<i (click)="blockUser(user)" *ngIf="!user.userBlocked" class="fa fa-2x fa-user-times"></i><i (click)="unblockUser(user)" *ngIf="user.userBlocked" class="fa fa-2x fa-unlock"></i>
 							</div>
 						</div>
 					

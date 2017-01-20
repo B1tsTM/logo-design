@@ -24,6 +24,9 @@ export class UserNavigationComponent implements OnInit {
     //modal: ModalComponent;   //to support modal in modal (to implement: forgot password)
     model: User = new User('', '');
 
+    @ViewChild('registerModal') registerModal;
+    @ViewChild('loginModal') loginModal;
+
     index: number = 0;
   //  backdropOptions = [true, false, 'static'];
     cssClass: string = '';
@@ -72,9 +75,9 @@ export class UserNavigationComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      nickName: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      nickNameReg: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       email: ['', Validators.compose([Validators.required, this.isValidEmail])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      passwordReg: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       userType: [this.userTypes[0].value, Validators.required]
     });
@@ -111,6 +114,7 @@ export class UserNavigationComponent implements OnInit {
          sessionStorage.setItem('emailConfirmed', CryptoJS.SHA3(data.emailConfirmed.toString()).toString());
          this.nickname = data.nickname;
          this.isLoading = false;
+         this.loginModal.close();
          this.notificationsService.success('Prisijungta', 'Sėkmingai prisijungta', {timeOut: 3000, showProgressBar: false});
        },
        error => {
@@ -121,16 +125,17 @@ export class UserNavigationComponent implements OnInit {
 
     register(form: any) {
       this.isLoading = true;
-      const user = new User(form.nickName.value, form.password.value, form.repeatPassword.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0);
+      const user = new User(form.nickNameReg.value, form.passwordReg.value, form.repeatPassword.value, this.registerForm.value.userType, form.firstName.value, form.lastName.value, form.email.value, 0, 0);
         this.authService.signup(user)
           .subscribe(data => {
             form.firstName.value = null;
             form.lastName.value = null;
-            form.nickName.value = null;
+            form.nickNameReg.value = null;
             form.email.value = null;
-            form.password.value = null;
+            form.passwordReg.value = null;
             form.repeatPassword.value = null;
             this.isLoading = false;
+            this.registerModal.close();
             this.notificationsService.success('Užregistruota', 'Sėkmingai užsiregistravote. Patikrinkite savo el. pašto paskyrą ir ją patvirtinkite', {timeOut: 7000, showProgressBar: false});
           },
           error => { 
@@ -158,13 +163,17 @@ export class UserNavigationComponent implements OnInit {
 
     isMatchingPassword(control: FormGroup) {
         // check if control is equal to the password1 control //for some reason not working properly
-        return control.value === this.registerForm.value.password ? null : {isEqual: true};
+        return control.value === this.registerForm.value.passwordReg ? null : {isEqual: true};
     }
 
       created(ev) {
     }
 
     destroyed(ev) {
+    }
+
+    log(firstName) {
+      console.log(firstName);
     }
 
 }
