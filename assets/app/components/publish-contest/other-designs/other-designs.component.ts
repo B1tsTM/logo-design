@@ -65,5 +65,6 @@ export class OtherDesignsComponent implements OnInit {
   isEmailConfirmed() { // TODO add these checks to every form
     return sessionStorage.getItem('emailConfirmed') == CryptoJS.SHA3('true').toString();
   }
+  
 
 }

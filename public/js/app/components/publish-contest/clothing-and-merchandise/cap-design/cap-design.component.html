@@ -25,8 +25,19 @@
 
 		<form #f="ngForm" (ngSubmit)="addContest(f.value)">
 
-		<div class="input-forms">
+		<div *ngIf="!isClient()" class="input-forms">
+			<div class="input-row">
+				<h4><span class="span-bold">Paskelbti konkursą gali tik užsakovai.</span> <span class="normal-text">Prašome <span class="italic">prisijungti</span> ar <span class="italic">užsiregistruoti</span></span>.</h4>
+			</div>
+		</div>
 
+		<div *ngIf="isClient() && !isEmailConfirmed()" class="input-forms">
+			<div class="input-row">
+				<h4><span class="span-bold">Kad galėtumėte paskelbti konkursą, prašome patvirtinti savo el. pašto paskyrą</span> <a class="span-link" routerLink="/profilis">profilyje</a></h4>
+			</div>
+		</div>
+
+		<div *ngIf="isClient() && isEmailConfirmed()" class="input-forms">
 			<div class="input-row">
 				<div class="input-label">
 					<span>Konkurso kategorija</span>

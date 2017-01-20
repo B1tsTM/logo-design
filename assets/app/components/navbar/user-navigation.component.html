@@ -60,7 +60,7 @@
             <modal-body>
               <div class="form-group">
                     <label for="firstName">Vardas</label>
-                    <input (click)="log(registerForm)" type="text" class="form-control input-short" formControlName="firstName" name="firstName" id="firstName">
+                    <input type="text" class="form-control input-short" formControlName="firstName" name="firstName" id="firstName">
                     <div *ngIf="(registerForm.controls.firstName.dirty || registerForm.controls.firstName.touched) && !registerForm.controls.firstName.valid">
                         <p class="haserror" *ngIf="registerForm.controls.firstName.errors?.required">
                             Šis laukas privalomas

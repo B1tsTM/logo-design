@@ -210,3 +210,11 @@ img:hover {
     margin: 50px auto;
     text-align: center;
 }
+
+.text-green {
+  color: #7bd07b;
+}
+
+.text-red {
+  color: red;
+}

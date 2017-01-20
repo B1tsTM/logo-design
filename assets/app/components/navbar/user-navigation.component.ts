@@ -157,7 +157,7 @@ export class UserNavigationComponent implements OnInit {
     }
 
     private isValidEmail(control: FormControl): {[s: string]: boolean} {
-      let emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"); 
+      let emailRegex = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$"); 
       return emailRegex.test(control.value) ? null : {invalidEmail: true}
       }
 

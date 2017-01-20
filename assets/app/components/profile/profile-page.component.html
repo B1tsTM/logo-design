@@ -82,9 +82,9 @@
       <h3>Būsena</h3>
     </div>
     <div class="project-name-text">
-      <p *ngIf="emailConfirmed()">Patvirtintas</p>
+      <p class="text-green" *ngIf="emailConfirmed()">Patvirtintas</p>
       <div *ngIf="!emailConfirmed()">
-        <p>Nepatvirtintas!</p>
+        <p class="text-red">Nepatvirtintas!</p>
         <span class="resend-email">
           <button (click)="sendConfirmationEmail()" class="resend-email-button">Nusiųsti patvirtinimo laišką</button>
         </span>
