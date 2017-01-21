@@ -60,6 +60,17 @@ var dynamicStorage = multer.diskStorage({
 });
 
 var storageForSubmitions = multer.diskStorage({
+    fileFilter: function (req, file, cb) { //not working
+      console.log(file);
+      //if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+      // if (file[0].mimetype != 'image/png') {
+      //     cb(null, false);
+      //     req.fileValidationError = 'goes wrong on the mimetype';
+      //     return cb(new Error('Only image files are allowed!'));
+      // }
+      // cb(null, true);
+      cb(null, false);
+    },
     destination: function (req, file, cb) {
         var newDestination = './public/uploads/contests/' + req.params.contestId + '/';
         var stat = null;
@@ -977,7 +988,7 @@ router.patch('/contests/:contestId/extend', function(req,res,next) {
     var endDate = new Date(dateNow.getTime() + (req.body.days * 24 * 60 * 60 * 1000));
     contest.endDate = endDate;
     contest.status = "Pratęstas";
-    contest.award += 10;
+    contest.award += req.body.extraPrize;
     contest.save(function(err, result) {
       if (err) {
         console.log(err);
@@ -1316,6 +1327,17 @@ router.post('/submitions/:contestId/:userId', submitionsUpload.array("submition"
 
 var contestId = req.params.contestId;
 var userId = req.params.userId;
+console.log(req.files);
+
+for (var i=0; i<req.files.length; i++) {
+  if (!req.files[i].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return res.status(404).json({
+      title: 'Klaida !',
+      error: {message: 'Pasirinkti netinkami failai'}
+    });
+  }
+}
+
 //User.findById(id, function(err, user) {
 Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': userId}}, {new: true},  function(err, contest) {
   if (err) {
@@ -1323,6 +1345,12 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
       return res.status(404).json({
         title: 'Klaida !',
         error: {message: 'Įvyko klaida'}
+      });
+    }
+    if(req.fileValidationError) {
+      return res.status(404).json({
+        title: 'Klaida !',
+        error: {message: 'Pasirinkti netinkami failai'}
       });
     }
     ////console.log(contest);
@@ -1364,6 +1392,15 @@ Contest.findOneAndUpdate({'idName': contestId}, {$addToSet: {'participants': use
 //End of submitions post req
 
 router.post('/submitions/change/:contestId/:userId/:submitionId', submitionsUpload.array("submition", 12), function(req,res){
+
+for (var i=0; i<req.files.length; i++) {
+  if (!req.files[i].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return res.status(404).json({
+      title: 'Klaida !',
+      error: {message: 'Pasirinkti netinkami failai'}
+    });
+  }
+}
 
 var contestId = req.params.contestId;
 var userId = req.params.userId;
@@ -1407,6 +1444,15 @@ Contest.findOne({'idName': contestId}, function(err, contest) {
 router.post('/contests/:contestId/files', submitionsUpload.array("additionalfiles", 12), function(req,res){
 // //console.log('hello');
 // return res.status(201).json({msg: 'heelllo'})
+
+for (var i=0; i<req.files.length; i++) {
+  if (!req.files[i].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return res.status(404).json({
+      title: 'Klaida !',
+      error: {message: 'Netinkamas failų formatas'}
+    });
+  }
+}
 
   var contestId = req.params.contestId;
 Contest.findOne({'idName': contestId}, function(err, contest) {
@@ -1457,6 +1503,14 @@ router.post('/submitions/gallery/:contestId/:userId', submitionsUploadForGallery
 
 var contestId = req.params.contestId;
 var userId = req.params.userId;
+for (var i=0; i<req.files.length; i++) {
+  if (!req.files[i].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return res.status(404).json({
+      title: 'Klaida !',
+      error: {message: 'Pasirinkti netinkami failai'}
+    });
+  }
+}
   //User.update({_id: userId}, {$push: {galleryUrls: {$each:fileNames}}}, {upsert: true}, function(err, user) {
   User.findById(userId, function(err, user) {
       if(err){
@@ -1528,6 +1582,14 @@ var userId = req.params.userId;
 //End of submitions post req
 
 router.post('/avatars/:id', multer({storage: storageForAvatar}).array("avatar", 12), function(req,res){
+  for (var i=0; i<req.files.length; i++) {
+  if (!req.files[i].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return res.status(404).json({
+      title: 'Klaida !',
+      error: {message: 'Netinkamas failo formatas'}
+    });
+  }
+}
 var id = req.params.id;
 User.findById(id, function(err, user) {
   if (err) {

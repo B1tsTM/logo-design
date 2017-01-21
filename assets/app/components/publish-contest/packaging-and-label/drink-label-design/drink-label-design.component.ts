@@ -27,7 +27,7 @@ export class DrinkLabelDesignComponent implements OnInit {
 
   ngOnInit() { 
     window.scrollTo(0,0);
-    this.contest.category = "Gerimų pakuotės";
+    this.contest.category = "Gėrimų pakuotės";
   }
 
   backToList() {

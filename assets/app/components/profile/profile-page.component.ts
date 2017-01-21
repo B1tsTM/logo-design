@@ -66,10 +66,13 @@ export class ProfilePageComponent implements OnInit {
               this.isLoading = false;
               this.notificationsService.success('Pakeista','Avataras pakeistas', {timeOut: 3000, showProgressBar: false})
             }, error => {
+                this.isLoading = false;
                 this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             });
             this.filesToUpload = [];
         }, (error) => {
+            this.isLoading = false;
+            this.notificationsService.error('Klaida !', 'Netinkamas failo formatas! Tinkami formatai: .jpg, .jpeg, .png, .gif', {timeOut: 3000, showProgressBar: false});
         });
     }
 

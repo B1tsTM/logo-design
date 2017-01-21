@@ -142,7 +142,8 @@ export class SubmitionDetailsComponent implements OnInit {
             this.notificationsService.success('Pakeista', 'Dizainas sėkmingai pakeistas', {timeOut: 3000, showProgressBar: false});
         }, (error) => {
             this.isLoading = false;
-            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error('Klaida !', 'Failo formatas netinkamas. Tinkami formatai: .jpg, .jpeg, .png, .gif', {timeOut: 3000, showProgressBar: false});
+            //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
         });
     }
 

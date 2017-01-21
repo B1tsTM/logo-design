@@ -176,3 +176,7 @@ span.no-contests-label {
   background-color: #cad8e0;
   border-radius: 10px;
 }
+
+.fa-unlock, .fa-user-times {
+   margin-left: 30px;
+}

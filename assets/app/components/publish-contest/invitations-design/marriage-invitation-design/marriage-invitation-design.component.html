@@ -109,7 +109,7 @@
 					<small>Mažiausiai 7 dienos</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small">
-					<input class="input-center" type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="60" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
+					<input class="input-center" type="number" [ngClass]="{'input-area-error': contestLength.errors && (contestLength.dirty || contestLength.touched)}" placeholder="Pvz. 14" name="contestLength" min="7" max="30" [(ngModel)]="contest.contestLength" required #contestLength="ngModel" />
 				</div><!-- .input-field -->
 				<span *ngIf="contestLength.pristine" class="asterisk">*</span>
 				<div *ngIf="contestLength.errors && (contestLength.dirty || contestLength.touched)"
@@ -140,7 +140,7 @@
 			<div class="input-row">
 				<div class="input-label textarea-label">
 					<span>Privatus konkursas?</span>
-					<small>+5 &euro; administracijai</small>
+					<small>Konkursas nematomas viešai</small>
 				</div><!-- .input-label -->
 				<div class="input-field input-small checkbox-input">
 					<input type="checkbox" name="isPrivate"  [(ngModel)]="contest.isPrivate">

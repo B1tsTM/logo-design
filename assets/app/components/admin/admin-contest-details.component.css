@@ -287,10 +287,9 @@ hr {
 }
 
 .upload-button {
-  background-color: #2b2b88;
+  background-color: #5a5aca;
   color: white;
   padding: 5px;
-  border-radius: 10px;
   border: 1px solid black;
   width: 150px;
   transition: all 0.25s ease-in 0s;
@@ -298,6 +297,7 @@ hr {
 
 .upload-button:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .upload-button:disabled {
@@ -339,5 +339,8 @@ hr {
   color: #fff;
 }
 
+.input-extend {
+  padding: 5px;
+}
 
 

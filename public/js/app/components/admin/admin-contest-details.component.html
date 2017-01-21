@@ -185,7 +185,9 @@
   <div class="btn-back-wrapper" *ngIf="contest.status == 'Laikas baigėsi'">
     <button class="btn" (click)="extendInputEnabled = true">Pratęsti konkursą</button>
     <span *ngIf="extendInputEnabled">Pratęsti dienų: </span>
-    <input *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="endDate" min="1" max="30" required>
+    <input class="input-extend" *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="endDate" min="7" max="30" required>
+    <span *ngIf="extendInputEnabled">Prizo padidinimo suma (&euro;): </span>
+    <input class="input-extend" *ngIf="extendInputEnabled"  type="number" name="endDate" [(ngModel)]="extraPrize" min="10" max="1000" required>
     <button class="btn btn-primary pad-20 btn-accept" *ngIf="extendInputEnabled" [disabled]="endDate < 1 || endDate > 30" (click)="extendContest()" type="button">Pratęsti</button>
   </div>
 

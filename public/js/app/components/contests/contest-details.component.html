@@ -4647,7 +4647,7 @@
 
 
 
-
+<div *ngIf="contest.status != 'Nepatvirtintas'">
 
   <div *ngIf="additionalFiles.length > 0 || isContestPublisher(contest.publisher._id)">
     <div class="section-extra">
@@ -4667,8 +4667,8 @@
         </div>
           <input type="file" name="additionalFiles" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
           <div class="button-wrapper">
-        <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Įkelti failus</button>
-        <span class="percent"> {{percent}} %</span>
+        <button *ngIf="filesToUpload.length > 0" class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadAdditionalFiles()">Įkelti failus</button>
+        <span *ngIf="percent && percent != 100" class="percent"> {{percent}} %</span>
       </div>
     </div>
   </div>
@@ -4704,7 +4704,7 @@
       <div class="mini-image-container">
       <div class="pad-left-60">Dizainas: #{{submition.submitionId}}</div>
       <img *ngIf="contest.status == 'Užbaigtas' || contest.status == 'Laikas baigėsi' || isAdmin() || isContestPublisher(contest.publisher._id) || isDesignAuthor(submition.submitionAuthor._id)" class="mini-image" (click)="viewSubmitionDetails(contestId, contest, submition)" src="http://localhost:3000/uploads/contests/{{contestId}}/{{submition.submitionUrl}}" alt="Submition">
-      <img *ngIf="contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isAdmin() && !isContestPublisher(contest.publisher._id) && !isDesignAuthor(submition.submitionAuthor._id)" class="mini-image" src="http://localhost:3000/uploads/common/lock.png" alt="Submition">
+      <img *ngIf="contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi' && !isAdmin() && !isContestPublisher(contest.publisher._id) && !isDesignAuthor(submition.submitionAuthor._id)" class="mini-image" src="http://localhost:3000/uploads/common/hiddenContest4.png" alt="Submition">
       <br>
       <span class="pad-left-60">Autorius: {{submition.submitionAuthor.nickName}}</span>
       <div>
@@ -4745,15 +4745,21 @@
     </div>
   <input type="file" name="submition" (change)="fileChangeEvent($event)" placeholder="Pasirinkite..." multiple />
   <div class="button-wrapper">
-    <button class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Įkelti dizainus</button>
-     <span class="percent"> {{percent}} %</span>
+    <button *ngIf="filesToUpload.length > 0" class="upload-button" type="button" [disabled]="filesToUpload.length == 0" (click)="uploadSubmitions()">Įkelti dizainus</button>
+     <span *ngIf="percent && percent != 100" class="percent"> {{percent}} %</span>
   </div>
   </div>
-  <div class="italic text-center" *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite būti registruotas dizaineris</div></div>
+  <!--<div class="italic text-center" *ngIf="isClient() && contest.status != 'Užbaigtas' && contest.status != 'Laikas baigėsi'"><div>Kad galėtumėte dalyvauti konkurse, turite prisijungti kaip dizaineris</div></div>-->
 
   <div class="comments-section">
     <comments-section [contest]="contest"></comments-section>
   </div>
+
+</div>
+
+<div class="text-center" *ngIf="contest.status == 'Nepatvirtintas'">
+  <h2>Konkursas nepatvirtintas !</h2>
+</div>
 
 </div> <!-- end of private check -->
   

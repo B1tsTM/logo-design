@@ -27,7 +27,8 @@ export class AdminContestDetailsComponent implements OnInit {
   additionalFiles = [];
   winnerSubmition: any;
   extendInputEnabled = false;
-  endDate;
+  endDate: number;
+  extraPrize: number;
   //locale = moment.locale('lt');
   //momentDate: any = moment(Date.now().toString(), 'YYYY MMMM Do', 'lt');
   momentDate: any;
@@ -136,7 +137,7 @@ export class AdminContestDetailsComponent implements OnInit {
 
   extendContest() {
     this.isLoading = true;
-    this.contestsService.extendContest(this.contestId, this.endDate)
+    this.contestsService.extendContest(this.contestId, this.endDate, this.extraPrize)
     .subscribe(res => {
       this.notificationsService.success('Pratęsta', 'Konkursas sėkmingai pratęstas', {timeOut: 3000, showProgressBar: false});
       this.isLoading = false;

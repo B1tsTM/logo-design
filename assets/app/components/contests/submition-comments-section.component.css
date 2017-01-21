@@ -109,3 +109,32 @@ pre.comment-text {
   font-size: 0.9rem;
   white-space: pre-line;
 }
+
+.btn-add {
+  display: block;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px transparent;
+  transition: all 0.2s ease-in 0s;
+}
+
+.btn-goback {
+  display: block;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px transparent;
+  transition: all 0.2s ease-in 0s;
+}
+
+.btn-add:hover {
+  background-color: #71c58b;
+  color: #fff;
+}
+
+.btn-goback:hover {
+  background-color: #2b3542;
+  color: #fff;
+}
+

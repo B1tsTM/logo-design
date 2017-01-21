@@ -28,7 +28,7 @@ export class LogoAndBusinessCardComponent implements OnInit {
 
   ngOnInit() { 
     window.scrollTo(0,0);
-    this.contest.category = "Logotipas ir vizitinė kortelė";
+    this.contest.category = "Logotipas ir verslo kortelė";
   }
 
   backToList() {

@@ -133,9 +133,11 @@ export class ContestDetailsComponent implements OnInit {
         this.userId = sessionStorage.getItem('userId');
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/' + this.contestId + '/' +this.userId,this.filesToUpload, "submition").then((result) => {
             this.isLoading = false;
+            this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
         }, (error) => {
             this.isLoading = false;
-            this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+            this.notificationsService.error('Klaida !', 'Netinkamas įkeliamų dizainų formatas. Tinkami formatai: .jpg, .jpeg, .png, .gif', {timeOut: 3000, showProgressBar: false})
         });
         this.makeFileRequest('http://localhost:3000/api/v1/submitions/gallery/' + this.contestId + '/' +this.userId, this.filesToUpload, "submition").then((result) => {
             this.filesToUpload = [];
@@ -147,7 +149,7 @@ export class ContestDetailsComponent implements OnInit {
             .subscribe(submitions => {
                 this.submitions = submitions;
                 this.isLoading = false;
-                this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
+                //this.notificationsService.success('Dizainai įkelti', 'Dizainai įkelti sėkmingai', {timeOut: 3000, showProgressBar: false})
             },
             error => {
             this.isLoading = false;
@@ -175,6 +177,7 @@ export class ContestDetailsComponent implements OnInit {
             this.isLoading = false;
             this.apiService.getContestAdditionalFiles(this.contestId)
             .subscribe(data => {
+                this.isLoading = false;
                 this.additionalFiles = data;
             }, error => {
                 this.isLoading = false;
@@ -184,12 +187,18 @@ export class ContestDetailsComponent implements OnInit {
             this.apiService.getContestAdditionalFiles(this.contestId)
             .subscribe(data => {
                 this.isLoading = false;
+                var lengthBefore = this.additionalFiles.length;
                 this.additionalFiles = data;
+                if (lengthBefore == this.additionalFiles.length) {
+                    this.notificationsService.error('Klaida !','Netinkamas dizainų formatas. Tinkami formatai: .jpg, .jpeg, .png, .gif', {timeOut: 3000, showProgressBar: false})
+                } else {
+                    this.notificationsService.success('Įkelta','Failai įkelti', {timeOut: 3000, showProgressBar: false})
+                }
             }, error => {
                 this.isLoading = false;
-                this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
+                //this.notificationsService.error(error.title, error.error.message, {timeOut: 3000, showProgressBar: false})
             })
-            this.notificationsService.success('Įkelta','Failai įkelti', {timeOut: 3000, showProgressBar: false})
+            //this.notificationsService.success('Įkelta','Failai įkelti', {timeOut: 3000, showProgressBar: false})
         });
     }
 
